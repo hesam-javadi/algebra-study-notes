@@ -1,0 +1,60 @@
+/* ==========================================================================
+   Chapter 2 widgets — new classes only, prefixed w2-
+   Base card / plot / readout classes come from widgets.css
+   ========================================================================== */
+
+.w2 [hidden] { display: none !important; }
+
+/* ---------- draggable handles ---------- */
+.w2-hit { fill: transparent; stroke: transparent; stroke-width: 3px; cursor: grab; touch-action: none; outline: none; }
+.w2-hit:active { cursor: grabbing; }
+.w2-hit:focus-visible { stroke: var(--accent); }
+.w2-vl { font-style: italic; font-size: 15px; }
+
+/* ---------- unit-ball curves ---------- */
+.w2-pcurve { fill: none; stroke: var(--ink-2); stroke-width: 2; stroke-linejoin: round; }
+.w2-unit { fill: none; stroke: var(--ink-3); stroke-width: 1.5; stroke-dasharray: 5 4; }
+
+/* ---------- legend swatches (dashed) ---------- */
+.w2-swd { background: none; height: 0; border-top: 3px dashed var(--ink-2); border-radius: 0; }
+.w2-swd-ink { border-top-color: var(--ink-3); }
+.w2-swd-s2 { border-top-color: var(--series-2); }
+
+/* ---------- checks ---------- */
+.w2-checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.w2-chk { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-width: 0; }
+.w2-chk .w-tex { flex: 0 1 auto; min-width: 0; }
+
+/* ---------- Cauchy–Schwarz readouts ---------- */
+.w2-ratio { min-width: 0; }
+.w2-ratio-row { display: flex; align-items: center; gap: 12px; margin-top: 4px; }
+.w2-meter { flex: 1 1 auto; height: 12px; border-radius: 6px; background: var(--surface); border: 1px solid var(--line); overflow: hidden; }
+.w2-meter > i { display: block; height: 100%; background: var(--accent); }
+.w2-ratio-row .w-num { min-width: 4.5em; text-align: end; }
+.w2-eq { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.w2-eq:empty { display: none; }
+.w2-alpha { font-weight: 700; }
+
+/* ---------- matrix input ---------- */
+.w2-mbr { border-left: 2px solid var(--ink-2); border-right: 2px solid var(--ink-2); border-radius: 6px; padding: 4px 8px; grid-template-columns: repeat(2, 4.6em); }
+.w2-mbr .w-in { width: 100%; box-sizing: border-box; }
+
+/* ---------- norm bar chart ---------- */
+.w2-bars { display: grid; gap: 6px; }
+.w2-brow { display: grid; grid-template-columns: minmax(5.5em, 8em) 1fr 4.8em; gap: 8px; align-items: center; }
+.w2-blab { overflow-x: auto; overflow-y: hidden; font-size: .9rem; white-space: nowrap; }
+.w2-btrack { display: block; height: 14px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
+.w2-btrack > i { display: block; height: 100%; min-width: 0; }
+.w2-bd { background: var(--series-1); }
+.w2-bo { background: var(--series-2); }
+.w2-bval { font-size: .88rem; text-align: end; }
+
+@media (max-width: 520px) {
+  .w2-brow { grid-template-columns: minmax(4.5em, 6.5em) 1fr 4.2em; gap: 6px; }
+}
+@media (max-width: 600px) {
+  .w2-vl { font-size: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .w2-meter > i, .w2-btrack > i { transition: none; }
+}

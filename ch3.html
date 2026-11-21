@@ -1,0 +1,1632 @@
+<!doctype html>
+<html lang="fa" dir="rtl" data-page="ch3">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>فصل ۳ · دستگاه معادلات خطی</title>
+<meta name="description" content="جزوهٔ کامل و ساده‌شدهٔ فصل ۳ جبر خطی عددی: باقی‌مانده و عدد وضعیت، کرامر، حذف گاوسی، گاوس-جردن، شمارش اعمال و تجزیهٔ LU با همهٔ اثبات‌ها.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%23151a2d%27/%3E%3Cpath d=%27M10 8H7v16h3M22 8h3v16h-3%27 stroke=%27%23fff%27 stroke-width=%272.2%27 fill=%27none%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%273.2%27 fill=%27%23f2a73a%27/%3E%3C/svg%3E">
+<link rel="preload" href="assets/fonts/Vazirmatn-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/widgets.css">
+<script>try{var t=JSON.parse(localStorage.getItem("theme"));if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<script defer src="assets/vendor/katex/katex.min.js"></script>
+<script defer src="assets/vendor/katex/contrib/auto-render.min.js"></script>
+<script defer src="assets/js/core.js"></script>
+<script defer src="assets/js/widgets.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <button class="icon-btn" id="tocBtn" aria-controls="toc" aria-expanded="false" aria-label="فهرست مطالب">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+    </button>
+    <a class="brand" href="index.html">
+      <span class="brand-mark">Ax=b</span>
+      <span class="brand-t">جبر خطی عددی <span class="muted">· فصل ۳</span></span>
+    </a>
+    <span class="spacer"></span>
+    <button class="icon-btn" id="themeBtn" aria-label="تغییر حالت روشن و تیره"></button>
+  </div>
+  <div class="read-progress" aria-hidden="true"><span></span></div>
+</header>
+
+<div class="backdrop" id="backdrop"></div>
+
+<div class="shell">
+  <nav class="toc" id="toc" aria-label="فهرست مطالب">
+    <div class="toc-head">
+      <b>فهرست فصل ۳</b>
+      <button class="icon-btn toc-close" aria-label="بستن فهرست">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="toc-progress" id="tocProg">پیشرفت تو: <span class="t"></span><div class="bar"><span></span></div></div>
+    <ol id="tocList"></ol>
+  </nav>
+
+  <main class="content" id="main">
+
+<!-- ================================================================ HERO -->
+<section class="hero">
+  <div class="eyebrow"><span class="dot"></span>جبر خطی عددی · صفحات ۳۱ تا ۵۶ کتاب</div>
+  <h1>مسئلهٔ دستگاه معادلات خطی<span class="sub">فصل ۳ · از صورت مسئله تا تجزیهٔ LU، با همهٔ اثبات‌ها</span></h1>
+  <p class="lead">این جزوه برای کسی نوشته شده که می‌خواهد از صفر شروع کند. هر مفهوم اول به زبان ساده، بعد به شکل دقیقِ کتاب، بعد با مثال و در آخر با اثبات کامل و گام‌به‌گام آمده است. کنار هر گامِ اثبات نوشته‌ایم «چرا» آن گام درست است.</p>
+  <div class="hero-eq">
+  $$\underbrace{\begin{bmatrix} a_{11} & \cdots & a_{1n}\\ \vdots & \ddots & \vdots\\ a_{n1} & \cdots & a_{nn}\end{bmatrix}}_{A\ \text{(معلوم)}}\;
+  \underbrace{\begin{bmatrix} x_1\\ \vdots\\ x_n\end{bmatrix}}_{x\ \text{(مجهول)}} =
+  \underbrace{\begin{bmatrix} b_1\\ \vdots\\ b_n\end{bmatrix}}_{b\ \text{(معلوم)}}$$
+  </div>
+  <div class="chips" aria-label="محتوای فصل">
+    <span class="chip"><span class="sw" style="background:var(--def)"></span><b>۸</b> تعریف</span>
+    <span class="chip"><span class="sw" style="background:var(--thm)"></span><b>۷</b> قضیه · <b>۳</b> لم · <b>۱</b> گزاره · <b>۱</b> نتیجه</span>
+    <span class="chip"><span class="sw" style="background:var(--ex)"></span><b>۱۳</b> مثال</span>
+    <span class="chip"><span class="sw" style="background:var(--rem)"></span><b>۱۳</b> تبصره</span>
+    <span class="chip"><span class="sw" style="background:var(--ink)"></span><b>۳</b> الگوریتم</span>
+  </div>
+</section>
+
+<!-- ================================================================ GUIDE -->
+<section class="sec" id="guide">
+  <h2 id="how">چطور با این جزوه درس بخوانی</h2>
+  <p>روش این جزوه از چند راهکارِ آموزشیِ آزموده‌شده گرفته شده است: اصول آموزش روزنشاین (مرور، گام‌های کوچک، مثال حل‌شده)، «یادآوری فعال» و «تکرار با فاصله» از پژوهش‌های روان‌شناسی یادگیری (دانلوسکی و همکاران)، «اثر مثال حل‌شده» از نظریهٔ بار شناختی (سوئلر) و «خودتوضیحی» (چی). در عمل یعنی این پنج قدم:</p>
+  <ol class="route">
+    <li><div><b>اول «به زبان ساده» را بخوان.</b><span>کادرهای سبز ایدهٔ هر مطلب را بدون فرمول می‌گویند. اگر ایده را بفهمی، فرمول‌ها ترسناک نیستند.</span></div></li>
+    <li><div><b>بعد تعریف یا قضیه را دقیق بخوان.</b><span>متن کادرهای آبی و فیروزه‌ای همان متن کتاب است. شماره‌ها هم دقیقاً مثل کتاب‌اند (مثلاً «قضیه ۱.۳») تا بتوانی در کتاب پیدایشان کنی.</span></div></li>
+    <li><div><b>مثال حل‌شده را دنبال کن و بعد خودت تکرارش کن.</b><span>مثال‌ها را می‌توانی گام‌به‌گام با دکمهٔ «بعدی» اجرا کنی. بعد کاغذ بردار و همان را بدون نگاه کردن حل کن.</span></div></li>
+    <li><div><b>اثبات‌ها را در حالت «تمرین گام‌به‌گام» بخوان.</b><span>در این حالت فقط گام اول دیده می‌شود. قبل از زدن «گام بعدی»، خودت حدس بزن گام بعد چیست. همین حدس‌زدن است که اثبات را در ذهنت نگه می‌دارد. آخر هر اثبات یک «اسکلت اثبات» هست که باید حفظش کنی.</span></div></li>
+    <li><div><b>با خودآزمایی و کارت‌های مرور، با فاصله تکرار کن.</b><span>آخر هر بخش چند پرسش هست. در پایان صفحه هم کارت‌های مرور هستند که خودشان یادشان می‌ماند کدام را بلد نبودی و کِی دوباره نشانت بدهند (فردا، سه روز بعد، یک هفته بعد).</span></div></li>
+  </ol>
+  <div class="two-col">
+    <div class="mini">
+      <h5>رنگ کادرها</h5>
+      <p class="small"><span class="tag" style="--c:var(--def)">تعریف</span> &nbsp; <span class="tag" style="--c:var(--thm)">قضیه، لم، گزاره</span> &nbsp; <span class="tag" style="--c:var(--ex)">مثال</span> &nbsp; <span class="tag" style="--c:var(--rem)">تبصره</span> &nbsp; <span class="tag" style="--c:var(--intu)">به زبان ساده</span> &nbsp; <span class="tag" style="--c:var(--warn)">اشتباه رایج</span></p>
+    </div>
+    <div class="mini">
+      <h5>اثبات‌ها</h5>
+      <p class="small"><span class="badge book">از کتاب</span> یعنی اثبات خود کتاب، با توضیح بیشتر. <span class="badge supp">تکمیلی</span> یعنی کتاب اثبات را نیاورده یا به تمرین سپرده و ما کاملش کرده‌ایم.</p>
+      <button class="btn" id="allPractice" aria-pressed="false" type="button">همهٔ اثبات‌ها را در حالت تمرین ببین</button>
+    </div>
+  </div>
+
+  <h3 id="map">نقشهٔ فصل</h3>
+  <p>کل فصل سه ایستگاه دارد. اول مسئله را دقیق تعریف می‌کنیم، بعد می‌پرسیم مسئله چقدر به خطا حساس است و در آخر روش‌های حل را می‌سازیم.</p>
+  <div class="map">
+    <div class="map-col">
+      <h4><span class="st">۱</span>صورت مسئله</h4>
+      <ul>
+        <li><a href="#s1">نوشتن دستگاه به شکل $Ax=b$ <small>· ۱.۳</small></a></li>
+        <li><a href="#complex">از اعداد مختلط به حقیقی</a></li>
+        <li><a href="#rem23">حل دستگاه = یافتن $A^{-1}$ <small>· تبصره ۲.۳</small></a></li>
+      </ul>
+    </div>
+    <div class="map-col">
+      <h4><span class="st">۲</span>حساسیت مسئله</h4>
+      <ul>
+        <li><a href="#def23">باقی‌مانده $r=b-A\tilde x$ <small>· تعریف ۲.۳</small></a></li>
+        <li><a href="#thm13">رابطهٔ خطا و باقی‌مانده <small>· قضیه ۱.۳</small></a></li>
+        <li><a href="#def33">عدد وضعیت $\kappa(A)$ <small>· تعریف ۳.۳</small></a></li>
+        <li><a href="#thm23">اثر اختلال داده‌ها <small>· قضیه ۲.۳</small></a></li>
+      </ul>
+    </div>
+    <div class="map-col">
+      <h4><span class="st">۳</span>روش‌های مستقیم</h4>
+      <ul>
+        <li><a href="#cramer">قاعدهٔ کرامر و هزینهٔ $n!$</a></li>
+        <li><a href="#gauss">حذف گاوسی و جایگذاری پسرو</a></li>
+        <li><a href="#gj">گاوس-جردن و محاسبهٔ وارون</a></li>
+        <li><a href="#count">شمارش اعمال: $n^3/3$ در برابر $n^3/2$</a></li>
+        <li><a href="#lu">تجزیهٔ $A=LU$ و $PA=LU$</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ PREREQ -->
+<section class="sec" id="prereq">
+  <h2 id="pre">یادآوری پیش‌نیازها</h2>
+  <p class="sec-intro">این چند ابزار از فصل‌های قبل‌اند و در تقریباً همهٔ اثبات‌های این فصل به کار می‌روند. اگر یادت هست، سریع رد شو.</p>
+
+  <div class="box recall">
+    <div class="box-h"><span class="tag">یادآوری ۱</span><span class="box-t">نرم بی‌نهایتِ بردار</span></div>
+    <p>نرم یعنی «اندازهٔ» بردار. نرم بی‌نهایت، بزرگ‌ترین قدرمطلق مؤلفه‌هاست:</p>
+    $$\|x\|_\infty=\max_{1\le i\le n}|x_i| \qquad\text{مثلاً}\qquad \left\|\begin{bmatrix}3\\-5\\1\end{bmatrix}\right\|_\infty=5 .$$
+  </div>
+
+  <div class="box recall">
+    <div class="box-h"><span class="tag">یادآوری ۲</span><span class="box-t">نرم ماتریسی طبیعی (القایی) و سه ویژگی مهمش</span></div>
+    <p>نرم طبیعیِ ماتریس می‌گوید ماتریس حداکثر چند برابر طول بردار را بزرگ می‌کند: $\displaystyle \|A\|=\max_{x\neq 0}\frac{\|Ax\|}{\|x\|}$. از همین تعریف سه نتیجه می‌گیریم که مدام لازم‌شان داریم:</p>
+    <ol>
+      <li><b>سازگاری:</b> $\|Ax\|\le \|A\|\,\|x\|$ برای هر بردار $x$.</li>
+      <li><b>ضرب:</b> $\|AB\|\le \|A\|\,\|B\|$.</li>
+      <li><b>همانی:</b> $\|I\|=1$ (چون $Ix=x$ و نسبت $\|Ix\|/\|x\|$ همیشه ۱ است).</li>
+    </ol>
+    <p>نرم بی‌نهایتِ ماتریس = <b>بزرگ‌ترین مجموع قدرمطلق‌های یک سطر</b>:</p>
+    $$\|A\|_\infty=\max_{i}\sum_{j=1}^{n}|a_{ij}|,\qquad A=\begin{bmatrix}1&2\\1.0001&2\end{bmatrix}\ \Rightarrow\ \text{مجموع سطرها: } 3,\ 3.0001\ \Rightarrow\ \|A\|_\infty=3.0001 .$$
+  </div>
+
+  <div class="box recall">
+    <div class="box-h"><span class="tag">یادآوری ۳</span><span class="box-t">دترمینان، رتبه و ماتریس‌های مثلثی</span></div>
+    <ul>
+      <li>$\det(AB)=\det(A)\det(B)$ و $A$ وارون‌پذیر است اگر و فقط اگر $\det(A)\neq0$.</li>
+      <li>دترمینانِ ماتریس مثلثی (بالا یا پایین) = حاصل‌ضرب درایه‌های قطری.</li>
+      <li>جابه‌جاکردن دو سطر، علامت دترمینان را عوض می‌کند. عمل $R_i\leftarrow R_i-lR_j$ دترمینان را تغییر نمی‌دهد.</li>
+      <li>رتبه (rank) یعنی تعداد سطرها (یا ستون‌های) مستقل خطی. ماتریس $n\times n$ وارون‌پذیر است اگر و فقط اگر رتبه‌اش $n$ باشد.</li>
+      <li>حاصل‌ضرب دو ماتریس پایین‌مثلثی، پایین‌مثلثی است. وارونِ ماتریس پایین‌مثلثی با قطر ۱، باز هم پایین‌مثلثی با قطر ۱ است (کتاب به این‌ها «گزارهٔ ۱۰.۱» می‌گوید). همین برای بالامثلثی هم درست است.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================================================================ 3.1 -->
+<section class="sec" id="s1">
+  <h2 id="sec31"><span class="num">۱.۳</span>دستگاه معادلات خطی</h2>
+
+  <div class="box goal">
+    <div class="box-h"><span class="tag">بعد از این بخش می‌توانی</span></div>
+    <ul>
+      <li>هر دستگاه $n$ معادله و $n$ مجهول را به شکل فشردهٔ $Ax=b$ بنویسی؛</li>
+      <li>یک دستگاه با ضرایب مختلط را به یک دستگاه حقیقیِ $2n\times2n$ تبدیل کنی؛</li>
+      <li>توضیح بدهی چرا «حل دستگاه» و «پیدا کردن $A^{-1}$» هم‌ارزند.</li>
+    </ul>
+  </div>
+
+  <div class="box intu">
+    <div class="box-h"><span class="tag">به زبان ساده</span></div>
+    <p>دستگاه معادلات یعنی چند شرط که باید <b>هم‌زمان</b> برقرار باشند. مثلاً «دو برابرِ سیب به‌اضافهٔ پرتقال ۵ می‌شود و سیب منهای پرتقال ۱». ضرایب را در یک جدول (ماتریس $A$)، مجهول‌ها را در یک ستون ($x$) و سمت راست‌ها را در یک ستون دیگر ($b$) می‌چینیم. آن‌وقت کل دستگاه در سه حرف خلاصه می‌شود: $Ax=b$.</p>
+  </div>
+
+  <p>در این فصل به حل مسئلهٔ دستگاه خطی می‌پردازیم، یعنی محاسبهٔ $x_1,\dots,x_n$ از دستگاه معادلات هم‌زمان</p>
+  $$\begin{cases} a_{11}x_1+a_{12}x_2+\cdots+a_{1n}x_n=b_1\\ a_{21}x_1+a_{22}x_2+\cdots+a_{2n}x_n=b_2\\ \quad\vdots\\ a_{n1}x_1+a_{n2}x_2+\cdots+a_{nn}x_n=b_n\end{cases}$$
+  <p>که در آن $b_i$ها و $a_{ij}$ها معلوم‌اند. با معرفی ماتریس $A=[a_{ij}]_{n\times n}$ و بردارهای $x=[x_i]_{n\times1}$ و $b=[b_i]_{n\times1}$ دستگاه به شکل فشردهٔ $Ax=b$ نوشته می‌شود. بدون کاستن از کلیت، مسئله را روی میدان اعداد حقیقی بررسی می‌کنیم؛ دلیلش را الان می‌بینیم.</p>
+
+  <h3 id="complex">دستگاه مختلط را می‌شود حقیقی کرد</h3>
+  <p>اگر $A\in\mathbb{C}^{n\times n}$ و $x,b\in\mathbb{C}^n$ باشند، هر کدام را به قسمت حقیقی و موهومی می‌شکنیم و به یک دستگاه حقیقی بزرگ‌تر می‌رسیم.</p>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">استخراج دستگاه حقیقی معادل</span><span class="badge book">از کتاب</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">می‌نویسیم $A=A_r+\mathrm{i}A_i$، $b=b_r+\mathrm{i}b_i$ و $x=x_r+\mathrm{i}x_i$ که در آن $A_r,A_i\in\mathbb{R}^{n\times n}$ و $x_r,x_i,b_r,b_i\in\mathbb{R}^n$.
+        <div class="why">هر عدد مختلط $z=p+\mathrm{i}q$ یک قسمت حقیقی $p$ و یک قسمت موهومی $q$ دارد؛ همین کار را درایه‌به‌درایه برای ماتریس و بردارها انجام داده‌ایم.</div></li>
+      <li class="step">ضرب را باز می‌کنیم:
+        $$Ax=(A_r+\mathrm{i}A_i)(x_r+\mathrm{i}x_i)=A_rx_r-A_ix_i+\mathrm{i}\,(A_rx_i+A_ix_r).$$
+        <div class="why">پخش‌پذیری ضرب ماتریسی: چهار جمله داریم $A_rx_r+\mathrm{i}A_rx_i+\mathrm{i}A_ix_r+\mathrm{i}^2A_ix_i$ و چون $\mathrm{i}^2=-1$، جملهٔ آخر منفی و حقیقی می‌شود.</div></li>
+      <li class="step">از $Ax=b$ و برابری قسمت‌های حقیقی و موهومی دو طرف:
+        $$A_rx_r-A_ix_i=b_r,\qquad A_rx_i+A_ix_r=b_i .$$
+        <div class="why">دو عدد (یا بردار) مختلط وقتی برابرند که قسمت‌های حقیقی‌شان با هم و قسمت‌های موهومی‌شان با هم برابر باشند.</div></li>
+      <li class="step">این دو معادلهٔ برداری را به شکل یک دستگاه بلوکی می‌نویسیم:
+        $$\begin{bmatrix}A_r&-A_i\\ A_i&A_r\end{bmatrix}\begin{bmatrix}x_r\\ x_i\end{bmatrix}=\begin{bmatrix}b_r\\ b_i\end{bmatrix}.$$
+        <div class="why">سطر بلوکی اول یعنی $A_rx_r+(-A_i)x_i=b_r$ و سطر بلوکی دوم یعنی $A_ix_r+A_rx_i=b_i$؛ دقیقاً همان دو معادلهٔ گام قبل. این یک دستگاه خطی بلوکیِ حقیقی از مرتبهٔ $2n\times2n$ است.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>بشکن به حقیقی + موهومی ← ضرب را باز کن ($\mathrm{i}^2=-1$) ← دو طرف را مقایسه کن ← بلوکی بنویس: $\left[\begin{smallmatrix}A_r&-A_i\\A_i&A_r\end{smallmatrix}\right]$. منفی فقط در بلوک بالا-راست است.</div>
+    <div class="qed">∎</div>
+  </div>
+
+  <div class="box ex">
+    <div class="box-h"><span class="tag">مثال کمکی</span><span class="box-t">یک دستگاه ۱×۱ مختلط</span><span class="box-src">برای فهم، خارج از کتاب</span></div>
+    <p>معادلهٔ $(1+\mathrm{i})z=2$ را در نظر بگیر. اینجا $A_r=1$، $A_i=1$، $b_r=2$، $b_i=0$. دستگاه حقیقی معادل:</p>
+    $$\begin{bmatrix}1&-1\\1&1\end{bmatrix}\begin{bmatrix}x_r\\x_i\end{bmatrix}=\begin{bmatrix}2\\0\end{bmatrix}\ \Rightarrow\ x_r=1,\ x_i=-1\ \Rightarrow\ z=1-\mathrm{i}.$$
+    <p>امتحان: $(1+\mathrm{i})(1-\mathrm{i})=1-\mathrm{i}^2=2$. درست است.</p>
+  </div>
+
+  <div class="box rem">
+    <div class="box-h"><span class="tag">تبصره ۱.۳</span></div>
+    <p>برای جلوگیری از افزایش بُعد مسئله در میدان اعداد مختلط، می‌توان با احتیاط از روش‌های حل دستگاه معادلات خطی روی میدان اعداد حقیقی استفاده کرد.</p>
+  </div>
+
+  <div class="box def" id="def13">
+    <div class="box-h"><span class="tag">تعریف ۱.۳</span><span class="box-t">مسئلهٔ دستگاه معادلات خطی</span></div>
+    <p>مسئلهٔ دستگاه معادلات خطی عبارت است از یافتن بردار $x\in\mathbb{R}^n$ به گونه‌ای که برای بردار معلوم $b\in\mathbb{R}^n$ و ماتریس معلوم $A\in\mathbb{R}^{n\times n}$ داشته باشیم $Ax=b$.</p>
+  </div>
+
+  <div class="box rem" id="rem23">
+    <div class="box-h"><span class="tag">تبصره ۲.۳</span><span class="box-t">حل دستگاه هم‌ارز یافتن $A^{-1}$ است</span></div>
+    <p>حل این مسئله با یافتن $A^{-1}$ هم‌ارز است؛ به این معنی که اگر $A^{-1}$ موجود باشد $x=A^{-1}b$ جواب مسئلهٔ بیان‌شده است. برعکس اگر solve فرایندی باشد که $A$ و $b$ را به عنوان ورودی دریافت کند و $x$ را به عنوان خروجی برگرداند، یعنی $x=\mathrm{solve}(A,b)$، آن‌گاه برای $i=1,\dots,n$ قرار می‌دهیم $\hat a^{(i)}=\mathrm{solve}(A,e^{(i)})$ و $\hat A=[\hat a^{(1)}\cdots\hat a^{(n)}]$؛ در این صورت $\hat A=A^{-1}$.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات تبصره ۲.۳</span><span class="badge book">از کتاب</span><span class="grow"></span></div>
+    <p class="proof-goal">باید دو جهت را نشان دهیم: (الف) با داشتن $A^{-1}$ دستگاه حل می‌شود؛ (ب) با داشتن یک «حل‌کننده»، $A^{-1}$ ساخته می‌شود.</p>
+    <ol class="steps">
+      <li class="step"><b>جهت الف.</b> طرفین $Ax=b$ را از چپ در $A^{-1}$ ضرب می‌کنیم: $A^{-1}Ax=A^{-1}b$ پس $x=A^{-1}b$.
+        <div class="why">$A^{-1}A=I$ و $Ix=x$. پس با داشتن وارون، جواب فقط یک ضرب ماتریس در بردار است.</div></li>
+      <li class="step"><b>جهت ب.</b> ستون $i$ام ماتریس همانی را $e^{(i)}$ بنامیم و دستگاه $A\hat a^{(i)}=e^{(i)}$ را حل کنیم: $\hat a^{(i)}=\mathrm{solve}(A,e^{(i)})$ برای $i=1,\dots,n$.
+        <div class="why">یعنی $n$ بار حل‌کننده را صدا می‌زنیم، هر بار با یکی از ستون‌های $I$ به‌جای $b$.</div></li>
+      <li class="step">جواب‌ها را کنار هم می‌گذاریم: $\hat A=[\hat a^{(1)}\cdots\hat a^{(n)}]$. آن‌گاه
+        $$A\hat A=A[\hat a^{(1)}\cdots\hat a^{(n)}]=[A\hat a^{(1)}\ A\hat a^{(2)}\cdots A\hat a^{(n)}]=[e_1\ e_2\cdots e_n]=I .$$
+        <div class="why">ستون $j$امِ حاصل‌ضرب $AB$ برابر است با $A$ ضرب در ستون $j$امِ $B$. پس $A\hat A$ ستون‌به‌ستون همان $e^{(i)}$ها می‌شود.</div></li>
+      <li class="step">چون $A\hat A=I$، داریم $\hat A=A^{-1}$.
+        <div class="why">برای ماتریس مربعی، اگر $AB=I$ آن‌گاه $B$ وارون $A$ است.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>جهت الف: ضرب در $A^{-1}$. جهت ب: $n$ دستگاه $A\hat a^{(i)}=e^{(i)}$ را حل کن ← ستون‌ها را کنار هم بگذار ← $A\hat A=I$.</div>
+    <div class="qed">∎</div>
+  </div>
+  <div class="box warn">
+    <div class="box-h"><span class="tag">نکتهٔ عملی</span></div>
+    <p>با این‌که حل دستگاه و یافتن وارون هم‌ارزند، در عمل <b>برای حل $Ax=b$ اول $A^{-1}$ را حساب نمی‌کنیم.</b> به دلایلی که کتاب در زیربخش ۷.۳.۳ می‌گوید، روش‌هایی هستند که $x$ را بدون محاسبهٔ $A^{-1}$ پیدا می‌کنند. محاسبهٔ سنتیِ $A^{-1}$ بر پایهٔ بسط دترمینان هم حجم عملیات بسیار بالایی دارد.</p>
+  </div>
+
+  <div class="quiz">
+    <div class="quiz-h"><b>خودآزمایی ۱.۳</b><span class="score"></span></div>
+    <div class="q">
+      <p class="q-t">یک دستگاه مختلطِ $n\times n$ به یک دستگاه حقیقی با چه اندازه‌ای تبدیل می‌شود؟</p>
+      <div class="opts two"><button class="opt">$n\times n$</button><button class="opt" data-c>$2n\times 2n$</button><button class="opt">$n^2\times n^2$</button><button class="opt">$4n\times 4n$</button></div>
+      <p class="q-exp">مجهول‌ها از $n$ عدد مختلط به $2n$ عدد حقیقی ($x_r$ و $x_i$) تبدیل می‌شوند، پس ماتریس $2n\times2n$ است.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">در دستگاه بلوکی $\left[\begin{smallmatrix}A_r&?\\A_i&A_r\end{smallmatrix}\right]$ جای علامت سؤال چیست؟</p>
+      <div class="opts two"><button class="opt">$A_i$</button><button class="opt" data-c>$-A_i$</button><button class="opt">$A_r$</button><button class="opt">$-A_r$</button></div>
+      <p class="q-exp">قسمت حقیقی $Ax$ برابر $A_rx_r-A_ix_i$ است، پس ضریب $x_i$ در سطر اول $-A_i$ است.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">با یک حل‌کنندهٔ solve، برای ساختن $A^{-1}$ چه می‌کنیم؟</p>
+      <div class="opts"><button class="opt">یک بار $Ax=b$ را حل می‌کنیم.</button><button class="opt" data-c>برای $i=1,\dots,n$ دستگاه $Ax=e^{(i)}$ را حل می‌کنیم و جواب‌ها را ستون‌های $A^{-1}$ قرار می‌دهیم.</button><button class="opt">دستگاه $A^{T}x=b$ را حل می‌کنیم.</button></div>
+      <p class="q-exp">ستون $i$ام وارون، جواب $Ax=e^{(i)}$ است؛ چون $A\hat A=I$ ستون‌به‌ستون همین را می‌گوید.</p>
+    </div>
+    <div class="quiz-f"><button class="btn quiz-reset">دوباره</button></div>
+  </div>
+
+  <div class="sec-done"><p>اگر بدون نگاه کردن می‌توانی دستگاه بلوکی $2n\times2n$ را بنویسی و دو جهت تبصرهٔ ۲.۳ را توضیح دهی، این بخش تمام است.</p><button class="btn done-btn" data-sec="sec31"></button></div>
+</section>
+
+<!-- ================================================================ 3.2 -->
+<section class="sec" id="s2">
+  <h2 id="sec32"><span class="num">۲.۳</span>بررسی وضعیت مسئلهٔ دستگاه خطی</h2>
+
+  <div class="box goal">
+    <div class="box-h"><span class="tag">بعد از این بخش می‌توانی</span></div>
+    <ul>
+      <li>باقی‌مانده را حساب کنی و بگویی چرا «باقی‌ماندهٔ کوچک» تضمین «خطای کوچک» نیست؛</li>
+      <li>قضیهٔ ۱.۳ را کامل اثبات کنی (هر دو کران)؛</li>
+      <li>عدد وضعیت $\kappa(A)$ را تعریف و حساب کنی و ثابت کنی $\kappa(A)\ge1$؛</li>
+      <li>قضیهٔ ۲.۳ (اثر اختلال در $A$ و $b$) را اثبات کنی.</li>
+    </ul>
+  </div>
+
+  <p>واضح است که اگر $x$ جواب دقیق دستگاه خطی با ماتریس ضرایب $A$ و بردار سمت راست $b$ باشد آن‌گاه $b-Ax=0$.</p>
+
+  <div class="box def" id="def23">
+    <div class="box-h"><span class="tag">تعریف ۲.۳</span><span class="box-t">بردار باقی‌مانده</span></div>
+    <p>فرض کنید بردار $\tilde x\in\mathbb{R}^n$ تقریبی برای جواب دستگاه $Ax=b$ باشد. بردار $r=b-A\tilde x$ بردار باقی‌ماندهٔ نظیر $\tilde x$ نامیده می‌شود.</p>
+  </div>
+
+  <div class="box intu">
+    <div class="box-h"><span class="tag">به زبان ساده</span><span class="box-t">خطا را نمی‌بینیم، باقی‌مانده را می‌بینیم</span></div>
+    <p><b>خطا</b> یعنی $x-\tilde x$: چقدر از جواب واقعی دوریم. ولی $x$ را نداریم (اگر داشتیم که مسئله حل بود!)، پس خطا را نمی‌توانیم حساب کنیم.</p>
+    <p><b>باقی‌مانده</b> یعنی $r=b-A\tilde x$: وقتی جواب تقریبی را در معادله‌ها می‌گذاریم، چقدر کم می‌آوریم. این را همیشه می‌توانیم حساب کنیم.</p>
+    <p>پس سؤال طبیعی این است: <b>از روی باقی‌مانده، چه چیزی دربارهٔ خطا می‌شود گفت؟</b> جواب این سؤال، قضیهٔ ۱.۳ و «عدد وضعیت» است.</p>
+  </div>
+
+  <p>به نظر می‌رسد که اگر $\tilde x$ جواب تقریبی دستگاه خطی $Ax=b$ باشد و نرم بردار باقی‌ماندهٔ نظیر یعنی $\|r\|=\|b-A\tilde x\|$ کوچک باشد، آن‌گاه $\|x-\tilde x\|$ هم کوچک باشد؛ ولی دستگاه‌هایی وجود دارند که این ویژگی برای آن‌ها برقرار نیست.</p>
+
+  <div class="box ex" id="ex13">
+    <div class="box-h"><span class="tag">مثال ۱.۳</span><span class="box-t">باقی‌ماندهٔ کوچک، خطای بزرگ</span></div>
+    <p>دستگاه</p>
+    $$\begin{bmatrix}1&2\\1.0001&2\end{bmatrix}\begin{bmatrix}x_1\\x_2\end{bmatrix}=\begin{bmatrix}3\\3.0001\end{bmatrix}$$
+    <p>دارای جواب دقیق $x=[1\ \ 1]^T$ است و بردار باقی‌ماندهٔ نظیر تقریب با دقت پایین $\tilde x=[3\ \ 0]^T$ به قرار زیر است:</p>
+    $$r=b-A\tilde x=\begin{bmatrix}3\\3.0001\end{bmatrix}-\begin{bmatrix}1&2\\1.0001&2\end{bmatrix}\begin{bmatrix}3\\0\end{bmatrix}=\begin{bmatrix}3\\3.0001\end{bmatrix}-\begin{bmatrix}3\\3.0003\end{bmatrix}=\begin{bmatrix}0\\-0.0002\end{bmatrix}.$$
+    <p>کوچک بودن نرم بردار باقی‌مانده ($\|r\|_\infty=0.0002$) دلیلی بر خوب بودن تقریب نیست، زیرا</p>
+    $$x-\tilde x=\begin{bmatrix}1-3\\1-0\end{bmatrix}=\begin{bmatrix}-2\\1\end{bmatrix}\ \Rightarrow\ \|x-\tilde x\|_\infty=2 .$$
+    <p>این مشکل از آن‌جا ناشی می‌شود که شیب خطوط $x_1+2x_2=3$ و $1.0001x_1+2x_2=3.0001$ به ترتیب $-0.5$ و $-0.50005$ است. بنابراین دو خط در نزدیکی نقطهٔ $(1,1)$ به‌طور تقریبی بر هم منطبق‌اند. هر نقطه روی خط اول (مثل $(3,0)$) تقریباً روی خط دوم هم هست، پس معادله‌ها را تقریباً برآورده می‌کند، در حالی که از $(1,1)$ خیلی دور است.</p>
+  </div>
+  <div class="widget" data-widget="illcond"></div>
+  <p class="small muted">با لغزندهٔ ε دو خط را از هم دور یا به هم نزدیک کن و با لغزندهٔ t نقطهٔ تقریبی را روی خط اول جابه‌جا کن. ببین وقتی خطوط تقریباً موازی‌اند، باقی‌مانده چقدر کوچک و خطا چقدر بزرگ است.</p>
+
+  <p>به منظور تشریح این مشکل در حالت کلی، قضیهٔ ۱.۳ بیان می‌گردد.</p>
+
+  <div class="box thm" id="thm13">
+    <div class="box-h"><span class="tag">قضیه ۱.۳</span><span class="box-t">رابطهٔ خطا و باقی‌مانده</span></div>
+    <p>فرض کنید $A$ ماتریسی وارون‌پذیر، $\tilde x$ جواب تقریبی دستگاه $Ax=b$ و $r$ بردار باقی‌ماندهٔ نظیر $\tilde x$ باشد. آن‌گاه به ازای هر نرم ماتریسی طبیعی داریم</p>
+    $$\|x-\tilde x\|\le\|r\|\,\|A^{-1}\|$$
+    <p>و اگر $x\neq0$ و $b\neq0$ آن‌گاه</p>
+    $$\frac{1}{\|A\|\,\|A^{-1}\|}\,\frac{\|r\|}{\|b\|}\ \le\ \frac{\|x-\tilde x\|}{\|x\|}\ \le\ \|A\|\,\|A^{-1}\|\,\frac{\|r\|}{\|b\|}.$$
+  </div>
+
+  <div class="box intu">
+    <div class="box-h"><span class="tag">ایدهٔ اثبات در یک جمله</span></div>
+    <p>خطا و باقی‌مانده با خود $A$ به هم وصل‌اند: $r=A(x-\tilde x)$. پس خطا $=A^{-1}\times$ باقی‌مانده. اگر $A^{-1}$ «بزرگ» باشد (یعنی $\|A^{-1}\|$ بزرگ)، یک باقی‌ماندهٔ کوچک می‌تواند خطای بزرگ بسازد. بقیهٔ اثبات فقط استفادهٔ مکرر از نامساوی سازگاری $\|Mv\|\le\|M\|\|v\|$ است.</p>
+  </div>
+
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۱.۳</span><span class="badge book">از کتاب</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">باقی‌مانده را بر حسب خطا می‌نویسیم:
+        $$r=b-A\tilde x=Ax-A\tilde x=A(x-\tilde x).$$
+        <div class="why">چون $x$ جواب دقیق است، $b=Ax$. بعد از $A$ فاکتور گرفته‌ایم (پخش‌پذیری ضرب ماتریس).</div></li>
+      <li class="step">چون $A$ وارون‌پذیر است: $\ x-\tilde x=A^{-1}r$.
+        <div class="why">دو طرف $r=A(x-\tilde x)$ را از چپ در $A^{-1}$ ضرب کرده‌ایم.</div></li>
+      <li class="step">از دو طرف نرم می‌گیریم:
+        $$\|x-\tilde x\|=\|A^{-1}r\|\le\|A^{-1}\|\,\|r\| .$$
+        <div class="why">ویژگی سازگاری نرم ماتریسی طبیعی با نرم برداری: $\|Mv\|\le\|M\|\|v\|$ با $M=A^{-1}$ و $v=r$. <b>نامساوی اول قضیه ثابت شد.</b></div></li>
+      <li class="step">حالا فرض می‌کنیم $x\neq0$ و $b\neq0$. نامساوی گام ۳ را بر $\|x\|$ تقسیم می‌کنیم:
+        $$\frac{\|x-\tilde x\|}{\|x\|}\le\frac{\|A^{-1}\|\,\|r\|}{\|x\|}.$$
+        <div class="why">$\|x\|\gt 0$ است (چون $x\neq0$)، پس تقسیم جهت نامساوی را عوض نمی‌کند. می‌خواهیم «خطای نسبی» داشته باشیم.</div></li>
+      <li class="step">باید $\|x\|$ را از مخرج حذف کنیم. از $Ax=b$:
+        $$\|b\|=\|Ax\|\le\|A\|\,\|x\|\ \Longrightarrow\ \frac{1}{\|x\|}\le\frac{\|A\|}{\|b\|}.$$
+        <div class="why">باز هم سازگاری. بعد دو طرف $\|b\|\le\|A\|\|x\|$ را بر عدد مثبت $\|x\|\,\|b\|$ تقسیم کرده‌ایم.</div></li>
+      <li class="step">جای‌گذاری در گام ۴:
+        $$\frac{\|x-\tilde x\|}{\|x\|}\le\|A\|\,\|A^{-1}\|\,\frac{\|r\|}{\|b\|}.$$
+        <div class="why">در سمت راست گام ۴، به‌جای $\frac{1}{\|x\|}$ مقدار بزرگ‌تر $\frac{\|A\|}{\|b\|}$ را گذاشته‌ایم؛ سمت راست بزرگ‌تر می‌شود و نامساوی برقرار می‌ماند. <b>کران بالا ثابت شد.</b></div></li>
+      <li class="step">برای کران پایین، دوباره از گام ۱ شروع می‌کنیم: $r=A(x-\tilde x)$ پس
+        $$\|r\|\le\|A\|\,\|x-\tilde x\|\ \Longrightarrow\ \frac{\|r\|}{\|A\|}\le\|x-\tilde x\| .$$
+        <div class="why">سازگاری با $M=A$. چون $A$ وارون‌پذیر است صفر نیست و $\|A\|\gt 0$، پس می‌توانیم تقسیم کنیم.</div></li>
+      <li class="step">دو طرف را بر $\|x\|$ تقسیم می‌کنیم:
+        $$\frac{\|r\|}{\|x\|\,\|A\|}\le\frac{\|x-\tilde x\|}{\|x\|}.$$
+        <div class="why">همان کار گام ۴، این بار برای نامساوی پایینی.</div></li>
+      <li class="step">این بار $\frac{1}{\|x\|}$ را از پایین کران‌دار می‌کنیم. از $x=A^{-1}b$:
+        $$\|x\|\le\|A^{-1}\|\,\|b\|\ \Longrightarrow\ \frac{1}{\|x\|}\ge\frac{1}{\|A^{-1}\|\,\|b\|}.$$
+        <div class="why">سازگاری با $M=A^{-1}$. وقتی دو طرفِ نامساویِ اعداد مثبت را معکوس می‌کنیم، جهت نامساوی برمی‌گردد.</div></li>
+      <li class="step">جای‌گذاری در گام ۸:
+        $$\frac{1}{\|A\|\,\|A^{-1}\|}\,\frac{\|r\|}{\|b\|}\le\frac{\|r\|}{\|x\|\,\|A\|}\le\frac{\|x-\tilde x\|}{\|x\|}.$$
+        <div class="why">در سمت چپ گام ۸، به‌جای $\frac{1}{\|x\|}$ مقدار کوچک‌ترش را گذاشته‌ایم؛ سمت چپ کوچک‌تر شده و نامساوی هنوز برقرار است. <b>کران پایین هم ثابت شد.</b></div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>
+      <ol>
+        <li>کلید همه چیز: $r=A(x-\tilde x)$ پس $x-\tilde x=A^{-1}r$.</li>
+        <li>کران بالا: سازگاری روی $A^{-1}r$ + از $b=Ax$ داریم $\frac1{\|x\|}\le\frac{\|A\|}{\|b\|}$.</li>
+        <li>کران پایین: سازگاری روی $A(x-\tilde x)$ + از $x=A^{-1}b$ داریم $\frac1{\|x\|}\ge\frac1{\|A^{-1}\|\|b\|}$.</li>
+      </ol>
+      ترفند حافظه: <b>بالا با $A^{-1}$ شروع می‌شود، پایین با $A$</b>؛ و هر بار برای خلاص شدن از $\|x\|$ از «همان یکی دیگر» استفاده می‌کنیم.</div>
+    <div class="qed">∎</div>
+  </div>
+
+  <p>بنابر نامساوی‌های قضیهٔ ۱.۳، $\|A\|$ و $\|A^{-1}\|$ تعیین‌کنندهٔ رابطهٔ بین بردار باقی‌مانده و دقت جواب هستند. با توجه به اهمیت خطای نسبی، قضیهٔ ۱.۳ نشان می‌دهد که خطای نسبی توسط حاصل‌ضرب $\|A\|\,\|A^{-1}\|$ و باقی‌ماندهٔ نسبی متناظر تقریب یعنی $\frac{\|r\|}{\|b\|}$ کران‌دار می‌شود.</p>
+
+  <div class="box rem">
+    <div class="box-h"><span class="tag">تبصره ۳.۳</span></div>
+    <p>در قضیهٔ ۱.۳ تنها از ویژگی سازگاری نرم ماتریسی طبیعی استفاده شد (یعنی $\|Ax\|\le\|A\|\|x\|$). اگر دوباره به اثبات نگاه کنی، در گام‌های ۳، ۵، ۷ و ۹ فقط همین ویژگی به کار رفته است.</p>
+  </div>
+
+  <div class="box def" id="def33">
+    <div class="box-h"><span class="tag">تعریف ۳.۳</span><span class="box-t">عدد وضعیت</span></div>
+    <p>عدد وضعیت ماتریس وارون‌پذیر $A$ نسبت به نرم $\|\cdot\|$ به صورت زیر تعریف می‌شود:</p>
+    $$\kappa(A)=\|A\|\,\|A^{-1}\|$$
+    <p>و اگر $A$ ماتریسی وارون‌پذیر نباشد قرار می‌دهیم $\kappa(A)=\infty$. عدد وضعیت ماتریس $A$ نسبت به نرم ماتریسی طبیعی $\|\cdot\|_p$ را با $\kappa_p(A)$ نشان می‌دهیم.</p>
+  </div>
+
+  <div class="box rem" id="rem43">
+    <div class="box-h"><span class="tag">تبصره ۴.۳</span><span class="box-t">عدد وضعیت هیچ‌وقت از ۱ کمتر نیست</span></div>
+    <p>برای هر ماتریس وارون‌پذیر دلخواه $A$ و هر نرم ماتریسی طبیعی داریم $\kappa(A)\ge1$.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات تبصره ۴.۳</span><span class="badge book">از کتاب</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">$1=\|I\|$.
+        <div class="why">برای هر نرم ماتریسی طبیعی، $\|I\|=\max_{x\ne0}\frac{\|Ix\|}{\|x\|}=\max_{x\neq 0} 1=1$.</div></li>
+      <li class="step">$\|I\|=\|AA^{-1}\|$.
+        <div class="why">چون $AA^{-1}=I$.</div></li>
+      <li class="step">$\|AA^{-1}\|\le\|A\|\,\|A^{-1}\|=\kappa(A)$.
+        <div class="why">ویژگی ضربی نرم: $\|AB\|\le\|A\|\|B\|$. پس $1\le\kappa(A)$.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>یک خط: $1=\|I\|=\|AA^{-1}\|\le\|A\|\|A^{-1}\|=\kappa(A)$.</div>
+    <div class="qed">∎</div>
+  </div>
+
+  <div class="box rem" id="rem53">
+    <div class="box-h"><span class="tag">تبصره ۵.۳</span><span class="box-t">قضیهٔ ۱.۳ به زبان عدد وضعیت</span></div>
+    <p>با توجه به تعریف عدد وضعیت، نامساوی‌های قضیهٔ ۱.۳ به صورت زیر بازنویسی می‌شوند:</p>
+    $$\|x-\tilde x\|\le\kappa(A)\frac{\|r\|}{\|A\|}$$
+    <p>و اگر $x\neq0$ و $b\neq0$ آن‌گاه</p>
+    $$\frac{1}{\kappa(A)}\frac{\|r\|}{\|b\|}\le\frac{\|x-\tilde x\|}{\|x\|}\le\kappa(A)\frac{\|r\|}{\|b\|}.$$
+    <p>بنابراین مسئلهٔ $Ax=b$ <b>خوش‌وضع</b> است هرگاه $\kappa(A)$ به اندازهٔ کافی به ۱ نزدیک باشد و هرچه $\kappa(A)$ از ۱ دورتر باشد مسئله <b>بدوضع‌تر</b> خواهد شد.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">چرا بازنویسی درست است؟</span><span class="badge book">از کتاب</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">از تعریف $\kappa(A)=\|A\|\|A^{-1}\|$ داریم $\|A^{-1}\|=\dfrac{\kappa(A)}{\|A\|}$. این را در نامساوی اول قضیهٔ ۱.۳ می‌گذاریم: $\|x-\tilde x\|\le\|r\|\,\dfrac{\kappa(A)}{\|A\|}$.
+        <div class="why">فقط یک جای‌گذاری است؛ $\|A\|\gt 0$ چون $A$ وارون‌پذیر است.</div></li>
+      <li class="step">در دو کران خطای نسبی، به‌جای $\|A\|\|A^{-1}\|$ مستقیم $\kappa(A)$ می‌گذاریم.
+        <div class="why">همان عبارت است؛ فقط اسم گذاشته‌ایم.</div></li>
+    </ol>
+    <div class="qed">∎</div>
+  </div>
+  <div class="box intu">
+    <div class="box-h"><span class="tag">به زبان ساده</span><span class="box-t">$\kappa$ ضریب بزرگ‌نمایی است</span></div>
+    <p>نامساوی سمت راست می‌گوید: <b>خطای نسبی حداکثر $\kappa(A)$ برابرِ باقی‌ماندهٔ نسبی است.</b> اگر $\kappa=1$ باشد، باقی‌ماندهٔ کوچک واقعاً یعنی خطای کوچک. اگر $\kappa=60000$ باشد، باقی‌مانده ممکن است تا شصت هزار برابر «دروغ» بگوید.</p>
+  </div>
+
+  <div class="box ex" id="ex23">
+    <div class="box-h"><span class="tag">مثال ۲.۳</span><span class="box-t">عدد وضعیت ماتریس مثال ۱.۳</span></div>
+    <p>در مثال قبل داریم $A=\begin{bmatrix}1&2\\1.0001&2\end{bmatrix}$ که برای آن $\|A\|_\infty=3.0001$ چندان بزرگ نیست. ولی وارون آن را حساب کنیم:</p>
+    $$\det A=1\cdot2-2\cdot1.0001=-0.0002,\qquad A^{-1}=\frac{1}{-0.0002}\begin{bmatrix}2&-2\\-1.0001&1\end{bmatrix}=\begin{bmatrix}-10000&10000\\5000.5&-5000\end{bmatrix}.$$
+    <p>مجموع قدرمطلق سطرهای $A^{-1}$: سطر اول $20000$ و سطر دوم $10000.5$. پس $\|A^{-1}\|_\infty=20000$ و از آن‌جا</p>
+    $$\kappa_\infty(A)=\|A\|_\infty\,\|A^{-1}\|_\infty=3.0001\times20000=60002 .$$
+    <p class="small">وارون ماتریس $2\times2$: $\left[\begin{smallmatrix}a&b\\c&d\end{smallmatrix}\right]^{-1}=\frac{1}{ad-bc}\left[\begin{smallmatrix}d&-b\\-c&a\end{smallmatrix}\right]$.</p>
+  </div>
+  <details class="try">
+    <summary>کنترل: آیا قضیهٔ ۱.۳ برای مثال ۱.۳ درست کار می‌کند؟</summary>
+    <div>
+      <p>کران بالای خطای نسبی: $\kappa_\infty(A)\dfrac{\|r\|_\infty}{\|b\|_\infty}=60002\times\dfrac{0.0002}{3.0001}=4$. خطای نسبی واقعی: $\dfrac{\|x-\tilde x\|_\infty}{\|x\|_\infty}=\dfrac{2}{1}=2$. چون $2\le4$، قضیه برقرار است. باقی‌ماندهٔ نسبی فقط حدود $0.00007$ بود، ولی خطای نسبی ۲ شد؛ این همان بزرگ‌نماییِ عدد وضعیت است.</p>
+    </div>
+  </details>
+
+  <h3 id="perturb">اثر اختلال در داده‌ها</h3>
+  <p>تا اینجا فرض شده بود که درایه‌های ماتریس $A$ و بردار $b$ به‌طور دقیق در محاسبات وارد می‌شوند. اما در حقیقت این درایه‌ها به دلیل وجود خطای گردکردن به‌طور دقیق ذخیره نمی‌شوند و به‌طور تقریبی مورد استفاده قرار می‌گیرند. این بخش را با قضیه‌ای در رابطه با اثر اختلال‌های جزئی داده‌های ورودی روی جواب دستگاه خطی $Ax=b$ به پایان می‌رسانیم.</p>
+
+  <div class="box thm" id="thm23">
+    <div class="box-h"><span class="tag">قضیه ۲.۳</span><span class="box-t">اختلال در $A$ و $b$</span></div>
+    <p>فرض کنید $A$ ماتریسی وارون‌پذیر، $b\neq0$ و $x\neq0$ جواب دستگاه $Ax=b$ باشد. اگر بردار سمت راست و ماتریس ضرایب به صورت $b+\delta b$ و $A+\delta A$ اختلال یافته باشند، $\tilde x$ جواب دستگاه $(A+\delta A)\tilde x=b+\delta b$ باشد و برای نرم ماتریسی طبیعی $\|\cdot\|$ داشته باشیم</p>
+    $$\|\delta A\|\lt\frac{1}{\|A^{-1}\|}$$
+    <p>آن‌گاه</p>
+    $$\frac{\|x-\tilde x\|}{\|x\|}\le\frac{\kappa(A)\,\|A\|}{\|A\|-\kappa(A)\,\|\delta A\|}\left(\frac{\|\delta b\|}{\|b\|}+\frac{\|\delta A\|}{\|A\|}\right).$$
+  </div>
+  <div class="box intu">
+    <div class="box-h"><span class="tag">به زبان ساده</span></div>
+    <p>اگر داده‌ها ($A$ و $b$) کمی خراب شوند، جواب حداکثر به اندازهٔ «$\kappa$ ضربدر خرابی نسبی داده‌ها» (کمی بیشتر) خراب می‌شود. باز هم $\kappa$ ضریب بزرگ‌نمایی است. شرط $\|\delta A\|\lt1/\|A^{-1}\|$ فقط می‌گوید اختلال آن‌قدر بزرگ نباشد که مخرج صفر یا منفی شود.</p>
+  </div>
+  <div class="proof supp">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۲.۳</span><span class="badge supp">تکمیلی · در کتاب تمرین ۳</span><span class="grow"></span></div>
+    <p class="proof-goal">کتاب این اثبات را به تمرین ۳ سپرده است. ایدهٔ آن مثل قضیهٔ ۱.۳ است: یک معادله برای خطا پیدا می‌کنیم و از آن نرم می‌گیریم.</p>
+    <ol class="steps">
+      <li class="step">دو معادله داریم: $Ax=b$ و $(A+\delta A)\tilde x=b+\delta b$. دومی را باز می‌کنیم و اولی را از آن کم می‌کنیم:
+        $$A\tilde x+\delta A\,\tilde x-Ax=\delta b\ \Longrightarrow\ A(\tilde x-x)=\delta b-\delta A\,\tilde x .$$
+        <div class="why">$b$ از دو طرف حذف می‌شود و از $A$ فاکتور می‌گیریم. حالا «خطا» ($\tilde x-x$) در یک معادله تنها شده است.</div></li>
+      <li class="step">ضرب در $A^{-1}$ و نرم گرفتن:
+        $$\|x-\tilde x\|=\|A^{-1}(\delta b-\delta A\,\tilde x)\|\le\|A^{-1}\|\big(\|\delta b\|+\|\delta A\|\,\|\tilde x\|\big).$$
+        <div class="why">سازگاری نرم، بعد نامساوی مثلث $\|u-v\|\le\|u\|+\|v\|$ و دوباره سازگاری برای $\|\delta A\,\tilde x\|\le\|\delta A\|\|\tilde x\|$. ضمناً $\|x-\tilde x\|=\|\tilde x-x\|$.</div></li>
+      <li class="step">$\tilde x$ را به $x$ برمی‌گردانیم: $\ \|\tilde x\|\le\|x\|+\|x-\tilde x\|$.
+        <div class="why">نامساوی مثلث روی $\tilde x=x+(\tilde x-x)$. هدف این است که در سمت راست فقط $x$ (جواب دقیق) بماند.</div></li>
+      <li class="step">جای‌گذاری و جمع‌کردن جمله‌های خطا در یک طرف:
+        $$\|x-\tilde x\|\le\|A^{-1}\|\|\delta b\|+\|A^{-1}\|\|\delta A\|\|x\|+\|A^{-1}\|\|\delta A\|\,\|x-\tilde x\|$$
+        $$\Longrightarrow\ \big(1-\|A^{-1}\|\|\delta A\|\big)\|x-\tilde x\|\le\|A^{-1}\|\big(\|\delta b\|+\|\delta A\|\|x\|\big).$$
+        <div class="why">جملهٔ آخرِ سمت راست را که $\|x-\tilde x\|$ دارد به سمت چپ برده‌ایم و فاکتور گرفته‌ایم.</div></li>
+      <li class="step">طبق فرض $\|\delta A\|\lt1/\|A^{-1}\|$، پس $1-\|A^{-1}\|\|\delta A\|\gt0$ و می‌توانیم تقسیم کنیم:
+        $$\|x-\tilde x\|\le\frac{\|A^{-1}\|\big(\|\delta b\|+\|\delta A\|\|x\|\big)}{1-\|A^{-1}\|\|\delta A\|}.$$
+        <div class="why">اینجا دقیقاً معلوم می‌شود فرض قضیه برای چیست: تقسیم بر عدد مثبت جهت نامساوی را حفظ می‌کند.</div></li>
+      <li class="step">تقسیم بر $\|x\|$ و استفاده از $\frac{1}{\|x\|}\le\frac{\|A\|}{\|b\|}$ (همان گام ۵ قضیهٔ ۱.۳):
+        $$\frac{\|x-\tilde x\|}{\|x\|}\le\frac{\|A^{-1}\|\left(\|A\|\frac{\|\delta b\|}{\|b\|}+\|\delta A\|\right)}{1-\|A^{-1}\|\|\delta A\|}=\frac{\kappa(A)\left(\frac{\|\delta b\|}{\|b\|}+\frac{\|\delta A\|}{\|A\|}\right)}{1-\|A^{-1}\|\|\delta A\|}.$$
+        <div class="why">در صورت از $\|A\|$ فاکتور گرفتیم: $\|A\|\frac{\|\delta b\|}{\|b\|}+\|\delta A\|=\|A\|\left(\frac{\|\delta b\|}{\|b\|}+\frac{\|\delta A\|}{\|A\|}\right)$ و $\|A^{-1}\|\|A\|=\kappa(A)$.</div></li>
+      <li class="step">مخرج را بر حسب $\kappa$ می‌نویسیم: $$\ 1-\|A^{-1}\|\|\delta A\|=1-\dfrac{\kappa(A)\|\delta A\|}{\|A\|}=\dfrac{\|A\|-\kappa(A)\|\delta A\|}{\|A\|}$$. پس
+        $$\frac{\|x-\tilde x\|}{\|x\|}\le\frac{\kappa(A)\,\|A\|}{\|A\|-\kappa(A)\,\|\delta A\|}\left(\frac{\|\delta b\|}{\|b\|}+\frac{\|\delta A\|}{\|A\|}\right).$$
+        <div class="why">$\|A^{-1}\|=\kappa(A)/\|A\|$؛ تقسیم بر کسرِ $\frac{\|A\|-\kappa\|\delta A\|}{\|A\|}$ یعنی ضرب در $\frac{\|A\|}{\|A\|-\kappa\|\delta A\|}$. این دقیقاً حکم قضیه است.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>
+      <ol>
+        <li>تفریق دو دستگاه: $A(\tilde x-x)=\delta b-\delta A\,\tilde x$.</li>
+        <li>نرم + سازگاری + نامساوی مثلث؛ و $\|\tilde x\|\le\|x\|+\|x-\tilde x\|$.</li>
+        <li>جملهٔ خطا را به چپ ببر؛ فرض $\|\delta A\|\|A^{-1}\|\lt1$ اجازهٔ تقسیم می‌دهد.</li>
+        <li>تقسیم بر $\|x\|$ با $\frac1{\|x\|}\le\frac{\|A\|}{\|b\|}$؛ همه چیز را بر حسب $\kappa$ بنویس.</li>
+      </ol></div>
+    <div class="qed">∎</div>
+  </div>
+  <div class="box rem">
+    <div class="box-h"><span class="tag">حالت خاص مفید</span><span class="box-src">نتیجهٔ مستقیم قضیهٔ ۲.۳</span></div>
+    <p>اگر فقط $b$ خراب شده باشد ($\delta A=0$)، کسرِ جلو برابر $\kappa(A)$ می‌شود و داریم $\dfrac{\|x-\tilde x\|}{\|x\|}\le\kappa(A)\dfrac{\|\delta b\|}{\|b\|}$. یعنی خطای نسبیِ ورودی حداکثر $\kappa(A)$ برابر می‌شود.</p>
+  </div>
+
+  <div class="quiz">
+    <div class="quiz-h"><b>خودآزمایی ۲.۳</b><span class="score"></span></div>
+    <div class="q">
+      <p class="q-t">اگر $\|r\|$ خیلی کوچک باشد، آیا خطا حتماً کوچک است؟</p>
+      <div class="opts"><button class="opt">بله، همیشه.</button><button class="opt" data-c>نه؛ فقط وقتی $\kappa(A)$ کوچک (نزدیک ۱) باشد می‌توان مطمئن بود.</button><button class="opt">نه؛ خطا همیشه بزرگ‌تر از باقی‌مانده است.</button></div>
+      <p class="q-exp">طبق قضیهٔ ۱.۳، خطای نسبی $\le\kappa(A)\|r\|/\|b\|$. مثال ۱.۳ با $\kappa=60002$ نشان داد باقی‌ماندهٔ ۰٫۰۰۰۲ می‌تواند با خطای ۲ همراه باشد.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">کمترین مقدار ممکنِ $\kappa(A)$ برای نرم طبیعی چند است؟</p>
+      <div class="opts two"><button class="opt">۰</button><button class="opt" data-c>۱</button><button class="opt">$n$</button><button class="opt">$\|A\|$</button></div>
+      <p class="q-exp">تبصرهٔ ۴.۳: $1=\|I\|=\|AA^{-1}\|\le\|A\|\|A^{-1}\|$.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">برای $A=\left[\begin{smallmatrix}1&-3\\2&4\end{smallmatrix}\right]$، مقدار $\|A\|_\infty$ چند است؟</p>
+      <div class="opts two"><button class="opt">۴</button><button class="opt">۵</button><button class="opt" data-c>۶</button><button class="opt">۱۰</button></div>
+      <p class="q-exp">مجموع قدرمطلق سطرها: $1+3=4$ و $2+4=6$. بزرگ‌ترین ۶ است.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">کلید اثبات قضیهٔ ۱.۳ کدام تساوی است؟</p>
+      <div class="opts two"><button class="opt" data-c>$r=A(x-\tilde x)$</button><button class="opt">$r=A^{-1}(x-\tilde x)$</button><button class="opt">$x=A\tilde x$</button><button class="opt">$\|r\|=\|x-\tilde x\|$</button></div>
+      <p class="q-exp">$r=b-A\tilde x=Ax-A\tilde x=A(x-\tilde x)$؛ بقیهٔ اثبات از همین بیرون می‌آید.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">در قضیهٔ ۲.۳، شرط $\|\delta A\|\lt1/\|A^{-1}\|$ کجای اثبات لازم شد؟</p>
+      <div class="opts"><button class="opt">برای نوشتن $r=A(x-\tilde x)$.</button><button class="opt" data-c>برای اینکه $1-\|A^{-1}\|\|\delta A\|$ مثبت باشد و بتوانیم بر آن تقسیم کنیم.</button><button class="opt">برای اینکه $b\neq0$ باشد.</button></div>
+      <p class="q-exp">گام ۵ اثبات: تقسیم بر یک عدد مثبت جهت نامساوی را حفظ می‌کند.</p>
+    </div>
+    <div class="quiz-f"><button class="btn quiz-reset">دوباره</button></div>
+  </div>
+
+  <div class="sec-done"><p>محک: اثبات کامل قضیهٔ ۱.۳ (هر دو کران) و تبصرهٔ ۴.۳ را بدون نگاه بنویس، و $\kappa_\infty$ مثال ۲.۳ را دوباره حساب کن.</p><button class="btn done-btn" data-sec="sec32"></button></div>
+</section>
+
+<!-- ================================================================ 3.3 -->
+<section class="sec" id="s3">
+  <h2 id="sec33"><span class="num">۳.۳</span>روش‌های مستقیم</h2>
+  <div class="box def">
+    <div class="box-h"><span class="tag">روش مستقیم چیست؟</span></div>
+    <p><b>روش‌های مستقیم</b> روش‌هایی هستند که در تعدادی متناهی (از قبل مشخص) تکرار خاتمه می‌یابند و اگر خطای گردکردن وجود نداشته باشد، جواب واقعی را به‌دست می‌آورند. روش‌های مستقیمی که <b>پایدار</b> باشند از اهمیت بالایی برخوردارند و وجه تمایز آن‌ها در <b>شمارش اعمال حسابی</b> (اعمال ممیز شناور) شامل جمع، تفریق، ضرب و تقسیم (<b>هزینهٔ محاسباتی</b>) است.</p>
+  </div>
+  <div class="box intu">
+    <div class="box-h"><span class="tag">به زبان ساده</span></div>
+    <p>«مستقیم» یعنی دستور پختی با تعداد قدم معلوم: می‌دانی بعد از چند قدم کار تمام می‌شود. سؤال اصلی این بخش این است: <b>کدام دستور پخت قدم‌های کمتری دارد؟</b> اول کرامر را می‌بینیم که روی کاغذ قشنگ است ولی خیلی گران است، بعد حذف گاوسی که ارزان است.</p>
+  </div>
+
+  <!-- ---------------- Cramer -->
+  <h3 id="cramer"><span class="num">۱.۳.۳</span>قاعدهٔ کرامر</h3>
+  <p>یک روش کلاسیک برای حل دستگاه $Ax=b$، <b>قاعدهٔ کرامر</b> است. در این روش ماتریس $A^{(j)}$ برای $j=1,\dots,n$ با جایگزینی ستون $j$امِ $A$ با بردار $b$ ساخته می‌شود و سپس برای $j=1,\dots,n$ داریم</p>
+  $$x_j=\frac{\det\big(A^{(j)}\big)}{\det(A)} .$$
+  <div class="box ex" id="ex33">
+    <div class="box-h"><span class="tag">مثال ۳.۳</span><span class="box-t">حل با کرامر</span></div>
+    <p>جواب دستگاه</p>
+    $$\begin{bmatrix}\frac{\sqrt2}{3}&1\\[2pt]-\frac13&\frac{1}{\sqrt2}\end{bmatrix}\begin{bmatrix}x_1\\x_2\end{bmatrix}=\begin{bmatrix}\sqrt{\frac23}\\[2pt]-\frac{1}{\sqrt3}\end{bmatrix}$$
+    <p>را مرحله به مرحله پیدا می‌کنیم.</p>
+    <ol class="algo-steps">
+      <li>مخرج مشترک، دترمینان خود $A$:
+        $$\det(A)=\frac{\sqrt2}{3}\cdot\frac{1}{\sqrt2}-1\cdot\left(-\frac13\right)=\frac13+\frac13=\frac23$$</li>
+      <li>ستون اول را با $b$ عوض می‌کنیم:
+        $$\det(A^{(1)})=\begin{vmatrix}\sqrt{\frac23}&1\\-\frac1{\sqrt3}&\frac1{\sqrt2}\end{vmatrix}=\sqrt{\tfrac23}\cdot\tfrac{1}{\sqrt2}+\tfrac{1}{\sqrt3}=\tfrac{2}{\sqrt3}$$
+        پس
+        $$x_1=\frac{2/\sqrt3}{2/3}=\frac{3}{\sqrt3}=\sqrt3$$</li>
+      <li>ستون دوم را با $b$ عوض می‌کنیم:
+        $$\det(A^{(2)})=\begin{vmatrix}\frac{\sqrt2}{3}&\sqrt{\frac23}\\-\frac13&-\frac1{\sqrt3}\end{vmatrix}=-\tfrac{\sqrt2}{3\sqrt3}+\tfrac{\sqrt2}{3\sqrt3}=0$$
+        پس
+        $$x_2=\frac{0}{2/3}=0$$</li>
+    </ol>
+    <p class="small">ریزه‌کاری‌ها: $\sqrt{\frac23}\cdot\frac1{\sqrt2}=\frac1{\sqrt3}$ و $\sqrt{\frac23}\cdot\frac13=\frac{\sqrt2}{3\sqrt3}$.</p>
+    <p class="small">امتحان معادلهٔ اول: $\frac{\sqrt2}{3}\cdot\sqrt3+1\cdot0=\frac{\sqrt6}{3}=\sqrt{\frac23}$ ✓</p>
+  </div>
+
+  <div class="box rem" id="rem63">
+    <div class="box-h"><span class="tag">تبصره ۶.۳</span><span class="box-t">چرا کرامر در عمل به کار نمی‌آید</span></div>
+    <p>تعداد ضرب‌ها در محاسبهٔ دترمینان یک ماتریس مربعی از مرتبهٔ $n\times n$ با استفاده از بسط موجود در تعریف ۴.۱، از مرتبهٔ $n!$ ($O(n!)$) است (جملهٔ غالب در شمارش تعداد ضرب‌ها $n!$ است). پس تعداد ضرب‌ها در حل یک دستگاه خطی $n\times n$ به‌وسیلهٔ قاعدهٔ کرامر از مرتبهٔ $(n+1)n!=(n+1)!$ است و در نتیجه برای $n$های نه چندان بزرگ هم، این روش در عمل کارایی ندارد. به عنوان مثال، محاسبهٔ دترمینان یک ماتریس $28\times28$ بر روی رایانه‌ای که در هر ثانیه قادر به انجام $10^{20}$ عمل ضرب است حدود <b>۹۷ سال</b> طول می‌کشد. عیب دیگر قاعدهٔ کرامر <b>ناپایداری عددی</b> آن است؛ ولی به دلیل شکل ظاهری که جواب دستگاه را به صورت بسته ارائه می‌کند، کاربرد نظری آن خالی از جذابیت نیست.</p>
+  </div>
+  <div class="proof supp">
+    <div class="proof-h"><span class="pt">چرا تعداد ضرب‌ها از مرتبهٔ $n!$ است؟</span><span class="badge supp">تکمیلی</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">فرض کن $c_n$ تعداد ضرب‌ها برای دترمینان $n\times n$ با بسط سطر اول باشد: $\ \det A=\sum_{j=1}^{n}(-1)^{1+j}a_{1j}\det(M_{1j})$ که $M_{1j}$ زیرماتریس $(n-1)\times(n-1)$ است.
+        <div class="why">این همان بسط لاپلاس (همسازه‌ها) در تعریف دترمینان است.</div></li>
+      <li class="step">باید $n$ دترمینانِ $(n-1)\times(n-1)$ حساب کنیم و هر کدام را در $a_{1j}$ ضرب کنیم: $\ c_n=n\,c_{n-1}+n$ و $c_2=2$.
+        <div class="why">برای $2\times2$ فقط دو ضرب $a_{11}a_{22}$ و $a_{12}a_{21}$ داریم.</div></li>
+      <li class="step">از $c_n\ge n\,c_{n-1}$ پشت سر هم نتیجه می‌گیریم $c_n\ge n(n-1)\cdots3\cdot c_2=n!$. در واقع $c_3=9$، $c_4=40$، $c_5=205$ و نسبت $c_n/n!$ به عدد ثابتی (حدود $1.72$) میل می‌کند؛ پس $c_n=O(n!)$.
+        <div class="why">ضریب ثابت مهم نیست؛ مهم رشد فاکتوریلی است که از هر توانی مثل $n^3$ سریع‌تر است.</div></li>
+      <li class="step">کرامر $n+1$ دترمینان لازم دارد ($\det A$ و $n$ تا $\det A^{(j)}$)، پس حدود $(n+1)\cdot n!=(n+1)!$ ضرب.
+        <div class="why">برای مثال کتاب: $28!\approx3.05\times10^{29}$ و تقسیم بر $10^{20}$ می‌شود حدود $3.05\times10^{9}$ ثانیه، یعنی تقریباً ۹۷ سال.</div></li>
+    </ol>
+    <div class="qed">∎</div>
+  </div>
+  <div class="widget" data-widget="cost"></div>
+
+  <div class="quiz">
+    <div class="quiz-h"><b>خودآزمایی ۱.۳.۳</b><span class="score"></span></div>
+    <div class="q">
+      <p class="q-t">در قاعدهٔ کرامر، $A^{(j)}$ چگونه ساخته می‌شود؟</p>
+      <div class="opts"><button class="opt">سطر $j$ام $A$ را با $b^T$ عوض می‌کنیم.</button><button class="opt" data-c>ستون $j$ام $A$ را با $b$ عوض می‌کنیم.</button><button class="opt">سطر و ستون $j$ام را حذف می‌کنیم.</button></div>
+      <p class="q-exp">$x_j=\det(A^{(j)})/\det(A)$ که در $A^{(j)}$ فقط ستون $j$ام با $b$ جایگزین شده است.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">تعداد ضرب‌های کرامر برای دستگاه $n\times n$ از چه مرتبه‌ای است؟</p>
+      <div class="opts two"><button class="opt">$n^2$</button><button class="opt">$n^3/3$</button><button class="opt" data-c>$(n+1)!$</button><button class="opt">$2^n$</button></div>
+      <p class="q-exp">$n+1$ دترمینان، هر کدام از مرتبهٔ $n!$.</p>
+    </div>
+    <div class="quiz-f"><button class="btn quiz-reset">دوباره</button></div>
+  </div>
+
+  <!-- ---------------- Gaussian elimination -->
+  <h3 id="gauss"><span class="num">۲.۳.۳</span>روش حذف گاوسی</h3>
+  <p>قبل از آن‌که به معرفی این روش بپردازیم، ببینیم دستگاه‌های «مثلثی» چقدر راحت حل می‌شوند.</p>
+
+  <h4 id="forward">دستگاه پایین‌مثلثی ← جایگذاری پیشرو (از اول)</h4>
+  <p>اگر $A=[a_{ij}]_{n\times n}$ ماتریسی پایین‌مثلثی باشد (همهٔ درایه‌های بالای قطر صفر)، از $Ax=b$ نتیجه می‌شود</p>
+  $$\begin{cases}a_{11}x_1=b_1\\ a_{21}x_1+a_{22}x_2=b_2\\ \quad\vdots\\ a_{n1}x_1+a_{n2}x_2+\cdots+a_{nn}x_n=b_n\end{cases}
+  \qquad\Longrightarrow\qquad
+  \begin{cases}x_1=\dfrac{b_1}{a_{11}},\\[8pt] x_i=\dfrac{1}{a_{ii}}\left(b_i-\displaystyle\sum_{j=1}^{i-1}a_{ij}x_j\right),\quad i=2,\dots,n.\end{cases}$$
+
+  <h4 id="backward">دستگاه بالامثلثی ← جایگذاری پسرو (از آخر)</h4>
+  <p>اگر $A$ بالامثلثی باشد (همهٔ درایه‌های زیر قطر صفر)، از $Ax=b$ نتیجه می‌شود</p>
+  $$\begin{cases}a_{11}x_1+a_{12}x_2+\cdots+a_{1n}x_n=b_1\\ \qquad\ \ a_{22}x_2+\cdots+a_{2n}x_n=b_2\\ \qquad\qquad\qquad\ddots\qquad\vdots\\ \qquad\qquad\qquad\quad a_{nn}x_n=b_n\end{cases}
+  \qquad\Longrightarrow\qquad
+  \begin{cases}x_n=\dfrac{b_n}{a_{nn}},\\[8pt] x_i=\dfrac{1}{a_{ii}}\left(b_i-\displaystyle\sum_{j=i+1}^{n}a_{ij}x_j\right),\quad i=n-1,\dots,1.\end{cases}$$
+  <div class="proof">
+    <div class="proof-h"><span class="pt">فرمول جایگذاری از کجا می‌آید؟</span><span class="badge supp">توضیح</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">معادلهٔ $i$ام دستگاه بالامثلثی فقط مجهول‌های $x_i,\dots,x_n$ را دارد: $\ a_{ii}x_i+\sum_{j=i+1}^{n}a_{ij}x_j=b_i$.
+        <div class="why">چون درایه‌های $a_{i1},\dots,a_{i,i-1}$ (زیر قطر) صفرند.</div></li>
+      <li class="step">اگر از پایین شروع کنیم، وقتی به معادلهٔ $i$ می‌رسیم $x_{i+1},\dots,x_n$ را قبلاً پیدا کرده‌ایم. پس جمع را به طرف دیگر می‌بریم و بر $a_{ii}$ تقسیم می‌کنیم: $x_i=\frac{1}{a_{ii}}\big(b_i-\sum_{j=i+1}^n a_{ij}x_j\big)$.
+        <div class="why">در این جمع همه‌چیز معلوم است، پس $x_i$ یک عدد است. برای پایین‌مثلثی همین کار را از بالا انجام می‌دهیم.</div></li>
+      <li class="step">این تقسیم‌ها فقط وقتی ممکن‌اند که <b>همهٔ $a_{ii}\neq0$</b> باشند.
+        <div class="why">به همین دلیل شرط لازم و کافی وجود جواب (یکتا) در این حالت‌ها آن است که درایه‌های قطری $A$ غیرصفر باشند؛ دترمینان ماتریس مثلثی حاصل‌ضرب قطر است و باید ناصفر باشد.</div></li>
+    </ol>
+    <div class="qed">∎</div>
+  </div>
+  <div class="box ex">
+    <div class="box-h"><span class="tag">مثال کمکی</span><span class="box-src">برای گرم کردن</span></div>
+    <p>$\begin{cases}2x_1+x_2=5\\ \qquad\ 3x_2=6\end{cases}$ از آخر: $x_2=\frac63=2$، بعد $x_1=\frac12(5-1\cdot2)=1.5$.</p>
+  </div>
+
+  <h4 id="gauss-idea">ایدهٔ حذف گاوسی</h4>
+  <p>به وضوح شرط لازم و کافی برای وجود جواب در این حالت‌ها آن است که درایه‌های قطری $A$ غیرصفر باشند. اما ایدهٔ روش <b>حذف گاوسی</b> آن است که به کمک اعمال سطری مقدماتی، دستگاه خطی $Ax=b$ را به دستگاه $Tx=c$ با ماتریس ضرایب مثلثی $T$ چنان تبدیل کند که دو دستگاه <b>هم‌ارز</b> باشند (جواب یکسانی داشته باشند). واضح است که اگر $T$ ماتریسی بالامثلثی (پایین‌مثلثی) باشد با جایگذاری پسرو (پیشرو) به جواب می‌رسیم.</p>
+  <div class="box intu">
+    <div class="box-h"><span class="tag">به زبان ساده</span></div>
+    <p>با معادله‌ها سه کار مجاز داریم که جواب را عوض نمی‌کنند: جابه‌جا کردن دو معادله، ضرب یک معادله در عدد ناصفر، و کم کردن مضربی از یک معادله از معادلهٔ دیگر. حذف گاوسی با همین کارها، $x_1$ را از همهٔ معادله‌های پایینی حذف می‌کند، بعد $x_2$ را از پایینی‌ها، و همین‌طور تا آخر. نتیجه یک «پلکان» است که از پایین حل می‌شود.</p>
+  </div>
+
+  <div class="box def" id="def43">
+    <div class="box-h"><span class="tag">تعریف ۴.۳</span><span class="box-t">ماتریس افزوده</span></div>
+    <p>ماتریس افزودهٔ متناظر با دستگاه $Ax=b$، ماتریسی است به صورت</p>
+    $$S=[A\ \ b]=\left[\begin{array}{ccc|c}a_{11}&\cdots&a_{1n}&a_{1,n+1}\\ \vdots&\ddots&\vdots&\vdots\\ a_{n1}&\cdots&a_{nn}&a_{n,n+1}\end{array}\right]$$
+    <p>که در آن برای $i=1,\dots,n$ داریم $a_{i,n+1}=b_i$ و منظور از $R_i$ سطر $i$ام ماتریس $S$ است.</p>
+  </div>
+
+  <p>قضیهٔ زیر را از جبرخطی نظری یادآوری می‌کنیم.</p>
+  <div class="box thm" id="thm33">
+    <div class="box-h"><span class="tag">قضیه ۳.۳</span><span class="box-t">وجود و یکتایی جواب با رتبه</span></div>
+    <p>فرض کنید $A$ یک ماتریس از مرتبهٔ $n\times n$ و $S=[A\ b]$ ماتریس افزودهٔ نظیر باشد. دستگاه $Ax=b$</p>
+    <ol>
+      <li>(آ) جواب یکتا دارد، به شرط آن‌که $\operatorname{rank}(A)=\operatorname{rank}(S)=n$؛</li>
+      <li>(ب) بی‌نهایت جواب دارد، هرگاه $\operatorname{rank}(A)=\operatorname{rank}(S)\lt n$؛</li>
+      <li>(پ) جواب ندارد، اگر $\operatorname{rank}(A)\neq\operatorname{rank}(S)$.</li>
+    </ol>
+  </div>
+  <div class="proof supp">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۳.۳</span><span class="badge supp">تکمیلی · یادآوری از جبر خطی</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">اگر ستون‌های $A$ را $C_1,\dots,C_n$ بنامیم، $Ax=b$ یعنی $x_1C_1+\cdots+x_nC_n=b$.
+        <div class="why">ضرب ماتریس در بردار یعنی ترکیب خطی ستون‌ها با ضرایب $x_i$.</div></li>
+      <li class="step">پس دستگاه جواب دارد $\iff$ $b$ ترکیب خطی ستون‌های $A$ باشد $\iff$ اضافه کردن ستون $b$ رتبه را بالا نبرد، یعنی $\operatorname{rank}(S)=\operatorname{rank}(A)$. اگر $b$ ترکیب خطی ستون‌ها نباشد، رتبه یکی بالا می‌رود و جواب نداریم. <b>این حالت (پ) است.</b>
+        <div class="why">رتبه = بیشترین تعداد ستون مستقل. ستونی که ترکیب خطی بقیه است تعداد ستون‌های مستقل را زیاد نمی‌کند.</div></li>
+      <li class="step">اگر یک جواب $x_0$ داشته باشیم، هر جواب دیگر به شکل $x=x_0+z$ با $Az=0$ است.
+        <div class="why">$A(x-x_0)=b-b=0$. برعکس، اگر $Az=0$ آن‌گاه $A(x_0+z)=b$.</div></li>
+      <li class="step">طبق قضیهٔ رتبه-پوچی، فضای جواب‌های $Az=0$ بُعد $n-\operatorname{rank}(A)$ دارد. اگر رتبه $n$ باشد فقط $z=0$ داریم و جواب یکتاست <b>(آ)</b>. اگر رتبه کمتر از $n$ باشد یک $z\ne0$ هست و $x_0+tz$ برای همهٔ اعداد حقیقی $t$ جواب‌های متمایزند <b>(ب)</b>.
+        <div class="why">بی‌نهایت عدد $t$ داریم و چون $z\neq0$ هر $t$ جواب متفاوتی می‌دهد.</div></li>
+    </ol>
+    <div class="qed">∎</div>
+  </div>
+
+  <div class="box rem" id="rem73">
+    <div class="box-h"><span class="tag">تبصره ۷.۳</span></div>
+    <p>انجام اعمال سطری مقدماتی روی سطرهای ماتریس $S$ متناظر با اعمال آن‌ها روی معادلات دستگاه $Ax=b$ است.</p>
+  </div>
+  <div class="box rem" id="rem83">
+    <div class="box-h"><span class="tag">تبصره ۸.۳</span></div>
+    <p>با انجام تعداد متناهی اعمال سطری مقدماتی، ماتریس $S$ به ماتریس $\tilde S$ تبدیل می‌شود که دستگاه معادلات نظیر آن‌ها هم‌ارزند.</p>
+    <p class="small"><b>چرا هم‌ارزند؟</b> هر عمل سطری مقدماتی برگشت‌پذیر است: جابه‌جایی را دوباره انجام بده، $R_i\leftarrow R_i-lR_j$ را با $R_i\leftarrow R_i+lR_j$ خنثی کن، ضرب در $c\neq0$ را با ضرب در $1/c$. پس هر جواب دستگاه قدیم در دستگاه جدید صدق می‌کند و برعکس.</p>
+  </div>
+
+  <p>حال می‌توان روش حذف گاوسی را در الگوریتم ۱.۳ مشخص کرد.</p>
+  <div class="box algo" id="alg13">
+    <div class="box-h"><span class="tag">الگوریتم ۱.۳</span><span class="box-t">روش حذف گاوسی</span></div>
+    <div class="io"><div><b>ورودی:</b> ماتریس افزودهٔ $S=[A\ b]_{n\times(n+1)}$</div><div><b>خروجی:</b> ماتریس افزودهٔ $S=[U\ c]_{n\times(n+1)}$ که در آن $U$ ماتریسی بالامثلثی است</div></div>
+    <ol class="algo-steps">
+      <li>قرار دهید $j=1$.</li>
+      <li>$r$ای ($j\le r\le n$) پیدا کنید که $a_{rj}\neq0$. اگر چنین $r$ای یافت نشد مسئله جواب (یکتا) ندارد و الگوریتم متوقف می‌گردد.</li>
+      <li>اگر $r\neq j$ آن‌گاه $R_r\leftrightarrow R_j$.</li>
+      <li>برای $i=j+1,\dots,n$ قرار دهید $l_{ij}=\dfrac{a_{ij}}{a_{jj}}$ و $R_i\leftarrow R_i-l_{ij}R_j$.</li>
+      <li>قرار دهید $j=j+1$ و اگر $j\lt n$ به گام ۲ بروید.</li>
+    </ol>
+  </div>
+  <div class="box rem" id="rem93">
+    <div class="box-h"><span class="tag">تبصره ۹.۳</span></div>
+    <p>در الگوریتم ۱.۳، گام ۲ به <b>محورگیری</b>، درایهٔ $a_{rj}$ به <b>درایهٔ محوری</b> و گام ۴ به <b>فرایند حذف</b> معروف است. به راحتی می‌توان نسخهٔ دیگری از الگوریتم ۱.۳ را برای محاسبهٔ ماتریس $S=[L\ c]_{n\times(n+1)}$ نوشت که در آن $L$ ماتریسی پایین‌مثلثی است. (پیاده‌سازی الگوریتم ۱.۳ در نرم‌افزار MATLAB در کد آ.۱ کتاب آمده است.)</p>
+  </div>
+  <div class="box warn">
+    <div class="box-h"><span class="tag">اشتباه رایج</span></div>
+    <ul>
+      <li>در گام ۲ کتاب <b>اولین</b> $r$ با $a_{rj}\neq0$ را برمی‌دارد (مثل مثال ۴.۳). لازم نیست بزرگ‌ترین را انتخاب کنی.</li>
+      <li>$l_{ij}$ همیشه «درایهٔ زیر محور تقسیم بر محور» است: $a_{ij}/a_{jj}$، نه برعکس.</li>
+      <li>حلقه تا $j=n-1$ است. قبل از جایگذاری پسرو حتماً نگاه کن $a_{nn}\neq0$ باشد؛ وگرنه جواب یکتا نداریم.</li>
+      <li>عمل سطری را روی <b>کل سطر</b>، از جمله ستون آخر ($b$)، انجام بده.</li>
+    </ul>
+  </div>
+
+  <div class="box ex" id="ex43">
+    <div class="box-h"><span class="tag">مثال ۴.۳</span><span class="box-t">حذف گاوسی و جایگذاری پسرو</span></div>
+    <p>دستگاه داده‌شده را با روش حذف گاوسی و جایگذاری پسرو حل کنید.</p>
+    $$\begin{cases}x_1+x_2-x_3+x_4=1\\ x_1+x_2+x_3-x_4=1\\ \qquad x_2+x_3-x_4=-1\\ x_1-x_2-x_3-x_4=-1\end{cases}$$
+    <p>اول با دکمهٔ «بعدی» گام‌به‌گام جلو برو. نسخهٔ نوشتاریِ کامل (همان چیزی که در برگهٔ امتحان می‌نویسی) زیر آن است.</p>
+  </div>
+  <div class="widget" data-widget="stepper" data-preset="ex43"></div>
+  <details class="try">
+    <summary>راه‌حل نوشتاری کامل مثال ۴.۳</summary>
+    <div>
+      <p>ماتریس افزوده: $S=\left[\begin{array}{rrrr|r}1&1&-1&1&1\\1&1&1&-1&1\\0&1&1&-1&-1\\1&-1&-1&-1&-1\end{array}\right]$.</p>
+      <p><b>$j=1$:</b> داریم $r=1$ زیرا $a_{11}=1\neq0$. بنابراین $l_{21}=\frac{1}{1}=1,\ R_2\leftarrow R_2-R_1$؛ $l_{31}=\frac01=0,\ R_3\leftarrow R_3$؛ $l_{41}=\frac11=1,\ R_4\leftarrow R_4-R_1$. پس</p>
+      $$S=\left[\begin{array}{rrrr|r}1&1&-1&1&1\\0&0&2&-2&0\\0&1&1&-1&-1\\0&-2&0&-2&-2\end{array}\right].$$
+      <p><b>$j=2$:</b> داریم $r=3$ زیرا $a_{22}=0$ و $a_{32}=1\neq0$. بنابراین $R_3\leftrightarrow R_2$:</p>
+      $$S=\left[\begin{array}{rrrr|r}1&1&-1&1&1\\0&1&1&-1&-1\\0&0&2&-2&0\\0&-2&0&-2&-2\end{array}\right],\qquad l_{32}=\tfrac01=0,\ R_3\leftarrow R_3;\quad l_{42}=\tfrac{-2}{1}=-2,\ R_4\leftarrow R_4+2R_2$$
+      $$S=\left[\begin{array}{rrrr|r}1&1&-1&1&1\\0&1&1&-1&-1\\0&0&2&-2&0\\0&0&2&-4&-4\end{array}\right].$$
+      <p><b>$j=3$:</b> داریم $r=3$ زیرا $a_{33}=2\neq0$. پس $l_{43}=\frac22=1,\ R_4\leftarrow R_4-R_3$:</p>
+      $$S=\left[\begin{array}{rrrr|r}1&1&-1&1&1\\0&1&1&-1&-1\\0&0&2&-2&0\\0&0&0&-2&-4\end{array}\right].$$
+      <p><b>جایگذاری پسرو:</b></p>
+      $$x_4=\frac{-4}{-2}=2,\quad x_3=\frac12(0+2x_4)=2,\quad x_2=\frac11(-1-x_3+x_4)=-1,\quad x_1=\frac11(1-x_2+x_3-x_4)=2 .$$
+    </div>
+  </details>
+
+  <div class="box ex" id="ex53">
+    <div class="box-h"><span class="tag">مثال ۵.۳</span><span class="box-t">سهمی گذرنده از سه نقطه</span></div>
+    <p>با حل یک دستگاه خطی از مرتبهٔ $3\times3$ ضریب‌های موجود در معادلهٔ سهمی $y=\alpha+\beta x+\gamma x^2$ که از نقطه‌های $(1,1)$، $(2,2)$ و $(3,0)$ عبور می‌کند را بیابید.</p>
+    <p>با قرار دادن هر یک از نقطه‌ها در معادلهٔ داده‌شده یک معادله به‌دست می‌آید (مثلاً نقطهٔ $(2,2)$ یعنی $\alpha+2\beta+4\gamma=2$). این سه معادله را می‌توان به شکل یک دستگاه خطی سه معادله سه مجهولی نوشت:</p>
+    $$\begin{bmatrix}1&1&1\\1&2&4\\1&3&9\end{bmatrix}\begin{bmatrix}\alpha\\\beta\\\gamma\end{bmatrix}=\begin{bmatrix}1\\2\\0\end{bmatrix}.$$
+    <p>با استفاده از روش حذف گاوسی و اجرای دو بار فرایند حذف به‌دست می‌آوریم</p>
+    $$\begin{bmatrix}1&1&1\\0&1&3\\0&0&2\end{bmatrix}\begin{bmatrix}\alpha\\\beta\\\gamma\end{bmatrix}=\begin{bmatrix}1\\1\\-3\end{bmatrix}\quad\Longrightarrow\quad\gamma=\frac{-3}{2},\quad\beta=1-3\gamma=\frac{11}{2},\quad\alpha=1-\beta-\gamma=-3 .$$
+  </div>
+  <div class="widget" data-widget="stepper" data-preset="ex53"></div>
+
+  <div class="box ex" id="ex63">
+    <div class="box-h"><span class="tag">مثال ۶.۳</span><span class="box-t">زنبورهای عسل</span></div>
+    <p>فرض کنید ۱۰۰ زنبور عسل در حصاری شامل ۴ حجره با گذرگاه‌هایی که در شکل روی جلد کتاب نشان داده شده است، پراکنده شده‌اند. پس از یک دقیقه به دلیل حرکت زنبورها، پراکندگی آن‌ها تغییر می‌کند. فرض کنید برای یک زنبور یک دقیقه زمان کافی نباشد تا بتواند بیش از یک حجره را ببیند و پس از یک دقیقه ۴۰٪ زنبورهای هر حجره، حجرهٔ اولیهٔ خود را ترک نکرده‌اند. زنبورهایی که یک حجره را ترک می‌کنند به‌طور یکنواخت در میان حجره‌هایی پخش می‌شوند که به‌طور مستقیم از حجرهٔ اولیهٔ آن‌ها قابل دسترسی است. برای مثال از حجرهٔ شمارهٔ ۳ نیمی به حجرهٔ شمارهٔ ۲ و نیمی به حجرهٔ شمارهٔ ۴ حرکت می‌کنند.</p>
+    <ol>
+      <li>(آ) توزیع اولیهٔ زنبورها را چنان بیابید که در پایان دقیقهٔ اول ۱۲، ۲۵، ۲۶ و ۳۷ زنبور به ترتیب در حجره‌های ۱، ۲، ۳ و ۴ وجود داشته باشند.</li>
+      <li>(ب) اگر توزیع اولیهٔ زنبورها در حجره‌های ۱، ۲، ۳ و ۴ به ترتیب ۲۰، ۲۰، ۲۰ و ۴۰ باشد توزیع آن‌ها را در پایان یک دقیقه به‌دست آورید.</li>
+    </ol>
+    <div class="two-col">
+      <figure class="mini" style="margin:0">
+        <svg viewBox="0 0 260 170" role="img" aria-label="نمودار گذرگاه‌های چهار حجره" style="width:100%;height:auto;direction:ltr">
+          <g style="stroke:var(--ink-3);stroke-width:2.5;fill:none">
+            <line x1="62" y1="85" x2="130" y2="85"/><line x1="130" y1="85" x2="204" y2="40"/><line x1="130" y1="85" x2="204" y2="130"/><line x1="204" y1="40" x2="204" y2="130"/>
+          </g>
+          <g style="fill:var(--surface);stroke:var(--ex);stroke-width:2">
+            <rect x="30" y="63" width="44" height="44" rx="10"/><rect x="108" y="63" width="44" height="44" rx="10"/><rect x="182" y="18" width="44" height="44" rx="10"/><rect x="182" y="108" width="44" height="44" rx="10"/>
+          </g>
+          <g style="fill:var(--ink);font:700 17px var(--font)" text-anchor="middle">
+            <text x="52" y="91">1</text><text x="130" y="91">4</text><text x="204" y="46">2</text><text x="204" y="136">3</text>
+          </g>
+        </svg>
+        <figcaption class="small muted">گذرگاه‌ها (برداشت‌شده از ماتریس کتاب): حجرهٔ ۱ فقط به ۴ راه دارد؛ ۲ و ۳ به هم و هر دو به ۴.</figcaption>
+      </figure>
+      <div class="mini">
+        <h5>ساختن معادله‌ها</h5>
+        <p class="small">$x_i$ = تعداد زنبورهای حجرهٔ $i$ در شروع. ۴۰٪ هر حجره می‌ماند و ۶۰٪ بین همسایه‌ها مساوی پخش می‌شود: حجرهٔ ۱ یک همسایه دارد (همه ۰٫۶ به ۴ می‌روند)، حجره‌های ۲ و ۳ دو همسایه (۰٫۳ به هر کدام) و حجرهٔ ۴ سه همسایه (۰٫۲ به هر کدام).</p>
+        <p class="small">مثلاً در پایان دقیقه در حجرهٔ ۱: $0.4x_1+0.2x_4$ زنبور هست که باید ۱۲ باشد.</p>
+      </div>
+    </div>
+    <p><b>حل قسمت آ.</b> با نوشتن ۳ معادله برای ۳ حجرهٔ دیگر، دستگاه ۴ معادله ۴ مجهولی زیر به‌دست می‌آید:</p>
+    $$\begin{bmatrix}0.4&0&0&0.2\\0&0.4&0.3&0.2\\0&0.3&0.4&0.2\\0.6&0.3&0.3&0.4\end{bmatrix}\begin{bmatrix}x_1\\x_2\\x_3\\x_4\end{bmatrix}=\begin{bmatrix}12\\25\\26\\37\end{bmatrix}$$
+    <p>با استفاده از روش حذف گاوسی و اجرای سه بار فرایند حذف به‌دست می‌آوریم</p>
+    $$\begin{bmatrix}0.4&0&0&0.2\\0&0.4&0.3&0.2\\0&0&0.175&0.05\\0&0&0&-\frac{1}{14}\end{bmatrix}\begin{bmatrix}x_1\\x_2\\x_3\\x_4\end{bmatrix}=\begin{bmatrix}12\\25\\7.25\\-\frac{20}{7}\end{bmatrix}\quad\Longrightarrow\quad x_4=40,\ x_3=30,\ x_2=20,\ x_1=10 .$$
+    <p><b>حل قسمت ب.</b> کافی است در هر یک از عبارت‌های جبری (سمت چپ معادلات) که در قسمت آ به‌دست آمد به‌جای $x_1,\dots,x_4$ مقدارهای داده‌شده را قرار دهیم، یا از ضرب ماتریسی استفاده کنیم:</p>
+    $$\begin{bmatrix}0.4&0&0&0.2\\0&0.4&0.3&0.2\\0&0.3&0.4&0.2\\0.6&0.3&0.3&0.4\end{bmatrix}\begin{bmatrix}20\\20\\20\\40\end{bmatrix}=\begin{bmatrix}16\\22\\22\\40\end{bmatrix}.$$
+    <p>بنابراین تعداد زنبورها در پایان یک دقیقه در حجرهٔ ۱، ۲، ۳ و ۴ به ترتیب برابر با ۱۶، ۲۲، ۲۲ و ۴۰ است. (کنترل: $16+22+22+40=100$؛ هیچ زنبوری گم نشده.)</p>
+  </div>
+  <div class="widget" data-widget="stepper" data-preset="ex63"></div>
+
+  <h4 id="formulas">فرمول درایه‌ها در هر تکرار (بدون جابه‌جایی سطر)</h4>
+  <p>اگر در حل دستگاه خطی $Ax=b$ با استفاده از روش حذف گاوسی جابه‌جایی سطر در گام ۳ الگوریتم ۱.۳ انجام نشود و قرار دهیم $S^{(0)}=[A\ b]=[a^{(0)}_{ij}]_{n\times(n+1)}$ که در آن $a^{(0)}_{ij}=a_{ij}$ و $a^{(0)}_{i,n+1}=b_i$، و برای $k=1,\dots,n-1$ ماتریس افزودهٔ انتهای تکرار $k$ام را با $S^{(k)}=[a^{(k)}_{ij}]_{n\times(n+1)}$ نمایش دهیم، آن‌گاه با نگاهی دقیق‌تر به الگوریتم درمی‌یابیم که</p>
+  $$a^{(1)}_{ij}=\begin{cases}0,& j=1,\ i=2,\dots,n,\\[4pt] a^{(0)}_{ij}-\dfrac{a^{(0)}_{i1}}{a^{(0)}_{11}}\,a^{(0)}_{1j},& i=2,\dots,n,\ j=2,\dots,n+1\end{cases}$$
+  <p>و برای $k=2,\dots,n-1$</p>
+  $$a^{(k)}_{ij}=\begin{cases}a^{(k-1)}_{ij},& i=1,\dots,k,\ j=1,\dots,n+1,\\[4pt] 0,& j=1,\dots,k,\ i=j+1,\dots,n,\\[4pt] a^{(k-1)}_{ij}-\dfrac{a^{(k-1)}_{ik}}{a^{(k-1)}_{kk}}\,a^{(k-1)}_{kj},& i=k+1,\dots,n,\ j=k+1,\dots,n+1.\end{cases}$$
+  <div class="proof">
+    <div class="proof-h"><span class="pt">این فرمول‌ها از کجا می‌آیند؟</span><span class="badge supp">توضیح</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">در تکرار $k$ فقط سطرهای $k+1,\dots,n$ عوض می‌شوند؛ سطرهای ۱ تا $k$ دست نمی‌خورند.
+        <div class="why">گام ۴ الگوریتم فقط برای $i=k+1,\dots,n$ اجرا می‌شود. این ردیف اول فرمول است.</div></li>
+      <li class="step">عمل $R_i\leftarrow R_i-l_{ik}R_k$ با $l_{ik}=\frac{a^{(k-1)}_{ik}}{a^{(k-1)}_{kk}}$ درایه‌به‌درایه یعنی $a^{(k)}_{ij}=a^{(k-1)}_{ij}-l_{ik}\,a^{(k-1)}_{kj}$.
+        <div class="why">درایهٔ $j$ام سطر جدید = درایهٔ $j$ام سطر قدیم منهای $l_{ik}$ ضربدر درایهٔ $j$ام سطر محوری. این ردیف سوم فرمول است.</div></li>
+      <li class="step">برای $j=k$ این فرمول صفر می‌دهد: $a^{(k-1)}_{ik}-\frac{a^{(k-1)}_{ik}}{a^{(k-1)}_{kk}}a^{(k-1)}_{kk}=0$.
+        <div class="why">دقیقاً به همین دلیل $l_{ik}$ را این‌طور انتخاب کرده‌ایم؛ درایه‌های زیر محور صفر می‌شوند. ستون‌های قبلی هم که از تکرارهای قبل صفر بوده‌اند صفر می‌مانند (چون $a^{(k-1)}_{kj}=0$ برای $j\lt k$). این ردیف دوم فرمول است.</div></li>
+    </ol>
+    <div class="qed">∎</div>
+  </div>
+  <p>بنابراین ماتریس افزودهٔ $S^{(k)}=[A^{(k)}\ b^{(k)}]$ در پایان تکرار $k$ام به صورت زیر خواهد بود:</p>
+  $$S^{(k)}=\left[\begin{array}{cccccccc|c}a^{(0)}_{11}&a^{(0)}_{12}&a^{(0)}_{13}&\cdots&a^{(0)}_{1k}&a^{(0)}_{1,k+1}&\cdots&a^{(0)}_{1n}&a^{(0)}_{1,n+1}\\ 0&a^{(1)}_{22}&a^{(1)}_{23}&\cdots&a^{(1)}_{2k}&a^{(1)}_{2,k+1}&\cdots&a^{(1)}_{2n}&a^{(1)}_{2,n+1}\\ 0&0&a^{(2)}_{33}&\cdots&a^{(2)}_{3k}&a^{(2)}_{3,k+1}&\cdots&a^{(2)}_{3n}&a^{(2)}_{3,n+1}\\ \vdots&\vdots&\ddots&\ddots&\vdots&\vdots&&\vdots&\vdots\\ 0&0&\cdots&0&a^{(k-1)}_{kk}&a^{(k-1)}_{k,k+1}&\cdots&a^{(k-1)}_{kn}&a^{(k-1)}_{k,n+1}\\ 0&0&\cdots&0&0&a^{(k)}_{k+1,k+1}&\cdots&a^{(k)}_{k+1,n}&a^{(k)}_{k+1,n+1}\\ \vdots&\vdots&&\vdots&\vdots&\vdots&&\vdots&\vdots\\ 0&0&\cdots&0&0&a^{(k)}_{n,k+1}&\cdots&a^{(k)}_{nn}&a^{(k)}_{n,n+1}\end{array}\right]$$
+  <div class="box warn">
+    <div class="box-h"><span class="tag">هشدار نمادگذاری</span><span class="box-t">کتاب دو جور شماره‌گذاری دارد</span></div>
+    <ul>
+      <li>در فرمول‌های بالا و الگوریتم ۳.۳: $S^{(k)}$ یعنی <b>بعد از</b> $k$ تکرار و $S^{(0)}$ ماتریس اولیه است. محور تکرار $k$ می‌شود $a^{(k-1)}_{kk}$.</li>
+      <li>در تبصرهٔ ۱۰.۳، مثال ۱۱.۳ و اثبات قضیه‌های ۴.۳ و ۵.۳: $A^{(k)}$ یعنی ماتریس <b>در شروع</b> تکرار $k$ و $A^{(1)}=A$. محور تکرار $k$ می‌شود $a^{(k)}_{kk}$ و $U=A^{(n)}$.</li>
+    </ul>
+    <p>هر دو یک چیز را می‌گویند؛ فقط شمارنده یکی جابه‌جاست. سر امتحان هر کدام را که به کار می‌بری، ثابت نگه دار.</p>
+  </div>
+
+  <div class="box rem" id="rem103">
+    <div class="box-h"><span class="tag">تبصره ۱۰.۳</span><span class="box-t">دترمینان از روی حذف گاوسی</span></div>
+    <p>چون در هر تکرار از روش حذف گاوسی اعمال سطری مقدماتی انجام می‌شود</p>
+    $$\det(A)=\det(A^{(1)})=(-1)^{m_2}\det(A^{(2)})=(-1)^{m_2}(-1)^{m_3}\det(A^{(3)})=\cdots=(-1)^{m_2}\cdots(-1)^{m_n}\det(A^{(n)})$$
+    <p>که در آن برای $j=2,\dots,n$ داریم $m_j=1$ اگر در گام ۳ از تکرار $(j-1)$ام جابه‌جایی سطر داشته باشیم و $m_j=0$ در غیر این صورت؛ و به‌ویژه</p>
+    $$\det(A)=(-1)^{m_2}\cdots(-1)^{m_n}\det(U)=(-1)^{m_2}\cdots(-1)^{m_n}\,a^{(1)}_{11}a^{(2)}_{22}\cdots a^{(n)}_{nn}.$$
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات تبصره ۱۰.۳</span><span class="badge book">از کتاب، با جزئیات</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">در تکرار $j$ دو نوع کار انجام می‌شود: شاید یک جابه‌جایی سطر (گام ۳) و چند عمل $R_i\leftarrow R_i-l_{ij}R_j$ (گام ۴). نتیجه $A^{(j+1)}$ است.
+        <div class="why">این همان تعریف یک تکرار در الگوریتم ۱.۳ است.</div></li>
+      <li class="step">عمل $R_i\leftarrow R_i-lR_j$ دترمینان را عوض نمی‌کند.
+        <div class="why">دترمینان نسبت به هر سطر خطی است: $$\det(\dots,R_i-lR_j,\dots)=\det(\dots,R_i,\dots)-l\det(\dots,R_j,\dots,R_j,\dots)$$ و دترمینانِ ماتریسی که دو سطر برابر دارد صفر است.</div></li>
+      <li class="step">جابه‌جایی دو سطر دترمینان را در $-1$ ضرب می‌کند. پس $\det(A^{(j)})=(-1)^{m_{j+1}}\det(A^{(j+1)})$.
+        <div class="why">اگر جابه‌جایی بوده $m_{j+1}=1$ و علامت عوض می‌شود؛ اگر نبوده $m_{j+1}=0$ و $(-1)^0=1$. (چون $(-1)^{-1}=-1$ فرقی نمی‌کند ضریب را کدام طرف بنویسیم.)</div></li>
+      <li class="step">این تساوی را برای $j=1,\dots,n-1$ پشت سر هم می‌نویسیم و به $\det(A)=(-1)^{m_2}\cdots(-1)^{m_n}\det(A^{(n)})$ می‌رسیم.
+        <div class="why">زنجیره‌ای از تساوی‌ها؛ $A^{(1)}=A$.</div></li>
+      <li class="step">$A^{(n)}=U$ بالامثلثی است، پس $\det(U)$ حاصل‌ضرب قطرش یعنی حاصل‌ضرب محورها $a^{(1)}_{11}a^{(2)}_{22}\cdots a^{(n)}_{nn}$ است.
+        <div class="why">دترمینان ماتریس مثلثی = حاصل‌ضرب درایه‌های قطری.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>$\det A=(-1)^{\text{تعداد جابه‌جایی‌ها}}\times(\text{حاصل‌ضرب محورها})$. حذف دترمینان را عوض نمی‌کند، جابه‌جایی علامتش را.</div>
+    <div class="qed">∎</div>
+  </div>
+  <details class="try">
+    <summary>تمرین: دترمینان ماتریس مثال ۴.۳ را با تبصرهٔ ۱۰.۳ حساب کن</summary>
+    <div><p>یک جابه‌جایی داشتیم ($R_2\leftrightarrow R_3$ در $j=2$) و محورها $1,1,2,-2$ بودند. پس $\det(A)=(-1)^1\times(1\cdot1\cdot2\cdot(-2))=4$. با بسط دترمینان هم همین ۴ به‌دست می‌آید، ولی با حدود $n^3/3$ عمل به‌جای $n!$.</p></div>
+  </details>
+
+  <div class="quiz">
+    <div class="quiz-h"><b>خودآزمایی ۲.۳.۳</b><span class="score"></span></div>
+    <div class="q">
+      <p class="q-t">در تکرار $j=2$ مثال ۴.۳ چرا $R_2\leftrightarrow R_3$ انجام شد؟</p>
+      <div class="opts"><button class="opt">چون $a_{32}$ بزرگ‌تر از $a_{22}$ بود.</button><button class="opt" data-c>چون $a_{22}=0$ بود و اولین سطر زیر آن با درایهٔ ناصفر در ستون ۲، سطر ۳ بود.</button><button class="opt">چون همیشه در تکرار دوم جابه‌جایی می‌کنیم.</button></div>
+      <p class="q-exp">گام ۲ الگوریتم ۱.۳: اولین $r\ge j$ با $a_{rj}\neq0$.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">ضریب $l_{ij}$ در فرایند حذف برابر است با:</p>
+      <div class="opts two"><button class="opt" data-c>$a_{ij}/a_{jj}$</button><button class="opt">$a_{jj}/a_{ij}$</button><button class="opt">$a_{ij}\,a_{jj}$</button><button class="opt">$a_{ji}/a_{ii}$</button></div>
+      <p class="q-exp">درایهٔ زیر محور تقسیم بر محور؛ آن‌وقت $R_i-l_{ij}R_j$ درایهٔ $(i,j)$ را صفر می‌کند.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">اگر حذف گاوسی ۲ جابه‌جایی داشته باشد و محورها $2,-1,3$ باشند، $\det(A)$ چند است؟</p>
+      <div class="opts two"><button class="opt">$6$</button><button class="opt" data-c>$-6$</button><button class="opt">$-12$</button><button class="opt">$12$</button></div>
+      <p class="q-exp">$(-1)^2\times(2\cdot(-1)\cdot3)=-6$.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">دستگاه بالامثلثی کِی جواب یکتا دارد؟</p>
+      <div class="opts"><button class="opt">وقتی $b\neq0$.</button><button class="opt" data-c>وقتی همهٔ درایه‌های قطری ناصفر باشند.</button><button class="opt">همیشه.</button></div>
+      <p class="q-exp">در جایگذاری پسرو بر هر $a_{ii}$ تقسیم می‌کنیم؛ و $\det$ = حاصل‌ضرب قطر.</p>
+    </div>
+    <div class="quiz-f"><button class="btn quiz-reset">دوباره</button></div>
+  </div>
+
+  <div class="sec-done"><p>محک: الگوریتم ۱.۳ را از حفظ بنویس، مثال ۴.۳ را روی کاغذ حل کن و اثبات تبصرهٔ ۱۰.۳ را توضیح بده.</p><button class="btn done-btn" data-sec="gauss"></button></div>
+
+  <!-- ---------------- Gauss-Jordan -->
+  <h3 id="gj"><span class="num">۳.۳.۳</span>روش حذفی گاوس-جردن</h3>
+  <p>قبل از معرفی این روش توجه داریم که اگر $A=[a_{ij}]_{n\times n}$ ماتریسی قطری باشد یعنی $A=\operatorname{diag}[a_{11},\dots,a_{nn}]$، آن‌گاه از $Ax=b$ نتیجه می‌شود</p>
+  $$\begin{cases}a_{11}x_1=b_1\\ \quad a_{22}x_2=b_2\\ \qquad\ddots\\ \qquad\quad a_{nn}x_n=b_n\end{cases}\qquad\Longrightarrow\qquad x_i=\frac{b_i}{a_{ii}},\quad i=1,\dots,n .$$
+  <p>به وضوح شرط لازم و کافی برای وجود جواب در این حالت آن است که درایه‌های قطری $A$ غیرصفر باشند. اما ایدهٔ روش <b>حذفی گاوس-جردن</b> آن است که به کمک اعمال سطری مقدماتی دستگاه خطی $Ax=b$ را به دستگاه $Dx=c$ با ماتریس ضرایب قطری $D$ چنان تبدیل کند که دو دستگاه هم‌ارز باشند. مراحل این روش در الگوریتم ۲.۳ مشخص می‌شود.</p>
+  <div class="box intu">
+    <div class="box-h"><span class="tag">به زبان ساده</span></div>
+    <p>گاوس فقط <b>زیر</b> قطر را صفر می‌کند و بعد از پایین جایگذاری می‌کند. گاوس-جردن یک قدم جلوتر می‌رود: بعد از صفر کردن زیر قطر، از پایین به بالا <b>بالای</b> قطر را هم صفر می‌کند. آخرش هر معادله فقط یک مجهول دارد.</p>
+  </div>
+  <div class="box algo" id="alg23">
+    <div class="box-h"><span class="tag">الگوریتم ۲.۳</span><span class="box-t">روش حذفی گاوس-جردن</span></div>
+    <div class="io"><div><b>ورودی:</b> ماتریس افزودهٔ $S=[A\ b]_{n\times(n+1)}$</div><div><b>خروجی:</b> ماتریس افزودهٔ $S=[D\ c]_{n\times(n+1)}$ که در آن $D$ ماتریسی قطری است</div></div>
+    <ol class="algo-steps">
+      <li>قرار دهید $j=1$.</li>
+      <li>$r$ای ($j\le r\le n$) پیدا کنید که $a_{rj}\neq0$. اگر چنین $r$ای یافت نشد مسئله جواب (یکتا) ندارد و الگوریتم متوقف می‌گردد.</li>
+      <li>اگر $r\neq j$ آن‌گاه $R_r\leftrightarrow R_j$.</li>
+      <li>برای $i=j+1,\dots,n$ قرار دهید $l_{ij}=\dfrac{a_{ij}}{a_{jj}}$ و $R_i\leftarrow R_i-l_{ij}R_j$.</li>
+      <li>قرار دهید $j=j+1$ و اگر $j\lt n$ به گام ۲ بروید.</li>
+      <li>اگر $a_{nn}=0$، مسئله جواب یکتا ندارد و الگوریتم متوقف می‌گردد.</li>
+      <li>برای $i=1,\dots,j-1$ قرار دهید $l_{ij}=\dfrac{a_{ij}}{a_{jj}}$ و $R_i\leftarrow R_i-l_{ij}R_j$.</li>
+      <li>قرار دهید $j=j-1$ و اگر $j\gt1$ به گام ۷ بروید.</li>
+    </ol>
+    <p class="small muted">گام‌های ۱ تا ۵ همان حذف گاوسی‌اند. وقتی به گام ۶ می‌رسیم $j=n$ است و گام‌های ۷ و ۸ از ستون آخر به سمت ستون اول، بالای محورها را صفر می‌کنند.</p>
+  </div>
+
+  <div class="box ex" id="ex73">
+    <div class="box-h"><span class="tag">مثال ۷.۳</span><span class="box-t">همان دستگاه مثال ۴.۳، این بار با گاوس-جردن</span></div>
+    <p>با توجه به مثال ۴.۳، بعد از گام‌های ۱ تا ۵ داریم $S=\left[\begin{array}{rrrr|r}1&1&-1&1&1\\0&1&1&-1&-1\\0&0&2&-2&0\\0&0&0&-2&-4\end{array}\right]$. حال چون $a_{44}=-2\neq0$، با انجام اعمال</p>
+    $$l_{34}=\tfrac{-2}{-2}=1,\ R_3\leftarrow R_3-R_4;\qquad l_{24}=\tfrac{-1}{-2}=\tfrac12,\ R_2\leftarrow R_2-\tfrac12R_4;\qquad l_{14}=\tfrac{1}{-2}=-\tfrac12,\ R_1\leftarrow R_1+\tfrac12R_4$$
+    <p>داریم $S=\left[\begin{array}{rrrr|r}1&1&-1&0&-1\\0&1&1&0&1\\0&0&2&0&4\\0&0&0&-2&-4\end{array}\right]$. سپس با انجام اعمال $l_{23}=\frac12,\ R_2\leftarrow R_2-\frac12R_3$ و $l_{13}=\frac{-1}{2}=-\frac12,\ R_1\leftarrow R_1+\frac12R_3$ خواهیم داشت $S=\left[\begin{array}{rrrr|r}1&1&0&0&1\\0&1&0&0&-1\\0&0&2&0&4\\0&0&0&-2&-4\end{array}\right]$. در نهایت با انجام عمل $l_{12}=\frac11=1,\ R_1\leftarrow R_1-R_2$ داریم</p>
+    $$S=\left[\begin{array}{rrrr|r}1&0&0&0&2\\0&1&0&0&-1\\0&0&2&0&4\\0&0&0&-2&-4\end{array}\right]\quad\Longrightarrow\quad x_1=\tfrac21=2,\ x_2=\tfrac{-1}{1}=-1,\ x_3=\tfrac42=2,\ x_4=\tfrac{-4}{-2}=2 .$$
+  </div>
+  <div class="widget" data-widget="stepper" data-preset="ex73"></div>
+
+  <p>گزارهٔ زیر کامل‌کنندهٔ گزارهٔ ۸.۱ (از فصل ۱) است.</p>
+  <div class="box thm" id="prop13">
+    <div class="box-h"><span class="tag">گزاره ۱.۳</span><span class="box-t">شرط‌های هم‌ارز وارون‌پذیری</span></div>
+    <p>برای ماتریس $A_{n\times n}$ عبارت‌های زیر هم‌ارزند:</p>
+    <ol>
+      <li>(آ) ماتریس $A$ وارون‌پذیر است؛</li>
+      <li>(ب) دستگاه خطی $Ax=0$ دارای جواب یکتای $x=0$ است؛</li>
+      <li>(پ) دستگاه $Ax=b$ به ازای هر بردار غیرصفر $b$ دارای جواب یکتای $x\neq0$ است؛</li>
+      <li>(ت) با اعمال روش حذف گاوسی یا حذفی گاوس-جردن بر روی دستگاه $Ax=b$ به ازای هر بردار غیرصفر $b$ (صرف‌نظر از خطاهای گردکردن) به جواب یکتای دستگاه خواهیم رسید.</li>
+    </ol>
+  </div>
+  <div class="proof supp">
+    <div class="proof-h"><span class="pt">اثبات گزاره ۱.۳</span><span class="badge supp">تکمیلی · در کتاب نیامده</span><span class="grow"></span></div>
+    <p class="proof-goal">نشان می‌دهیم (آ)⇒(ب)⇒(آ)، (آ)⇒(پ)⇒(ب) و (آ)⇔(ت). با این‌ها همه هم‌ارز می‌شوند.</p>
+    <ol class="steps">
+      <li class="step"><b>(آ)⇒(ب):</b> اگر $Ax=0$، با ضرب در $A^{-1}$: $x=A^{-1}0=0$. پس تنها جواب صفر است.
+        <div class="why">صفر همیشه جواب $Ax=0$ است؛ وارون نشان می‌دهد جواب دیگری نیست.</div></li>
+      <li class="step"><b>(ب)⇒(آ):</b> $Ax=0$ یعنی $x_1C_1+\cdots+x_nC_n=0$. اگر فقط $x=0$ این را برقرار کند، ستون‌های $A$ مستقل خطی‌اند، پس $\operatorname{rank}(A)=n$ و $A$ وارون‌پذیر است.
+        <div class="why">تعریف استقلال خطی و یادآوری ۳ (رتبهٔ $n$ ⇔ وارون‌پذیری).</div></li>
+      <li class="step"><b>(آ)⇒(پ):</b> $x=A^{-1}b$ جواب است. یکتاست: اگر $Ay=b$ هم باشد $A(x-y)=0$ و طبق (ب) $x=y$. ناصفر است: اگر $x=0$ بود آن‌وقت $b=A0=0$، خلاف فرض.
+        <div class="why">وجود از وارون، یکتایی از (ب)، و $x\neq0$ از $b\neq0$.</div></li>
+      <li class="step"><b>(پ)⇒(ب):</b> یک $b\neq0$ بگیر و جواب یکتای آن را $x_0$. اگر $Az=0$ با $z\neq0$ وجود داشت، $x_0+z$ هم جواب $Ax=b$ می‌شد، که با یکتایی تناقض دارد. پس $Ax=0$ فقط جواب صفر دارد.
+        <div class="why">$A(x_0+z)=Ax_0+Az=b+0=b$.</div></li>
+      <li class="step"><b>(آ)⇒(ت):</b> فرض کن الگوریتم در گام ۲ از تکرار $j$ متوقف شود: یعنی در ماتریس فعلی، ستون $j$ از سطر $j$ به پایین تماماً صفر است. آن‌وقت ستون‌های $1,\dots,j$ همه در زیرفضای $\operatorname{span}\{e_1,\dots,e_{j-1}\}$ می‌افتند ($j$ بردار در فضایی با بعد $j-1$)، پس وابسته‌اند و ماتریس فعلی وارون‌ناپذیر است. ولی ماتریس فعلی از $A$ با اعمال سطری برگشت‌پذیر به‌دست آمده و باید وارون‌پذیر باشد. تناقض. پس همهٔ محورها (و $a_{nn}$) ناصفرند و جایگذاری پسرو جواب یکتا را می‌دهد. برای گاوس-جردن هم همین استدلال و گام ۶.
+        <div class="why">اعمال سطری مقدماتی معادل ضرب در ماتریس‌های وارون‌پذیرند و وارون‌پذیری را عوض نمی‌کنند.</div></li>
+      <li class="step"><b>(ت)⇒(آ):</b> اگر الگوریتم تا آخر برود، $U$ (یا $D$) قطر ناصفر دارد، پس $\det(U)\neq0$. طبق تبصرهٔ ۱۰.۳، $\det(A)=\pm\det(U)\neq0$ و $A$ وارون‌پذیر است.
+        <div class="why">دترمینان مثلثی = حاصل‌ضرب محورها.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>وارون ⇒ جواب $A^{-1}b$؛ یکتایی ⇔ $Az=0$ فقط صفر ⇔ ستون‌ها مستقل ⇔ رتبه $n$. الگوریتم موفق ⇔ همهٔ محورها ناصفر ⇔ $\det A=\pm\prod\text{محورها}\neq0$.</div>
+    <div class="qed">∎</div>
+  </div>
+
+  <div class="quiz">
+    <div class="quiz-h"><b>خودآزمایی ۳.۳.۳</b><span class="score"></span></div>
+    <div class="q">
+      <p class="q-t">خروجی گاوس-جردن (الگوریتم ۲.۳) چه شکلی دارد؟</p>
+      <div class="opts"><button class="opt">$[U\ c]$ با $U$ بالامثلثی</button><button class="opt" data-c>$[D\ c]$ با $D$ قطری</button><button class="opt">$[L\ c]$ با $L$ پایین‌مثلثی</button></div>
+      <p class="q-exp">گام‌های ۷ و ۸ بالای قطر را هم صفر می‌کنند.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">در گام ۷ الگوریتم ۲.۳، کدام درایه‌ها صفر می‌شوند؟</p>
+      <div class="opts"><button class="opt">زیر محور $a_{jj}$</button><button class="opt" data-c>بالای محور $a_{jj}$ (سطرهای $1$ تا $j-1$)</button><button class="opt">فقط درایهٔ $a_{1n}$</button></div>
+      <p class="q-exp">$i=1,\dots,j-1$ یعنی سطرهای بالای سطر محوری.</p>
+    </div>
+    <div class="quiz-f"><button class="btn quiz-reset">دوباره</button></div>
+  </div>
+  <div class="sec-done"><p>محک: تفاوت الگوریتم ۱.۳ و ۲.۳ را در دو جمله بگو و مثال ۷.۳ را روی کاغذ ادامه بده.</p><button class="btn done-btn" data-sec="gj"></button></div>
+
+  <!-- ---------------- Operation count -->
+  <h3 id="count"><span class="num">۴.۳.۳</span>شمارش اعمال</h3>
+  <p>با نگرشی عمیق به الگوریتم روش حذف گاوسی، می‌توان برای شمارش اعمال ممیز شناور آن از جدول ۱.۳ کمک گرفت.</p>
+  <div class="tbl">
+    <table>
+      <caption>جدول ۱.۳: محاسبهٔ تعداد اعمال در روش حذف گاوسی</caption>
+      <thead><tr><th>در انتهای تکرار</th><th>تعداد جمع</th><th>تعداد ضرب</th><th>تعداد تقسیم</th></tr></thead>
+      <tbody>
+        <tr><td>اول</td><td>$n(n-1)$</td><td>$n(n-1)$</td><td>$n-1$</td></tr>
+        <tr><td>دوم</td><td>$(n-1)(n-2)$</td><td>$(n-1)(n-2)$</td><td>$n-2$</td></tr>
+        <tr><td>$\vdots$</td><td>$\vdots$</td><td>$\vdots$</td><td>$\vdots$</td></tr>
+        <tr><td>$(n-2)$ام</td><td>$3\times2$</td><td>$3\times2$</td><td>$2$</td></tr>
+        <tr><td>$(n-1)$ام</td><td>$2\times1$</td><td>$2\times1$</td><td>$1$</td></tr>
+      </tbody>
+      <tfoot><tr><td>در مجموع</td><td>$\sum_{k=1}^{n-1}k(k+1)$</td><td>$\sum_{k=1}^{n-1}k(k+1)$</td><td>$\sum_{k=1}^{n-1}k$</td></tr></tfoot>
+    </table>
+  </div>
+  <p>نتیجه: روش حذف گاوسی به $\sum_{k=1}^{n-1}k(k+1)=\frac{n^3}{3}-\frac{n}{3}$ عمل جمع/تفریق و $\frac{n^3}{3}-\frac n3+\frac{n(n-1)}{2}=\frac{2n^3+3n^2-5n}{6}$ عمل ضرب/تقسیم نیاز دارد. با جایگذاری پسرو روی هم $\frac{n^3}{3}+\frac{n^2}{2}-\frac{5n}{6}$ جمع/تفریق و $\frac{n^3}{3}+n^2-\frac{n}{3}$ ضرب/تقسیم لازم است. این‌ها را گام‌به‌گام اثبات می‌کنیم.</p>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات شمارش اعمال حذف گاوسی و جایگذاری پسرو</span><span class="badge book">از کتاب، با جزئیات</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step"><b>یک تکرار را بشمار.</b> در تکرار $k$، سطرهای $k+1,\dots,n$ یعنی $n-k$ سطر عوض می‌شوند. برای هر سطر: ۱ تقسیم برای $l_{ik}$، و برای درایه‌های ستون‌های $k+1,\dots,n+1$ (یعنی $n-k+1$ درایه) هر کدام ۱ ضرب و ۱ تفریق.
+        <div class="why">درایهٔ ستون $k$ را حساب نمی‌کنیم؛ می‌دانیم صفر می‌شود. ستون $n+1$ همان $b$ است و باید به‌روز شود. پس در تکرار $k$: تقسیم $=n-k$، ضرب $=(n-k)(n-k+1)$، جمع $=(n-k)(n-k+1)$. برای $k=1$ همان سطر اول جدول است: $n-1$ و $(n-1)n$.</div></li>
+      <li class="step"><b>جمع روی تکرارها.</b> با $m=n-k$ (وقتی $k$ از ۱ تا $n-1$ می‌رود، $m$ از $n-1$ تا ۱ می‌رود):
+        $$\text{ضرب}=\text{جمع}=\sum_{m=1}^{n-1}m(m+1),\qquad \text{تقسیم}=\sum_{m=1}^{n-1}m .$$
+        <div class="why">ترتیب جمع زدن مهم نیست؛ فقط اسم شمارنده را عوض کرده‌ایم. این همان سطر «در مجموع» جدول است.</div></li>
+      <li class="step"><b>دو فرمول معروف.</b> $\displaystyle\sum_{m=1}^{n-1}m=\frac{n(n-1)}{2}$ و $\displaystyle\sum_{m=1}^{n-1}m^2=\frac{(n-1)n(2n-1)}{6}$.
+        <div class="why">فرمول مجموع اعداد و مجموع مربع‌ها تا $N=n-1$: $\frac{N(N+1)}{2}$ و $\frac{N(N+1)(2N+1)}{6}$.</div></li>
+      <li class="step"><b>محاسبهٔ $\sum m(m+1)$.</b>
+        $$\sum_{m=1}^{n-1}m(m+1)=\sum m^2+\sum m=\frac{n(n-1)(2n-1)}{6}+\frac{3n(n-1)}{6}=\frac{n(n-1)(2n+2)}{6}=\frac{(n-1)n(n+1)}{3}=\frac{n^3-n}{3}.$$
+        <div class="why">از $\frac{n(n-1)}{6}$ فاکتور گرفتیم: $(2n-1)+3=2n+2=2(n+1)$؛ و $(n-1)(n+1)=n^2-1$.</div></li>
+      <li class="step"><b>فاز حذف.</b> جمع/تفریق $=\frac{n^3-n}{3}$. ضرب/تقسیم $$=\frac{n^3-n}{3}+\frac{n(n-1)}{2}=\frac{2n^3-2n+3n^2-3n}{6}=\frac{2n^3+3n^2-5n}{6}$$.
+        <div class="why">ضرب‌ها و تقسیم‌ها را با هم شمرده‌ایم، چون هزینهٔ تقریباً یکسانی دارند.</div></li>
+      <li class="step"><b>جایگذاری پسرو.</b> برای $x_i=\frac{1}{a_{ii}}\big(c_i-\sum_{j=i+1}^n a_{ij}x_j\big)$: $(n-i)$ ضرب، $(n-i)$ تفریق و ۱ تقسیم. روی $i=1,\dots,n$: $\ \sum(n-i)=\frac{n(n-1)}{2}$ ضرب، $\frac{n(n-1)}{2}$ جمع/تفریق و $n$ تقسیم.
+        <div class="why">سطر $i$ام $n-i$ مجهول معلوم‌شدهٔ قبلی دارد. کتاب: «جایگذاری پسرو به $n$ عمل تقسیم، $\frac{n(n-1)}{2}$ عمل ضرب و $\frac{n(n-1)}{2}$ عمل جمع نیاز دارد».</div></li>
+      <li class="step"><b>جمع کل.</b>
+        $$\text{جمع/تفریق: }\frac{n^3}{3}-\frac n3+\frac{n(n-1)}{2}=\frac{n^3}{3}+\frac{n^2}{2}-\frac{5n}{6},\qquad \text{ضرب/تقسیم: }\frac{2n^3+3n^2-5n}{6}+n+\frac{n(n-1)}{2}=\frac{n^3}{3}+n^2-\frac{n}{3}.$$
+        <div class="why">فقط ساده‌سازی جبری است؛ مخرج مشترک ۶ بگیر.</div></li>
+      <li class="step"><b>کنترل با $n=2$.</b> فاز حذف: ۱ تقسیم ($l_{21}$)، ۲ ضرب و ۲ تفریق (درایهٔ $a_{22}$ و $b_2$). جایگذاری: ۲ تقسیم، ۱ ضرب، ۱ تفریق. روی هم ۶ ضرب/تقسیم و ۳ جمع/تفریق. فرمول‌ها: $\frac83+4-\frac23=6$ و $\frac83+2-\frac53=3$. درست است.
+        <div class="why">کنترل با یک عدد کوچک بهترین راه برای اطمینان از فرمولی است که سر امتحان می‌نویسی.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>تکرار $k$: $(n-k)$ سطر × $(n-k+1)$ درایه ← $\sum m(m+1)=\frac{n^3-n}{3}$ ← به‌اضافهٔ $\frac{n(n-1)}{2}$ تقسیم ← جایگذاری $\approx\frac{n^2}{2}$ ← <b>جملهٔ غالب $\frac{n^3}{3}$</b>.</div>
+    <div class="qed">∎</div>
+  </div>
+  <p>هنگامی که $n$ بزرگ باشد جملهٔ غالب $n^3/3$ است و می‌توان گفت روش حذف گاوسی با جایگذاری پسرو به حدود $n^3/3$ عمل جمع/تفریق و $n^3/3$ عمل ضرب/تقسیم نیاز دارد. به‌طور مشابه شمارش اعمال الگوریتم روش حذفی گاوس-جردن نتیجه می‌دهد که این روش به</p>
+  $$\frac{n^3}{2}-\frac n2\ \ \text{عمل جمع/تفریق}\qquad\text{و}\qquad\frac{n^3}{2}+\frac{n^2}{2}\ \ \text{عمل ضرب/تقسیم}$$
+  <p>نیاز دارد. چون هنگامی که $n$ بزرگ باشد جملهٔ غالب $n^3/2$ است، می‌توان گفت روش حذفی گاوس-جردن به‌طور تقریبی به ۵۰٪ اعمال حسابی بیشتر نسبت به روش حذف گاوسی احتیاج دارد. به عنوان مثال برای حل یک دستگاه ۱۰۰ معادله و ۱۰۰ مجهولی، روش حذف گاوسی به حدود ۳۳۳۳۳۳ عمل (جمع/تفریق و ضرب/تقسیم) و روش حذفی گاوس-جردن به حدود ۵۰۰۰۰۰ عمل نیاز دارد.</p>
+  <details class="try">
+    <summary>اثبات تکمیلی: عددهای گاوس-جردن از کجا می‌آیند؟</summary>
+    <div>
+      <p>کتاب فقط می‌گوید «به‌طور مشابه». این عددها با شیوهٔ متداول اجرای گاوس-جردن به‌دست می‌آیند: در هر گام $j$ اول سطر محوری بر محور تقسیم می‌شود و بعد درایه‌های ستون $j$ در <b>همهٔ</b> $n-1$ سطر دیگر (بالا و پایین) با هم صفر می‌شوند.</p>
+      <ol>
+        <li>تقسیم سطر محوری: درایه‌های ستون‌های $j+1,\dots,n+1$، یعنی $n+1-j$ تقسیم. (خود محور ۱ می‌شود، حسابش نمی‌کنیم.)</li>
+        <li>برای هر کدام از $n-1$ سطر دیگر: $n+1-j$ ضرب و $n+1-j$ تفریق.</li>
+        <li>ضرب/تقسیم در گام $j$: $$(n+1-j)+(n-1)(n+1-j)=n(n+1-j)$$. روی $j=1..n$: $$\ n\sum_{j=1}^{n}(n+1-j)=n\cdot\frac{n(n+1)}{2}=\frac{n^3}{2}+\frac{n^2}{2}$$.</li>
+        <li>جمع/تفریق: $$(n-1)\sum_{j=1}^n(n+1-j)=(n-1)\frac{n(n+1)}{2}=\frac{n^3}{2}-\frac n2$$.</li>
+      </ol>
+      <p class="small">برای امتحان کافی است بدانی: گاوس حدود $n^3/3$ و گاوس-جردن حدود $n^3/2$، یعنی تقریباً ۵۰٪ بیشتر.</p>
+    </div>
+  </details>
+
+  <div class="box rem" id="rem113">
+    <div class="box-h"><span class="tag">تبصره ۱۱.۳</span><span class="box-t">کاربرد گاوس-جردن: محاسبهٔ وارون</span></div>
+    <p>روش حذفی گاوس-جردن در عمل برای حل دستگاه‌های خطی توصیه نمی‌شود؛ اما این روش دارای مزیت‌هایی در مباحث نظری است و به علاوه می‌تواند به منظور رسیدن به اهدافی به غیر از حل دستگاه خطی مورد استفاده قرار گیرد. به عنوان مثال برای محاسبهٔ وارون یک ماتریس مربعی وارون می‌توان روش حذفی گاوس-جردن را به کار گرفت.</p>
+  </div>
+  <p>اگر $B$ وارون ماتریس $A_{n\times n}$ باشد آن‌گاه از $AB=I$ خواهیم داشت $A[b^{(1)}\cdots b^{(n)}]=[e^{(1)}\cdots e^{(n)}]$ و از آن‌جا</p>
+  $$Ab^{(i)}=e^{(i)},\qquad i=1,\dots,n. \tag{۱.۳}$$
+  <p>اگر این $n$ دستگاه را با روش حذفی گاوس-جردن حل کنیم ستون‌های $B$ مشخص می‌شوند. اما چون ماتریس ضرایب این $n$ دستگاه یکسان است، در عمل به کمک اعمال سطری مقدماتی ماتریس افزودهٔ $[A\ I]$ را در صورت امکان به ماتریس $[I\ B]$ تبدیل می‌کنیم.</p>
+  <div class="box intu">
+    <div class="box-h"><span class="tag">چرا یک‌جا؟</span></div>
+    <p>اعمال سطری فقط به $A$ بستگی دارند (ضرایب $l_{ij}$ از درایه‌های $A$ ساخته می‌شوند). پس هر عملی که برای حل $Ax=e^{(1)}$ لازم است، برای $Ax=e^{(2)}$ و بقیه هم دقیقاً همان است. به‌جای $n$ بار تکرار، $n$ ستون سمت راست را کنار هم می‌گذاریم و یک بار حذف می‌کنیم.</p>
+  </div>
+
+  <div class="box ex" id="ex83">
+    <div class="box-h"><span class="tag">مثال ۸.۳</span><span class="box-t">آیا ماتریس داده‌شده وارون‌پذیر است؟</span></div>
+    $$A=\begin{bmatrix}1&2&3\\2&3&4\\3&4&5\end{bmatrix}$$
+    <p>ابتدا ماتریس افزوده‌ای به صورت $\left[\begin{array}{ccc|ccc}1&2&3&1&0&0\\2&3&4&0&1&0\\3&4&5&0&0&1\end{array}\right]$ ساخته و روش حذفی گاوس-جردن را دنبال می‌کنیم. با صفرسازی درایه‌های زیر قطر ستون اول داریم $\left[\begin{array}{rrr|rrr}1&2&3&1&0&0\\0&-1&-2&-2&1&0\\0&-2&-4&-3&0&1\end{array}\right]$. سپس درایه‌های زیر قطر ستون دوم را صفر کرده، خواهیم داشت</p>
+    $$\left[\begin{array}{rrr|rrr}1&2&3&1&0&0\\0&-1&-2&-2&1&0\\0&0&0&1&-2&1\end{array}\right].$$
+    <p>حال بنابر گزارهٔ ۶.۱ رتبهٔ ماتریس $A$ برابر ۲ است (سطر سوم بخش $A$ تماماً صفر شد) و بنابراین وارون‌پذیر نیست.</p>
+  </div>
+  <div class="widget" data-widget="stepper" data-preset="ex83"></div>
+
+  <div class="box ex" id="ex93">
+    <div class="box-h"><span class="tag">مثال ۹.۳</span><span class="box-t">وارون ماتریس داده‌شده را بیابید</span></div>
+    $$A=\begin{bmatrix}1&2&-1\\2&1&0\\-1&1&2\end{bmatrix}$$
+    <p>ابتدا ماتریس افزوده $\left[\begin{array}{rrr|rrr}1&2&-1&1&0&0\\2&1&0&0&1&0\\-1&1&2&0&0&1\end{array}\right]$ را ساخته و پس از صفرسازی درایه‌های زیر قطر ستون اول داریم $\left[\begin{array}{rrr|rrr}1&2&-1&1&0&0\\0&-3&2&-2&1&0\\0&3&1&1&0&1\end{array}\right]$. سپس با صفر کردن درایه‌های زیر قطر ستون دوم به‌دست می‌آوریم</p>
+    $$\left[\begin{array}{rrr|rrr}1&2&-1&1&0&0\\0&-3&2&-2&1&0\\0&0&3&-1&1&1\end{array}\right].$$
+    <p>چون $a_{33}=3\neq0$، $A$ وارون‌پذیر است. جهت ادامهٔ کار دو راه پیش رو داریم: راه‌کار اول بر پایهٔ روش حذفی گاوس-جردن و راه‌کار دوم بر پایهٔ روش حذف گاوسی با جایگذاری پسرو است.</p>
+    <p><b>راه اول.</b> سطر سوم را بر ۳ تقسیم می‌کنیم و پس از صفر کردن درایه‌های بالای قطر ستون سوم خواهیم داشت</p>
+    $$\left[\begin{array}{rrr|rrr}1&2&0&\frac23&\frac13&\frac13\\[2pt]0&-3&0&-\frac43&\frac13&-\frac23\\[2pt]0&0&1&-\frac13&\frac13&\frac13\end{array}\right].$$
+    <p>حال سطر دوم را بر $-3$ تقسیم کرده و با صفر کردن درایهٔ بالای قطر ستون دوم به‌دست می‌آوریم</p>
+    $$\left[\begin{array}{rrr|rrr}1&0&0&-\frac29&\frac59&-\frac19\\[2pt]0&1&0&\frac49&-\frac19&\frac29\\[2pt]0&0&1&-\frac13&\frac13&\frac13\end{array}\right].$$
+    <p><b>راه دوم.</b> پس از حل دستگاه‌های (هر ستون سمت راست یک دستگاه بالامثلثی است)</p>
+    $$\begin{cases}b_{11}+2b_{21}-b_{31}=1\\ \ \ -3b_{21}+2b_{31}=-2\\ \qquad\quad\ \ 3b_{31}=-1\end{cases}\qquad\begin{cases}b_{12}+2b_{22}-b_{32}=0\\ \ \ -3b_{22}+2b_{32}=1\\ \qquad\quad\ \ 3b_{32}=1\end{cases}\qquad\begin{cases}b_{13}+2b_{23}-b_{33}=0\\ \ \ -3b_{23}+2b_{33}=0\\ \qquad\quad\ \ 3b_{33}=1\end{cases}$$
+    <p>با جایگذاری پسرو (مثلاً برای ستون اول: $b_{31}=-\frac13$، بعد $-3b_{21}=-2+\frac23$ پس $b_{21}=\frac49$، بعد $b_{11}=1-\frac89-\frac13=-\frac29$) داریم</p>
+    $$A^{-1}=[b_{ij}]=\frac19\begin{bmatrix}-2&5&-1\\4&-1&2\\-3&3&3\end{bmatrix}.$$
+  </div>
+  <div class="widget" data-widget="stepper" data-preset="ex93"></div>
+  <details class="try">
+    <summary>کنترل: آیا واقعاً $AA^{-1}=I$؟</summary>
+    <div><p>سطر اول $A$ ضربدر ستون اول $9A^{-1}$: $1\cdot(-2)+2\cdot4+(-1)(-3)=9$. سطر اول در ستون دوم: $5-2-3=0$. سطر سوم در ستون سوم: $1+2+6=9$. بقیه را هم حساب کن؛ روی قطر ۹ و بیرون قطر ۰ می‌آید، پس $AA^{-1}=\frac19\cdot9I=I$.</p></div>
+  </details>
+
+  <div class="quiz">
+    <div class="quiz-h"><b>خودآزمایی ۴.۳.۳</b><span class="score"></span></div>
+    <div class="q">
+      <p class="q-t">جملهٔ غالب تعداد ضرب/تقسیم در حذف گاوسی با جایگذاری پسرو چیست؟</p>
+      <div class="opts two"><button class="opt">$n^2/2$</button><button class="opt" data-c>$n^3/3$</button><button class="opt">$n^3/2$</button><button class="opt">$n!$</button></div>
+      <p class="q-exp">$\frac{n^3}{3}+n^2-\frac n3$؛ برای $n$ بزرگ $n^3/3$ غالب است.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">$\sum_{k=1}^{n-1}k(k+1)$ برابر است با:</p>
+      <div class="opts two"><button class="opt">$\frac{n^3+n}{3}$</button><button class="opt" data-c>$\frac{n^3-n}{3}$</button><button class="opt">$\frac{n(n-1)}{2}$</button><button class="opt">$\frac{n^3}{2}$</button></div>
+      <p class="q-exp">برای $n=3$: $1\cdot2+2\cdot3=8$ و $\frac{27-3}{3}=8$.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">برای محاسبهٔ $A^{-1}$ با گاوس-جردن از چه ماتریس افزوده‌ای شروع می‌کنیم؟</p>
+      <div class="opts two"><button class="opt">$[A\ b]$</button><button class="opt" data-c>$[A\ I]$</button><button class="opt">$[I\ A]$</button><button class="opt">$[A\ A^T]$</button></div>
+      <p class="q-exp">$[A\ I]$ را با اعمال سطری به $[I\ B]$ می‌رسانیم و $B=A^{-1}$.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">در مثال ۸.۳ چرا نتیجه گرفتیم $A$ وارون‌پذیر نیست؟</p>
+      <div class="opts"><button class="opt">چون $a_{11}=1$ بود.</button><button class="opt" data-c>چون بعد از حذف، سطر سوم بخش $A$ تماماً صفر شد و رتبه ۲ شد.</button><button class="opt">چون بخش سمت راست صفر شد.</button></div>
+      <p class="q-exp">رتبهٔ $2\lt3$ یعنی وارون‌ناپذیر.</p>
+    </div>
+    <div class="quiz-f"><button class="btn quiz-reset">دوباره</button></div>
+  </div>
+  <div class="sec-done"><p>محک: شمارش $\frac{n^3-n}{3}$ را از جدول ۱.۳ تا آخر اثبات کن و وارون مثال ۹.۳ را از هر دو راه به‌دست آور.</p><button class="btn done-btn" data-sec="count"></button></div>
+
+  <!-- ---------------- LU -->
+  <h3 id="lu"><span class="num">۵.۳.۳</span>تجزیهٔ مثلثی یک ماتریس</h3>
+  <p>این بخش به تجزیهٔ یک ماتریس به صورت حاصل‌ضربی از دو ماتریس مثلثی و کاربردهای مختلف آن اختصاص یافته است.</p>
+  <div class="box intu">
+    <div class="box-h"><span class="tag">به زبان ساده</span><span class="box-t">چرا تجزیه؟</span></div>
+    <p>حذف گاوسی هر بار که یک $b$ جدید بیاید، از اول تکرار می‌شود. ولی اعمال سطری فقط به $A$ بستگی دارند. اگر یک بار «دفترچهٔ» این اعمال را نگه داریم ($L$ که ضرایب $l_{ij}$ را دارد) و نتیجهٔ نهایی را ($U$)، آن‌وقت $A=LU$ و حل هر دستگاه جدید فقط دو جایگذاری ارزان است. در این بخش می‌بینیم هر گام حذف گاوسی در واقع <b>ضرب در یک ماتریس</b> است.</p>
+  </div>
+
+  <h4 id="lu-gauss"><span class="num" style="font-size:.85em">۱.۵.۳.۳</span> روش حذف گاوسی و تجزیهٔ مثلثی</h4>
+  <p>هر گام از روش حذف گاوسی را می‌توان با استفاده از ضرب ماتریس‌ها توصیف کرد. در واقع می‌توان ماتریس $A$ را با ضرب ماتریس‌هایی خاص با ترتیبی مشخص در آن، به ماتریسی مثلثی کاهش داد.</p>
+
+  <div class="box def" id="def53">
+    <div class="box-h"><span class="tag">تعریف ۵.۳</span><span class="box-t">ماتریس جایگشت</span></div>
+    <p>یک ماتریس مربعی که در هر سطر و ستون فقط یک درایه با مقدار ۱ دارد و بقیهٔ درایه‌های آن صفر هستند را <b>ماتریس جایگشت</b> می‌نامند. ماتریس جایگشتی که از جابه‌جایی سطرهای (ستون‌های) $r$ام و $s$ام ماتریس همانی به‌دست می‌آید به <b>ماتریس جایگشت مقدماتی</b> معروف است و با $P=P(r,s)$ نمایش داده می‌شود.</p>
+  </div>
+
+  <div class="box thm" id="lem13">
+    <div class="box-h"><span class="tag">لم ۱.۳</span><span class="box-t">ویژگی‌های ماتریس‌های جایگشت</span></div>
+    <ol>
+      <li>(آ) مجموعهٔ ماتریس‌های جایگشت تحت عمل ضرب ماتریسی بسته است.</li>
+      <li>(ب) هر ماتریس جایگشت حاصل‌ضربی از ماتریس‌های جایگشت مقدماتی است.</li>
+      <li>(پ) $P^T=P$.</li>
+      <li>(ت) $\det(P)=-1$.</li>
+      <li>(ث) ضرب $P(r,s)$ از سمت چپ در ماتریس $A$ باعث جابه‌جایی سطرهای $r$ام و $s$ام ماتریس می‌شود.</li>
+      <li>(ج) ضرب $P(r,s)$ از سمت راست در ماتریس $A$ باعث جابه‌جایی ستون‌های $r$ام و $s$ام ماتریس می‌شود.</li>
+      <li>(چ) $P^2=I$ یا $P^{-1}=P$ (ماتریس‌های جایگشت مقدماتی متعامد هستند).</li>
+    </ol>
+    <p class="small">توجه: در (پ)، (ت) و (چ) منظور ماتریس جایگشت <b>مقدماتی</b> $P=P(r,s)$ با $r\neq s$ است.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات لم ۱.۳</span><span class="badge supp">کتاب: «به سادگی ثابت می‌شود» · کامل شده</span><span class="grow"></span></div>
+    <p class="proof-goal">ترتیب اثبات را طوری می‌چینیم که هر قسمت از قبلی‌ها استفاده کند: اول (ث)، بعد (ج)، (پ)، (ت)، (چ)، و در آخر (آ) و (ب).</p>
+    <ol class="steps">
+      <li class="step"><b>(ث)</b> درایهٔ $(i,j)$ حاصل‌ضرب: $(PA)_{ij}=\sum_k p_{ik}a_{kj}$. سطر $i$ام $P(r,s)$ برای $i\neq r,s$ همان $e_i^T$ است، پس $(PA)_{ij}=a_{ij}$. سطر $r$ام $P$ برابر $e_s^T$ است، پس $(PA)_{rj}=a_{sj}$؛ و به همین ترتیب $(PA)_{sj}=a_{rj}$.
+        <div class="why">ضرب سطر $e_s^T$ در $A$ دقیقاً سطر $s$ام $A$ را برمی‌دارد. پس $PA$ همان $A$ است با سطرهای $r$ و $s$ جابه‌جا.</div></li>
+      <li class="step"><b>(ج)</b> به‌طور مشابه $(AP)_{ij}=\sum_k a_{ik}p_{kj}$ و ستون $j$ام $P$ برای $j\neq r,s$ برابر $e_j$، ستون $r$ام برابر $e_s$ و ستون $s$ام برابر $e_r$ است. پس $AP$ همان $A$ با ستون‌های $r$ و $s$ جابه‌جاست.
+        <div class="why">$A e_s$ یعنی ستون $s$ام $A$.</div></li>
+      <li class="step"><b>(پ)</b> درایه‌های ناصفر $P(r,s)$ عبارت‌اند از $p_{ii}=1$ برای $i\neq r,s$ و $p_{rs}=p_{sr}=1$. این مجموعه نسبت به جابه‌جایی اندیس‌ها متقارن است، پس $P^T=P$.
+        <div class="why">ترانهاده یعنی $(P^T)_{ij}=p_{ji}$؛ چون $p_{rs}=p_{sr}$، چیزی عوض نمی‌شود.</div></li>
+      <li class="step"><b>(ت)</b> $P(r,s)$ از $I$ با یک جابه‌جایی سطر به‌دست آمده و جابه‌جایی سطر دترمینان را قرینه می‌کند: $\det P=-\det I=-1$.
+        <div class="why">یادآوری ۳.</div></li>
+      <li class="step"><b>(چ)</b> طبق (ث) با $A=P$: $P\cdot P$ یعنی جابه‌جا کردن دوبارهٔ سطرهای $r$ و $s$ در $P$، که آن را به $I$ برمی‌گرداند. پس $P^2=I$، $P^{-1}=P$ و با (پ) $P^{-1}=P^T$؛ یعنی $P$ متعامد است.
+        <div class="why">دو بار جابه‌جا کردن یک جفت سطر، هیچ کاری نکردن است.</div></li>
+      <li class="step"><b>(آ)</b> اگر $P$ و $Q$ ماتریس جایگشت باشند، سطر $i$ام $P$ یک ۱ در ستون $\sigma(i)$ دارد، پس سطر $i$ام $PQ$ برابر سطر $\sigma(i)$ام $Q$ است. چون هر ستون $P$ هم دقیقاً یک ۱ دارد، $\sigma$ یک‌به‌یک است و سطرهای $PQ$ همان سطرهای $Q$ با ترتیبی تازه‌اند. پس $PQ$ در هر سطر و ستون دقیقاً یک ۱ دارد.
+        <div class="why">جابه‌جا کردن سطرهای یک ماتریس جایگشت، باز ماتریس جایگشت می‌دهد.</div></li>
+      <li class="step"><b>(ب)</b> سطرهای هر ماتریس جایگشت $P$ همان سطرهای $I$ با ترتیبی دیگرند. با حداکثر $n-1$ جابه‌جایی (اول سطر $e_1^T$ را به جای اول ببر، بعد $e_2^T$ را به جای دوم و …) به $I$ می‌رسیم: $P_k\cdots P_1P=I$. طبق (چ) هر $P_t^{-1}=P_t$، پس $P=P_1P_2\cdots P_k$.
+        <div class="why">هر جابه‌جایی طبق (ث) یعنی ضرب از چپ در یک جایگشت مقدماتی.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>سطر $r$ام $P(r,s)$ همان $e_s^T$ است ⇒ (ث) و (ج). متقارن ⇒ (پ). یک جابه‌جایی از $I$ ⇒ $\det=-1$. دو بار جابه‌جایی = هیچ ⇒ $P^2=I$. ضرب = جابه‌جا کردن سطرها ⇒ (آ). مرتب کردن سطرها با جابه‌جایی ⇒ (ب).</div>
+    <div class="qed">∎</div>
+  </div>
+
+  <div class="box ex" id="ex103">
+    <div class="box-h"><span class="tag">مثال ۱۰.۳</span></div>
+    <p>اگر $P=P(1,3)=\begin{bmatrix}0&0&1\\0&1&0\\1&0&0\end{bmatrix}$ آن‌گاه</p>
+    $$P\begin{bmatrix}a_{11}&a_{12}&a_{13}\\a_{21}&a_{22}&a_{23}\\a_{31}&a_{32}&a_{33}\end{bmatrix}=\begin{bmatrix}a_{31}&a_{32}&a_{33}\\a_{21}&a_{22}&a_{23}\\a_{11}&a_{12}&a_{13}\end{bmatrix}.$$
+  </div>
+  <div class="widget" data-widget="perm"></div>
+
+  <div class="box def" id="def63">
+    <div class="box-h"><span class="tag">تعریف ۶.۳</span><span class="box-t">ماتریس تبدیل گاوسی (فروبنیوس)</span></div>
+    <p>اگر برای $j=1,\dots,n-1$ قرار دهیم $l^{(j)}=[0\ \cdots\ 0\ \ l_{j+1,j}\ \cdots\ l_{nj}]^T$ (یعنی $j$ درایهٔ اول صفرند) آن‌گاه ماتریسی که به صورت زیر ساخته می‌شود به <b>ماتریس تبدیل گاوسی $j$ام</b> یا <b>ماتریس فروبنیوس $j$ام</b> معروف است:</p>
+    $$M^{(j)}=I-l^{(j)}e_j^T=\begin{bmatrix}1&&&&&\\&\ddots&&&&\\&&1&&&\\&&-l_{j+1,j}&1&&\\&&\vdots&&\ddots&\\&&-l_{nj}&&&1\end{bmatrix}\quad(\text{ستون }j).$$
+  </div>
+  <div class="box intu">
+    <div class="box-h"><span class="tag">به زبان ساده</span></div>
+    <p>$M^{(j)}$ همان ماتریس همانی است که فقط در ستون $j$ام، زیر قطر، ضرایب حذفِ تکرار $j$ (با علامت منفی) نشسته‌اند. ضرب آن از چپ در $A$ یعنی «همهٔ عمل‌های $R_i\leftarrow R_i-l_{ij}R_j$ تکرار $j$ را یک‌جا انجام بده». عبارت $l^{(j)}e_j^T$ یک ماتریس است که فقط ستون $j$امش ناصفر است و آن ستون همان $l^{(j)}$ است.</p>
+  </div>
+
+  <div class="box thm" id="lem23">
+    <div class="box-h"><span class="tag">لم ۲.۳</span><span class="box-t">ویژگی‌های ماتریس‌های تبدیل گاوسی</span></div>
+    <ol>
+      <li>(آ) $\det(M^{(j)})=1$؛</li>
+      <li>(ب) ضرب $M^{(j)}$ از سمت چپ در $A$ باعث انجام عمل $R_k\leftarrow R_k-l_{kj}R_j$ به ازای $k=j+1,\dots,n$ می‌شود؛</li>
+      <li>(پ) ضرب ${M^{(j)}}^T$ از سمت راست در $A$ باعث انجام عملی مشابه روی ستون‌های $A$ می‌شود؛</li>
+      <li>(ت) معکوس $M^{(j)}$ به صورت $L^{(j)}={M^{(j)}}^{-1}=I+l^{(j)}e_j^T$ است (همان $M^{(j)}$ با علامت مثبت زیر قطر)؛</li>
+      <li>(ث) برای ضرب این نوع ماتریس‌ها داریم $M^{(j)}M^{(k)}=I-l^{(j)}e_j^T-l^{(k)}e_k^T$ (برای $j\lt k$). به‌ویژه به کمک یک روند استقرایی می‌توان نشان داد
+      $$M^{(1)}M^{(2)}\cdots M^{(n-1)}=I-l^{(1)}e_1^T-l^{(2)}e_2^T-\cdots-l^{(n-1)}e_{n-1}^T=\begin{bmatrix}1&&&\\-l_{21}&\ddots&&\\\vdots&\ddots&\ddots&\\-l_{n1}&\cdots&-l_{n,n-1}&1\end{bmatrix}.$$</li>
+    </ol>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات لم ۲.۳</span><span class="badge supp">کتاب: «به سادگی ثابت می‌شود» · کامل شده</span><span class="grow"></span></div>
+    <p class="proof-goal">ابزار اصلی: برای دو بردار $u,v$، ماتریس $uv^T$ و این واقعیت که $v^Tu$ یک عدد است. در ضمن $e_j^Tl^{(k)}$ یعنی درایهٔ $j$ام بردار $l^{(k)}$.</p>
+    <ol class="steps">
+      <li class="step"><b>(آ)</b> درایه‌های ناصفر $l^{(j)}e_j^T$ فقط در ستون $j$ و سطرهای $j+1,\dots,n$ هستند، یعنی <b>زیر قطر</b>. پس $M^{(j)}$ پایین‌مثلثی با قطر ۱ است و $\det M^{(j)}=1\cdot1\cdots1=1$.
+        <div class="why">دترمینان مثلثی = حاصل‌ضرب قطر.</div></li>
+      <li class="step"><b>(ب)</b> $M^{(j)}A=A-l^{(j)}(e_j^TA)$. اما $e_j^TA$ همان سطر $j$ام $A$ یعنی $R_j$ است. پس سطر $k$ام حاصل برابر $R_k-l_{kj}R_j$ است. برای $k\le j$ داریم $l_{kj}=0$ و سطر تغییر نمی‌کند؛ برای $k=j+1,\dots,n$ دقیقاً $R_k\leftarrow R_k-l_{kj}R_j$.
+        <div class="why">ماتریس $l^{(j)}R_j$ سطر $k$امش برابر $l_{kj}R_j$ است.</div></li>
+      <li class="step"><b>(پ)</b> ${M^{(j)}}^T=I-e_j{l^{(j)}}^T$، پس $$A{M^{(j)}}^T=A-(Ae_j){l^{(j)}}^T=A-C_j{l^{(j)}}^T$$ که $C_j$ ستون $j$ام $A$ است. ستون $k$ام حاصل برابر $C_k-l_{kj}C_j$ است.
+        <div class="why">همان (ب)، این بار برای ستون‌ها (ترانهاده‌اش را بگیر).</div></li>
+      <li class="step"><b>(ت)</b> ضرب را مستقیم حساب می‌کنیم:
+        $$(I-l^{(j)}e_j^T)(I+l^{(j)}e_j^T)=I+l^{(j)}e_j^T-l^{(j)}e_j^T-l^{(j)}\,(e_j^Tl^{(j)})\,e_j^T=I-(e_j^Tl^{(j)})\,l^{(j)}e_j^T=I .$$
+        <div class="why">$e_j^Tl^{(j)}$ درایهٔ $j$ام $l^{(j)}$ است که طبق تعریف <b>صفر</b> است (درایه‌های ۱ تا $j$ صفرند). پس $I+l^{(j)}e_j^T$ وارون $M^{(j)}$ است.</div></li>
+      <li class="step"><b>(ث)</b> برای $j\lt k$:
+        $$M^{(j)}M^{(k)}=(I-l^{(j)}e_j^T)(I-l^{(k)}e_k^T)=I-l^{(j)}e_j^T-l^{(k)}e_k^T+l^{(j)}\,(e_j^Tl^{(k)})\,e_k^T .$$
+        و $e_j^Tl^{(k)}$ درایهٔ $j$ام $l^{(k)}$ است؛ چون $j\le k$ و درایه‌های ۱ تا $k$ِ $l^{(k)}$ صفرند، این عدد صفر است.
+        <div class="why">نکتهٔ دقیق: این ساده‌شدن فقط برای $j\lt k$ (ترتیب صعودی) درست است. برای $j\gt k$ درایهٔ $l_{jk}$ ممکن است صفر نباشد و جملهٔ اضافه باقی می‌ماند. شکل ماتریسی که کتاب کشیده هم حالت $j\lt k$ است.</div></li>
+      <li class="step"><b>استقرا.</b> فرض کن $M^{(1)}\cdots M^{(m)}=I-\sum_{t=1}^{m}l^{(t)}e_t^T$. آن‌وقت
+        $$\Big(I-\sum_{t=1}^{m}l^{(t)}e_t^T\Big)(I-l^{(m+1)}e_{m+1}^T)=I-\sum_{t=1}^{m+1}l^{(t)}e_t^T+\sum_{t=1}^{m}l^{(t)}\,(e_t^Tl^{(m+1)})\,e_{m+1}^T$$
+        و همهٔ $e_t^Tl^{(m+1)}=0$ چون $t\le m$. پایه ($m=1$) بدیهی است. پس حکم برای $m=n-1$ برقرار است.
+        <div class="why">در ماتریس نهایی، ستون $t$ام زیر قطر برابر $-l^{(t)}$ است: یعنی ضرایب حذف دقیقاً سر جای خودشان می‌نشینند.</div></li>
+      <li class="step"><b>همین برای $L^{(j)}$ها.</b> با همان محاسبه (فقط علامت‌ها مثبت): $L^{(1)}L^{(2)}\cdots L^{(n-1)}=I+\sum_t l^{(t)}e_t^T$، یعنی ماتریس پایین‌مثلثی با قطر ۱ که زیر قطرش خود $l_{ij}$ها هستند.
+        <div class="why">این همان چیزی است که در اثبات قضیهٔ ۴.۳ لازم داریم.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>همه چیز از یک واقعیت می‌آید: <b>$e_j^Tl^{(k)}=0$ وقتی $j\le k$</b>. با آن: (ت) ضرب $M$ در $I+le^T$ می‌شود $I$؛ (ث) جملهٔ ضرب متقاطع صفر می‌شود؛ استقرا ستون‌ها را کنار هم می‌گذارد. (آ) از پایین‌مثلثی با قطر ۱، (ب) از $e_j^TA=R_j$.</div>
+    <div class="qed">∎</div>
+  </div>
+
+  <p>حال می‌توان الگوریتم روش حذف گاوسی را به‌طور خلاصه بازنویسی نمود.</p>
+  <div class="box algo" id="alg33">
+    <div class="box-h"><span class="tag">الگوریتم ۳.۳</span><span class="box-t">روش حذف گاوسی با اعمال ماتریسی</span></div>
+    <div class="io"><div><b>ورودی:</b> ماتریس افزودهٔ $S=[A\ b]_{n\times(n+1)}$</div><div><b>خروجی:</b> ماتریس افزودهٔ $S=[U\ c]_{n\times(n+1)}$ که در آن $U$ ماتریسی بالامثلثی است</div></div>
+    <ol class="algo-steps">
+      <li>قرار دهید $j=1$ و $S^{(0)}=S$.</li>
+      <li>قرار دهید $\tilde S=P^{(j)}S^{(j-1)}$ که $P^{(j)}$ ماتریس همانی یا یک ماتریس جایگشت مقدماتی متناظر با محورگیری است.</li>
+      <li>بردار $l^{(j)}$ مناسب را ساخته و قرار دهید $M^{(j)}=I-l^{(j)}e_j^T$ و $S^{(j)}=M^{(j)}\tilde S$.</li>
+      <li>قرار دهید $j=j+1$ و اگر $j\lt n$ به گام ۲ بروید.</li>
+    </ol>
+  </div>
+
+  <div class="box def" id="def73">
+    <div class="box-h"><span class="tag">تعریف ۷.۳</span><span class="box-t">تجزیهٔ مثلثی</span></div>
+    <p>فرض کنید ماتریس $A$ به صورت $A=LU$ تجزیه شده باشد. اگر $L$ ماتریسی پایین‌مثلثی و $U$ ماتریسی بالامثلثی باشد چنین تجزیه‌ای به <b>تجزیهٔ مثلثی</b> ماتریس $A$ معروف است.</p>
+  </div>
+
+  <div class="box thm" id="thm43">
+    <div class="box-h"><span class="tag">قضیه ۴.۳</span><span class="box-t">بدون جابه‌جایی سطر، LU وجود دارد</span></div>
+    <p>اگر در اعمال روش حذف گاوسی بر روی دستگاه خطی $Ax=b$ نیازی به جابه‌جایی سطر نباشد آن‌گاه برای ماتریس $A$ یک تجزیهٔ مثلثی موجود است.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۴.۳</span><span class="badge book">از کتاب</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">با توجه به روند الگوریتم ۳.۳ می‌توان نوشت
+        $$[U\ c]=S^{(n-1)}=M^{(n-1)}\tilde S=M^{(n-1)}P^{(n-1)}S^{(n-2)}=M^{(n-1)}P^{(n-1)}M^{(n-2)}P^{(n-2)}S^{(n-3)}=\cdots=M^{(n-1)}P^{(n-1)}\cdots M^{(1)}P^{(1)}[A\ b].$$
+        <div class="why">هر تکرار یعنی ضرب از چپ در یک $P^{(j)}$ و بعد یک $M^{(j)}$ (گام‌های ۲ و ۳ الگوریتم). این ضرب‌ها را پشت سر هم باز کرده‌ایم تا به $S^{(0)}=[A\ b]$ برسیم.</div></li>
+      <li class="step">در نتیجه
+        $$U=M^{(n-1)}P^{(n-1)}\cdots M^{(1)}P^{(1)}A. \tag{2.3}$$
+        <div class="why">ضرب یک ماتریس $X$ از چپ در $[A\ b]$ برابر $[XA\ \ Xb]$ است؛ فقط $n$ ستون اول را نگاه کرده‌ایم.</div></li>
+      <li class="step">حال اگر در اعمال روش حذف گاوسی نیازی به جابه‌جایی سطر نباشد، $P^{(1)}=\cdots=P^{(n-1)}=I$ و بنابراین $U=M^{(n-1)}\cdots M^{(1)}A$.
+        <div class="why">ماتریس جایگشتِ «بدون جابه‌جایی» همان $I$ است و از ضرب حذف می‌شود.</div></li>
+      <li class="step">از آن‌جا $$A={M^{(1)}}^{-1}\cdots{M^{(n-1)}}^{-1}U=L^{(1)}\cdots L^{(n-1)}U$$.
+        <div class="why">دو طرف را به ترتیب از چپ در ${M^{(n-1)}}^{-1}$، …، ${M^{(1)}}^{-1}$ ضرب کرده‌ایم (وارون حاصل‌ضرب = حاصل‌ضرب وارون‌ها با ترتیب برعکس). طبق لم ۲.۳ (ت)، ${M^{(j)}}^{-1}=L^{(j)}$.</div></li>
+      <li class="step">به کمک ویژگی‌های ماتریس‌های تبدیل گاوسی (لم ۲.۳، گام آخر اثبات) داریم $A=LU$ که در آن
+        $$L=L^{(1)}\cdots L^{(n-1)}=\begin{bmatrix}1&&&0\\l_{21}&\ddots&&\\\vdots&\ddots&\ddots&\\l_{n1}&\cdots&l_{n,n-1}&1\end{bmatrix},\qquad U=\begin{bmatrix}a^{(0)}_{11}&a^{(0)}_{12}&\cdots&a^{(0)}_{1n}\\&a^{(1)}_{22}&\cdots&a^{(1)}_{2n}\\&&\ddots&\vdots\\0&&&a^{(n-1)}_{nn}\end{bmatrix}.$$
+        <div class="why">$L$ پایین‌مثلثی با قطر ۱ است و زیر قطرش همان ضرایب حذف $l_{ij}$ هستند (بدون علامت منفی). $U$ هم بالامثلثی است. پس یک تجزیهٔ مثلثی داریم.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>$U=M^{(n-1)}P^{(n-1)}\cdots M^{(1)}P^{(1)}A$ ← بدون جابه‌جایی همهٔ $P=I$ ← وارون $M$ها را به آن طرف ببر ← $L=L^{(1)}\cdots L^{(n-1)}$ با $l_{ij}$ها زیر قطر.</div>
+    <div class="qed">∎</div>
+  </div>
+  <div class="box warn">
+    <div class="box-h"><span class="tag">اشتباه رایج</span></div>
+    <p>زیر قطرِ $L$ خودِ $l_{ij}$ها هستند (مثبت)، در حالی که زیر قطرِ $M^{(j)}$ منفیِ آن‌ها ($-l_{ij}$) است. اگر در حذف نوشتی $R_4\leftarrow R_4+\frac12R_2$، یعنی $l_{42}=-\frac12$ و در $L$ می‌نویسی $-\frac12$.</p>
+  </div>
+
+  <div class="box ex" id="ex113">
+    <div class="box-h"><span class="tag">مثال ۱۱.۳</span><span class="box-t">محاسبهٔ تجزیهٔ مثلثی با الگوریتم ۳.۳</span></div>
+    <p>با استفاده از الگوریتم ۳.۳ (با قرار دادن $A$ به جای $S$) تجزیهٔ مثلثی ماتریس $A$ را محاسبه می‌کنیم:</p>
+    $$A=\begin{bmatrix}1&1&-1&1\\1&-1&-1&-1\\1&1&1&-1\\0&1&1&-1\end{bmatrix}.$$
+    <p>برای $j=1$، چون $a_{11}=1\neq0$ نیازی به جابه‌جایی سطر نیست یعنی $P^{(1)}=I$ و</p>
+    $$M^{(1)}=\begin{bmatrix}1&0&0&0\\-1&1&0&0\\-1&0&1&0\\0&0&0&1\end{bmatrix},\qquad A^{(2)}=M^{(1)}P^{(1)}A^{(1)}=\begin{bmatrix}1&1&-1&1\\0&-2&0&-2\\0&0&2&-2\\0&1&1&-1\end{bmatrix}.$$
+    <p>برای $j=2$، چون $a^{(2)}_{22}\neq0$، $P^{(2)}=I$ و</p>
+    $$M^{(2)}=\begin{bmatrix}1&0&0&0\\0&1&0&0\\0&0&1&0\\0&\frac12&0&1\end{bmatrix},\qquad A^{(3)}=M^{(2)}P^{(2)}A^{(2)}=\begin{bmatrix}1&1&-1&1\\0&-2&0&-2\\0&0&2&-2\\0&0&1&-2\end{bmatrix}.$$
+    <p>برای $j=3$، چون $a^{(3)}_{33}\neq0$ نیازی به جابه‌جایی سطر نیست یعنی $P^{(3)}=I$ و</p>
+    $$M^{(3)}=\begin{bmatrix}1&0&0&0\\0&1&0&0\\0&0&1&0\\0&0&-\frac12&1\end{bmatrix},\qquad A^{(4)}=M^{(3)}P^{(3)}A^{(3)}=\begin{bmatrix}1&1&-1&1\\0&-2&0&-2\\0&0&2&-2\\0&0&0&-1\end{bmatrix}.$$
+    <p>در نهایت $A=LU$ که در آن</p>
+    $$L={M^{(1)}}^{-1}{M^{(2)}}^{-1}{M^{(3)}}^{-1}=\begin{bmatrix}1&0&0&0\\1&1&0&0\\1&0&1&0\\0&-\frac12&\frac12&1\end{bmatrix},\qquad U=\begin{bmatrix}1&1&-1&1\\0&-2&0&-2\\0&0&2&-2\\0&0&0&-1\end{bmatrix}.$$
+    <p class="small">چرا در $M^{(2)}$ عدد $+\frac12$ آمده؟ چون $l_{42}=\frac{a_{42}}{a_{22}}=\frac{1}{-2}=-\frac12$ و در $M^{(2)}$ منفیِ آن یعنی $+\frac12$ می‌نشیند؛ در $L$ خودِ $-\frac12$.</p>
+  </div>
+  <div class="widget" data-widget="stepper" data-preset="ex113"></div>
+
+  <div class="box thm" id="lem33">
+    <div class="box-h"><span class="tag">لم ۳.۳</span><span class="box-t">یکتایی تجزیهٔ LU</span></div>
+    <p>فرض کنید $A=[a_{ij}]_{n\times n}$ ماتریسی وارون‌پذیر باشد. اگر $A$ تجزیه‌ای به صورت $A=LU$ داشته باشد که در آن $L$ ماتریسی پایین‌مثلثی با درایه‌های قطری ۱ و $U$ ماتریسی بالامثلثی باشد آن‌گاه این تجزیه یکتا است.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات لم ۳.۳</span><span class="badge book">از کتاب</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">فرض کنید برای ماتریس $A$ دو تجزیهٔ مثلثی به صورت $L^{(1)}U^{(1)}=A=L^{(2)}U^{(2)}$ موجود باشد.
+        <div class="why">روش استاندارد اثبات یکتایی: فرض کن دو تا هست و نشان بده یکی‌اند.</div></li>
+      <li class="step">بنابر گزارهٔ ۱۰.۱، $L^{(1)}$ وارون‌پذیر است و چون $$0\neq\det(A)=\det(L^{(2)})\det(U^{(2)})=\det(U^{(2)})$$، $U^{(2)}$ نیز وارون‌پذیر است.
+        <div class="why">$\det L=1$ (پایین‌مثلثی با قطر ۱). پس $\det U^{(2)}=\det A\neq0$.</div></li>
+      <li class="step">با ضرب از چپ در ${L^{(1)}}^{-1}$ و از راست در ${U^{(2)}}^{-1}$:
+        $$U^{(1)}{U^{(2)}}^{-1}=B={L^{(1)}}^{-1}L^{(2)} .$$
+        <div class="why">از $L^{(1)}U^{(1)}=L^{(2)}U^{(2)}$ شروع کن و این دو ضرب را انجام بده.</div></li>
+      <li class="step">باز هم بنابر گزارهٔ ۱۰.۱، سمت چپ این رابطه یک ماتریس بالامثلثی و سمت راست آن یک ماتریس پایین‌مثلثی با درایه‌های قطری یک قرار دارد.
+        <div class="why">وارون بالامثلثی، بالامثلثی است و ضرب دو بالامثلثی بالامثلثی است؛ همین برای پایین‌مثلثی با قطر ۱.</div></li>
+      <li class="step">این در حالی ممکن است که $B=I$ و یا $L^{(1)}=L^{(2)}$ و $U^{(1)}=U^{(2)}$.
+        <div class="why">ماتریسی که هم بالامثلثی و هم پایین‌مثلثی است، قطری است؛ و چون قطرش ۱ است، همان $I$ است. از $B=I$: ${L^{(1)}}^{-1}L^{(2)}=I$ و $U^{(1)}{U^{(2)}}^{-1}=I$.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>دو تجزیه فرض کن ← $U^{(1)}{U^{(2)}}^{-1}={L^{(1)}}^{-1}L^{(2)}$ ← چپ بالامثلثی، راست پایین‌مثلثیِ قطر ۱ ← هر دو $=I$.</div>
+    <div class="qed">∎</div>
+  </div>
+
+  <div class="box thm" id="thm53">
+    <div class="box-h"><span class="tag">قضیه ۵.۳</span><span class="box-t">شرط لازم و کافی وجود LU</span></div>
+    <p>فرض کنید $A=[a_{ij}]_{n\times n}$ ماتریسی وارون‌پذیر باشد. $A$ تجزیه‌ای به صورت $A=LU$ دارد که در آن $L$ ماتریسی پایین‌مثلثی با درایه‌های قطری ۱ و $U$ ماتریسی بالامثلثی است <b>اگر و تنها اگر</b> تمام زیرماتریس‌های اصلی پیشروی $A$ وارون‌پذیر باشند.</p>
+  </div>
+  <div class="box intu">
+    <div class="box-h"><span class="tag">به زبان ساده</span></div>
+    <p>«زیرماتریس اصلی پیشرو از مرتبهٔ $k$» یعنی مربع $k\times k$ بالا-چپِ ماتریس ($A_{11}$ در افراز بلوکی). قضیه می‌گوید: حذف گاوسی بدون هیچ جابه‌جایی تا آخر می‌رود (هیچ محوری صفر نمی‌شود) دقیقاً وقتی که دترمینان همهٔ این مربع‌های تودرتو ناصفر باشد. چون حاصل‌ضرب $k$ محور اول = دترمینان مربع $k\times k$ اول.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۵.۳</span><span class="badge book">از کتاب</span><span class="grow"></span></div>
+    <p class="proof-goal">جهت «فقط اگر» (LU ⇒ زیرماتریس‌ها وارون‌پذیر) و جهت «اگر» (زیرماتریس‌ها وارون‌پذیر ⇒ LU).</p>
+    <ol class="steps">
+      <li class="step"><b>جهت ⇒.</b> فرض کنید تجزیهٔ LU ماتریس وارون‌پذیر $A$ به صورت
+        $$\begin{bmatrix}a_{11}&\cdots&a_{1n}\\\vdots&\ddots&\vdots\\a_{n1}&\cdots&a_{nn}\end{bmatrix}=\begin{bmatrix}1&&0\\\vdots&\ddots&\\l_{n1}&\cdots&1\end{bmatrix}\begin{bmatrix}u_{11}&\cdots&u_{1n}\\&\ddots&\vdots\\0&&u_{nn}\end{bmatrix}\tag{3.3}$$
+        باشد. واضح است که $$0\neq\det(A)=\det(L)\det(U)=\det(U)=u_{11}\cdots u_{nn}$$ و در نتیجه $u_{ii}\neq0$ برای $i=1,\dots,n$.
+        <div class="why">(۴.۳) و (۵.۳) کتاب: $\det L=1$ و دترمینان $U$ حاصل‌ضرب قطر است؛ حاصل‌ضرب ناصفر یعنی هیچ عاملی صفر نیست.</div></li>
+      <li class="step">با افراز بلوکی (بلوک بالا-چپ از مرتبهٔ $k$)، رابطهٔ (۳.۳) به صورت
+        $$A=\begin{bmatrix}A_{11}&A_{12}\\A_{21}&A_{22}\end{bmatrix}=\begin{bmatrix}L_{11}&0\\L_{21}&L_{22}\end{bmatrix}\begin{bmatrix}U_{11}&U_{12}\\0&U_{22}\end{bmatrix}=\begin{bmatrix}L_{11}U_{11}&L_{11}U_{12}\\L_{21}U_{11}&L_{21}U_{12}+L_{22}U_{22}\end{bmatrix}$$
+        بازنویسی می‌شود که در آن $A_{11}$ زیرماتریس اصلی پیشروی مرتبهٔ $k$ است و $A_{11}=L_{11}U_{11}$.
+        <div class="why">ضرب بلوکی مثل ضرب معمولی است؛ چون بلوک بالا-راست $L$ و پایین-چپ $U$ صفرند، بلوک $(1,1)$ فقط $L_{11}U_{11}$ می‌شود.</div></li>
+      <li class="step">در نتیجه $$\det(A_{11})=\det(L_{11})\det(U_{11})=\det(U_{11})=u_{11}\cdots u_{kk}\neq0$$؛ یعنی $A_{11}$ وارون‌پذیر است. این برای هر $k$ برقرار است.
+        <div class="why">$L_{11}$ پایین‌مثلثی با قطر ۱ است ($\det=1$) و $U_{11}$ بالامثلثی با قطر $u_{11},\dots,u_{kk}$ که طبق گام ۱ همه ناصفرند.</div></li>
+      <li class="step"><b>جهت ⇐.</b> حال فرض کنید تمام زیرماتریس‌های اصلی پیشروی $A$ وارون‌پذیر باشند. با یک روند استقرایی نشان می‌دهیم که به ازای هر $k$ ($1\le k\lt n$)، در تکرار $k$ام روش حذف گاوسی، عنصر محوری $a^{(k)}_{kk}$ غیرصفر است و نیازی به جابه‌جایی سطر نیست؛ آن‌وقت حکم از قضیهٔ ۴.۳ نتیجه می‌شود.
+        <div class="why">پس کافی است ثابت کنیم هیچ محوری صفر نمی‌شود.</div></li>
+      <li class="step"><b>پایه:</b> برای $k=1$ واضح است که $a^{(1)}_{11}=a_{11}\neq0$ (دترمینان زیرماتریس پیشروی مرتبهٔ یک) و بنابراین نیازی به جابه‌جایی سطر اول نیست.
+        <div class="why">زیرماتریس پیشروی مرتبهٔ ۱ همان عدد $a_{11}$ است و وارون‌پذیر بودنش یعنی $a_{11}\neq0$.</div></li>
+      <li class="step"><b>گام استقرا:</b> فرض کنید برای $l=1,\dots,k-1$ داشته باشیم $a^{(l)}_{ll}\neq0$ (تا تکرار $(k-1)$ام نیازی به جابه‌جایی سطر نیست). با توجه به ساختار $S^{(k)}$ می‌توان افراز بلوکی $A^{(k)}=\begin{bmatrix}A^{(k)}_{11}&A^{(k)}_{12}\\A^{(k)}_{21}&A^{(k)}_{22}\end{bmatrix}$ را در نظر گرفت که در آن
+        $$A^{(k)}_{11}=\begin{bmatrix}a^{(1)}_{11}&a^{(1)}_{12}&\cdots&a^{(1)}_{1k}\\&a^{(2)}_{22}&\cdots&a^{(2)}_{2k}\\&&\ddots&\vdots\\0&&&a^{(k)}_{kk}\end{bmatrix}.$$
+        <div class="why">بعد از $k-1$ تکرار، زیر قطر ستون‌های ۱ تا $k-1$ صفر شده؛ پس مربع $k\times k$ بالا-چپ بالامثلثی است و قطرش محورهای $a^{(1)}_{11},\dots,a^{(k)}_{kk}$ است (نمادگذاری $A^{(k)}$: ماتریس در شروع تکرار $k$).</div></li>
+      <li class="step">چون $P^{(1)}=\cdots=P^{(k-1)}=I$، با توجه به الگوریتم ۳.۳ می‌توان نوشت
+        $$\begin{bmatrix}A^{(k)}_{11}&A^{(k)}_{12}\\A^{(k)}_{21}&A^{(k)}_{22}\end{bmatrix}=\begin{bmatrix}M^{(k-1)}_{11}&0\\M^{(k-1)}_{21}&M^{(k-1)}_{22}\end{bmatrix}\cdots\begin{bmatrix}M^{(1)}_{11}&0\\M^{(1)}_{21}&M^{(1)}_{22}\end{bmatrix}\begin{bmatrix}A_{11}&A_{12}\\A_{21}&A_{22}\end{bmatrix}$$
+        و از آن‌جا $A^{(k)}_{11}=M^{(k-1)}_{11}\cdots M^{(1)}_{11}A_{11}$.
+        <div class="why">هر $M^{(j)}$ پایین‌مثلثی است، پس بلوک بالا-راستش صفر است. در ضرب $\left[\begin{smallmatrix}X_{11}&0\\X_{21}&X_{22}\end{smallmatrix}\right]\left[\begin{smallmatrix}Y_{11}&Y_{12}\\Y_{21}&Y_{22}\end{smallmatrix}\right]$ بلوک $(1,1)$ برابر $X_{11}Y_{11}$ است؛ این را پشت سر هم به کار برده‌ایم.</div></li>
+      <li class="step">$A_{11}$ زیرماتریس اصلی پیشروی مرتبهٔ $k$ ماتریس $A$ و بنابر فرض وارون‌پذیر است. با توجه به ویژگی‌های ماتریس‌های تبدیل گاوسی
+        $$a^{(1)}_{11}\cdots a^{(k-1)}_{k-1,k-1}\,a^{(k)}_{kk}=\det(A^{(k)}_{11})=\det(M^{(k-1)}_{11})\cdots\det(M^{(1)}_{11})\det(A_{11})=\det(A_{11})\neq0 .$$
+        <div class="why">سمت چپ: دترمینان بالامثلثی = حاصل‌ضرب قطر. $M^{(j)}_{11}$ پایین‌مثلثی با قطر ۱ است، پس دترمینانش ۱ است.</div></li>
+      <li class="step">در نتیجه $a^{(k)}_{kk}\neq0$.
+        <div class="why">حاصل‌ضربی ناصفر است، پس هیچ عاملش صفر نیست. پس در تکرار $k$ هم جابه‌جایی لازم نیست و استقرا کامل است.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>
+      <ol>
+        <li>⇒: $\det A=\prod u_{ii}\neq0$ ← بلوکی $A_{11}=L_{11}U_{11}$ ← $\det A_{11}=u_{11}\cdots u_{kk}\neq0$.</li>
+        <li>⇐: استقرا روی محورها ← $A^{(k)}_{11}=M^{(k-1)}_{11}\cdots M^{(1)}_{11}A_{11}$ ← <b>حاصل‌ضرب $k$ محور اول $=\det A_{11}\neq0$</b> ← محور $k$ام ناصفر ← قضیهٔ ۴.۳.</li>
+      </ol></div>
+    <div class="qed">∎</div>
+  </div>
+
+  <div class="box thm" id="cor13">
+    <div class="box-h"><span class="tag">نتیجه ۱.۳</span><span class="box-t">تجزیه‌های $LDU$ و $LDL^T$</span></div>
+    <p>تحت شرایط قضیهٔ ۵.۳ ماتریس $A$ تجزیه‌ای یکتا به صورت</p>
+    $$A=\begin{bmatrix}1&&&0\\l_{21}&\ddots&&\\\vdots&\ddots&\ddots&\\l_{n1}&\cdots&l_{n,n-1}&1\end{bmatrix}\begin{bmatrix}d_{11}&&&0\\&d_{22}&&\\&&\ddots&\\0&&&d_{nn}\end{bmatrix}\begin{bmatrix}1&u_{12}&\cdots&u_{1n}\\&\ddots&\ddots&\vdots\\&&\ddots&u_{n-1,n}\\0&&&1\end{bmatrix}=LDU$$
+    <p>دارد و به علاوه اگر $A$ ماتریسی متقارن باشد آن‌گاه $A=LDL^T$.</p>
+  </div>
+  <div class="proof supp">
+    <div class="proof-h"><span class="pt">اثبات نتیجه ۱.۳</span><span class="badge supp">تکمیلی · در کتاب تمرین ۱۷</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step"><b>وجود.</b> طبق قضیهٔ ۵.۳، $A=L\hat U$ با $L$ پایین‌مثلثیِ قطر ۱ و $\hat U$ بالامثلثی. طبق جهت ⇒ آن اثبات، همهٔ $\hat u_{ii}\neq0$. قرار می‌دهیم $D=\operatorname{diag}(\hat u_{11},\dots,\hat u_{nn})$ و $U=D^{-1}\hat U$.
+        <div class="why">ضرب $D^{-1}$ از چپ یعنی تقسیم سطر $i$ام $\hat U$ بر $\hat u_{ii}$. پس $U$ بالامثلثی با قطر ۱ است: $u_{ij}=\hat u_{ij}/\hat u_{ii}$.</div></li>
+      <li class="step">پس $A=L\hat U=L\,(DD^{-1})\,\hat U=LDU$.
+        <div class="why">$DD^{-1}=I$ را وسط گذاشته‌ایم.</div></li>
+      <li class="step"><b>یکتایی.</b> اگر $A=L_1D_1U_1=L_2D_2U_2$، ماتریس‌های $D_1U_1$ و $D_2U_2$ بالامثلثی‌اند. طبق لم ۳.۳ (یکتایی LU): $L_1=L_2$ و $D_1U_1=D_2U_2$.
+        <div class="why">$A=L_1(D_1U_1)$ و $A=L_2(D_2U_2)$ دو تجزیهٔ LU با $L$ِ قطر ۱ هستند.</div></li>
+      <li class="step">قطر $DU$ همان قطر $D$ است (چون قطر $U$ یک است)؛ پس از $D_1U_1=D_2U_2$ نتیجه می‌شود $D_1=D_2$ و سپس $U_1=D_1^{-1}D_1U_1=D_2^{-1}D_2U_2=U_2$.
+        <div class="why">درایهٔ $(i,i)$ ماتریس $DU$ برابر $d_{ii}\cdot1$ است.</div></li>
+      <li class="step"><b>حالت متقارن.</b> اگر $A^T=A$، آن‌گاه $$A=A^T=(LDU)^T=U^TD^TL^T=U^TDL^T$$. اینجا $U^T$ پایین‌مثلثی با قطر ۱، $D$ قطری و $L^T$ بالامثلثی با قطر ۱ است؛ یعنی این هم یک تجزیهٔ $LDU$ است.
+        <div class="why">ترانهادهٔ حاصل‌ضرب = حاصل‌ضرب ترانهاده‌ها با ترتیب برعکس؛ و $D^T=D$.</div></li>
+      <li class="step">طبق یکتایی (گام ۳ و ۴): $L=U^T$ و $U=L^T$. پس $A=LDL^T$.
+        <div class="why">دو تجزیهٔ $LDU$ از یک ماتریس باید عیناً یکی باشند.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>قطر $U$ را بیرون بکش: $\hat U=DU$ ← یکتایی از لم ۳.۳ ← متقارن: ترانهاده بگیر، $U^TDL^T$ هم $LDU$ است ← یکتایی ⇒ $U=L^T$.</div>
+    <div class="qed">∎</div>
+  </div>
+
+  <p>قضیهٔ ۵.۳ بیان می‌کند که شرط لازم و کافی برای وجود تجزیهٔ LU ماتریس وارون‌پذیر $A$، آن است که تمام زیرماتریس‌های اصلی پیشروی $A$ وارون‌پذیر باشند. در اینجا به یک خانواده از ماتریس‌هایی اشاره می‌کنیم که این شرط برای آن‌ها برقرار است.</p>
+
+  <div class="box def" id="def83">
+    <div class="box-h"><span class="tag">تعریف ۸.۳</span><span class="box-t">غالب قطری</span></div>
+    <p>ماتریس $A=[a_{ij}]_{n\times n}$ را <b>غالب قطری سطری</b> گویند هرگاه</p>
+    $$|a_{ii}|\ge\sum_{\substack{j=1\\ j\neq i}}^{n}|a_{ij}|,\qquad i=1,\dots,n$$
+    <p>و اگر برابری برقرار نباشد (نامساوی اکید $\gt$ برای همهٔ سطرها) به آن <b>غالب قطری سطری اکید</b> گفته می‌شود. به‌طور مشابه می‌توان ماتریس غالب قطری ستونی (اکید) را تعریف کرد. از این به بعد منظور از غالب قطری (اکید) همان غالب قطری سطری (اکید) است.</p>
+  </div>
+  <div class="box ex" id="ex123">
+    <div class="box-h"><span class="tag">مثال ۱۲.۳</span></div>
+    <p>$A$ یک ماتریس غالب قطری اکید و $B$ یک ماتریس غالب قطری است:</p>
+    $$A=\begin{bmatrix}2&1&0&0\\1&-5&1&-2\\-1&0&6&3\\1&-3&-4&10\end{bmatrix},\qquad B=\begin{bmatrix}2&1&-1&0\\3&-5&-1&0\\0&0&2&-1\\1&-2&0&4\end{bmatrix}.$$
+    <p class="small">سطرهای $A$: $2\gt1$، $5\gt4$، $6\gt4$، $10\gt8$ (همه اکید). سطرهای $B$: $2=1+1$ (برابری!)، $5\gt4$، $2\gt1$، $4\gt3$؛ پس $B$ غالب قطری هست ولی اکید نیست.</p>
+  </div>
+  <div class="widget" data-widget="lab"></div>
+
+  <div class="box thm" id="thm63">
+    <div class="box-h"><span class="tag">قضیه ۶.۳</span><span class="box-t">غالب قطری اکید ⇒ وارون‌پذیر و حذف بدون جابه‌جایی</span></div>
+    <p>اگر $A=[a_{ij}]_{n\times n}$ یک ماتریس غالب قطری اکید باشد آن‌گاه $A$ وارون‌پذیر است و روش حذف گاوسی را می‌توان روی هر دستگاه خطی با ماتریس ضرایب $A$ بدون نیاز به جابه‌جایی سطر اعمال کرد.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۶.۳</span><span class="badge book">از کتاب</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step"><b>وارون‌پذیری (برهان خلف).</b> فرض کنید $A$ وارون‌پذیر نباشد. بنابر گزارهٔ ۱.۳ بردار غیرصفر $x$ چنان وجود دارد که $Ax=0$، پس به ازای هر $1\le i\le n$ داریم $\sum_{j=1}^{n}a_{ij}x_j=0$.
+        <div class="why">گزارهٔ ۱.۳: (آ)⇔(ب). اگر وارون‌پذیر نباشد، $Ax=0$ جوابی غیر از صفر دارد.</div></li>
+      <li class="step">از طرفی چون $x\neq0$، اندیس $k$ای وجود دارد که $0\lt|x_k|=\max_{1\le j\le n}|x_j|$.
+        <div class="why">بزرگ‌ترین مؤلفه (از نظر قدرمطلق) را انتخاب می‌کنیم. چون بردار صفر نیست، این بیشینه مثبت است.</div></li>
+      <li class="step">حال می‌توان معادلهٔ $k$ام را نوشت: $\ a_{kk}x_k=-\sum_{j\neq k}a_{kj}x_j$.
+        <div class="why">جملهٔ $j=k$ را از جمع جدا کرده‌ایم.</div></li>
+      <li class="step">قدرمطلق می‌گیریم:
+        $$|a_{kk}|\,|x_k|\le\sum_{j\neq k}|a_{kj}|\,|x_j|\ \Longrightarrow\ |a_{kk}|\le\sum_{j\neq k}|a_{kj}|\frac{|x_j|}{|x_k|}\le\sum_{j\neq k}|a_{kj}|$$
+        که متناقض با غالب قطری اکید بودن $A$ است.
+        <div class="why">نامساوی مثلث؛ تقسیم بر $|x_k|\gt0$؛ و چون $|x_k|$ بزرگ‌ترین است، $\frac{|x_j|}{|x_k|}\le1$. ولی غالب قطری اکید یعنی $|a_{kk}|\gt\sum_{j\neq k}|a_{kj}|$. تناقض، پس $A$ وارون‌پذیر است.</div></li>
+      <li class="step"><b>حذف بدون جابه‌جایی.</b> اگر $A$ یک ماتریس غالب قطری اکید باشد، به وضوح تمام زیرماتریس‌های اصلی پیشروی آن هستند.
+        <div class="why">در زیرماتریس $k\times k$ بالا-چپ، برای سطر $i\le k$ فقط بعضی از جمله‌های غیرقطری باقی می‌مانند: $\sum_{j\le k,\,j\neq i}|a_{ij}|\le\sum_{j\neq i}|a_{ij}|\lt|a_{ii}|$.</div></li>
+      <li class="step">پس طبق قسمت قبل همهٔ زیرماتریس‌های اصلی پیشرو وارون‌پذیرند. بنابر اثبات قسمت برگشت قضیهٔ ۵.۳، در تکرار $k$ام روش حذف گاوسی عنصر محوری $a^{(k)}_{kk}$ مخالف صفر خواهد بود و نیازی به جابه‌جایی سطر نیست.
+        <div class="why">جهت ⇐ قضیهٔ ۵.۳ دقیقاً همین را نشان داد: حاصل‌ضرب $k$ محور اول $=\det A_{11}\neq0$.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>خلف: $Ax=0$ با $x\neq0$ ← بزرگ‌ترین مؤلفه $x_k$ ← معادلهٔ $k$ام را قدرمطلق بگیر ← $|a_{kk}|\le\sum_{j\ne k}|a_{kj}|$ تناقض. بعد: زیرماتریس‌های پیشرو هم غالب قطری اکیدند ← قضیهٔ ۵.۳.</div>
+    <div class="qed">∎</div>
+  </div>
+  <div class="box rem" id="rem123">
+    <div class="box-h"><span class="tag">تبصره ۱۲.۳</span></div>
+    <p>قسمت دوم قضیهٔ ۶.۳ برای ماتریس‌های غالب قطری وارون‌پذیر نیز برقرار است.</p>
+  </div>
+  <div class="box rem" id="rem133">
+    <div class="box-h"><span class="tag">تبصره ۱۳.۳</span></div>
+    <p>بعضی مواقع در نگاه اول ماتریس ضرایب دستگاه خطی داده‌شده غالب قطری نیست ولی می‌توان با جابه‌جایی معادلات (سطرها) دستگاهی با ماتریس ضرایب غالب قطری به‌دست آورد.</p>
+  </div>
+
+  <p>شرط قضیهٔ ۵.۳ برای بسیاری از ماتریس‌ها برقرار نیست و در این صورت باید از قضیهٔ زیر کمک گرفت.</p>
+  <div class="box thm" id="thm73">
+    <div class="box-h"><span class="tag">قضیه ۷.۳</span><span class="box-t">تجزیهٔ $PA=LU$</span></div>
+    <p>برای ماتریس مربعی وارون‌پذیر دلخواه $A$، ماتریس جایگشت $P$، ماتریس بالامثلثی $U$ و ماتریس پایین‌مثلثی $L$ با درایه‌های قطری ۱ چنان وجود دارند که $PA=LU$. ماتریس $P$ حاصل‌ضرب ماتریس‌های جایگشت مقدماتی در (۲.۳) است؛ یعنی $P=P^{(n-1)}\cdots P^{(1)}$.</p>
+  </div>
+  <div class="proof supp">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۷.۳</span><span class="badge supp">تکمیلی · کتاب به منبع [۱۸] ارجاع داده</span><span class="grow"></span></div>
+    <p class="proof-goal">کتاب می‌گوید اثبات بر پایهٔ ویژگی‌های ماتریس‌های جایگشت مقدماتی و تبدیل گاوسی است. ایده: همهٔ $P$ها را در رابطهٔ (۲.۳) به سمت راست «هل» می‌دهیم.</p>
+    <ol class="steps">
+      <li class="step">چون $A$ وارون‌پذیر است، طبق گزارهٔ ۱.۳ (ت) حذف گاوسی هیچ‌وقت در گام ۲ متوقف نمی‌شود و طبق (۲.۳): $$\ U=M^{(n-1)}P^{(n-1)}\cdots M^{(2)}P^{(2)}M^{(1)}P^{(1)}A$$ با $U$ بالامثلثی.
+        <div class="why">در هر تکرار محور ناصفری پیدا می‌شود؛ اگر لازم بوده جابه‌جایی کرده‌ایم ($P^{(j)}$).</div></li>
+      <li class="step"><b>ترفند اصلی.</b> $P^{(j)}$ (برای $j\gt k$) سطرهای $j$ و $r$ با $r\ge j\gt k$ را جابه‌جا می‌کند. آن‌وقت
+        $$P^{(j)}M^{(k)}=\big(P^{(j)}M^{(k)}P^{(j)}\big)P^{(j)}=\tilde M^{(k)}P^{(j)},\qquad \tilde M^{(k)}=I-\big(P^{(j)}l^{(k)}\big)e_k^T .$$
+        <div class="why">چون $P^2=I$ (لم ۱.۳ چ) می‌توانیم $P^{(j)}P^{(j)}$ را وسط بگذاریم. $P(I-le_k^T)P=I-(Pl)(e_k^TP)$ و $e_k^TP=(Pe_k)^T=e_k^T$ چون $P$ سطر $k$ را دست نمی‌زند ($k\lt j\le r$).</div></li>
+      <li class="step">$\tilde M^{(k)}$ باز هم یک ماتریس تبدیل گاوسی است: بردار $P^{(j)}l^{(k)}$ همان $l^{(k)}$ است که دو درایه‌اش (در جای $j$ و $r$) جابه‌جا شده‌اند، و چون $j,r\gt k$، درایه‌های ۱ تا $k$ آن هنوز صفرند.
+        <div class="why">پس ساختار «فقط زیر قطر ستون $k$» حفظ می‌شود؛ فقط ترتیب ضرایب حذف عوض شده است.</div></li>
+      <li class="step">با تکرار این ترفند هر $P^{(j)}$ را از همهٔ $M$های سمت راستش رد می‌کنیم:
+        $$U=\hat M^{(n-1)}\cdots\hat M^{(1)}\,\underbrace{P^{(n-1)}\cdots P^{(1)}}_{P}\,A$$
+        که هر $\hat M^{(k)}$ یک ماتریس تبدیل گاوسی از نوع ستون $k$ است.
+        <div class="why">مثلاً $M^{(2)}P^{(2)}M^{(1)}P^{(1)}=M^{(2)}\tilde M^{(1)}P^{(2)}P^{(1)}$. هر بار یک $P$ یک قدم به راست می‌رود.</div></li>
+      <li class="step">پس $PA=(\hat M^{(1)})^{-1}\cdots(\hat M^{(n-1)})^{-1}U=LU$ که طبق لم ۲.۳ (ت و ث) $L=\hat L^{(1)}\cdots\hat L^{(n-1)}$ پایین‌مثلثی با قطر ۱ است. $P$ طبق لم ۱.۳ (آ) یک ماتریس جایگشت است.
+        <div class="why">همان استدلال قضیهٔ ۴.۳. در عمل یعنی: وقتی دو سطر را جابه‌جا می‌کنی، ضرایب $l$ که قبلاً برای آن دو سطر ثبت کرده‌ای را هم جابه‌جا کن.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>$U=M^{(n-1)}P^{(n-1)}\cdots M^{(1)}P^{(1)}A$ ← $P^{(j)}M^{(k)}=\tilde M^{(k)}P^{(j)}$ (چون $P^2=I$ و $P$ سطر $k$ را دست نمی‌زند) ← همهٔ $P$ها به راست ← $PA=LU$.</div>
+    <div class="qed">∎</div>
+  </div>
+
+  <div class="box ex" id="ex133">
+    <div class="box-h"><span class="tag">مثال ۱۳.۳</span><span class="box-t">وقتی LU وجود ندارد ولی PA = LU دارد</span></div>
+    <p>برای ماتریس وارون‌پذیر</p>
+    $$A=\begin{bmatrix}0&1&-1&1\\1&1&-1&2\\-1&-1&1&0\\1&2&0&2\end{bmatrix}$$
+    <p>تجزیهٔ مثلثی قضیهٔ ۵.۳ وجود ندارد زیرا $a_{11}=0$ (اولین زیرماتریس پیشرو وارون‌ناپذیر است). با این حال با انجام دنبالهٔ اعمال $R_1\leftrightarrow R_2$، $R_3\leftarrow R_3+R_1$، $R_4\leftarrow R_4-R_1$، $R_4\leftarrow R_4-R_2$ و $R_3\leftrightarrow R_4$ بر روی ماتریس $A$، ماتریس بالامثلثی زیر به‌دست می‌آید:</p>
+    $$U=\begin{bmatrix}1&1&-1&2\\0&1&-1&1\\0&0&2&-1\\0&0&0&2\end{bmatrix}$$
+    <p>و با توجه به جابه‌جایی‌های $R_1\leftrightarrow R_2$ و $R_3\leftrightarrow R_4$ ماتریس جایگشتی به صورت</p>
+    $$P=\begin{bmatrix}0&1&0&0\\1&0&0&0\\0&0&0&1\\0&0&1&0\end{bmatrix}$$
+    <p>ساخته و داریم</p>
+    $$PA=\begin{bmatrix}1&1&-1&2\\0&1&-1&1\\1&2&0&2\\-1&-1&1&0\end{bmatrix}=\begin{bmatrix}1&0&0&0\\0&1&0&0\\1&1&1&0\\-1&0&0&1\end{bmatrix}\begin{bmatrix}1&1&-1&2\\0&1&-1&1\\0&0&2&-1\\0&0&0&2\end{bmatrix}=LU .$$
+    <p>ماتریس $L$ را می‌توان پس از مشخص شدن جایگشت‌های مورد نیاز به‌طور مستقیم با استفاده از تجزیهٔ LU ماتریس $PA$ (براساس مثال ۱۱.۳) محاسبه کرد.</p>
+  </div>
+  <div class="widget" data-widget="stepper" data-preset="ex133"></div>
+
+  <p>با توجه به اینکه هزینهٔ محاسباتی روش حذف گاوسی حدود $2n^3/3$ است (روی هم جمع/تفریق و ضرب/تقسیم)، به همین میزان هزینه برای محاسبهٔ تجزیهٔ LU یک ماتریس مربعی دلخواه نیاز است. البته برای ماتریس‌های نواری می‌توان هزینه را تا مرتبهٔ $n$ کاهش داد (تمرین ۱۴ و ۱۶ کتاب).</p>
+
+  <div class="quiz">
+    <div class="quiz-h"><b>خودآزمایی ۵.۳.۳</b><span class="score"></span></div>
+    <div class="q">
+      <p class="q-t">$\det P(r,s)$ برای $r\neq s$ چند است؟</p>
+      <div class="opts two"><button class="opt">$1$</button><button class="opt" data-c>$-1$</button><button class="opt">$0$</button><button class="opt">$2$</button></div>
+      <p class="q-exp">یک جابه‌جایی سطر از $I$: علامت دترمینان قرینه می‌شود.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">${M^{(j)}}^{-1}$ برابر است با:</p>
+      <div class="opts two"><button class="opt">${M^{(j)}}^T$</button><button class="opt" data-c>$I+l^{(j)}e_j^T$</button><button class="opt">$I-l^{(j)}e_j^T$</button><button class="opt">$M^{(j)}$</button></div>
+      <p class="q-exp">چون $e_j^Tl^{(j)}=0$، $(I-le_j^T)(I+le_j^T)=I$.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">کدام ماتریس قطعاً تجزیهٔ LU (بدون جابه‌جایی) دارد؟</p>
+      <div class="opts"><button class="opt">هر ماتریس وارون‌پذیر</button><button class="opt" data-c>هر ماتریس غالب قطری اکید</button><button class="opt">هر ماتریسی که $a_{11}=0$</button></div>
+      <p class="q-exp">قضیهٔ ۶.۳. یک ماتریس وارون‌پذیر با $a_{11}=0$ (مثل مثال ۱۳.۳) LU ندارد.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">در جهت ⇐ قضیهٔ ۵.۳، کلید اثبات کدام تساوی است؟</p>
+      <div class="opts"><button class="opt">$\det A=\det L\det U$</button><button class="opt" data-c>$a^{(1)}_{11}\cdots a^{(k)}_{kk}=\det(A_{11})$</button><button class="opt">$P^2=I$</button></div>
+      <p class="q-exp">حاصل‌ضرب $k$ محور اول = دترمینان زیرماتریس پیشروی مرتبهٔ $k$ که طبق فرض ناصفر است.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">در لم ۳.۳، چرا $B=I$ نتیجه می‌شود؟</p>
+      <div class="opts"><button class="opt">چون $B$ متقارن است.</button><button class="opt" data-c>چون $B$ هم بالامثلثی است و هم پایین‌مثلثی با قطر ۱.</button><button class="opt">چون $\det B=1$.</button></div>
+      <p class="q-exp">بالامثلثی و پایین‌مثلثی ⇒ قطری؛ قطر ۱ ⇒ $I$.</p>
+    </div>
+    <div class="quiz-f"><button class="btn quiz-reset">دوباره</button></div>
+  </div>
+  <div class="sec-done"><p>محک: لم ۲.۳ (ت و ث)، قضیهٔ ۴.۳، لم ۳.۳، قضیهٔ ۵.۳ و قضیهٔ ۶.۳ را از روی اسکلت‌شان کامل بنویس و مثال ۱۱.۳ را دستی حل کن.</p><button class="btn done-btn" data-sec="lu"></button></div>
+</section>
+
+<!-- ================================================================ REVIEW -->
+<section class="sec" id="review">
+  <h2 id="sec-review">مرور و جمع‌بندی فصل</h2>
+  <p class="sec-intro">این بخش برای شب امتحان و روزهای مرور است. اول اسکلت‌ها را بخوان، بعد با کارت‌ها خودت را بسنج، بعد آزمون ترکیبی و تمرین‌ها.</p>
+
+  <h3 id="cheat">برگهٔ اسکلت همهٔ اثبات‌ها</h3>
+  <p>هر اسکلت را بخوان، چشمت را ببند و کل اثبات را روی کاغذ بنویس. بعد با اثبات کامل (لینک) مقایسه کن.</p>
+  <div class="cheat">
+    <div class="item"><h5><a href="#complex">مسئلهٔ مختلط ← حقیقی</a></h5><ol><li>بشکن: $A=A_r+\mathrm iA_i$ و …؛ ضرب را باز کن با $\mathrm i^2=-1$.</li><li>حقیقی و موهومی را جدا مساوی بگذار ← $\left[\begin{smallmatrix}A_r&-A_i\\A_i&A_r\end{smallmatrix}\right]$.</li></ol></div>
+    <div class="item"><h5><a href="#rem23">تبصره ۲.۳</a></h5><ol><li>$x=A^{-1}b$.</li><li>$\hat a^{(i)}=\mathrm{solve}(A,e^{(i)})$ ← $A\hat A=[e_1\cdots e_n]=I$.</li></ol></div>
+    <div class="item"><h5><a href="#thm13">قضیه ۱.۳</a></h5><ol><li>$r=A(x-\tilde x)$ ⇒ $x-\tilde x=A^{-1}r$ ⇒ $\|x-\tilde x\|\le\|A^{-1}\|\|r\|$.</li><li>بالا: تقسیم بر $\|x\|$ و $\frac1{\|x\|}\le\frac{\|A\|}{\|b\|}$.</li><li>پایین: $\|r\|\le\|A\|\|x-\tilde x\|$ و $\frac1{\|x\|}\ge\frac1{\|A^{-1}\|\|b\|}$.</li></ol></div>
+    <div class="item"><h5><a href="#rem43">تبصره ۴.۳</a></h5><ol><li>$1=\|I\|=\|AA^{-1}\|\le\|A\|\|A^{-1}\|=\kappa(A)$.</li></ol></div>
+    <div class="item"><h5><a href="#thm23">قضیه ۲.۳</a></h5><ol><li>$A(\tilde x-x)=\delta b-\delta A\tilde x$.</li><li>نرم + $\|\tilde x\|\le\|x\|+\|x-\tilde x\|$ ← جملهٔ خطا به چپ ← تقسیم بر $1-\|A^{-1}\|\|\delta A\|\gt0$.</li><li>تقسیم بر $\|x\|$، همه بر حسب $\kappa$.</li></ol></div>
+    <div class="item"><h5><a href="#rem63">هزینهٔ کرامر</a></h5><ol><li>$c_n=nc_{n-1}+n\ge n!$ ← $n+1$ دترمینان ← $(n+1)!$.</li></ol></div>
+    <div class="item"><h5><a href="#thm33">قضیه ۳.۳</a></h5><ol><li>$Ax=b$ ⇔ $b$ ترکیب خطی ستون‌ها ⇔ $\operatorname{rank}S=\operatorname{rank}A$.</li><li>جواب‌ها $=x_0+\{z:Az=0\}$ با بعد $n-\operatorname{rank}A$.</li></ol></div>
+    <div class="item"><h5><a href="#rem103">تبصره ۱۰.۳</a></h5><ol><li>حذف det را عوض نمی‌کند، جابه‌جایی علامتش را ← $\det A=(-1)^{\#}\prod$ محورها.</li></ol></div>
+    <div class="item"><h5><a href="#prop13">گزاره ۱.۳</a></h5><ol><li>وارون ⇒ یکتایی؛ $Az=0$ فقط صفر ⇔ ستون‌ها مستقل ⇔ رتبه $n$.</li><li>الگوریتم موفق ⇔ محورها ناصفر ⇔ $\det\neq0$.</li></ol></div>
+    <div class="item"><h5><a href="#count">شمارش اعمال</a></h5><ol><li>تکرار $k$: $(n-k)$ سطر × $(n-k+1)$ درایه.</li><li>$\sum m(m+1)=\frac{n^3-n}{3}$؛ + جایگذاری ← $\frac{n^3}{3}+n^2-\frac n3$ ضرب/تقسیم.</li></ol></div>
+    <div class="item"><h5><a href="#lem13">لم ۱.۳</a></h5><ol><li>سطر $r$ام $P(r,s)$ همان $e_s^T$ ⇒ (ث)، (ج). متقارن ⇒ $P^T=P$. یک جابه‌جایی ⇒ $\det=-1$. دوبار ⇒ $P^2=I$.</li></ol></div>
+    <div class="item"><h5><a href="#lem23">لم ۲.۳</a></h5><ol><li>کلید: $e_j^Tl^{(k)}=0$ برای $j\le k$.</li><li>$(I-le_j^T)(I+le_j^T)=I$؛ ضرب صعودی ← ستون‌ها کنار هم؛ استقرا.</li></ol></div>
+    <div class="item"><h5><a href="#thm43">قضیه ۴.۳</a></h5><ol><li>$U=M^{(n-1)}P^{(n-1)}\cdots M^{(1)}P^{(1)}A$؛ بدون جابه‌جایی $P=I$ ← $A=L^{(1)}\cdots L^{(n-1)}U$.</li></ol></div>
+    <div class="item"><h5><a href="#lem33">لم ۳.۳</a></h5><ol><li>$U^{(1)}{U^{(2)}}^{-1}={L^{(1)}}^{-1}L^{(2)}$ ← بالامثلثی = پایین‌مثلثی قطر ۱ ← $I$.</li></ol></div>
+    <div class="item"><h5><a href="#thm53">قضیه ۵.۳</a></h5><ol><li>⇒: $A_{11}=L_{11}U_{11}$، $\det A_{11}=u_{11}\cdots u_{kk}\ne0$.</li><li>⇐: استقرا؛ $A^{(k)}_{11}=M^{(k-1)}_{11}\cdots M^{(1)}_{11}A_{11}$ ← $\prod_{l\le k}a^{(l)}_{ll}=\det A_{11}\ne0$.</li></ol></div>
+    <div class="item"><h5><a href="#cor13">نتیجه ۱.۳</a></h5><ol><li>$\hat U=DU$ ← یکتایی با لم ۳.۳ ← متقارن: $(LDU)^T=U^TDL^T$ ⇒ $U=L^T$.</li></ol></div>
+    <div class="item"><h5><a href="#thm63">قضیه ۶.۳</a></h5><ol><li>خلف: $Ax=0$، $|x_k|$ بیشینه، معادلهٔ $k$ ← $|a_{kk}|\le\sum_{j\ne k}|a_{kj}|$.</li><li>زیرماتریس‌های پیشرو هم غالب اکید ← قضیهٔ ۵.۳.</li></ol></div>
+    <div class="item"><h5><a href="#thm73">قضیه ۷.۳</a></h5><ol><li>$P^{(j)}M^{(k)}=\tilde M^{(k)}P^{(j)}$ برای $j\gt k$ ← همهٔ $P$ها به راست ← $PA=LU$.</li></ol></div>
+  </div>
+
+  <h3 id="cards">کارت‌های مرور با فاصله</h3>
+  <p>کارت را بخوان، جواب را <b>اول در ذهنت بگو</b>، بعد برگردان. اگر بلد بودی به جعبهٔ بعد می‌رود و دیرتر برمی‌گردد (۱، ۳، ۷، ۱۶ روز بعد)؛ اگر بلد نبودی از اول. هر روز فقط «کارت‌های امروز» را مرور کن. پیشرفتت فقط در همین مرورگر ذخیره می‌شود.</p>
+  <div class="widget" data-widget="flashcards"></div>
+
+  <h3 id="final-quiz">آزمون ترکیبی</h3>
+  <p>پرسش‌ها عمداً از بخش‌های مختلف قاطی شده‌اند. این کار (یادگیری درهم) برای امتحان مؤثرتر از تمرین بخش‌به‌بخش است.</p>
+  <div class="quiz">
+    <div class="quiz-h"><b>آزمون ترکیبی فصل ۳</b><span class="score"></span></div>
+    <div class="q">
+      <p class="q-t">در تکرار $k$ام حذف گاوسی چند سطر تغییر می‌کنند؟</p>
+      <div class="opts two"><button class="opt">$k$</button><button class="opt" data-c>$n-k$</button><button class="opt">$n-k+1$</button><button class="opt">$n$</button></div>
+      <p class="q-exp">سطرهای $k+1$ تا $n$.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">باقی‌ماندهٔ نسبی $\|r\|/\|b\|=10^{-6}$ و $\kappa(A)=10^4$. بهترین کرانی که قضیهٔ ۱.۳ برای خطای نسبی می‌دهد:</p>
+      <div class="opts two"><button class="opt">$10^{-10}$</button><button class="opt">$10^{-6}$</button><button class="opt" data-c>$10^{-2}$</button><button class="opt">$10^{4}$</button></div>
+      <p class="q-exp">$\kappa\cdot\|r\|/\|b\|=10^4\cdot10^{-6}=10^{-2}$.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">برای $A=\left[\begin{smallmatrix}1&2\\3&4\end{smallmatrix}\right]$ تجزیهٔ LU (بدون جابه‌جایی) وجود دارد؟</p>
+      <div class="opts"><button class="opt" data-c>بله؛ زیرماتریس‌های پیشرو دترمینان $1$ و $-2$ دارند و هر دو ناصفرند.</button><button class="opt">نه؛ چون $A$ غالب قطری نیست.</button><button class="opt">نه؛ چون $\det A\lt0$.</button></div>
+      <p class="q-exp">قضیهٔ ۵.۳. غالب قطری بودن شرط کافی است، نه لازم.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">چرا $M^{(1)}M^{(2)}=I-l^{(1)}e_1^T-l^{(2)}e_2^T$؟</p>
+      <div class="opts"><button class="opt">چون $M$ها متقارن‌اند.</button><button class="opt" data-c>چون $e_1^Tl^{(2)}=0$ (درایهٔ اول $l^{(2)}$ صفر است).</button><button class="opt">چون $\det M=1$.</button></div>
+      <p class="q-exp">جملهٔ متقاطع $l^{(1)}(e_1^Tl^{(2)})e_2^T$ صفر می‌شود.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">حذف گاوسی با یک جابه‌جایی و محورهای $1,-2,3$. مقدار $\det A$:</p>
+      <div class="opts two"><button class="opt">$-6$</button><button class="opt" data-c>$6$</button><button class="opt">$2$</button><button class="opt">$-2$</button></div>
+      <p class="q-exp">$(-1)^1\cdot(1\cdot(-2)\cdot3)=6$.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">برای $n=100$ کدام روش تقریباً $500\,000$ عمل لازم دارد؟</p>
+      <div class="opts two"><button class="opt">حذف گاوسی</button><button class="opt" data-c>گاوس-جردن</button><button class="opt">کرامر</button><button class="opt">جایگذاری پسرو</button></div>
+      <p class="q-exp">$n^3/2=500\,000$؛ حذف گاوسی حدود $n^3/3\approx333\,333$.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">کدام گزاره دربارهٔ ماتریس غالب قطری اکید <b>نادرست</b> است؟</p>
+      <div class="opts"><button class="opt">وارون‌پذیر است.</button><button class="opt">حذف گاوسی بدون جابه‌جایی سطر روی آن اجرا می‌شود.</button><button class="opt" data-c>عدد وضعیتش همیشه ۱ است.</button></div>
+      <p class="q-exp">قضیهٔ ۶.۳ چیزی دربارهٔ مقدار $\kappa$ نمی‌گوید.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">در اثبات قضیهٔ ۶.۳ چرا $|x_k|$ را بیشینه انتخاب کردیم؟</p>
+      <div class="opts"><button class="opt">تا $x_k=1$ شود.</button><button class="opt" data-c>تا $\frac{|x_j|}{|x_k|}\le1$ شود و به $|a_{kk}|\le\sum_{j\ne k}|a_{kj}|$ برسیم.</button><button class="opt">چون $x_k$ محور است.</button></div>
+      <p class="q-exp">با این انتخاب، هر کسر $|x_j|/|x_k|$ حداکثر ۱ است.</p>
+    </div>
+    <div class="quiz-f"><button class="btn quiz-reset">دوباره</button></div>
+  </div>
+
+  <h3 id="practice">تمرین‌های امتحانی با پاسخ</h3>
+  <p>اول روی کاغذ حل کن، بعد پاسخ را باز کن. این تمرین‌ها همان مهارت‌های مثال‌های کتاب را می‌سنجند.</p>
+
+  <div class="box ex"><div class="box-h"><span class="tag">تمرین ۱</span><span class="box-t">عدد وضعیت و کران خطا</span></div>
+    <p>برای $A=\left[\begin{smallmatrix}2&1\\1&1\end{smallmatrix}\right]$ و $b=[3\ \ 2]^T$ (جواب دقیق $x=[1\ \ 1]^T$) و تقریب $\tilde x=[1.1\ \ 0.9]^T$: (الف) $\kappa_\infty(A)$ را حساب کن. (ب) کران‌های قضیهٔ ۱.۳ را بنویس و با خطای نسبی واقعی مقایسه کن.</p></div>
+  <details class="try"><summary>پاسخ تمرین ۱</summary><div>
+    <p>(الف) $\det A=1$، $A^{-1}=\left[\begin{smallmatrix}1&-1\\-1&2\end{smallmatrix}\right]$. $\|A\|_\infty=\max(3,2)=3$ و $\|A^{-1}\|_\infty=\max(2,3)=3$؛ پس $\kappa_\infty=9$.</p>
+    <p>(ب) $$r=b-A\tilde x=[3-3.1\ \ ,\ 2-2]^T=[-0.1\ \ 0]^T$$ پس $\|r\|_\infty/\|b\|_\infty=0.1/3$. کران‌ها: $\frac19\cdot\frac{0.1}{3}\approx0.0037\le\text{خطای نسبی}\le9\cdot\frac{0.1}{3}=0.3$. خطای واقعی: $\|x-\tilde x\|_\infty/\|x\|_\infty=0.1$ که بین دو کران است.</p>
+  </div></details>
+
+  <div class="box ex"><div class="box-h"><span class="tag">تمرین ۲</span><span class="box-t">حذف گاوسی، LU و دترمینان</span></div>
+    <p>دستگاه $\left[\begin{smallmatrix}2&1&1\\4&-6&0\\-2&7&2\end{smallmatrix}\right]x=\left[\begin{smallmatrix}5\\-2\\9\end{smallmatrix}\right]$ را با الگوریتم ۱.۳ و جایگذاری پسرو حل کن، $L$ و $U$ را بنویس و $\det A$ را با تبصرهٔ ۱۰.۳ حساب کن.</p></div>
+  <details class="try"><summary>پاسخ تمرین ۲</summary><div>
+    <p>$j=1$: $l_{21}=2$، $R_2\leftarrow R_2-2R_1=[0,-8,-2\,|\,-12]$؛ $l_{31}=-1$، $R_3\leftarrow R_3+R_1=[0,8,3\,|\,14]$. $j=2$: $l_{32}=\frac{8}{-8}=-1$، $R_3\leftarrow R_3+R_2=[0,0,1\,|\,2]$.</p>
+    <p>جایگذاری پسرو: $x_3=2$، $x_2=\frac{-12+2\cdot2}{-8}=1$، $x_1=\frac{5-1-2}{2}=1$.</p>
+    <p>$L=\left[\begin{smallmatrix}1&0&0\\2&1&0\\-1&-1&1\end{smallmatrix}\right]$، $U=\left[\begin{smallmatrix}2&1&1\\0&-8&-2\\0&0&1\end{smallmatrix}\right]$. جابه‌جایی نداشتیم، پس $\det A=2\cdot(-8)\cdot1=-16$.</p>
+    <p class="small">می‌توانی همین را در «ویرایشگر دلخواه» پایین صفحه وارد کنی و گام‌به‌گام چک کنی.</p>
+  </div></details>
+
+  <div class="box ex"><div class="box-h"><span class="tag">تمرین ۳</span><span class="box-t">غالب قطری</span></div>
+    <p>نشان بده $A=\left[\begin{smallmatrix}4&-1&1\\2&5&2\\1&2&4\end{smallmatrix}\right]$ وارون‌پذیر است و تجزیهٔ LU دارد، بدون اینکه دترمینان یا تجزیه را حساب کنی.</p></div>
+  <details class="try"><summary>پاسخ تمرین ۳</summary><div>
+    <p>سطرها: $4\gt1+1$، $5\gt2+2$، $4\gt1+2$. پس $A$ غالب قطری اکید است. طبق قضیهٔ ۶.۳ وارون‌پذیر است و حذف گاوسی بدون جابه‌جایی سطر انجام می‌شود؛ پس طبق قضیهٔ ۴.۳ تجزیهٔ LU دارد.</p>
+  </div></details>
+
+  <div class="box ex"><div class="box-h"><span class="tag">تمرین ۴</span><span class="box-t">شمارش اعمال</span></div>
+    <p>برای $n=10$ تعداد دقیق ضرب/تقسیم و جمع/تفریق حذف گاوسی با جایگذاری پسرو را حساب کن.</p></div>
+  <details class="try"><summary>پاسخ تمرین ۴</summary><div>
+    <p>ضرب/تقسیم: $\frac{n^3-n}{3}+n^2=\frac{990}{3}+100=430$. جمع/تفریق: $\frac{n^3-n}{3}+\frac{n(n-1)}{2}=330+45=375$.</p>
+  </div></details>
+
+  <div class="box ex"><div class="box-h"><span class="tag">تمرین ۵</span><span class="box-t">وقتی LU نیست</span></div>
+    <p>نشان بده $A=\left[\begin{smallmatrix}0&1\\1&1\end{smallmatrix}\right]$ تجزیهٔ LU ندارد ولی $PA=LU$ دارد.</p></div>
+  <details class="try"><summary>پاسخ تمرین ۵</summary><div>
+    <p>زیرماتریس پیشروی مرتبهٔ ۱ برابر $a_{11}=0$ و وارون‌ناپذیر است؛ طبق قضیهٔ ۵.۳ (و چون $\det A=-1\ne0$) LU وجود ندارد. با $P=P(1,2)$: $PA=\left[\begin{smallmatrix}1&1\\0&1\end{smallmatrix}\right]=I\cdot\left[\begin{smallmatrix}1&1\\0&1\end{smallmatrix}\right]$ پس $L=I$ و $U=PA$.</p>
+  </div></details>
+
+  <h3 id="playground">ویرایشگر دلخواه</h3>
+  <p>هر دستگاه یا ماتریسی (تا ۵×۵) که بخواهی وارد کن و الگوریتم را انتخاب کن. عددها می‌توانند کسری ($\frac13$ را بنویس 1/3) یا اعشاری باشند. برای چک کردن جواب تمرین‌هایت عالی است.</p>
+  <div class="widget" data-widget="stepper" data-preset="custom"></div>
+</section>
+
+  </main>
+</div>
+
+<footer class="page-foot">
+  <div class="in">
+    <p>این جزوه از فصل ۳ کتاب جبر خطی عددی (صفحات ۳۱ تا ۵۶، تا پیش از «محاسبهٔ مستقیم») تهیه شده است. اثبات‌هایی که با برچسب «تکمیلی» مشخص شده‌اند در کتاب نیامده یا به تمرین سپرده شده‌اند.</p>
+    <p><a href="index.html">بازگشت به فهرست فصل‌ها</a> · <a href="ch2.html">فصل قبل: مفاهیم پایه</a></p>
+  </div>
+</footer>
+
+<script type="application/json" id="cards-data">
+[
+ {"id":"d1","tag":"تعریف","front":"تعریف ۱.۳: مسئلهٔ دستگاه معادلات خطی چیست؟","back":"یافتن $x\\in\\mathbb{R}^n$ به گونه‌ای که برای $b\\in\\mathbb{R}^n$ و $A\\in\\mathbb{R}^{n\\times n}$ معلوم داشته باشیم $Ax=b$."},
+ {"id":"d2","tag":"تعریف","front":"تعریف ۲.۳: بردار باقی‌مانده نظیر $\\tilde x$","back":"$r=b-A\\tilde x$ (برای جواب دقیق $b-Ax=0$)."},
+ {"id":"d3","tag":"تعریف","front":"تعریف ۳.۳: عدد وضعیت","back":"$\\kappa(A)=\\|A\\|\\,\\|A^{-1}\\|$ و اگر $A$ وارون‌پذیر نباشد $\\kappa(A)=\\infty$. نسبت به $\\|\\cdot\\|_p$ می‌نویسیم $\\kappa_p(A)$."},
+ {"id":"d4","tag":"تعریف","front":"تعریف ۴.۳: ماتریس افزوده","back":"$S=[A\\ b]$ از مرتبهٔ $n\\times(n+1)$ با $a_{i,n+1}=b_i$؛ $R_i$ سطر $i$ام $S$ است."},
+ {"id":"d5","tag":"تعریف","front":"تعریف ۵.۳: ماتریس جایگشت و جایگشت مقدماتی","back":"ماتریس مربعی با دقیقاً یک ۱ در هر سطر و ستون (بقیه صفر). جایگشت مقدماتی $P(r,s)$: از جابه‌جایی سطرهای $r$ و $s$ ماتریس همانی."},
+ {"id":"d6","tag":"تعریف","front":"تعریف ۶.۳: ماتریس تبدیل گاوسی $j$ام","back":"$M^{(j)}=I-l^{(j)}e_j^T$ که $l^{(j)}=[0\\cdots0\\ \\ l_{j+1,j}\\cdots l_{nj}]^T$؛ یعنی $I$ با $-l_{ij}$ زیر قطر ستون $j$."},
+ {"id":"d7","tag":"تعریف","front":"تعریف ۷.۳: تجزیهٔ مثلثی","back":"$A=LU$ با $L$ پایین‌مثلثی و $U$ بالامثلثی."},
+ {"id":"d8","tag":"تعریف","front":"تعریف ۸.۳: غالب قطری (سطری) و اکید","back":"$|a_{ii}|\\ge\\sum_{j\\ne i}|a_{ij}|$ برای همهٔ $i$. اگر برابری برقرار نباشد ($\\gt$): غالب قطری اکید."},
+ {"id":"t1","tag":"قضیه","front":"قضیه ۱.۳: حکم را بنویس.","back":"$\\|x-\\tilde x\\|\\le\\|r\\|\\|A^{-1}\\|$ و اگر $x,b\\ne0$: $\\frac{1}{\\kappa(A)}\\frac{\\|r\\|}{\\|b\\|}\\le\\frac{\\|x-\\tilde x\\|}{\\|x\\|}\\le\\kappa(A)\\frac{\\|r\\|}{\\|b\\|}$."},
+ {"id":"t1p","tag":"قضیه","front":"اسکلت اثبات قضیه ۱.۳","back":"$r=A(x-\\tilde x)$ ⇒ $x-\\tilde x=A^{-1}r$. بالا: سازگاری + $\\frac{1}{\\|x\\|}\\le\\frac{\\|A\\|}{\\|b\\|}$. پایین: $\\|r\\|\\le\\|A\\|\\|x-\\tilde x\\|$ + $\\frac1{\\|x\\|}\\ge\\frac{1}{\\|A^{-1}\\|\\|b\\|}$."},
+ {"id":"t2","tag":"قضیه","front":"قضیه ۲.۳: شرط و حکم","back":"اگر $\\|\\delta A\\|\\lt1/\\|A^{-1}\\|$ و $(A+\\delta A)\\tilde x=b+\\delta b$: $\\frac{\\|x-\\tilde x\\|}{\\|x\\|}\\le\\frac{\\kappa\\|A\\|}{\\|A\\|-\\kappa\\|\\delta A\\|}\\left(\\frac{\\|\\delta b\\|}{\\|b\\|}+\\frac{\\|\\delta A\\|}{\\|A\\|}\\right)$."},
+ {"id":"t2p","tag":"قضیه","front":"اسکلت اثبات قضیه ۲.۳","back":"تفریق: $A(\\tilde x-x)=\\delta b-\\delta A\\tilde x$ ← نرم و $\\|\\tilde x\\|\\le\\|x\\|+\\|x-\\tilde x\\|$ ← خطا را به چپ ببر و بر $1-\\|A^{-1}\\|\\|\\delta A\\|\\gt0$ تقسیم کن ← تقسیم بر $\\|x\\|$ و نوشتن بر حسب $\\kappa$."},
+ {"id":"t3","tag":"قضیه","front":"قضیه ۳.۳: سه حالت جواب بر حسب رتبه","back":"یکتا: $\\operatorname{rank}A=\\operatorname{rank}S=n$. بی‌نهایت: $\\operatorname{rank}A=\\operatorname{rank}S\\lt n$. بدون جواب: $\\operatorname{rank}A\\ne\\operatorname{rank}S$."},
+ {"id":"t4","tag":"قضیه","front":"قضیه ۴.۳ و ایدهٔ اثبات","back":"اگر حذف گاوسی جابه‌جایی نخواهد، LU وجود دارد. $U=M^{(n-1)}\\cdots M^{(1)}A$ ⇒ $A=L^{(1)}\\cdots L^{(n-1)}U$."},
+ {"id":"t5","tag":"قضیه","front":"قضیه ۵.۳: حکم","back":"$A$ وارون‌پذیر تجزیهٔ $LU$ (با قطر $L$ برابر ۱) دارد ⇔ همهٔ زیرماتریس‌های اصلی پیشرو وارون‌پذیرند."},
+ {"id":"t5p","tag":"قضیه","front":"قضیه ۵.۳: کلید جهت ⇐","back":"استقرا: $A^{(k)}_{11}=M^{(k-1)}_{11}\\cdots M^{(1)}_{11}A_{11}$ پس $a^{(1)}_{11}\\cdots a^{(k)}_{kk}=\\det A_{11}\\ne0$ ⇒ محور $k$ام ناصفر."},
+ {"id":"t6","tag":"قضیه","front":"قضیه ۶.۳ و ایدهٔ اثبات","back":"غالب قطری اکید ⇒ وارون‌پذیر و حذف بدون جابه‌جایی. خلف با $Ax=0$ و بزرگ‌ترین مؤلفهٔ $x_k$ ⇒ $|a_{kk}|\\le\\sum_{j\\ne k}|a_{kj}|$."},
+ {"id":"t7","tag":"قضیه","front":"قضیه ۷.۳ و ترفند اثبات","back":"هر $A$ وارون‌پذیر: $PA=LU$ با $P=P^{(n-1)}\\cdots P^{(1)}$. ترفند: $P^{(j)}M^{(k)}=\\tilde M^{(k)}P^{(j)}$ برای $j\\gt k$."},
+ {"id":"l1","tag":"لم","front":"لم ۱.۳: ویژگی‌های $P(r,s)$","back":"بسته بودن ضرب؛ هر جایگشت حاصل‌ضرب مقدماتی‌ها؛ $P^T=P$؛ $\\det P=-1$؛ $PA$ سطرها و $AP$ ستون‌ها را جابه‌جا می‌کند؛ $P^2=I$."},
+ {"id":"l2","tag":"لم","front":"لم ۲.۳: کلید همهٔ اثبات‌ها","back":"$e_j^Tl^{(k)}=0$ برای $j\\le k$. نتیجه: ${M^{(j)}}^{-1}=I+l^{(j)}e_j^T$ و $M^{(1)}\\cdots M^{(n-1)}=I-\\sum l^{(j)}e_j^T$."},
+ {"id":"l3","tag":"لم","front":"لم ۳.۳ و ایدهٔ اثبات","back":"LU (با قطر $L$ برابر ۱) برای $A$ وارون‌پذیر یکتاست. $U^{(1)}{U^{(2)}}^{-1}={L^{(1)}}^{-1}L^{(2)}$ هم بالا و هم پایین‌مثلثی قطر ۱ ⇒ $I$."},
+ {"id":"c1","tag":"قضیه","front":"نتیجه ۱.۳","back":"تحت شرایط قضیهٔ ۵.۳: $A=LDU$ یکتا (قطر $L$ و $U$ برابر ۱). اگر $A$ متقارن: $A=LDL^T$."},
+ {"id":"p1","tag":"قضیه","front":"گزاره ۱.۳: چهار شرط هم‌ارز","back":"$A$ وارون‌پذیر ⇔ $Ax=0$ فقط $x=0$ ⇔ $Ax=b$ برای هر $b\\ne0$ جواب یکتای ناصفر ⇔ حذف گاوسی/گاوس-جردن به جواب یکتا می‌رسد."},
+ {"id":"r2","tag":"تبصره","front":"تبصره ۲.۳","back":"حل $Ax=b$ هم‌ارز یافتن $A^{-1}$ است: $x=A^{-1}b$؛ و برعکس $\\hat a^{(i)}=\\mathrm{solve}(A,e^{(i)})$ ستون‌های $A^{-1}$ را می‌دهد."},
+ {"id":"r4","tag":"تبصره","front":"تبصره ۴.۳: چرا $\\kappa(A)\\ge1$؟","back":"$1=\\|I\\|=\\|AA^{-1}\\|\\le\\|A\\|\\|A^{-1}\\|=\\kappa(A)$."},
+ {"id":"r10","tag":"تبصره","front":"تبصره ۱۰.۳: دترمینان از حذف گاوسی","back":"$\\det A=(-1)^{\\text{تعداد جابه‌جایی‌ها}}\\,a^{(1)}_{11}a^{(2)}_{22}\\cdots a^{(n)}_{nn}$."},
+ {"id":"r1","tag":"تبصره","front":"دستگاه حقیقی معادل $Ax=b$ مختلط","back":"$\\begin{bmatrix}A_r&-A_i\\\\A_i&A_r\\end{bmatrix}\\begin{bmatrix}x_r\\\\x_i\\end{bmatrix}=\\begin{bmatrix}b_r\\\\b_i\\end{bmatrix}$ از مرتبهٔ $2n\\times2n$."},
+ {"id":"a1","tag":"الگوریتم","front":"الگوریتم ۱.۳: گام ۲ و گام ۴","back":"گام ۲ (محورگیری): اولین $r\\ge j$ با $a_{rj}\\ne0$. گام ۴ (حذف): برای $i=j+1..n$: $l_{ij}=a_{ij}/a_{jj}$ و $R_i\\leftarrow R_i-l_{ij}R_j$."},
+ {"id":"a2","tag":"الگوریتم","front":"الگوریتم ۲.۳: گام‌های ۶ تا ۸","back":"اگر $a_{nn}=0$ توقف. برای $i=1..j-1$: $l_{ij}=a_{ij}/a_{jj}$ و $R_i\\leftarrow R_i-l_{ij}R_j$. سپس $j=j-1$ و اگر $j\\gt1$ تکرار."},
+ {"id":"n1","tag":"شمارش","front":"هزینهٔ حذف گاوسی + جایگذاری پسرو","back":"ضرب/تقسیم: $\\frac{n^3}{3}+n^2-\\frac n3$. جمع/تفریق: $\\frac{n^3}{3}+\\frac{n^2}{2}-\\frac{5n}{6}$. جملهٔ غالب: $n^3/3$."},
+ {"id":"n2","tag":"شمارش","front":"هزینهٔ کرامر و گاوس-جردن","back":"کرامر: حدود $(n+1)!$ ضرب. گاوس-جردن: $\\frac{n^3}{2}+\\frac{n^2}{2}$ ضرب/تقسیم و $\\frac{n^3}{2}-\\frac n2$ جمع (حدود ۵۰٪ بیشتر از گاوس)."}
+]
+</script>
+</body>
+</html>

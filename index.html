@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fa" dir="rtl" data-page="home">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>جزوهٔ جبر خطی عددی</title>
+<meta name="description" content="جزوهٔ تعاملی و ساده‌شدهٔ جبر خطی عددی با همهٔ اثبات‌ها، مثال‌های گام‌به‌گام و کارت‌های مرور.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%23151a2d%27/%3E%3Cpath d=%27M10 8H7v16h3M22 8h3v16h-3%27 stroke=%27%23fff%27 stroke-width=%272.2%27 fill=%27none%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%273.2%27 fill=%27%23f2a73a%27/%3E%3C/svg%3E">
+<link rel="preload" href="assets/fonts/Vazirmatn-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="assets/css/main.css">
+<script>try{var t=JSON.parse(localStorage.getItem("theme"));if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<script defer src="assets/vendor/katex/katex.min.js"></script>
+<script defer src="assets/vendor/katex/contrib/auto-render.min.js"></script>
+<script defer src="assets/js/core.js"></script>
+<style>
+  .home { max-width: 860px; margin: 0 auto; }
+  .chapters { display: grid; gap: 14px; margin: 26px 0 34px; }
+  @media (min-width: 720px) { .chapters { grid-template-columns: 1fr 1fr; } }
+  .ch-card {
+    display: grid; gap: 8px; padding: 18px; border-radius: var(--radius);
+    background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; min-width: 0;
+  }
+  a.ch-card { box-shadow: var(--shadow); }
+  a.ch-card:hover { border-color: var(--accent); }
+  .ch-card .n { font-weight: 850; color: var(--accent); font-size: .95rem; }
+  .ch-card h3 { margin: 0; font-size: 1.25rem; display: block; }
+  .ch-card p { margin: 0; color: var(--ink-2); font-size: .95rem; }
+  .ch-card .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .ch-card.soon { opacity: .7; border-style: dashed; }
+  .ch-card .go { font-weight: 750; color: var(--accent); font-size: .92rem; }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html"><span class="brand-mark">Ax=b</span><span class="brand-t">جبر خطی عددی</span></a>
+    <span class="spacer"></span>
+    <button class="icon-btn" id="themeBtn" aria-label="تغییر حالت روشن و تیره"></button>
+  </div>
+</header>
+
+<div class="shell no-toc">
+  <main class="content home">
+    <section class="hero">
+      <div class="eyebrow"><span class="dot"></span>جزوهٔ تعاملی · همهٔ اثبات‌ها کامل</div>
+      <h1>جزوهٔ جبر خطی عددی<span class="sub">ساده برای فهمیدن، کامل برای امتحان</span></h1>
+      <p class="lead">هر فصل از متن کتاب ساخته شده است: اول ایده به زبان ساده، بعد تعریف و قضیه دقیقاً مثل کتاب، بعد مثال‌هایی که گام‌به‌گام اجرا می‌شوند و در آخر اثبات کامل با توضیحِ «چرا»ی هر گام.</p>
+      <div class="hero-eq">$$Ax=b\qquad A=LU\qquad \kappa(A)=\|A\|\,\|A^{-1}\|$$</div>
+    </section>
+
+    <h2 id="chapters">فصل‌ها</h2>
+    <div class="chapters">
+      <a class="ch-card" href="ch2.html">
+        <span class="n">فصل ۲</span>
+        <h3>مفاهیم پایه</h3>
+        <p>نرم برداری و ضرب داخلی، کوشی-شوارتز، نرم ماتریسی طبیعی، ماتریس یکانی، شعاع طیفی و همگرایی $A^k$؛ با حل کامل ۱۹ تمرین آخر فصل.</p>
+        <div class="meta"><span class="chip"><b>۱۶</b> صفحهٔ کتاب</span><span class="chip"><b>۱۹</b> تمرین حل‌شده</span><span class="chip"><b>۳۱</b> کارت مرور</span></div>
+        <span class="go">شروع مطالعه ←</span>
+      </a>
+      <a class="ch-card" href="ch3.html">
+        <span class="n">فصل ۳</span>
+        <h3>مسئلهٔ دستگاه معادلات خطی</h3>
+        <p>باقی‌مانده و عدد وضعیت، قاعدهٔ کرامر، حذف گاوسی، گاوس-جردن، شمارش اعمال، تجزیهٔ $LU$ و $PA=LU$.</p>
+        <div class="meta"><span class="chip"><b>۲۶</b> صفحهٔ کتاب</span><span class="chip"><b>۱۳</b> مثال</span><span class="chip"><b>۳۱</b> کارت مرور</span></div>
+        <span class="go">شروع مطالعه ←</span>
+      </a>
+    </div>
+    <p class="muted small">فصل‌های بعدی با همین ساختار به این صفحه اضافه می‌شوند.</p>
+
+    <h2 id="method">روش مطالعه</h2>
+    <ol class="route">
+      <li><div><b>ایده، بعد فرمول.</b><span>کادرهای «به زبان ساده» را اول بخوان؛ فرمول‌ها بعد از فهم ایده آسان‌اند.</span></div></li>
+      <li><div><b>مثال حل‌شده، بعد خودت.</b><span>مثال را گام‌به‌گام اجرا کن، بعد بدون نگاه روی کاغذ تکرارش کن.</span></div></li>
+      <li><div><b>اثبات را حدس بزن، بعد ببین.</b><span>در حالت «تمرین گام‌به‌گام» قبل از هر گام حدس بزن. آخرش اسکلت اثبات را حفظ کن.</span></div></li>
+      <li><div><b>با فاصله مرور کن.</b><span>کارت‌های مرور خودشان زمان‌بندی می‌کنند: فردا، سه روز بعد، یک هفته بعد.</span></div></li>
+    </ol>
+  </main>
+</div>
+<footer class="page-foot"><div class="in"><p>ساخته‌شده با HTML، CSS و JavaScript ساده؛ قابل انتشار روی GitHub Pages.</p></div></footer>
+</body>
+</html>

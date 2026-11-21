@@ -1,0 +1,1651 @@
+<!doctype html>
+<html lang="fa" dir="rtl" data-page="ch2">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>فصل ۲ · مفاهیم پایه</title>
+<meta name="description" content="جزوهٔ کامل و ساده‌شدهٔ فصل ۲ جبر خطی عددی: نرم برداری، ضرب داخلی، نرم ماتریسی و شعاع طیفی، با همهٔ اثبات‌ها و حل کامل ۱۹ تمرین آخر فصل.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%23151a2d%27/%3E%3Cpath d=%27M10 8H7v16h3M22 8h3v16h-3%27 stroke=%27%23fff%27 stroke-width=%272.2%27 fill=%27none%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%273.2%27 fill=%27%23f2a73a%27/%3E%3C/svg%3E">
+<link rel="preload" href="assets/fonts/Vazirmatn-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/widgets.css">
+<link rel="stylesheet" href="assets/css/widgets-ch2.css">
+<script>try{var t=JSON.parse(localStorage.getItem("theme"));if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<script defer src="assets/vendor/katex/katex.min.js"></script>
+<script defer src="assets/vendor/katex/contrib/auto-render.min.js"></script>
+<script defer src="assets/js/core.js"></script>
+<script defer src="assets/js/widgets.js"></script>
+<script defer src="assets/js/widgets-ch2.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <button class="icon-btn" id="tocBtn" aria-controls="toc" aria-expanded="false" aria-label="فهرست مطالب">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+    </button>
+    <a class="brand" href="index.html">
+      <span class="brand-mark">Ax=b</span>
+      <span class="brand-t">جبر خطی عددی <span class="muted">· فصل ۲</span></span>
+    </a>
+    <span class="spacer"></span>
+    <button class="icon-btn" id="themeBtn" aria-label="تغییر حالت روشن و تیره"></button>
+  </div>
+  <div class="read-progress" aria-hidden="true"><span></span></div>
+</header>
+
+<div class="backdrop" id="backdrop"></div>
+
+<div class="shell">
+  <nav class="toc" id="toc" aria-label="فهرست مطالب">
+    <div class="toc-head">
+      <b>فهرست فصل ۲</b>
+      <button class="icon-btn toc-close" aria-label="بستن فهرست">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="toc-progress" id="tocProg">پیشرفت تو: <span class="t"></span><div class="bar"><span></span></div></div>
+    <ol id="tocList"></ol>
+  </nav>
+
+  <main class="content" id="main">
+
+<!-- ================================================================ HERO -->
+<section class="hero">
+  <div class="eyebrow"><span class="dot"></span>جبر خطی عددی · صفحات ۱۵ تا ۳۰ کتاب</div>
+  <h1>مفاهیم پایه<span class="sub">فصل ۲ · نرم، ضرب داخلی و شعاع طیفی، با همهٔ اثبات‌ها و حل کامل تمرین‌ها</span></h1>
+  <p class="lead">در این فصل یاد می‌گیری «اندازهٔ» یک بردار و یک ماتریس را چطور اندازه بگیری. این ابزارها در فصل ۳ (عدد وضعیت) و فصل‌های بعد (همگرایی روش‌های تکراری) مدام لازم می‌شوند. ۱۹ تمرین آخر فصل نمونه‌سؤال امتحان‌اند؛ برای همه‌شان راهنمایی و حل کامل گذاشته‌ایم.</p>
+  <div class="hero-eq">
+  $$\|x\|_1=\sum_{i}|x_i|\qquad \|x\|_2=\Big(\sum_i|x_i|^2\Big)^{\frac12}\qquad \|x\|_\infty=\max_i|x_i|\qquad \rho(A)=\max_{\lambda\in\sigma(A)}|\lambda|$$
+  </div>
+  <div class="chips" aria-label="محتوای فصل">
+    <span class="chip"><span class="sw" style="background:var(--def)"></span><b>۱۶</b> تعریف</span>
+    <span class="chip"><span class="sw" style="background:var(--thm)"></span><b>۱۸</b> قضیه · <b>۲</b> لم · <b>۳</b> گزاره · <b>۳</b> نتیجه</span>
+    <span class="chip"><span class="sw" style="background:var(--ex)"></span><b>۹</b> مثال</span>
+    <span class="chip"><span class="sw" style="background:var(--rem)"></span><b>۱۱</b> تبصره</span>
+    <span class="chip"><span class="sw" style="background:var(--pivot)"></span><b>۱۹</b> تمرین حل‌شده</span>
+  </div>
+</section>
+
+<!-- ================================================================ GUIDE -->
+<section class="sec" id="guide">
+  <h2 id="how">چطور این فصل را بخوانی</h2>
+  <p>روش همان فصل ۳ است (اصول آموزش روزنشاین، یادآوری فعال، تکرار با فاصله، مثال حل‌شده و خودتوضیحی). چون تمرین‌های آخر این فصل نمونه‌سؤال امتحان‌اند، یک قدم اضافه داریم:</p>
+  <ol class="route">
+    <li><div><b>هر بخش را بخوان: اول «به زبان ساده»، بعد متن دقیق، بعد اثبات.</b><span>اثبات‌ها را در حالت «تمرین گام‌به‌گام» بخوان و قبل از هر گام حدس بزن.</span></div></li>
+    <li><div><b>آخر هر بخش، تمرین‌های همان بخش را حل کن.</b><span>کادر «حالا این تمرین‌ها را می‌توانی حل کنی» می‌گوید کدام تمرین‌ها فقط به همان بخش نیاز دارند. لینکشان مستقیم به صورت سؤال می‌رود.</span></div></li>
+    <li><div><b>برای هر تمرین: اول خودت، بعد راهنمایی، بعد حل کامل.</b><span>هر تمرین یک «راهنمایی» دارد که فقط ایدهٔ اول را می‌گوید. اگر با راهنمایی حلش کردی، حل کامل را فقط برای مقایسه باز کن.</span></div></li>
+    <li><div><b>جعبه‌ابزار اثبات را حفظ کن.</b><span>تقریباً همهٔ تمرین‌ها با هشت ترفند تکراری حل می‌شوند (مثل «بردار خاص را انتخاب کن» یا «نامساوی را از دو طرف ثابت کن»). این ترفندها کلید حل سؤال‌های جدید سر جلسه‌اند.</span></div></li>
+    <li><div><b>با کارت‌های مرور، با فاصله تکرار کن.</b><span>کارت‌های این فصل جدا از فصل ۳ ذخیره می‌شوند.</span></div></li>
+  </ol>
+  <div class="two-col">
+    <div class="mini">
+      <h5>رنگ کادرها</h5>
+      <p class="small"><span class="tag" style="--c:var(--def)">تعریف</span> &nbsp; <span class="tag" style="--c:var(--thm)">قضیه، لم، گزاره</span> &nbsp; <span class="tag" style="--c:var(--ex)">مثال</span> &nbsp; <span class="tag" style="--c:var(--rem)">تبصره</span> &nbsp; <span class="tag" style="--c:var(--intu)">به زبان ساده</span> &nbsp; <span class="tag" style="--c:var(--warn)">اشتباه رایج</span></p>
+    </div>
+    <div class="mini">
+      <h5>اثبات‌ها</h5>
+      <p class="small"><span class="badge book">از کتاب</span> اثبات خود کتاب با توضیح بیشتر. <span class="badge supp">تکمیلی</span> کتاب اثبات را نیاورده، به تمرین یا فصل دیگری سپرده و ما کاملش کرده‌ایم.</p>
+      <button class="btn" id="allPractice" aria-pressed="false" type="button">همهٔ اثبات‌ها را در حالت تمرین ببین</button>
+    </div>
+  </div>
+
+  <h3 id="map">نقشهٔ فصل</h3>
+  <div class="map">
+    <div class="map-col">
+      <h4><span class="st">۱</span>اندازهٔ بردار</h4>
+      <ul>
+        <li><a href="#def12">نرم برداری و نرم‌های $p$ <small>· تعریف ۱.۲</small></a></li>
+        <li><a href="#def22">ضرب داخلی <small>· تعریف ۲.۲</small></a></li>
+        <li><a href="#lem12">کوشی-شوارتز <small>· لم ۱.۲</small></a></li>
+        <li><a href="#thm52">هم‌ارزی نرم‌ها <small>· قضیه ۵.۲</small></a></li>
+        <li><a href="#thm72">همگرایی دنباله‌ها <small>· قضیه ۷.۲</small></a></li>
+      </ul>
+    </div>
+    <div class="map-col">
+      <h4><span class="st">۲</span>اندازهٔ ماتریس</h4>
+      <ul>
+        <li><a href="#thm82">نرم طبیعی $\max\frac{\|Ax\|}{\|x\|}$ <small>· قضیه ۸.۲</small></a></li>
+        <li><a href="#thm112">فرمول $\|A\|_1$ و $\|A\|_\infty$ <small>· قضیه ۱۱.۲</small></a></li>
+        <li><a href="#thm122">ویژگی‌های $\|A\|_2$ <small>· قضیه ۱۲.۲</small></a></li>
+        <li><a href="#thm132">ماتریس یکانی <small>· قضیه‌های ۱۳.۲ و ۱۴.۲</small></a></li>
+      </ul>
+    </div>
+    <div class="map-col">
+      <h4><span class="st">۳</span>شعاع طیفی و همگرایی</h4>
+      <ul>
+        <li><a href="#def152">ویژه‌مقدار و $\rho(A)$ <small>· تعریف ۱۵.۲</small></a></li>
+        <li><a href="#thm172">$\rho(A)\le\|A\|$ <small>· قضیه ۱۷.۲</small></a></li>
+        <li><a href="#thm182">$A^k\to0\iff\rho(A)\lt1$ <small>· قضیه ۱۸.۲</small></a></li>
+        <li><a href="#exercises">۱۹ تمرین آخر فصل <small>· حل کامل</small></a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ PREREQ -->
+<section class="sec" id="prereq">
+  <h2 id="pre">یادآوری پیش‌نیازها</h2>
+  <p class="sec-intro">این فصل با اعداد مختلط و ترانهادهٔ مزدوج کار می‌کند. اگر این‌ها را بلدی سریع رد شو؛ اگر نه، همین چند خط کافی است.</p>
+
+  <div class="box recall">
+    <div class="box-h"><span class="tag">یادآوری ۱</span><span class="box-t">اعداد مختلط</span></div>
+    <ul>
+      <li>برای $z=a+\mathrm{i}b$: مزدوج $\bar z=a-\mathrm{i}b$، قدرمطلق $|z|=\sqrt{a^2+b^2}$ و قسمت حقیقی $\operatorname{Re}z=a$.</li>
+      <li>$z\bar z=|z|^2$، $\ z+\bar z=2\operatorname{Re}z$، $\ |\operatorname{Re}z|\le|z|$، $\ |zw|=|z||w|$، $\ \overline{zw}=\bar z\,\bar w$.</li>
+      <li>نمایش قطبی: هر $z$ را می‌توان نوشت $z=re^{\mathrm{i}\theta}$ با $r=|z|\ge0$؛ و $|e^{\mathrm{i}\theta}|=1$. پس $z\,e^{-\mathrm{i}\theta}=r=|z|$ یک عدد حقیقی نامنفی است. (این ترفند در اثبات قضیهٔ ۱۱.۲ لازم است.)</li>
+    </ul>
+  </div>
+
+  <div class="box recall">
+    <div class="box-h"><span class="tag">یادآوری ۲</span><span class="box-t">ترانهادهٔ مزدوج $A^H$</span></div>
+    <ul>
+      <li>$A^H=\bar A^{\,T}$: ترانهاده کن و همهٔ درایه‌ها را مزدوج کن. برای ماتریس حقیقی $A^H=A^T$.</li>
+      <li>$(AB)^H=B^HA^H$، $\ (A^H)^H=A$، $\ (\alpha A)^H=\bar\alpha A^H$.</li>
+      <li>برای بردارها: $x^Hy=\sum_i\bar x_iy_i$ و $x^Hx=\sum_i|x_i|^2\ge0$.</li>
+      <li>$A$ <b>هرمیتی</b> است اگر $A^H=A$ (در حالت حقیقی یعنی متقارن). $\ \det(A^H)=\overline{\det A}$.</li>
+    </ul>
+  </div>
+
+  <div class="box recall">
+    <div class="box-h"><span class="tag">یادآوری ۳</span><span class="box-t">حد، فشردگی و وایرشتراس</span></div>
+    <ul>
+      <li><b>قضیهٔ فشردگی (ساندویچ):</b> اگر $0\le a_k\le b_k$ و $b_k\to0$ آن‌گاه $a_k\to0$.</li>
+      <li><b>قضیهٔ وایرشتراس:</b> تابع پیوسته روی مجموعهٔ بسته و کران‌دار، بیشترین و کمترین مقدارش را <b>می‌گیرد</b> (یعنی نقطه‌ای هست که در آن ماکزیمم رخ می‌دهد).</li>
+      <li>تابع $f$ در $x$ پیوسته است اگر وقتی $y\to x$ داشته باشیم $f(y)\to f(x)$.</li>
+    </ul>
+  </div>
+
+  <div class="box recall">
+    <div class="box-h"><span class="tag">یادآوری ۴</span><span class="box-t">ویژه‌مقدار و چند واقعیت از فصل‌های دیگر</span></div>
+    <ul>
+      <li>ویژه‌مقدارها ریشه‌های $\det(A-\lambda I)=0$ هستند. برای $2\times2$: $\ \lambda^2-(\operatorname{tr}A)\lambda+\det A=0$.</li>
+      <li>ویژه‌مقدارهای ماتریس مثلثی همان درایه‌های قطری‌اند (کتاب: گزارهٔ ۲.۴).</li>
+      <li><b>قضیهٔ طیفی (فصل ۴ کتاب):</b> هر ماتریس هرمیتی $H$ را می‌توان نوشت $H=Q\Lambda Q^H$ با $Q$ یکانی و $\Lambda$ قطری حقیقی. ویژه‌مقدارهای $A^HA$ نامنفی‌اند.</li>
+      <li><b>تجزیهٔ شور:</b> هر ماتریس مربعی را می‌توان نوشت $A=UTU^H$ با $U$ یکانی و $T$ بالامثلثی که قطرش ویژه‌مقدارهای $A$ است.</li>
+    </ul>
+    <p class="small muted">دو مورد آخر فقط در دو اثبات تکمیلی (قضیهٔ ۱۷.۲ بخش آ و ث) به کار می‌روند.</p>
+  </div>
+</section>
+
+<!-- ================================================================ 2.1 -->
+<section class="sec" id="s1">
+  <h2 id="sec21"><span class="num">۱.۲</span>نرم برداری و حاصل‌ضرب داخلی</h2>
+
+  <div class="box goal">
+    <div class="box-h"><span class="tag">بعد از این بخش می‌توانی</span></div>
+    <ul>
+      <li>نرم‌های $\|\cdot\|_1$، $\|\cdot\|_2$ و $\|\cdot\|_\infty$ را حساب کنی و بگویی یک تابع نرم است یا نه؛</li>
+      <li>نابرابری کوشی-شوارتز و نابرابری مثلثی اقلیدسی را اثبات کنی؛</li>
+      <li>ثابت کنی همهٔ نرم‌ها روی $\mathbb{C}^n$ هم‌ارزند و همگرایی در یک نرم یعنی همگرایی در همه.</li>
+    </ul>
+  </div>
+
+  <p>از مهم‌ترین ابزارها می‌توان نرم و ضرب داخلی را نام برد که در ادامه به معرفی آن‌ها پرداخته می‌شود.</p>
+  <div class="box intu">
+    <div class="box-h"><span class="tag">به زبان ساده</span><span class="box-t">نرم یعنی «طول»</span></div>
+    <p>نرم به هر بردار یک عدد می‌دهد که «اندازه» یا «طول» آن است. هر قاعده‌ای که این چهار شرط عقل سلیم را داشته باشد نرم است: (۱) طول منفی نمی‌شود؛ (۲) فقط بردار صفر طول صفر دارد؛ (۳) اگر بردار را ۳ برابر کنی طولش ۳ برابر می‌شود؛ (۴) میان‌بُر زدن کوتاه‌تر از دور زدن است: $\|x+y\|\le\|x\|+\|y\|$.</p>
+  </div>
+
+  <div class="box def" id="def12">
+    <div class="box-h"><span class="tag">تعریف ۱.۲</span><span class="box-t">نرم برداری</span></div>
+    <p>یک نرم برداری روی $\mathbb{C}^n$ تابعی مانند $\|\cdot\|:\mathbb{C}^n\to\mathbb{R}$ با ویژگی‌های زیر است:</p>
+    <ol>
+      <li>(آ) به ازای هر $x\in\mathbb{C}^n$ داشته باشیم $\|x\|\ge0$؛</li>
+      <li>(ب) $\|x\|=0$ اگر و فقط اگر $x=0$؛</li>
+      <li>(پ) به ازای هر $x\in\mathbb{C}^n$ و هر $\alpha\in\mathbb{C}$ داشته باشیم $\|\alpha x\|=|\alpha|\,\|x\|$؛</li>
+      <li>(ت) (نابرابری مثلثی) به ازای هر $x,y\in\mathbb{C}^n$ داشته باشیم $\|x+y\|\le\|x\|+\|y\|$.</li>
+    </ol>
+    <p>اگر از $\|x\|=0$ نتیجه نشود $x=0$ آن‌گاه $\|\cdot\|$ را <b>نیم‌نرم</b> نامند. پس از تعریف نرم، بلافاصله می‌توان فاصلهٔ بین دو بردار $x$ و $y$ در $\mathbb{C}^n$ را به صورت $d(x,y):=\|x-y\|$ تعریف کرد.</p>
+  </div>
+
+  <div class="box ex" id="ex12">
+    <div class="box-h"><span class="tag">مثال ۱.۲</span><span class="box-t">نرم‌های $p$</span></div>
+    <p>فرض کنید $x=[x_i]_{n\times1}$ برداری در $\mathbb{C}^n$ باشد. تابع‌های</p>
+    $$\|x\|_p=\Big(\sum_{i=1}^{n}|x_i|^p\Big)^{\frac1p},\quad1\le p\lt\infty,\qquad\qquad \|x\|_\infty=\max_{1\le i\le n}|x_i|$$
+    <p>نرم‌های برداری متداولی روی $\mathbb{C}^n$ هستند. $\|\cdot\|_p$ به <b>نرم $p$</b>، $\|\cdot\|_2$ به <b>نرم اقلیدسی</b> و $\|\cdot\|_\infty$ به <b>نرم بی‌نهایت</b> (نرم ماکزیمم یا نرم یکنواخت) معروف هستند.</p>
+  </div>
+  <div class="box ex">
+    <div class="box-h"><span class="tag">مثال کمکی</span><span class="box-t">حساب کردن نرم‌ها</span><span class="box-src">برای تمرین دست</span></div>
+    <p>برای $x=[3\ \ -4\ \ 0]^T$: $\ \|x\|_1=3+4+0=7$، $\ \|x\|_2=\sqrt{9+16}=5$، $\ \|x\|_\infty=\max(3,4,0)=4$.</p>
+    <p>برای بردار مختلط $x=[1+\mathrm i\ \ \ 2]^T$ اول قدرمطلق‌ها را حساب کن: $|1+\mathrm i|=\sqrt2$ و $|2|=2$. پس $\|x\|_1=\sqrt2+2$، $\ \|x\|_2=\sqrt{2+4}=\sqrt6$ و $\|x\|_\infty=2$.</p>
+    <p class="small">همیشه $\|x\|_\infty\le\|x\|_2\le\|x\|_1$ است (تمرین ۵). در مثال اول: $4\le5\le7$.</p>
+  </div>
+  <div class="widget" data-widget="unitball"></div>
+
+  <details class="try">
+    <summary>اثبات تکمیلی: چرا $\|\cdot\|_1$ و $\|\cdot\|_\infty$ نرم‌اند؟</summary>
+    <div>
+      <p>ویژگی‌های (آ)، (ب) و (پ) مستقیم از ویژگی‌های قدرمطلق می‌آیند: $|x_i|\ge0$؛ مجموع یا ماکزیممِ $|x_i|$ها صفر است فقط وقتی همهٔ $x_i=0$؛ و $|\alpha x_i|=|\alpha||x_i|$. برای نابرابری مثلثی از $|x_i+y_i|\le|x_i|+|y_i|$ استفاده کن:</p>
+      $$\|x+y\|_1=\sum_i|x_i+y_i|\le\sum_i|x_i|+\sum_i|y_i|,\qquad |x_i+y_i|\le|x_i|+|y_i|\le\|x\|_\infty+\|y\|_\infty\ \ \forall i\ \Rightarrow\ \|x+y\|_\infty\le\|x\|_\infty+\|y\|_\infty .$$
+      <p>برای $\|\cdot\|_2$ نابرابری مثلثی سخت‌تر است و قضیهٔ ۱.۲ آن را با کوشی-شوارتز ثابت می‌کند.</p>
+    </div>
+  </details>
+
+  <div class="box rem" id="rem12">
+    <div class="box-h"><span class="tag">تبصره ۱.۲</span><span class="box-t">تعریف کوتاه‌تر نرم</span></div>
+    <p>نرم برداری روی $\mathbb{C}^n$ را می‌توان تابعی مانند $\|\cdot\|:\mathbb{C}^n\to\mathbb{R}$ با ویژگی‌های زیر تعریف کرد:</p>
+    <ol>
+      <li>(آ) به ازای هر $x\in\mathbb{C}^n$ و هر $\alpha\in\mathbb{C}$ داشته باشیم $\|\alpha x\|=|\alpha|\,\|x\|$؛</li>
+      <li>(ب) (نابرابری مثلثی) به ازای هر $x,y\in\mathbb{C}^n$ داشته باشیم $\|x+y\|\le\|x\|+\|y\|$؛</li>
+      <li>(پ) اگر $x\in\mathbb{C}^n$ و $\|x\|=0$ آن‌گاه $x=0$.</li>
+    </ol>
+    <p>برای اثبات این مطلب تمرین ۱ را انجام دهید. (حل کامل: <a href="#t1">تمرین ۱</a>.) ایده: نامنفی بودن از دو ویژگی دیگر نتیجه می‌شود.</p>
+  </div>
+
+  <h3 id="ip">ضرب داخلی</h3>
+  <div class="box def" id="def22">
+    <div class="box-h"><span class="tag">تعریف ۲.۲</span><span class="box-t">ضرب داخلی</span></div>
+    <p>تابع $ip:\mathbb{C}^n\times\mathbb{C}^n\to\mathbb{C}$ را یک ضرب داخلی روی $\mathbb{C}^n$ نامند هرگاه</p>
+    <ol>
+      <li>(آ) $\forall x\in\mathbb{C}^n:\ ip(x,x)\ge0$؛</li>
+      <li>(ب) $ip(x,x)=0$ اگر و فقط اگر $x=0$؛</li>
+      <li>(پ) $\forall x,y\in\mathbb{C}^n:\ ip(x,y)=\overline{ip(y,x)}$؛</li>
+      <li>(ت) $$\forall\alpha,\beta\in\mathbb{C},\ \forall x,y,z\in\mathbb{C}^n:\ ip(\alpha x+\beta y,z)=\bar\alpha\,ip(x,z)+\bar\beta\,ip(y,z)$$</li>
+    </ol>
+  </div>
+  <div class="box intu">
+    <div class="box-h"><span class="tag">به زبان ساده</span></div>
+    <p>ضرب داخلی تعمیم «ضرب نقطه‌ای» دبیرستان است: $(x,y)=x_1y_1+x_2y_2$. در اعداد مختلط یک مزدوج اضافه می‌شود تا $(x,x)=\sum|x_i|^2$ حقیقی و نامنفی بماند. در این کتاب مزدوج روی <b>آرگومان اول</b> است؛ برای همین در (ت) ضرایب $\alpha,\beta$ مزدوج بیرون می‌آیند.</p>
+  </div>
+  <div class="box rem" id="rem22">
+    <div class="box-h"><span class="tag">تبصره ۲.۲</span></div>
+    <p>ویژگی‌های پ و ت دلالت بر آن دارند که $$\ \forall\alpha\in\mathbb{C},\ \forall x,y\in\mathbb{C}^n:\ ip(x,\alpha y)=\alpha\,ip(x,y)$$</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات تبصره ۲.۲</span><span class="badge supp">تکمیلی</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">$ip(x,\alpha y)=\overline{ip(\alpha y,x)}$.
+        <div class="why">ویژگی (پ): جای دو آرگومان را عوض کن و مزدوج بگیر.</div></li>
+      <li class="step">$=\overline{\bar\alpha\,ip(y,x)}=\alpha\,\overline{ip(y,x)}$.
+        <div class="why">ویژگی (ت) با $\beta=0$؛ بعد $\overline{\bar\alpha w}=\alpha\bar w$.</div></li>
+      <li class="step">$=\alpha\,ip(x,y)$.
+        <div class="why">دوباره ویژگی (پ). پس ضرب داخلی نسبت به آرگومان دوم «خطی» و نسبت به اولی «مزدوج‌خطی» است.</div></li>
+    </ol>
+    <div class="qed">∎</div>
+  </div>
+  <div class="box rem" id="rem32">
+    <div class="box-h"><span class="tag">تبصره ۳.۲</span></div>
+    <p>اگر به جای $\mathbb{C}^n$ از $\mathbb{R}^n$ استفاده شود آن‌گاه ویژگی‌های پ و ت به صورت زیر تغییر می‌کنند:</p>
+    <p>(پ) $\forall x,y\in\mathbb{R}^n:\ ip(x,y)=ip(y,x)$؛ $\quad$ (ت) $$\forall\alpha,\beta\in\mathbb{R},\ \forall x,y,z\in\mathbb{R}^n:\ ip(\alpha x+\beta y,z)=\alpha\,ip(x,z)+\beta\,ip(y,z)$$</p>
+  </div>
+  <div class="box rem" id="rem42">
+    <div class="box-h"><span class="tag">تبصره ۴.۲</span></div>
+    <p>از این به بعد برای سادگی نوشتار قرار می‌دهیم $ip(x,y)=(x,y)$.</p>
+  </div>
+  <div class="box ex" id="ex22">
+    <div class="box-h"><span class="tag">مثال ۲.۲</span></div>
+    <p>$(x,y)=x^Hy$ و $(x,y)=x^Ty$ ضرب داخلی‌های <b>استاندارد</b> به ترتیب روی $\mathbb{C}^n$ و $\mathbb{R}^n$ هستند.</p>
+    <p class="small"><b>کنترل سریع:</b> $x^Hx=\sum|x_i|^2\ge0$ و فقط برای $x=0$ صفر است؛ $y^Hx=\sum\bar y_ix_i=\overline{\sum\bar x_iy_i}=\overline{x^Hy}$؛ و $(\alpha x+\beta y)^Hz=(\bar\alpha x^H+\bar\beta y^H)z$.</p>
+  </div>
+  <div class="box rem" id="rem52">
+    <div class="box-h"><span class="tag">تبصره ۵.۲</span><span class="box-t">نرم القایی</span></div>
+    <p>پس از تعریف یک ضرب داخلی، بلافاصله می‌توان یک نرم به صورت $\|x\|=\sqrt{(x,x)}$ تعریف کرد که <b>نرم القایی</b> از ضرب داخلی نامیده می‌شود. به عنوان مثال نرم اقلیدسی همان نرم القایی از ضرب داخلی استاندارد روی $\mathbb{C}^n$ است؛ در واقع برای هر بردار $x$ در $\mathbb{C}^n$ داریم $\|x\|_2^2=(x,x)=x^Hx$.</p>
+  </div>
+
+  <div class="box thm" id="lem12">
+    <div class="box-h"><span class="tag">لم ۱.۲</span><span class="box-t">نابرابری کوشی-شوارتز (کوشی-بونیاکوفسکی-شوارتز)</span></div>
+    <p>برای هر دو بردار دلخواه $x,y\in\mathbb{C}^n$ داریم</p>
+    $$|(x,y)|=|(y,x)|\le(x,x)^{\frac12}(y,y)^{\frac12}=\|x\|_2\,\|y\|_2$$
+    <p>و اگر $y\neq0$ برابری برقرار می‌شود اگر و تنها اگر $\alpha\in\mathbb{C}$ یافت شود که $x=\alpha y$.</p>
+  </div>
+  <div class="box intu">
+    <div class="box-h"><span class="tag">به زبان ساده</span></div>
+    <p>در صفحه $(x,y)=\|x\|\|y\|\cos\theta$ و چون $|\cos\theta|\le1$ نتیجه می‌گیریم $|(x,y)|\le\|x\|\|y\|$. برابری وقتی است که دو بردار هم‌راستا باشند ($\theta=0$ یا $\pi$). لم ۱.۲ همین را بدون زاویه، برای هر $n$ و حتی مختلط ثابت می‌کند.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات لم ۱.۲</span><span class="badge book">از کتاب</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">اگر $(x,y)=0$ به وضوح نتیجه برقرار است. پس فرض می‌کنیم $(x,y)\neq0$.
+        <div class="why">سمت چپ صفر است و سمت راست نامنفی. ضمناً $|(x,y)|=|(y,x)|$ چون $(y,x)=\overline{(x,y)}$ و قدرمطلق مزدوج همان قدرمطلق است.</div></li>
+      <li class="step">برای هر اسکالر دلخواه $\xi$:
+        $$0\le(x-\xi y,\,x-\xi y)=(x,x)-\xi(x,y)-\bar\xi(y,x)+|\xi|^2(y,y)=(x,x)-2\operatorname{Re}\big(\xi(x,y)\big)+|\xi|^2(y,y).$$
+        <div class="why">نامنفی بودن از ویژگی (آ). بازکردن: در آرگومان اول ضریب مزدوج بیرون می‌آید (ت) و در آرگومان دوم خودش (تبصرهٔ ۲.۲). بعد $\bar\xi(y,x)=\overline{\xi(x,y)}$ و $w+\bar w=2\operatorname{Re}w$.</div></li>
+      <li class="step">حال $\xi=\dfrac{(x,x)}{(x,y)}$ را قرار می‌دهیم. آن‌گاه $\xi(x,y)=(x,x)$ حقیقی است و
+        $$0\le(x,x)-2(x,x)+\frac{(x,x)^2}{|(x,y)|^2}(y,y)=-(x,x)+\frac{(x,x)^2}{|(x,y)|^2}(y,y).$$
+        <div class="why">این $\xi$ را طوری انتخاب کرده‌ایم که جملهٔ وسط ساده شود. $|\xi|^2=\frac{(x,x)^2}{|(x,y)|^2}$.</div></li>
+      <li class="step">چون $(x,y)\neq0$ پس $x\neq0$ و $(x,x)\gt0$. دو طرف را در عدد مثبت $\dfrac{|(x,y)|^2}{(x,x)}$ ضرب می‌کنیم:
+        $$0\le-|(x,y)|^2+(x,x)(y,y)\ \Longrightarrow\ |(x,y)|^2\le(x,x)(y,y).$$
+        <div class="why">اگر $x=0$ بود $(x,y)=0$ می‌شد. با جذر گرفتن نامساوی مورد نظر به‌دست می‌آید.</div></li>
+      <li class="step">برای اثبات قسمت دوم (حالت برابری) تمرین ۲ را انجام دهید.
+        <div class="why note">حل کامل در <a href="#t2">تمرین ۲</a>: با $\xi=\frac{(y,x)}{(y,y)}$ داریم $(x-\xi y,x-\xi y)=(x,x)-\frac{|(x,y)|^2}{(y,y)}$؛ برابری یعنی این صفر است، یعنی $x=\xi y$.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>$0\le(x-\xi y,x-\xi y)$ را باز کن ← $\xi=\frac{(x,x)}{(x,y)}$ ← ضرب در $\frac{|(x,y)|^2}{(x,x)}$ ← $|(x,y)|^2\le(x,x)(y,y)$.</div>
+    <div class="qed">∎</div>
+  </div>
+  <div class="widget" data-widget="cs"></div>
+
+  <p>باید توجه داشت که بررسی برخی از ویژگی‌های نرم برداری برای توابع تعریف‌شده در مثال ۱.۲ چندان راحت نیست. به عنوان مثال برای نشان‌دادن نابرابری مثلثی برای نرم اقلیدسی باید از لم ۱.۲ کمک گرفت.</p>
+  <div class="box thm" id="thm12">
+    <div class="box-h"><span class="tag">قضیه ۱.۲</span></div>
+    <p>نابرابری مثلثی برای نرم اقلیدسی برقرار است.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۱.۲</span><span class="badge book">از کتاب</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">برای هر دو بردار دلخواه $x,y\in\mathbb{C}^n$:
+        $$\|x+y\|_2^2=(x+y,x+y)=(x,x)+(y,x)+(x,y)+(y,y).$$
+        <div class="why">نرم اقلیدسی القایی از ضرب داخلی است (تبصرهٔ ۵.۲) و ضرب داخلی را مثل ضرب دو پرانتز باز می‌کنیم.</div></li>
+      <li class="step">$$=\|x\|_2^2+2\operatorname{Re}\big((y,x)\big)+\|y\|_2^2\le\|x\|_2^2+2|y^Hx|+\|y\|_2^2$$
+        <div class="why">$(x,y)=\overline{(y,x)}$ پس $(y,x)+(x,y)=2\operatorname{Re}(y,x)$؛ و $\operatorname{Re}w\le|w|$.</div></li>
+      <li class="step">$$\le\|x\|_2^2+2\|x\|_2\|y\|_2+\|y\|_2^2=(\|x\|_2+\|y\|_2)^2$$
+        <div class="why">نابرابری کوشی-شوارتز (لم ۱.۲): $|y^Hx|\le\|x\|_2\|y\|_2$.</div></li>
+      <li class="step">در نهایت $$\|x+y\|_2\le\big(\|x\|_2^2+2\|x\|_2\|y\|_2+\|y\|_2^2\big)^{\frac12}=\|x\|_2+\|y\|_2$$
+        <div class="why">از دو طرف عدد نامنفی جذر گرفته‌ایم.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>مربع را باز کن ← $2\operatorname{Re}\le2|\cdot|$ ← کوشی-شوارتز ← مربع کامل ← جذر.</div>
+    <div class="qed">∎</div>
+  </div>
+
+  <h3 id="orth">تعامد</h3>
+  <div class="box def" id="def32">
+    <div class="box-h"><span class="tag">تعریف ۳.۲</span></div>
+    <p>دو بردار در $\mathbb{C}^n$ ($\mathbb{R}^n$) <b>بر هم عمود</b> هستند یا <b>متعامد</b> نامیده می‌شوند اگر حاصل‌ضرب داخلی آن‌ها صفر شود.</p>
+  </div>
+  <div class="box def" id="def42">
+    <div class="box-h"><span class="tag">تعریف ۴.۲</span></div>
+    <p>مجموعهٔ بردارهای $\{v^{(1)},\dots,v^{(n)}\}$ <b>متعامد</b> نامیده می‌شود اگر این بردارها دو به دو بر هم عمود باشند؛ یعنی برای $i\neq j$، $(v^{(i)},v^{(j)})=0$. به علاوه اگر برای $i=1,\dots,n$ داشته باشیم $(v^{(i)},v^{(i)})=1$ مجموعهٔ بردارهای $\{v^{(1)},\dots,v^{(n)}\}$ <b>متعامدیکه</b> خوانده می‌شود (که لازمهٔ آن غیرصفر بودن بردارهای $v^{(1)},\dots,v^{(n)}$ است).</p>
+  </div>
+  <div class="box thm" id="thm22">
+    <div class="box-h"><span class="tag">قضیه ۲.۲</span></div>
+    <p>بردارهای متعامد غیرصفر، مستقل خطی هستند.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۲.۲</span><span class="badge book">از کتاب</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">فرض کنید $\{v^{(1)},\dots,v^{(n)}\}$ مجموعه‌ای متعامد از بردارهای غیرصفر باشد و $\alpha_1v^{(1)}+\cdots+\alpha_nv^{(n)}=0$.
+        <div class="why">برای اثبات استقلال خطی باید نشان دهیم این ترکیب خطی فقط با ضرایب صفر ممکن است.</div></li>
+      <li class="step">برای هر $i=1,\dots,n$ با ضرب داخلی $v^{(i)}$ در این رابطه داریم $\alpha_i(v^{(i)},v^{(i)})=0$.
+        <div class="why">$(v^{(i)},\sum_j\alpha_jv^{(j)})=\sum_j\alpha_j(v^{(i)},v^{(j)})$ و همهٔ جمله‌های $j\neq i$ به خاطر تعامد صفرند. سمت راست هم $(v^{(i)},0)=0$.</div></li>
+      <li class="step">چون $v^{(i)}$ غیرصفر است پس $(v^{(i)},v^{(i)})\neq0$ و بنابراین برای هر $i$، $\alpha_i=0$.
+        <div class="why">ویژگی (ب) ضرب داخلی.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>ترکیب خطی صفر را در $v^{(i)}$ ضرب داخلی کن؛ فقط جملهٔ $i$ام می‌ماند.</div>
+    <div class="qed">∎</div>
+  </div>
+
+  <div class="box ex" id="ex32">
+    <div class="box-h"><span class="tag">مثال ۳.۲</span></div>
+    <p>بردارهای $v^{(1)}=[0\ \ 4\ \ 2]^T$، $v^{(2)}=[-1\ \ -\frac15\ \ \frac25]^T$ و $v^{(3)}=[\frac16\ \ -\frac16\ \ \frac13]^T$ متعامد و بردارهای</p>
+    $$u^{(1)}=\frac{v^{(1)}}{\|v^{(1)}\|_2}=\Big[0\ \ \tfrac{2\sqrt5}{5}\ \ \tfrac{\sqrt5}{5}\Big]^T,\quad u^{(2)}=\frac{v^{(2)}}{\|v^{(2)}\|_2}=\Big[-\tfrac{\sqrt{30}}{6}\ \ -\tfrac{\sqrt{30}}{30}\ \ \tfrac{\sqrt{30}}{15}\Big]^T,\quad u^{(3)}=\frac{v^{(3)}}{\|v^{(3)}\|_2}=\Big[\tfrac{\sqrt6}{6}\ \ -\tfrac{\sqrt6}{6}\ \ \tfrac{\sqrt6}{3}\Big]^T$$
+    <p>متعامدیکه هستند. پس به راحتی می‌توان یک مجموعهٔ متعامد از بردارهای غیرصفر را به یک مجموعهٔ متعامدیکه تبدیل کرد.</p>
+  </div>
+  <details class="try">
+    <summary>کنترل محاسبات مثال ۳.۲</summary>
+    <div>
+      <p>تعامد: $(v^{(1)},v^{(2)})=0-\frac45+\frac45=0$، $\ (v^{(1)},v^{(3)})=0-\frac46+\frac23=0$، $\ (v^{(2)},v^{(3)})=-\frac16+\frac1{30}+\frac{2}{15}=\frac{-5+1+4}{30}=0$.</p>
+      <p>طول‌ها: $\|v^{(1)}\|_2=\sqrt{20}=2\sqrt5$، $\ \|v^{(2)}\|_2=\sqrt{1+\frac1{25}+\frac4{25}}=\frac{\sqrt{30}}5$، $\ \|v^{(3)}\|_2=\sqrt{\frac1{36}+\frac1{36}+\frac4{36}}=\frac{\sqrt6}6$. مثلاً $\frac{4}{2\sqrt5}=\frac{2}{\sqrt5}=\frac{2\sqrt5}{5}$.</p>
+    </div>
+  </details>
+  <div class="box def" id="def52">
+    <div class="box-h"><span class="tag">تعریف ۵.۲</span><span class="box-t">ماتریس متعامد و یکانی</span></div>
+    <p>یک ماتریس مربعی و حقیقی را <b>متعامد</b> نامند هرگاه ستون‌های آن متعامدیکه باشند. به طور مشابه یک ماتریس مربعی و مختلط را <b>یکانی</b> نامند هرگاه ستون‌های آن متعامدیکه باشند.</p>
+  </div>
+  <div class="box ex" id="ex42">
+    <div class="box-h"><span class="tag">مثال ۴.۲</span></div>
+    <p>با توجه به مثال ۳.۲ ماتریس زیر یک ماتریس متعامد است (ستون‌هایش $u^{(1)},u^{(2)},u^{(3)}$ هستند):</p>
+    $$U=\begin{bmatrix}0&-\frac{\sqrt{30}}{6}&\frac{\sqrt6}{6}\\[3pt]\frac{2\sqrt5}{5}&-\frac{\sqrt{30}}{30}&-\frac{\sqrt6}{6}\\[3pt]\frac{\sqrt5}{5}&\frac{\sqrt{30}}{15}&\frac{\sqrt6}{3}\end{bmatrix}.$$
+  </div>
+
+  <h3 id="newnorms">ساختن نرم جدید و نابرابری مثلثی پسرو</h3>
+  <div class="box thm" id="thm32">
+    <div class="box-h"><span class="tag">قضیه ۳.۲</span></div>
+    <p>اگر $\nu(\cdot)$ یک نرم برداری روی $\mathbb{C}^m$ و $A$ ماتریسی $m\times n$ ($m\ge n$) با ستون‌های مستقل خطی باشد، آن‌گاه تابع $\mu(x)=\nu(Ax)$ یک نرم برداری روی $\mathbb{C}^n$ است.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۳.۲</span><span class="badge supp">کتاب: «به سادگی» · کامل شده</span><span class="grow"></span></div>
+    <p class="proof-goal">کتاب می‌گوید چون $\nu$ ویژگی‌های نرم را دارد، $\mu$ هم دارد. چهار ویژگی را یکی‌یکی چک می‌کنیم.</p>
+    <ol class="steps">
+      <li class="step"><b>(آ)</b> $\mu(x)=\nu(Ax)\ge0$.
+        <div class="why">$\nu$ نرم است و مقدارش منفی نمی‌شود.</div></li>
+      <li class="step"><b>(ب)</b> $$\mu(x)=0\iff\nu(Ax)=0\iff Ax=0\iff x=0$$
+        <div class="why">تساوی دوم: ویژگی (ب) برای $\nu$. تساوی سوم: $Ax=x_1a^{(1)}+\cdots+x_na^{(n)}$ ترکیب خطی ستون‌هاست و چون ستون‌ها مستقل خطی‌اند، فقط با $x=0$ صفر می‌شود. <b>فرض استقلال خطی دقیقاً همین‌جا لازم است.</b></div></li>
+      <li class="step"><b>(پ)</b> $$\mu(\alpha x)=\nu(A(\alpha x))=\nu(\alpha\,Ax)=|\alpha|\,\nu(Ax)=|\alpha|\,\mu(x)$$
+        <div class="why">ضرب ماتریس در اسکالر جابه‌جا می‌شود؛ بعد ویژگی (پ) برای $\nu$.</div></li>
+      <li class="step"><b>(ت)</b> $$\mu(x+y)=\nu(Ax+Ay)\le\nu(Ax)+\nu(Ay)=\mu(x)+\mu(y)$$
+        <div class="why">پخش‌پذیری ضرب ماتریس و نابرابری مثلثی برای $\nu$.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>هر ویژگی $\mu$ = همان ویژگی $\nu$ روی $Ax$. فقط (ب) به «ستون‌های مستقل» نیاز دارد.</div>
+    <div class="qed">∎</div>
+  </div>
+  <p class="small muted">به عنوان مثالی برای قضیهٔ ۳.۲ کتاب به قضیهٔ ۱۱.۳ (صفحهٔ ۶۶) اشاره می‌کند.</p>
+
+  <div class="box thm" id="lem22">
+    <div class="box-h"><span class="tag">لم ۲.۲</span><span class="box-t">نابرابری مثلثی پسرو (وارون)</span></div>
+    <p>برای نرم برداری $\|\cdot\|$ و بردارهای دلخواه $x$ و $y$ در $\mathbb{C}^n$ داریم $\ \big|\,\|y\|-\|x\|\,\big|\le\|y-x\|$.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات لم ۲.۲</span><span class="badge book">از کتاب</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">از ویژگی نابرابری مثلثی نرم‌های برداری نتیجه می‌شود $\ \|y\|=\|y-x+x\|\le\|x\|+\|y-x\|$، یا $\ \|y\|-\|x\|\le\|y-x\|$.
+        <div class="why">ترفند «صفر اضافه کن»: $y=(y-x)+x$.</div></li>
+      <li class="step">به طور مشابه می‌توان نشان داد $\ -\|y-x\|\le\|y\|-\|x\|$.
+        <div class="why">همان کار با $x=(x-y)+y$: $\ \|x\|\le\|y\|+\|x-y\|$ و $$\|x-y\|=\|-(y-x)\|=|-1|\|y-x\|=\|y-x\|$$</div></li>
+      <li class="step">بنابراین $\ \big|\,\|y\|-\|x\|\,\big|\le\|y-x\|$.
+        <div class="why">عدد $t$ بین $-c$ و $c$ است یعنی $|t|\le c$.</div></li>
+    </ol>
+    <div class="qed">∎</div>
+  </div>
+
+  <p>در اثبات قضیهٔ ۴.۲ از لم ۲.۲ استفاده می‌شود.</p>
+  <div class="box thm" id="thm42">
+    <div class="box-h"><span class="tag">قضیه ۴.۲</span></div>
+    <p>هر نرم برداری روی $\mathbb{C}^n$ تابعی پیوسته است.</p>
+  </div>
+  <div class="proof supp">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۴.۲</span><span class="badge supp">تکمیلی · کتاب فقط به لم ۲.۲ اشاره کرده</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">نرم دلخواه $\nu$ و بردارهای $x,y$ را در نظر بگیر. طبق لم ۲.۲: $\ |\nu(y)-\nu(x)|\le\nu(y-x)$.
+        <div class="why">پس کافی است نشان دهیم وقتی $y$ به $x$ نزدیک می‌شود، $\nu(y-x)$ به صفر می‌رود.</div></li>
+      <li class="step">بردار $y-x$ را بر حسب پایهٔ استاندارد بنویس: $y-x=\sum_{i=1}^n(y_i-x_i)e^{(i)}$. پس
+        $$\nu(y-x)\le\sum_{i=1}^n|y_i-x_i|\,\nu(e^{(i)})\le M\,\|y-x\|_\infty,\qquad M=\sum_{i=1}^n\nu(e^{(i)}).$$
+        <div class="why">نابرابری مثلثی و ویژگی (پ) برای $\nu$؛ بعد هر $|y_i-x_i|\le\|y-x\|_\infty$. عدد $M$ ثابت است (به $x,y$ بستگی ندارد).</div></li>
+      <li class="step">نتیجه: $|\nu(y)-\nu(x)|\le M\|y-x\|_\infty$. اگر $y\to x$ (یعنی همهٔ مؤلفه‌ها همگرا شوند) آن‌گاه $\|y-x\|_\infty\to0$ و طبق فشردگی $\nu(y)\to\nu(x)$.
+        <div class="why">این دقیقاً تعریف پیوستگی است.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>لم ۲.۲ ← $y-x$ را با $e^{(i)}$ بنویس ← $|\nu(y)-\nu(x)|\le M\|y-x\|_\infty$ ← فشردگی.</div>
+    <div class="qed">∎</div>
+  </div>
+
+  <h3 id="equiv">هم‌ارزی نرم‌ها</h3>
+  <div class="box def" id="def62">
+    <div class="box-h"><span class="tag">تعریف ۶.۲</span></div>
+    <p>دو نرم برداری $\nu(\cdot)$ و $\mu(\cdot)$ روی $\mathbb{C}^n$ را <b>هم‌ارز</b> نامند هرگاه ثابت‌های مثبت $\alpha_1$ و $\alpha_2$ چنان موجود باشند که برای هر $x$ در $\mathbb{C}^n$ داشته باشیم $\ \alpha_1\mu(x)\le\nu(x)\le\alpha_2\mu(x)$.</p>
+  </div>
+  <div class="box intu">
+    <div class="box-h"><span class="tag">به زبان ساده</span></div>
+    <p>هم‌ارز یعنی دو خط‌کش متفاوت که هیچ‌وقت «خیلی» با هم اختلاف ندارند: یکی حداکثر چند برابر دیگری است. پس اگر یک بردار در یک نرم کوچک شود، در نرم دیگر هم کوچک می‌شود. در شکل بالا (گوی واحد) دیدی که دایره بین لوزی و مربع گیر افتاده است.</p>
+  </div>
+  <div class="box thm" id="thm52">
+    <div class="box-h"><span class="tag">قضیه ۵.۲</span></div>
+    <p>هر دو نرم برداری روی $\mathbb{C}^n$ هم‌ارز هستند.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۵.۲</span><span class="badge book">از کتاب، با جزئیات</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">به دلیل آنکه هم‌ارز بودن نرم‌های برداری روی مجموعهٔ تمام نرم‌های روی $\mathbb{C}^n$ یک رابطهٔ هم‌ارزی تعریف می‌کند، کافی است نشان دهیم نرم برداری دلخواه $\nu(\cdot)$ روی $\mathbb{C}^n$ با نرم بی‌نهایت هم‌ارز است.
+        <div class="why">ترایایی: اگر $\alpha_1\|x\|_\infty\le\nu(x)\le\alpha_2\|x\|_\infty$ و $\beta_1\|x\|_\infty\le\mu(x)\le\beta_2\|x\|_\infty$، آن‌گاه $\frac{\alpha_1}{\beta_2}\mu(x)\le\nu(x)\le\frac{\alpha_2}{\beta_1}\mu(x)$. پس هر دو نرم با واسطهٔ $\|\cdot\|_\infty$ هم‌ارزند.</div></li>
+      <li class="step">بنابر قضیهٔ ۴.۲، $\nu(\cdot)$ تابعی پیوسته است و بنابر قضیهٔ وایرشتراس بیشترین و کمترین مقدار خود را روی مجموعهٔ بسته و کران‌دار $S=\{x\in\mathbb{C}^n:\ \|x\|_\infty=1\}$ اختیار می‌کند؛ یعنی نقاط $x_m$ و $x_M$ در $S$ موجودند به طوری که $\nu(x_m)=\min_{x\in S}\nu(x)$ و $\nu(x_M)=\max_{x\in S}\nu(x)$.
+        <div class="why">$S$ کران‌دار است چون همهٔ مؤلفه‌ها قدرمطلق حداکثر ۱ دارند؛ بسته است چون $\|\cdot\|_\infty$ پیوسته است. (مثل سطح یک مکعب.)</div></li>
+      <li class="step">در نتیجه $\ 0\lt\nu(x_m)\le\nu(x)\le\nu(x_M)\lt\infty$ برای هر $x\in S$.
+        <div class="why">چرا $\nu(x_m)\gt0$؟ چون $\|x_m\|_\infty=1$ پس $x_m\neq0$ و طبق ویژگی (ب) نرم، $\nu(x_m)\neq0$.</div></li>
+      <li class="step">حال اگر $x$ بردار غیرصفر دلخواهی در $\mathbb{C}^n$ باشد آن‌گاه $x/\|x\|_\infty$ در $S$ قرار دارد و داریم $\ \nu(x_m)\le\nu\big(x/\|x\|_\infty\big)\le\nu(x_M)$.
+        <div class="why">$\big\|x/\|x\|_\infty\big\|_\infty=\frac{1}{\|x\|_\infty}\|x\|_\infty=1$؛ «نرمال کردن» بردار.</div></li>
+      <li class="step">بنابر ویژگی‌های نرم برداری نتیجه می‌شود $\ \nu(x_m)\le\nu(x)/\|x\|_\infty\le\nu(x_M)$ و در نهایت
+        $$\nu(x_m)\,\|x\|_\infty\le\nu(x)\le\nu(x_M)\,\|x\|_\infty .$$
+        <div class="why">ویژگی (پ): $\nu(x/c)=\nu(x)/c$ برای $c=\|x\|_\infty\gt0$. برای $x=0$ هم نامساوی بدیهی است. پس $\alpha_1=\nu(x_m)$ و $\alpha_2=\nu(x_M)$.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>کافی است با $\|\cdot\|_\infty$ مقایسه کنی ← $\nu$ پیوسته ← وایرشتراس روی $S=\{\|x\|_\infty=1\}$ ← $\min\gt0$ ← نرمال کن: $x/\|x\|_\infty\in S$.</div>
+    <div class="qed">∎</div>
+  </div>
+  <p>نمونه‌هایی از هم‌ارزی نرم‌های برداری متداول در <a href="#t5">تمرین ۵</a> آورده شده است.</p>
+
+  <h3 id="seq">دنباله‌های برداری و همگرایی</h3>
+  <div class="box def" id="def72">
+    <div class="box-h"><span class="tag">تعریف ۷.۲</span><span class="box-t">حد مؤلفه‌به‌مؤلفه</span></div>
+    <p>فرض کنید $\{x^{(k)}\}_{k=1}^\infty$ دنباله‌ای از بردارهای $\mathbb{C}^n$ و $x$ برداری در $\mathbb{C}^n$ باشد. $x$ حد دنبالهٔ $\{x^{(k)}\}$ است و می‌توان نوشت $x=\lim_{k\to\infty}x^{(k)}$ هرگاه</p>
+    $$\lim_{k\to\infty}x_i^{(k)}=x_i,\qquad i=1,\dots,n$$
+    <p>که در آن $x=[x_i]$ و $x^{(k)}=[x_i^{(k)}]$.</p>
+  </div>
+  <p>با توجه به ارتباط تنگاتنگ حد دنباله‌های برداری و حد دنباله‌های عددی، به راحتی می‌توان برقراری ویژگی‌هایی مانند یکتایی، خطی بودن عملگر حد و غیره را بررسی کرد.</p>
+  <div class="box thm" id="thm62">
+    <div class="box-h"><span class="tag">قضیه ۶.۲</span></div>
+    <p>با این فرض که $\lim_{k\to\infty}x^{(k)}=x$ و $\lim_{k\to\infty}y^{(k)}=y$، به ازای هر دو اسکالر دلخواه $\alpha$ و $\beta$ داریم $\ \lim_{k\to\infty}(\alpha x^{(k)}+\beta y^{(k)})=\alpha x+\beta y$.</p>
+    <p class="small">اثبات: تمرین ۶ (حل کامل: <a href="#t6">تمرین ۶</a>).</p>
+  </div>
+  <p>باید توجه داشت که بسیاری از ویژگی‌های حد در $\mathbb{C}$ را می‌توان به $\mathbb{C}^n$ تعمیم داد (مشابه قضیهٔ ۶.۲) ولی بعضی از حکم‌ها مانند قضیهٔ فشردگی قابل تعمیم نیستند (برای بردارها «کوچک‌تر» معنی ندارد) و در این مورد تعریف زیر راه‌گشا است.</p>
+  <div class="box def" id="def82">
+    <div class="box-h"><span class="tag">تعریف ۸.۲</span><span class="box-t">همگرایی نسبت به نرم</span></div>
+    <p>دنبالهٔ $\{x^{(k)}\}_{k=1}^\infty$ از بردارها در $\mathbb{C}^n$ <b>همگرا به</b> بردار $x$ در $\mathbb{C}^n$ نسبت به نرم برداری $\|\cdot\|$ است و می‌توان نوشت $\lim_{k\to\infty}\|x^{(k)}-x\|=0$ هرگاه به ازای هر $\epsilon\gt0$ داده شده، عدد صحیح $N_\epsilon$ چنان موجود باشد که $\ \|x^{(k)}-x\|\lt\epsilon,\ \ \forall k\ge N_\epsilon$.</p>
+  </div>
+  <div class="box thm" id="thm72">
+    <div class="box-h"><span class="tag">قضیه ۷.۲</span></div>
+    <p>اگر $\{x^{(k)}\}_{k=1}^\infty$ دنباله‌ای از بردارها در $\mathbb{C}^n$ و $x$ برداری در $\mathbb{C}^n$ باشد آن‌گاه
+    $$\ \lim_{k\to\infty}\|x^{(k)}-x\|=0\iff\lim_{k\to\infty}x^{(k)}=x$$</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۷.۲</span><span class="badge book">از کتاب</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">با توجه به هم‌ارز بودن نرم‌های برداری روی $\mathbb{C}^n$ کافی است حکم را برای $\|\cdot\|_\infty$ نشان دهیم.
+        <div class="why">طبق <a href="#t7">تمرین ۷</a>: اگر $\|x^{(k)}-x\|_a\to0$ آن‌گاه برای هر نرم دیگر $\|x^{(k)}-x\|_b\le\frac1{\alpha_1}\|x^{(k)}-x\|_a\to0$.</div></li>
+      <li class="step">$$\lim x^{(k)}=x\iff\lim x_i^{(k)}=x_i\ \ (i=1,\dots,n)\iff\lim|x_i^{(k)}-x_i|=0\ \ (i=1,\dots,n)$$
+        <div class="why">تعریف ۷.۲؛ و برای اعداد، $a_k\to a$ یعنی $|a_k-a|\to0$.</div></li>
+      <li class="step">$$\iff\lim_{k\to\infty}\max_{1\le i\le n}|x_i^{(k)}-x_i|=0\iff\lim\|x^{(k)}-x\|_\infty=0$$
+        <div class="why">ماکزیمم $n$ دنبالهٔ نامنفی به صفر می‌رود اگر و فقط اگر هر کدام به صفر برود ($n$ متناهی است): هر $|x_i^{(k)}-x_i|\le\max$ (فشردگی) و برعکس $\max\le\sum_i|x_i^{(k)}-x_i|\to0$.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>هم‌ارزی ⇒ فقط $\|\cdot\|_\infty$ ← حد مؤلفه‌ای ⇔ هر $|x_i^{(k)}-x_i|\to0$ ⇔ ماکزیمم آن‌ها $\to0$.</div>
+    <div class="qed">∎</div>
+  </div>
+
+  <div class="quiz">
+    <div class="quiz-h"><b>خودآزمایی ۱.۲</b><span class="score"></span></div>
+    <div class="q">
+      <p class="q-t">برای $x=[1\ \ -2\ \ 2]^T$، مقدار $\|x\|_2$ کدام است؟</p>
+      <div class="opts two"><button class="opt">۵</button><button class="opt" data-c>۳</button><button class="opt">۲</button><button class="opt">$\sqrt5$</button></div>
+      <p class="q-exp">$\sqrt{1+4+4}=3$. (و $\|x\|_1=5$، $\|x\|_\infty=2$.)</p>
+    </div>
+    <div class="q">
+      <p class="q-t">فرق نیم‌نرم با نرم در کدام ویژگی است؟</p>
+      <div class="opts"><button class="opt">نابرابری مثلثی</button><button class="opt" data-c>$\|x\|=0$ لزوماً نتیجه نمی‌دهد $x=0$</button><button class="opt">همگنی $\|\alpha x\|=|\alpha|\|x\|$</button></div>
+      <p class="q-exp">تعریف ۱.۲: اگر ویژگی (ب) از کار بیفتد، نیم‌نرم داریم.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">در اثبات کوشی-شوارتز، کدام $\xi$ انتخاب شد؟</p>
+      <div class="opts two"><button class="opt" data-c>$\xi=\frac{(x,x)}{(x,y)}$</button><button class="opt">$\xi=\frac{(x,y)}{(x,x)}$</button><button class="opt">$\xi=1$</button><button class="opt">$\xi=(y,y)$</button></div>
+      <p class="q-exp">با این انتخاب $\xi(x,y)=(x,x)$ حقیقی می‌شود و عبارت ساده می‌شود.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">چرا در اثبات قضیهٔ ۵.۲ داریم $\nu(x_m)\gt0$؟</p>
+      <div class="opts"><button class="opt">چون $\nu$ پیوسته است.</button><button class="opt" data-c>چون $\|x_m\|_\infty=1$ پس $x_m\ne0$ و نرم بردار ناصفر مثبت است.</button><button class="opt">چون $S$ کران‌دار است.</button></div>
+      <p class="q-exp">ویژگی (ب) نرم.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">در قضیهٔ ۳.۲ فرض «ستون‌های مستقل خطی» برای کدام ویژگی لازم است؟</p>
+      <div class="opts two"><button class="opt">نامنفی بودن</button><button class="opt" data-c>$\mu(x)=0\Rightarrow x=0$</button><button class="opt">همگنی</button><button class="opt">نابرابری مثلثی</button></div>
+      <p class="q-exp">$Ax=0$ فقط برای $x=0$، وقتی ستون‌ها مستقل‌اند.</p>
+    </div>
+    <div class="quiz-f"><button class="btn quiz-reset">دوباره</button></div>
+  </div>
+
+  <div class="box goal">
+    <div class="box-h"><span class="tag">حالا این تمرین‌ها را می‌توانی حل کنی</span></div>
+    <p><a href="#t1">تمرین ۱</a> · <a href="#t2">تمرین ۲</a> · <a href="#t3">تمرین ۳</a> · <a href="#t4">تمرین ۴</a> · <a href="#t5">تمرین ۵</a> · <a href="#t6">تمرین ۶</a> · <a href="#t7">تمرین ۷</a> (بخش برداری)</p>
+  </div>
+
+  <div class="sec-done"><p>محک: کوشی-شوارتز، قضیهٔ ۱.۲ و قضیهٔ ۵.۲ را بدون نگاه اثبات کن و تمرین‌های ۲ و ۵ را حل کن.</p><button class="btn done-btn" data-sec="sec21"></button></div>
+</section>
+
+<!-- ================================================================ 2.2 -->
+<section class="sec" id="s2">
+  <h2 id="sec22"><span class="num">۲.۲</span>نرم ماتریسی</h2>
+
+  <div class="box goal">
+    <div class="box-h"><span class="tag">بعد از این بخش می‌توانی</span></div>
+    <ul>
+      <li>نرم طبیعی (القایی) را تعریف کنی و ثابت کنی نرم، سازگار و زیرضربی است؛</li>
+      <li>$\|A\|_1$ (بیشترین مجموع ستونی) و $\|A\|_\infty$ (بیشترین مجموع سطری) را حساب و فرمولشان را اثبات کنی؛</li>
+      <li>ویژگی‌های $\|A\|_2$ و ماتریس‌های یکانی (قضیه‌های ۱۲.۲ تا ۱۴.۲) را اثبات کنی.</li>
+    </ul>
+  </div>
+
+  <p>مشابه با تعریف نرم روی بردارها می‌توان نرم ماتریسی را به صورت زیر تعریف کرد.</p>
+  <div class="box def" id="def92">
+    <div class="box-h"><span class="tag">تعریف ۹.۲</span><span class="box-t">نرم ماتریسی</span></div>
+    <p>یک نرم ماتریسی تابعی مانند $\|\cdot\|:\mathbb{C}^{m\times n}\to\mathbb{R}$ با ویژگی‌های زیر است:</p>
+    <ol>
+      <li>(آ) به ازای هر ماتریس مختلط $A\in\mathbb{C}^{m\times n}$ داشته باشیم $\|A\|\ge0$؛</li>
+      <li>(ب) $\|A\|=0$ اگر و فقط اگر $A=0$؛</li>
+      <li>(پ) به ازای هر $A\in\mathbb{C}^{m\times n}$ و هر $\alpha\in\mathbb{C}$ داشته باشیم $\|\alpha A\|=|\alpha|\,\|A\|$؛</li>
+      <li>(ت) (نابرابری مثلثی) به ازای هر $A,B\in\mathbb{C}^{m\times n}$ داشته باشیم $\|A+B\|\le\|A\|+\|B\|$.</li>
+    </ol>
+    <p>بلافاصله می‌توان فاصلهٔ بین دو ماتریس هم‌مرتبهٔ $A$ و $B$ را به صورت $d(A,B):=\|A-B\|$ تعریف کرد.</p>
+  </div>
+  <div class="box ex" id="ex52">
+    <div class="box-h"><span class="tag">مثال ۵.۲</span><span class="box-t">نرم فروبنیوس</span></div>
+    <p>فرض کنید $A=[a_{ij}]$ ماتریس دلخواهی در $\mathbb{C}^{m\times n}$ باشد. تابع $\ \|A\|_F=\Big(\sum_{i=1}^m\sum_{j=1}^n|a_{ij}|^2\Big)^{\frac12}\ $ یک نرم ماتریسی متداول روی $\mathbb{C}^{m\times n}$ است که به <b>نرم فروبنیوس</b> معروف است.</p>
+    <p class="small">مثلاً برای $A=\left[\begin{smallmatrix}1&-2\\3&4\end{smallmatrix}\right]$: $\ \|A\|_F=\sqrt{1+4+9+16}=\sqrt{30}$. (نرم فروبنیوس همان نرم اقلیدسیِ همهٔ درایه‌ها پشت سر هم است؛ برای همین نرم بودنش از قضیهٔ ۱.۲ می‌آید.)</p>
+  </div>
+  <div class="box rem" id="rem62">
+    <div class="box-h"><span class="tag">تبصره ۶.۲</span></div>
+    <p>از این به بعد از نماد $\|\cdot\|$ هم برای نمایش نرم برداری هم برای نمایش نرم ماتریسی استفاده می‌کنیم. با توجه به موضوع مشخص می‌شود منظور از $\|\cdot\|$ نرم برداری است یا نرم ماتریسی.</p>
+  </div>
+  <div class="box rem" id="rem72">
+    <div class="box-h"><span class="tag">تبصره ۷.۲</span></div>
+    <p>مشابه با تعریف نرم برداری در تبصرهٔ ۱.۲، می‌توان تعریفی هم‌ارز با تعریف ۹.۲ برای نرم ماتریسی بیان کرد. (همان سه ویژگی، این بار برای ماتریس‌ها؛ <a href="#t1">تمرین ۱</a>.)</p>
+  </div>
+  <div class="box def" id="def102">
+    <div class="box-h"><span class="tag">تعریف ۱۰.۲</span><span class="box-t">زیرضربی</span></div>
+    <p>تابع $\mu(\cdot)$ تعریف‌شده روی مجموعهٔ ماتریس‌های مختلط دارای <b>ویژگی زیرضربی</b> است هرگاه به ازای هر ماتریس مختلط $A$ و $B$ داشته باشیم $\mu(AB)\le\mu(A)\mu(B)$ که مرتبهٔ $A$ و $B$ به گونه‌ای است که ضرب $AB$ قابل انجام باشد.</p>
+  </div>
+  <div class="box def" id="def112">
+    <div class="box-h"><span class="tag">تعریف ۱۱.۲</span><span class="box-t">سازگاری</span></div>
+    <p>تابع $\mu(\cdot)$ تعریف‌شده روی $\mathbb{C}^{m\times n}$ را با نرم برداری $\|\cdot\|$ <b>سازگار</b> نامند هرگاه $\ \|Ax\|\le\mu(A)\,\|x\|,\ \ \forall x\in\mathbb{C}^n,\ \forall A\in\mathbb{C}^{m\times n}$.</p>
+  </div>
+  <div class="box intu">
+    <div class="box-h"><span class="tag">به زبان ساده</span><span class="box-t">نرم ماتریس = بیشترین «بزرگ‌نمایی»</span></div>
+    <p>ماتریس $A$ هر بردار $x$ را به $Ax$ می‌برد. نسبت $\frac{\|Ax\|}{\|x\|}$ می‌گوید $A$ این بردار را چند برابر کرده. «نرم طبیعی» بیشترین این نسبت روی همهٔ بردارهاست: بدترین بزرگ‌نمایی. «سازگار» یعنی هیچ برداری بیشتر از $\|A\|$ برابر بزرگ نمی‌شود.</p>
+  </div>
+
+  <div class="box thm" id="thm82">
+    <div class="box-h"><span class="tag">قضیه ۸.۲</span><span class="box-t">نرم ماتریسی طبیعی</span></div>
+    <p>اگر $\|\cdot\|$ یک نرم برداری باشد، تابع تعریف‌شده روی $\mathbb{C}^{m\times n}$ به صورت</p>
+    $$\|A\|=\max_{0\neq x\in\mathbb{C}^n}\frac{\|Ax\|}{\|x\|},\qquad\forall A\in\mathbb{C}^{m\times n}\tag{1.2}$$
+    <p>یک نرم ماتریسی است و به <b>نرم ماتریسی طبیعی</b> نسبت به (یا القاشده از یا وابسته به) نرم برداری معروف است.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۸.۲</span><span class="badge book">از کتاب، با جزئیات کامل‌شده</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step"><b>خوش‌تعریفی.</b> اگر $x$ بردار دلخواه غیرصفری در $\mathbb{C}^n$ باشد قرار می‌دهیم $z=\frac{1}{\|x\|}x$. در این صورت $\|z\|=\frac1{\|x\|}\|x\|=1$ و همچنین $\|Az\|=\frac{\|Ax\|}{\|x\|}$. بنابراین اگر $S=\{x\in\mathbb{C}^n:\|x\|=1\}$، برای هر $A$ خواهیم داشت
+        $$\|A\|=\max_{0\neq x}\frac{\|Ax\|}{\|x\|}=\max_{x\in S}\|Ax\| .$$
+        <div class="why">هر نسبت با یک بردار به طول ۱ هم‌مقدار است؛ پس به‌جای همهٔ بردارها فقط روی «کرهٔ واحد» $S$ نگاه می‌کنیم.</div></li>
+      <li class="step">با توجه به اینکه هر نرم برداری روی $\mathbb{C}^n$ تابعی پیوسته و $S$ مجموعه‌ای بسته و کران‌دار است، $\max_{x\in S}\|Ax\|$ وجود دارد و تابع تعریف‌شده در (۱.۲) خوش‌تعریف است.
+        <div class="why">$x\mapsto\|Ax\|$ ترکیب دو تابع پیوسته است (ضرب ماتریس و نرم، قضیهٔ ۴.۲)؛ وایرشتراس می‌گوید ماکزیمم واقعاً رخ می‌دهد (نه فقط سوپریمم).</div></li>
+      <li class="step"><b>سازگاری.</b> به ازای هر بردار غیرصفر $x$ بنابر تعریف خواهیم داشت $\|A\|\ge\frac{\|Ax\|}{\|x\|}$. در نتیجه $\ \|Ax\|\le\|A\|\,\|x\|$ برای هر $x$ و هر $A$.
+        <div class="why">ماکزیمم از هر مقدار بزرگ‌تر یا مساوی است. برای $x=0$ نامساوی بدیهی است ($0\le0$).</div></li>
+      <li class="step"><b>(آ) و (پ).</b> $\|A\|\ge0$ چون ماکزیمم اعداد نامنفی است. و $$\|\alpha A\|=\max_{x\in S}\|\alpha Ax\|=\max_{x\in S}|\alpha|\|Ax\|=|\alpha|\,\|A\|$$
+        <div class="why">ویژگی‌های (آ) و (پ) نرم برداری؛ عدد ثابت $|\alpha|$ از ماکزیمم بیرون می‌آید. (کتاب: «به وضوح».)</div></li>
+      <li class="step"><b>(ب).</b> اگر $A=0$ واضح است $\|A\|=0$. برعکس اگر $\|A\|=0$، طبق سازگاری $\|Ax\|\le0$ پس $Ax=0$ برای هر $x$؛ با $x=e^{(j)}$ ستون $j$ام $A$ صفر می‌شود، پس $A=0$.
+        <div class="why">$Ae^{(j)}$ همان ستون $j$ام $A$ است.</div></li>
+      <li class="step"><b>(ت) نابرابری مثلثی.</b> فرض کنید $A$ و $B$ دو ماتریس دلخواه از مرتبهٔ یکسان باشند و $y$ برداری باشد که $\|y\|=1$ و $\|(A+B)y\|=\|A+B\|$. به کمک ویژگی‌های نرم برداری و سازگاری داریم
+        $$\|A+B\|=\|(A+B)y\|=\|Ay+By\|\le\|Ay\|+\|By\|\le\|A\|\,\|y\|+\|B\|\,\|y\|=\|A\|+\|B\| .$$
+        <div class="why">چنین $y$ای وجود دارد چون ماکزیمم رخ می‌دهد (گام ۲). بعد نابرابری مثلثی برداری و دو بار سازگاری.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>نرمال کن ← $\max_{\|x\|=1}\|Ax\|$ (وایرشتراس) ← سازگاری از تعریف ماکزیمم ← (ب) با $e^{(j)}$ ← (ت) با بردار $y$ که ماکزیمم را می‌سازد.</div>
+    <div class="qed">∎</div>
+  </div>
+  <div class="box thm" id="cor12">
+    <div class="box-h"><span class="tag">نتیجه ۱.۲</span></div>
+    <p>اساس اثبات قضیهٔ ۸.۲ ویژگی‌های نرم برداری و سازگاری نرم ماتریسی طبیعی با نرم برداری نظیر بود. در واقع با داشتن یک نرم برداری دلخواه می‌توان یک نرم ماتریسی طبیعی تعریف کرد.</p>
+  </div>
+  <div class="box rem" id="rem82">
+    <div class="box-h"><span class="tag">تبصره ۸.۲</span><span class="box-t">نرم طبیعی زیرضربی است</span></div>
+    <p>نرم ماتریسی طبیعی دارای ویژگی زیرضربی است.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات تبصره ۸.۲</span><span class="badge book">از کتاب</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">فرض کنید $A$ و $B$ دو ماتریس مختلط از مرتبه‌های مناسب و $y$ برداری باشد که $\|y\|=1$ و $\|(AB)y\|=\|AB\|$.
+        <div class="why">همان ترفند قضیهٔ ۸.۲: برداری که ماکزیمم را می‌سازد.</div></li>
+      <li class="step">به کمک سازگاری نرم ماتریسی طبیعی با نرم برداری نظیر:
+        $$\|AB\|=\|(AB)y\|=\|A(By)\|\le\|A\|\,\|By\|\le\|A\|\,\|B\|\,\|y\|=\|A\|\,\|B\| .$$
+        <div class="why">یک بار سازگاری برای $A$ با بردار $By$ و یک بار برای $B$ با بردار $y$.</div></li>
+    </ol>
+    <div class="qed">∎</div>
+  </div>
+  <div class="box thm" id="prop12">
+    <div class="box-h"><span class="tag">گزاره ۱.۲</span></div>
+    <p>برای هر نرم ماتریسی طبیعی داریم $\|I\|=1$.</p>
+    <p class="small"><b>اثبات (تکمیلی):</b> $\|I\|=\max_{x\neq0}\frac{\|Ix\|}{\|x\|}=\max_{x\ne0}\frac{\|x\|}{\|x\|}=1$.</p>
+  </div>
+  <div class="box ex" id="ex62">
+    <div class="box-h"><span class="tag">مثال ۶.۲</span></div>
+    <p>فرض کنید $A=[a_{ij}]$ ماتریس دلخواهی در $\mathbb{C}^{m\times n}$ باشد. تابع $\ \|A\|_p=\max_{x\in S_p}\|Ax\|_p$، $\ S_p=\{x\in\mathbb{C}^n:\|x\|_p=1\}$، $\ 1\le p\le\infty$، نرم ماتریسی متداولی روی $\mathbb{C}^{m\times n}$ است.</p>
+  </div>
+  <div class="box thm" id="thm92">
+    <div class="box-h"><span class="tag">قضیه ۹.۲</span></div>
+    <p>هر نرم ماتریسی روی $\mathbb{C}^{m\times n}$ تابعی پیوسته است.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۹.۲</span><span class="badge supp">کتاب: «مشابه قضیهٔ ۴.۲» · کامل شده</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">نابرابری مثلثی پسرو برای نرم ماتریسی $\mu$ هم با همان اثبات لم ۲.۲ برقرار است: $|\mu(B)-\mu(A)|\le\mu(B-A)$.
+        <div class="why">در اثبات لم ۲.۲ فقط از نابرابری مثلثی و $\|-x\|=\|x\|$ استفاده شد که برای نرم ماتریسی هم درست‌اند.</div></li>
+      <li class="step">اگر $E_{ij}$ ماتریسی باشد که درایهٔ $(i,j)$ آن ۱ و بقیه صفرند، $B-A=\sum_{i,j}(b_{ij}-a_{ij})E_{ij}$ و
+        $$\mu(B-A)\le\sum_{i,j}|b_{ij}-a_{ij}|\,\mu(E_{ij})\le M\max_{i,j}|b_{ij}-a_{ij}|,\qquad M=\sum_{i,j}\mu(E_{ij}).$$
+        <div class="why">نابرابری مثلثی و ویژگی (پ)؛ $M$ عددی ثابت است.</div></li>
+      <li class="step">پس اگر $B\to A$ (درایه‌به‌درایه) آن‌گاه $\mu(B)\to\mu(A)$.
+        <div class="why">فشردگی؛ عین قضیهٔ ۴.۲ با $mn$ درایه به‌جای $n$ مؤلفه.</div></li>
+    </ol>
+    <div class="qed">∎</div>
+  </div>
+
+  <div class="box def" id="def122">
+    <div class="box-h"><span class="tag">تعریف ۱۲.۲</span></div>
+    <p>دو نرم ماتریسی $\nu(\cdot)$ و $\mu(\cdot)$ روی $\mathbb{C}^{m\times n}$ را <b>هم‌ارز</b> نامند هرگاه ثابت‌های مثبت $\alpha_1$ و $\alpha_2$ چنان موجود باشند که برای هر $A\in\mathbb{C}^{m\times n}$ داشته باشیم $\ \alpha_1\mu(A)\le\nu(A)\le\alpha_2\mu(A)$.</p>
+  </div>
+  <div class="box thm" id="thm102">
+    <div class="box-h"><span class="tag">قضیه ۱۰.۲</span></div>
+    <p>هر دو نرم ماتریسی روی $\mathbb{C}^{m\times n}$ هم‌ارز هستند.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۱۰.۲</span><span class="badge book">از کتاب</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">فرض کنید $\|\cdot\|_a$ و $\|\cdot\|_b$ نرم‌های ماتریسی دلخواهی روی $\mathbb{C}^{m\times n}$ باشند. با توجه به اینکه $\mathbb{C}^{m\times n}$ یک فضای با بعد متناهی (از بعد $mn$) است، مجموعهٔ $S=\{A\in\mathbb{C}^{m\times n}:\|A\|_b=1\}$ بسته و کران‌دار است.
+        <div class="why">ماتریس $m\times n$ را می‌شود مثل یک بردار $mn$ تایی دید؛ همان استدلال قضیهٔ ۵.۲.</div></li>
+      <li class="step">بنابر قضیهٔ ۹.۲، $\min_{B\in S}\|B\|_a$ وجود دارد و
+        $$\|A\|_a=\left\|\frac{A}{\|A\|_b}\right\|_a\|A\|_b\ \ge\ \|A\|_b\min_{B\in S}\|B\|_a=\|A\|_b\,\beta_1,\qquad\beta_1\gt0 .$$
+        <div class="why">$\frac{A}{\|A\|_b}\in S$ (برای $A\ne0$)؛ پس نرمش از کمترین مقدار روی $S$ کمتر نیست. $\beta_1\gt0$ چون مینیمم در ماتریسی ناصفر رخ می‌دهد.</div></li>
+      <li class="step">به طور مشابه می‌توان نشان داد اسکالر $\beta_2\gt0$ وجود دارد که $\|A\|_b\ge\|A\|_a\,\beta_2$ و حکم ثابت می‌شود.
+        <div class="why">جای $a$ و $b$ را عوض کن. پس $\beta_1\|A\|_b\le\|A\|_a\le\frac1{\beta_2}\|A\|_b$.</div></li>
+    </ol>
+    <div class="qed">∎</div>
+  </div>
+  <p>نمونه‌هایی از هم‌ارزی نرم‌های ماتریسی متداول در <a href="#t19">تمرین ۱۹</a> آورده شده است.</p>
+
+  <h3 id="norm1inf">فرمول نرم‌های ۱ و بی‌نهایت</h3>
+  <div class="box thm" id="thm112">
+    <div class="box-h"><span class="tag">قضیه ۱۱.۲</span></div>
+    <p>برای ماتریس دلخواه $A=[a_{kj}]$ در $\mathbb{C}^{m\times n}$ داریم</p>
+    $$\|A\|_1=\max_{1\le j\le n}\sum_{k=1}^m|a_{kj}|,\qquad\|A\|_\infty=\max_{1\le k\le m}\sum_{j=1}^n|a_{kj}| .$$
+  </div>
+  <div class="box intu">
+    <div class="box-h"><span class="tag">ترفند حافظه</span></div>
+    <p><b>«۱» مثل یک ستون ایستاده است</b> ⇒ $\|A\|_1$ = بزرگ‌ترین مجموع قدرمطلق یک <b>ستون</b>. <b>«∞» خوابیده است</b> ⇒ $\|A\|_\infty$ = بزرگ‌ترین مجموع قدرمطلق یک <b>سطر</b>.</p>
+    <p>مثال: $A=\left[\begin{smallmatrix}1&-2\\3&4\end{smallmatrix}\right]$: ستون‌ها $1+3=4$ و $2+4=6$ پس $\|A\|_1=6$؛ سطرها $1+2=3$ و $3+4=7$ پس $\|A\|_\infty=7$.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۱۱.۲</span><span class="badge book">از کتاب</span><span class="grow"></span></div>
+    <p class="proof-goal">روش اثبات در هر دو حالت یکسان است. فرض کنید $\lambda$ بیانگر سمت راست این رابطه‌ها باشد. ابتدا نشان می‌دهیم برای $p=1$ یا $p=\infty$ و بردار دلخواه $x$ که $\|x\|_p=1$، داریم $\|Ax\|_p\le\lambda$ که دلالت بر این دارد که $\|A\|_p\le\lambda$. سپس بردار خاص $x$ را چنان می‌یابیم که $\|x\|_p=1$ و $\|Ax\|_p\ge\lambda$ و این نشان می‌دهد که $\|A\|_p\ge\lambda$ و از این دو نابرابری نتیجه می‌شود $\|A\|_p=\lambda$.</p>
+    <ol class="steps">
+      <li class="step"><b>$p=1$، کران بالا.</b> با فرض $A=[a^{(1)}\cdots a^{(n)}]$ (ستون‌ها) و $\lambda=\max_j\|a^{(j)}\|_1$، برای $x$ با $\|x\|_1=1$:
+        $$\|Ax\|_1=\|x_1a^{(1)}+\cdots+x_na^{(n)}\|_1\le|x_1|\|a^{(1)}\|_1+\cdots+|x_n|\|a^{(n)}\|_1\le(|x_1|+\cdots+|x_n|)\max_j\|a^{(j)}\|_1=\|x\|_1\lambda=\lambda .$$
+        <div class="why">$Ax$ ترکیب خطی ستون‌هاست؛ بعد نابرابری مثلثی و همگنی؛ بعد هر $\|a^{(j)}\|_1$ را با بزرگ‌ترینشان جایگزین کردیم. $\|a^{(j)}\|_1$ همان مجموع قدرمطلق ستون $j$ است.</div></li>
+      <li class="step"><b>$p=1$، بردار خاص.</b> اگر $\lambda=\|a^{(q)}\|_1$ آن‌گاه با انتخاب $x=e^{(q)}$ داریم $\|e^{(q)}\|_1=1$ و $\|Ae^{(q)}\|_1=\|a^{(q)}\|_1=\lambda$.
+        <div class="why">$Ae^{(q)}$ ستون $q$ام است؛ بردار خاص = «ستون برنده» را انتخاب کن.</div></li>
+      <li class="step"><b>$p=\infty$، کران بالا.</b> با فرض $\lambda=\max_k\sum_j|a_{kj}|$، برای هر $x$ که $\|x\|_\infty=1$:
+        $$\|Ax\|_\infty=\max_k\Big|\sum_ja_{kj}x_j\Big|\le\max_k\sum_j|a_{kj}||x_j|\le\max_k\sum_j|a_{kj}|\max_j|x_j|=\lambda\|x\|_\infty=\lambda .$$
+        <div class="why">نابرابری مثلثی برای اعداد؛ بعد هر $|x_j|$ را با بیشترینشان جایگزین کردیم.</div></li>
+      <li class="step"><b>$p=\infty$، بردار خاص.</b> اگر $\lambda=\sum_j|a_{qj}|$ (سطر برنده $q$)، $a_{qj}=r_je^{\mathrm{i}\theta_j}$ با $r_j\ge0$ و $-\pi\lt\theta_j\le\pi$، و $x=[e^{-\mathrm{i}\theta_j}]_{n\times1}$، آن‌گاه $\|x\|_\infty=1$ و
+        $$\|Ax\|_\infty=\max_k\Big|\sum_ja_{kj}x_j\Big|\ge\Big|\sum_ja_{qj}x_j\Big|=\Big|\sum_jr_j\Big|=\sum_j|a_{qj}|=\lambda .$$
+        <div class="why">$a_{qj}e^{-\mathrm{i}\theta_j}=r_j=|a_{qj}|$ (یادآوری ۱). یعنی $x$ را طوری انتخاب کردیم که همهٔ جمله‌های سطر $q$ «هم‌جهت» و مثبت شوند. در حالت حقیقی همان $x_j=\operatorname{sign}(a_{qj})$ است (با $+1$ برای درایهٔ صفر).</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>دو مرحله: (۱) $\|Ax\|_p\le\lambda$ برای $\|x\|_p=1$ با نابرابری مثلثی؛ (۲) بردار خاص: برای ۱ ستون برنده $e^{(q)}$، برای ∞ علامت‌های سطر برنده $x_j=e^{-\mathrm i\theta_j}$.</div>
+    <div class="qed">∎</div>
+  </div>
+  <div class="box thm" id="cor22">
+    <div class="box-h"><span class="tag">نتیجه ۲.۲</span></div>
+    <p>برای $A\in\mathbb{C}^{m\times n}$، $\ \|A\|_1=\|A^H\|_\infty$.</p>
+    <p class="small"><b>اثبات (تکمیلی):</b> سطر $j$ام $A^H$ همان ستون $j$ام $A$ با درایه‌های مزدوج است و $|\bar a|=|a|$. پس مجموع‌های سطری $A^H$ همان مجموع‌های ستونی $A$اند و طبق قضیهٔ ۱۱.۲ بیشینه‌شان برابر است.</p>
+  </div>
+
+  <h3 id="norm2">نرم ۲ و ماتریس‌های یکانی</h3>
+  <div class="box thm" id="thm122">
+    <div class="box-h"><span class="tag">قضیه ۱۲.۲</span></div>
+    <p>برای ماتریس مختلط دلخواه $A$ داریم</p>
+    $$\|A\|_2=\max_{\|x\|_2=1=\|y\|_2}|y^HAx|,\qquad\|A^H\|_2=\|A\|_2,\qquad\|A^HA\|_2=\|A\|_2^2 .$$
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۱۲.۲</span><span class="badge book">از کتاب</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step"><b>برابری اول، «کمتر یا مساوی».</b> با فرض $\|x\|_2=\|y\|_2=1$ بنابر نابرابری کوشی-شوارتز داریم $$\ |y^HAx|\le\|y\|_2\|Ax\|_2\le\|y\|_2\|x\|_2\|A\|_2=\|A\|_2$$
+        <div class="why">$y^HAx=(y,Ax)$؛ کوشی-شوارتز روی $y$ و $Ax$؛ بعد سازگاری.</div></li>
+      <li class="step"><b>برابری اول، «رخ دادن».</b> اگر $x$ برداری باشد که $\|x\|_2=1$ و $\|A\|_2=\|Ax\|_2$، با فرض $y=\frac{1}{\|Ax\|_2}Ax$ داریم $\|y\|_2=1$ و
+        $$|y^HAx|=\frac{|x^HA^HAx|}{\|Ax\|_2}=\frac{\|Ax\|_2^2}{\|Ax\|_2}=\|Ax\|_2=\|A\|_2 .$$
+        <div class="why">$y^H=\frac{x^HA^H}{\|Ax\|_2}$ و $x^HA^HAx=(Ax)^H(Ax)=\|Ax\|_2^2$. (اگر $A=0$ همه چیز صفر و بدیهی است.)</div></li>
+      <li class="step"><b>برابری دوم.</b> $$\ \|A^H\|_2=\max|y^HA^Hx|=\max|x^HAy|=\|A\|_2$$
+        <div class="why">$y^HA^Hx=\overline{x^HAy}$ (ترانهادهٔ مزدوج یک عدد = مزدوجش) و قدرمطلق‌شان برابر است؛ ماکزیمم روی همان مجموعهٔ $x,y$ است، فقط اسم‌ها جابه‌جا شده‌اند.</div></li>
+      <li class="step"><b>برابری آخر، «کمتر یا مساوی».</b> $\ \|A^HA\|_2\le\|A^H\|_2\|A\|_2=\|A\|_2^2$.
+        <div class="why">زیرضربی (تبصرهٔ ۸.۲) و برابری دوم.</div></li>
+      <li class="step"><b>برابری آخر، «بزرگ‌تر یا مساوی».</b> اگر $x$ برداری باشد که $\|x\|_2=1$ و $\|A\|_2=\|Ax\|_2$، با فرض $y=x$ بنابر قسمت اول داریم $$\ \|A^HA\|_2\ge|x^HA^HAx|=\|Ax\|_2^2=\|A\|_2^2$$
+        <div class="why">برابری اول برای ماتریس $A^HA$: ماکزیمم $|y^H(A^HA)x|$ از مقدارش در $y=x$ کمتر نیست.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>کوشی-شوارتز + سازگاری برای «≤» ؛ بردار بهینه $x$ و $y=Ax/\|Ax\|$ برای رخ دادن ؛ $|y^HA^Hx|=|x^HAy|$ ؛ زیرضربی و $y=x$ برای $\|A^HA\|_2$.</div>
+    <div class="qed">∎</div>
+  </div>
+
+  <div class="box thm" id="thm132">
+    <div class="box-h"><span class="tag">قضیه ۱۳.۲</span></div>
+    <p>برای ماتریس $U_{n\times n}$ عبارت‌های زیر هم‌ارز هستند: (آ) $U$ ماتریسی یکانی است؛ (ب) $U^{-1}=U^H$؛ (پ) برای هر بردار $x\in\mathbb{C}^n$، $\|Ux\|_2=\|x\|_2$.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۱۳.۲</span><span class="badge book">از کتاب، با یک اصلاح</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step"><b>(آ)⇒(ب).</b> اگر $U=[u^{(1)}\cdots u^{(n)}]$ ماتریسی یکانی باشد آن‌گاه ${u^{(i)}}^Hu^{(j)}=\delta_{ij}$ ($1$ اگر $i=j$ و $0$ اگر $i\neq j$) و بنابراین $U^HU=I$.
+        <div class="why">درایهٔ $(i,j)$ ماتریس $U^HU$ همان ${u^{(i)}}^Hu^{(j)}$ است.</div></li>
+      <li class="step">با ضرب این رابطه از راست در $U$ داریم $UU^HU=U$ و با ضرب از راست در $U^{-1}$ خواهیم داشت $UU^H=I$؛ در نتیجه $U^{-1}=U^H$ (پس اگر $U$ یکانی باشد $U^H$ نیز یکانی است).
+        <div class="why">$U^HU=I$ برای ماتریس مربعی یعنی $U$ وارون‌پذیر است ($\det U^H\det U=1\ne0$). حالا هم $U^HU=I$ و هم $UU^H=I$.</div></li>
+      <li class="step"><b>(ب)⇒(پ).</b> اگر $U^{-1}=U^H$ و $x$ بردار دلخواهی باشد: $\ \|Ux\|_2^2=x^HU^HUx=x^Hx=\|x\|_2^2$.
+        <div class="why">$\|v\|_2^2=v^Hv$ و $(Ux)^H=x^HU^H$.</div></li>
+      <li class="step"><b>(پ)⇒(آ)، طول ستون‌ها.</b> فرض کنید برای هر بردار $x$، $\|x\|_2=\|Ux\|_2$. برای $k=1,\dots,n$ با قرار دادن $x=e^{(k)}$ نتیجه می‌شود ${u^{(k)}}^Hu^{(k)}=1$.
+        <div class="why">$Ue^{(k)}=u^{(k)}$ و $\|e^{(k)}\|_2=1$.</div></li>
+      <li class="step"><b>قسمت حقیقی ضرب داخلی ستون‌ها.</b> برای $k\neq j$ با قرار دادن $x=e^{(k)}+e^{(j)}$: $\ \|x\|_2^2=2$ و $$\|u^{(k)}+u^{(j)}\|_2^2=1+1+2\operatorname{Re}({u^{(k)}}^Hu^{(j)})$$؛ پس $\operatorname{Re}({u^{(k)}}^Hu^{(j)})=0$.
+        <div class="why">باز کردن مربع نرم مثل قضیهٔ ۱.۲.</div></li>
+      <li class="step"><b>قسمت موهومی.</b> با قرار دادن $x=e^{(k)}+\mathrm{i}e^{(j)}$: $$\ \|u^{(k)}+\mathrm{i}u^{(j)}\|_2^2=2+\mathrm{i}\,{u^{(k)}}^Hu^{(j)}-\mathrm{i}\,{u^{(j)}}^Hu^{(k)}=2-2\operatorname{Im}({u^{(k)}}^Hu^{(j)})$$ که باید ۲ باشد؛ پس $\operatorname{Im}({u^{(k)}}^Hu^{(j)})=0$.
+        <div class="why note">کتاب این سطر را به صورت «$2=2\mathrm{i}\operatorname{Im}(\cdot)+2$» نوشته است؛ محاسبهٔ دقیق بالا است ($\mathrm{i}w-\mathrm{i}\bar w=\mathrm{i}\cdot2\mathrm{i}\operatorname{Im}w=-2\operatorname{Im}w$). نتیجه یکی است.</div></li>
+      <li class="step">پس برای $k\ne j$ داریم ${u^{(k)}}^Hu^{(j)}=0$ و بنابراین $U$ ماتریسی یکانی است.
+        <div class="why">عدد مختلطی که قسمت حقیقی و موهومی‌اش صفر است، صفر است. ستون‌ها متعامدیکه‌اند.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>یکانی ⇔ $U^HU=I$ ⇔ $U^{-1}=U^H$ ⇒ $\|Ux\|^2=x^HU^HUx$. برگشت: $x=e^{(k)}$ (طول ۱)، $x=e^{(k)}+e^{(j)}$ (Re=0)، $x=e^{(k)}+\mathrm{i}e^{(j)}$ (Im=0).</div>
+    <div class="qed">∎</div>
+  </div>
+  <div class="box rem" id="rem92">
+    <div class="box-h"><span class="tag">تبصره ۹.۲</span></div>
+    <p>هر تبدیل خطی مانند $L$ از $\mathbb{C}^n$ به توی $\mathbb{C}^n$ <b>حافظ اندازه</b> نامیده می‌شود هرگاه به ازای هر $x$ در $\mathbb{C}^n$ داشته باشیم $\|Lx\|=\|x\|$. پس تبدیل خطی نظیر یک ماتریس یکانی، حافظ اندازه (نسبت به نرم اقلیدسی) است.</p>
+  </div>
+  <div class="box thm" id="thm142">
+    <div class="box-h"><span class="tag">قضیه ۱۴.۲</span></div>
+    <p>اگر $U_{n\times n}$ ماتریسی یکانی باشد آن‌گاه</p>
+    <ol>
+      <li>(آ) برای ماتریس $A$ در $\mathbb{C}^{n\times n}$ به ازای $p=2,F$ داریم $\|UA\|_p=\|AU\|_p=\|A\|_p$؛</li>
+      <li>(ب) $\|U\|_2=1$ و $\|U\|_F=\sqrt n$.</li>
+    </ol>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۱۴.۲</span><span class="badge book">از کتاب</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step"><b>(آ) برای $\|UA\|_2$.</b> بنابر قضیهٔ ۱۲.۲: $$\ \|UA\|_2^2=\|(UA)^HUA\|_2=\|A^HU^HUA\|_2=\|A^HA\|_2=\|A\|_2^2$$
+        <div class="why">$\|B\|_2^2=\|B^HB\|_2$ با $B=UA$؛ و $U^HU=I$.</div></li>
+      <li class="step"><b>(آ) برای $\|UA\|_F$.</b> اگر $A=[a^{(1)}\cdots a^{(n)}]$ آن‌گاه $$\ \|UA\|_F^2=\sum_{i=1}^n\|Ua^{(i)}\|_2^2=\sum_{i=1}^n\|a^{(i)}\|_2^2=\|A\|_F^2$$
+        <div class="why">ستون‌های $UA$ همان $Ua^{(i)}$اند؛ مربع نرم فروبنیوس = مجموع مربع طول ستون‌ها؛ $U$ طول را حفظ می‌کند (قضیهٔ ۱۳.۲ پ).</div></li>
+      <li class="step"><b>(آ) برای $\|AU\|_p$.</b> با توجه به اینکه اگر $U$ یکانی باشد $U^H$ نیز یکانی خواهد بود، برای $p=2,F$: $$\ \|AU\|_p=\|(AU)^H\|_p=\|U^HA^H\|_p=\|A^H\|_p=\|A\|_p$$
+        <div class="why">$\|B^H\|_2=\|B\|_2$ (قضیهٔ ۱۲.۲) و $\|B^H\|_F=\|B\|_F$ (همان درایه‌ها با قدرمطلق یکسان). بعد گام‌های قبل برای $U^H$ به‌جای $U$.</div></li>
+      <li class="step"><b>(ب).</b> $\ \|U\|_2^2=\|U^HU\|_2=\|I\|_2=1$. همچنین اگر $U=[u^{(1)}\cdots u^{(n)}]$: $\ \|U\|_F^2=\sum_{i=1}^n\|u^{(i)}\|_2^2=n$.
+        <div class="why">قضیهٔ ۱۲.۲ و گزارهٔ ۱.۲؛ هر ستون طول ۱ دارد.</div></li>
+    </ol>
+    <div class="qed">∎</div>
+  </div>
+  <p>به دلیل قسمت آ قضیهٔ ۱۴.۲، نرم ۲ ماتریسی و نرم فروبنیوس را نرم‌های <b>به طور یکانی پایا</b> می‌نامند.</p>
+  <div class="widget" data-widget="matnorm"></div>
+
+  <h3 id="matseq">دنباله‌های ماتریسی</h3>
+  <div class="box def" id="def132">
+    <div class="box-h"><span class="tag">تعریف ۱۳.۲</span></div>
+    <p>فرض کنید $\{A^{(k)}\}_{k=1}^\infty$ دنباله‌ای از ماتریس‌های $\mathbb{C}^{m\times n}$ و $A$ ماتریسی در $\mathbb{C}^{m\times n}$ باشد. $A$ حد دنبالهٔ $\{A^{(k)}\}$ است و می‌توان نوشت $A=\lim_{k\to\infty}A^{(k)}$ هرگاه $\ \lim_{k\to\infty}a_{ij}^{(k)}=a_{ij}$ برای همهٔ $i,j$، که در آن $A=[a_{ij}]$ و $A^{(k)}=[a^{(k)}_{ij}]$.</p>
+  </div>
+  <p>با توجه به ارتباط تنگاتنگ حد دنباله‌های ماتریسی و حد دنباله‌های عددی به راحتی می‌توان برقراری ویژگی‌هایی مانند یکتایی حد، خطی بودن عملگر حد و غیره را بررسی کرد.</p>
+  <div class="box thm" id="thm152">
+    <div class="box-h"><span class="tag">قضیه ۱۵.۲</span></div>
+    <p>اگر $\lim_{k\to\infty}A^{(k)}=A$ و $\lim_{k\to\infty}B^{(k)}=B$ آن‌گاه</p>
+    <ol>
+      <li>(آ) به ازای هر دو اسکالر دلخواه $\alpha$ و $\beta$ داریم $\lim(\alpha A^{(k)}+\beta B^{(k)})=\alpha A+\beta B$؛</li>
+      <li>(ب) $\lim A^{(k)}B^{(k)}=AB$؛</li>
+      <li>(پ) اگر $A$ ماتریسی وارون‌پذیر باشد آن‌گاه برای $k$ به اندازهٔ کافی بزرگ $A^{(k)}$ نیز وارون‌پذیر بوده و داریم $\lim{A^{(k)}}^{-1}=A^{-1}$.</li>
+    </ol>
+    <p class="small">اثبات: تمرین ۱۴ (حل کامل: <a href="#t14">تمرین ۱۴</a>).</p>
+  </div>
+  <div class="box def" id="def142">
+    <div class="box-h"><span class="tag">تعریف ۱۴.۲</span></div>
+    <p>دنبالهٔ $\{A^{(k)}\}$ از ماتریس‌های $\mathbb{C}^{m\times n}$ همگرا به ماتریس $A$ نسبت به نرم ماتریسی $\|\cdot\|$ است و می‌توان نوشت $\lim\|A^{(k)}-A\|=0$ هرگاه به ازای هر $\epsilon\gt0$ داده‌شده، عدد صحیح $N_\epsilon$ چنان موجود باشد که $\|A^{(k)}-A\|\lt\epsilon$ برای همهٔ $k\ge N_\epsilon$.</p>
+  </div>
+  <div class="box thm" id="thm162">
+    <div class="box-h"><span class="tag">قضیه ۱۶.۲</span></div>
+    <p>فرض کنید $\{A^{(k)}\}$ دنباله‌ای از ماتریس‌های $\mathbb{C}^{m\times n}$ و $A$ ماتریسی در $\mathbb{C}^{m\times n}$ باشد. آن‌گاه $\ \lim\|A^{(k)}-A\|=0\iff\lim A^{(k)}=A$.</p>
+    <p class="small">اثبات: تمرین ۱۵ (حل کامل: <a href="#t15">تمرین ۱۵</a>).</p>
+  </div>
+
+  <div class="quiz">
+    <div class="quiz-h"><b>خودآزمایی ۲.۲</b><span class="score"></span></div>
+    <div class="q">
+      <p class="q-t">برای $A=\left[\begin{smallmatrix}2&-1\\-3&0\end{smallmatrix}\right]$، $\|A\|_1$ و $\|A\|_\infty$ کدام‌اند؟</p>
+      <div class="opts two"><button class="opt" data-c>$\|A\|_1=5,\ \|A\|_\infty=3$</button><button class="opt">$\|A\|_1=3,\ \|A\|_\infty=5$</button><button class="opt">هر دو ۵</button><button class="opt">هر دو ۶</button></div>
+      <p class="q-exp">ستون‌ها: $2+3=5$ و $1+0=1$ ⇒ ۵. سطرها: $2+1=3$ و $3+0=3$ ⇒ ۳.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">کدام ویژگی را هر نرم طبیعی دارد ولی نرم فروبنیوس (برای $n\ge2$) ندارد؟</p>
+      <div class="opts"><button class="opt">زیرضربی</button><button class="opt" data-c>$\|I\|=1$</button><button class="opt">نابرابری مثلثی</button></div>
+      <p class="q-exp">$\|I\|_F=\sqrt n$. پس فروبنیوس نرم طبیعی نیست (تمرین ۹). فروبنیوس زیرضربی هست (تمرین ۱۰).</p>
+    </div>
+    <div class="q">
+      <p class="q-t">در اثبات $\|A\|_\infty\ge\lambda$ (قضیهٔ ۱۱.۲) کدام بردار انتخاب شد؟</p>
+      <div class="opts"><button class="opt">$e^{(q)}$</button><button class="opt" data-c>$x_j=e^{-\mathrm i\theta_j}$ (علامت‌های سطر برنده)</button><button class="opt">$x=[1\ \cdots\ 1]^T$ همیشه</button></div>
+      <p class="q-exp">$e^{(q)}$ برای $\|\cdot\|_1$ است. برای ∞ همهٔ جمله‌های سطر برنده را هم‌جهت می‌کنیم.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">اگر $U$ یکانی باشد، $\|U\|_F$ برابر است با:</p>
+      <div class="opts two"><button class="opt">۱</button><button class="opt" data-c>$\sqrt n$</button><button class="opt">$n$</button><button class="opt">$n^2$</button></div>
+      <p class="q-exp">$n$ ستون با طول ۱ ⇒ مجموع مربع‌ها $n$.</p>
+    </div>
+    <div class="quiz-f"><button class="btn quiz-reset">دوباره</button></div>
+  </div>
+
+  <div class="box goal">
+    <div class="box-h"><span class="tag">حالا این تمرین‌ها را می‌توانی حل کنی</span></div>
+    <p><a href="#t1">تمرین ۱</a> (بخش ماتریسی) · <a href="#t7">تمرین ۷</a> (بخش ماتریسی) · <a href="#t8">تمرین ۸</a> · <a href="#t9">تمرین ۹</a> · <a href="#t10">تمرین ۱۰</a> · <a href="#t11">تمرین ۱۱</a> · <a href="#t12">تمرین ۱۲</a> · <a href="#t13">تمرین ۱۳</a> · <a href="#t14">تمرین ۱۴</a> · <a href="#t15">تمرین ۱۵</a> · <a href="#t17">تمرین ۱۷</a></p>
+  </div>
+  <div class="sec-done"><p>محک: قضیه‌های ۸.۲، ۱۱.۲، ۱۲.۲ و ۱۳.۲ را از روی اسکلت‌شان کامل بنویس.</p><button class="btn done-btn" data-sec="sec22"></button></div>
+</section>
+
+<!-- ================================================================ 2.3 -->
+<section class="sec" id="s3">
+  <h2 id="sec23"><span class="num">۳.۲</span>شعاع طیفی</h2>
+
+  <div class="box goal">
+    <div class="box-h"><span class="tag">بعد از این بخش می‌توانی</span></div>
+    <ul>
+      <li>ویژه‌مقدار، طیف و شعاع طیفی را تعریف و برای ماتریس $2\times2$ حساب کنی؛</li>
+      <li>ثابت کنی $\rho(A)\le\|A\|$ برای هر نرم طبیعی و $\|A\|_2=\rho(A)$ برای ماتریس هرمیتی؛</li>
+      <li>ثابت کنی $A^k\to0$ اگر و فقط اگر $\rho(A)\lt1$.</li>
+    </ul>
+  </div>
+  <p>علاوه بر کمیت نرم می‌توان کمیت دیگری را با استفاده از تعریف زیر به یک ماتریس نسبت داد.</p>
+  <div class="box def" id="def152">
+    <div class="box-h"><span class="tag">تعریف ۱۵.۲</span><span class="box-t">ویژه‌مقدار، طیف، شعاع طیفی</span></div>
+    <p>عدد $\lambda$ در $\mathbb{C}$ یک <b>ویژه‌مقدار</b> برای ماتریس مربعی حقیقی یا مختلط $A_{n\times n}$ است هرگاه بردار غیرصفر $x$ در $\mathbb{C}^n$ چنان وجود داشته باشد که $Ax=\lambda x$. در این حالت $x$ <b>ویژه‌بردار</b> نظیر $\lambda$ نامیده می‌شود. مجموعه‌ای که شامل تمام ویژه‌مقدارهای ماتریس $A$ باشد به <b>طیف</b> $A$ معروف است و با $\sigma(A)$ نمایش داده می‌شود. <b>شعاع طیفی</b> ماتریس $A$ که با $\rho(A)$ نمایش داده می‌شود عبارت است از $\ \rho(A)=\max_{\lambda\in\sigma(A)}|\lambda|$.</p>
+  </div>
+  <div class="box ex">
+    <div class="box-h"><span class="tag">مثال کمکی</span><span class="box-t">محاسبهٔ $\rho$ برای $2\times2$</span><span class="box-src">برای تمرین دست</span></div>
+    <p>$A=\left[\begin{smallmatrix}2&1\\1&2\end{smallmatrix}\right]$: $\ \lambda^2-4\lambda+3=0$ پس $\lambda=1,3$ و $\rho(A)=3$. (ویژه‌بردارها $[1\ \ 1]^T$ برای ۳ و $[1\ \ -1]^T$ برای ۱.)</p>
+    <p>$B=\left[\begin{smallmatrix}1&-2\\3&4\end{smallmatrix}\right]$: $\ \lambda^2-5\lambda+10=0$، مبیّن منفی است و $\lambda=\frac{5\pm\mathrm i\sqrt{15}}{2}$. چون $|\lambda|^2=\lambda\bar\lambda=\det B=10$ پس $\rho(B)=\sqrt{10}\approx3.16$. (در حالی که $\|B\|_1=6$ و $\|B\|_\infty=7$؛ همان $\rho\le\|\cdot\|$.)</p>
+  </div>
+
+  <div class="box thm" id="thm172">
+    <div class="box-h"><span class="tag">قضیه ۱۷.۲</span></div>
+    <p>فرض کنید $A$ ماتریسی در $\mathbb{C}^{n\times n}$ باشد.</p>
+    <ol>
+      <li>(آ) $\|A\|_2=\sqrt{\rho(A^HA)}$؛</li>
+      <li>(ب) اگر $A$ ماتریسی هرمیتی باشد آن‌گاه $\|A\|_2=\rho(A)$؛</li>
+      <li>(پ) اگر $A$ ماتریسی هرمیتی و $p_m$ یک چندجمله‌ای با ضرایب حقیقی از درجهٔ $m$ باشد آن‌گاه $\|p_m(A)\|_2=\rho(p_m(A))$؛</li>
+      <li>(ت) برای هر نرم ماتریسی طبیعی $\|\cdot\|$ داریم $\rho(A)\le\|A\|$؛</li>
+      <li>(ث) برای هر $\epsilon\gt0$ داده‌شده نرم ماتریسی طبیعی $\|\cdot\|$ چنان وجود دارد که $\|A\|\lt\rho(A)+\epsilon$.</li>
+    </ol>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۱۷.۲ (ب)، (پ) و (ت)</span><span class="badge book">از کتاب</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step"><b>(ت)</b> فرض کنید $\lambda$ یک ویژه‌مقدار ماتریس $A$ و $x\neq0$ ویژه‌بردار نظیر آن باشد. از اینکه
+        $$|\lambda|=|\lambda|\frac{\|x\|}{\|x\|}=\frac{\|\lambda x\|}{\|x\|}=\frac{\|Ax\|}{\|x\|}\le\|A\|$$
+        بلافاصله حکم ثابت می‌شود.
+        <div class="why">نابرابری آخر از ویژگی سازگاری نرم ماتریسی طبیعی نتیجه شد. چون برای <b>هر</b> ویژه‌مقدار $|\lambda|\le\|A\|$، بزرگ‌ترینشان یعنی $\rho(A)$ هم $\le\|A\|$.</div></li>
+      <li class="step"><b>(ب)</b> چون اگر $\lambda$ ویژه‌مقداری از $A$ باشد آن‌گاه $\lambda^2$ ویژه‌مقداری از $A^2$ است ($A^2x=\lambda^2x$)، بنابر قسمت (آ) و چون $A^HA=A^2$:
+        $$\|A\|_2=\sqrt{\rho(A^2)}=\sqrt{\rho(A)^2}=\rho(A).$$
+        <div class="why note">برای $\rho(A^2)=\rho(A)^2$ باید بدانیم ویژه‌مقدارهای $A^2$ <b>فقط</b> همین $\lambda^2$ها هستند. برای $A$ هرمیتی این از قضیهٔ طیفی می‌آید: $A=Q\Lambda Q^H$ پس $A^2=Q\Lambda^2Q^H$ و ویژه‌مقدارهای $A^2$ دقیقاً $\lambda_i^2$اند. پس $\max\lambda_i^2=(\max|\lambda_i|)^2$.</div></li>
+      <li class="step"><b>(پ)</b> با فرض اینکه $A$ هرمیتی است $p_m(A)$ هرمیتی است و حکم از قسمت (ب) نتیجه می‌شود.
+        <div class="why">$p_m(A)=c_0I+c_1A+\cdots+c_mA^m$ با $c_k$ حقیقی؛ $$(p_m(A))^H=\sum\bar c_k(A^H)^k=\sum c_kA^k=p_m(A)$$</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>(ت): $|\lambda|=\frac{\|Ax\|}{\|x\|}\le\|A\|$ با ویژه‌بردار $x$. (ب): هرمیتی ⇒ $A^HA=A^2$ و $\rho(A^2)=\rho(A)^2$. (پ): $p_m(A)$ هرمیتی است.</div>
+    <div class="qed">∎</div>
+  </div>
+  <div class="proof supp">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۱۷.۲ (آ)</span><span class="badge supp">تکمیلی · کتاب در قضیهٔ ۵.۴ (صفحهٔ ۹۵) اثبات می‌کند</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">$A^HA$ هرمیتی است: $(A^HA)^H=A^H(A^H)^H=A^HA$. طبق قضیهٔ طیفی $A^HA=Q\Lambda Q^H$ با $Q=[q_1\cdots q_n]$ یکانی و $\Lambda=\operatorname{diag}(\lambda_1,\dots,\lambda_n)$.
+        <div class="why">یادآوری ۴.</div></li>
+      <li class="step">همهٔ $\lambda_i\ge0$: $$\ \lambda_i=\lambda_iq_i^Hq_i=q_i^HA^HAq_i=\|Aq_i\|_2^2\ge0$$ پس $\rho(A^HA)=\max_i\lambda_i=\lambda_{\max}$.
+        <div class="why">$q_i$ ویژه‌بردار با طول ۱ است: $A^HAq_i=\lambda_iq_i$.</div></li>
+      <li class="step">برای $\|x\|_2=1$ قرار بده $y=Q^Hx$ (طبق قضیهٔ ۱۳.۲، $\|y\|_2=1$):
+        $$\|Ax\|_2^2=x^HA^HAx=x^HQ\Lambda Q^Hx=y^H\Lambda y=\sum_i\lambda_i|y_i|^2\le\lambda_{\max}\sum_i|y_i|^2=\lambda_{\max}.$$
+        <div class="why">تغییر مختصات با ماتریس یکانی طول را عوض نمی‌کند.</div></li>
+      <li class="step">برابری با $x=q_{\max}$ (ویژه‌بردار $\lambda_{\max}$) رخ می‌دهد: $\|Aq_{\max}\|_2^2=\lambda_{\max}$. پس $\|A\|_2^2=\lambda_{\max}=\rho(A^HA)$.
+        <div class="why">دوباره الگوی «کران بالا + بردار خاص».</div></li>
+    </ol>
+    <div class="qed">∎</div>
+  </div>
+  <div class="proof supp">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۱۷.۲ (ث)</span><span class="badge supp">تکمیلی · کتاب به بخش ۳.۱ منبع [۱۵] ارجاع داده</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step">طبق تجزیهٔ شور $A=UTU^H$ با $U$ یکانی و $T$ بالامثلثی که قطرش ویژه‌مقدارهای $A$ است. برای $0\lt t\le1$ قرار بده $D_t=\operatorname{diag}(1,t,t^2,\dots,t^{n-1})$.
+        <div class="why">ایده: $T$ را طوری «فشرده» کنیم که درایه‌های بالای قطرش ریز شوند.</div></li>
+      <li class="step">$(D_t^{-1}TD_t)_{ij}=t_{ij}\,t^{\,j-i}$. پس قطر دست نمی‌خورد، زیر قطر صفر می‌ماند و هر درایهٔ بالای قطر در $t^{j-i}\le t$ ضرب می‌شود.
+        <div class="why">ضرب از چپ در $D_t^{-1}$ سطر $i$ را در $t^{-(i-1)}$ و ضرب از راست در $D_t$ ستون $j$ را در $t^{j-1}$ ضرب می‌کند.</div></li>
+      <li class="step">با $S=UD_t$ (وارون‌پذیر) تابع $\|x\|_*=\|S^{-1}x\|_\infty$ طبق قضیهٔ ۳.۲ یک نرم برداری است. نرم طبیعی آن:
+        $$\|A\|_*=\max_{x\ne0}\frac{\|S^{-1}Ax\|_\infty}{\|S^{-1}x\|_\infty}=\max_{y\ne0}\frac{\|S^{-1}ASy\|_\infty}{\|y\|_\infty}=\|S^{-1}AS\|_\infty=\|D_t^{-1}TD_t\|_\infty .$$
+        <div class="why">جای‌گذاری $x=Sy$؛ و $S^{-1}AS=D_t^{-1}U^HAUD_t=D_t^{-1}TD_t$.</div></li>
+      <li class="step">طبق قضیهٔ ۱۱.۲ (بیشترین مجموع سطری):
+        $$\|A\|_*\le\max_i|t_{ii}|+t\sum_{i\lt j}|t_{ij}|=\rho(A)+t\,c,\qquad c=\sum_{i\lt j}|t_{ij}|.$$
+        با انتخاب $t$ آن‌قدر کوچک که $t\,c\lt\epsilon$ داریم $\|A\|_*\lt\rho(A)+\epsilon$.
+        <div class="why">$|t_{ii}|$ قدرمطلق ویژه‌مقدارهاست پس $\le\rho(A)$. اگر $c=0$ هر $t$ کار می‌کند.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>شور $A=UTU^H$ ← $D_t^{-1}TD_t$ بالای قطر را ریز می‌کند ← نرم $\|S^{-1}x\|_\infty$ با $S=UD_t$ ← $\|A\|_*=\|D_t^{-1}TD_t\|_\infty\le\rho+tc$.</div>
+    <div class="qed">∎</div>
+  </div>
+  <div class="box rem" id="rem102">
+    <div class="box-h"><span class="tag">تبصره ۱۰.۲</span></div>
+    <p>قسمت آ، برای ماتریس $A_{m\times n}$ نیز برقرار است.</p>
+  </div>
+  <div class="box thm" id="cor32">
+    <div class="box-h"><span class="tag">نتیجه ۳.۲</span></div>
+    <p>از قسمت ت و ث نتیجه می‌شود که $\rho(A)$ بزرگ‌ترین کران پایین برای نرم‌های ماتریسی طبیعی روی $A$ است.</p>
+    <p class="small">یعنی: (ت) $\rho(A)$ یک کران پایین برای همهٔ نرم‌های طبیعی است؛ (ث) هیچ عدد بزرگ‌تری مثل $\rho(A)+\epsilon$ کران پایین نیست، چون نرمی کوچک‌تر از آن پیدا می‌شود.</p>
+  </div>
+
+  <h3 id="conv">ماتریس همگرا</h3>
+  <div class="box def" id="def162">
+    <div class="box-h"><span class="tag">تعریف ۱۶.۲</span></div>
+    <p>ماتریس $A\in\mathbb{C}^{n\times n}$ را <b>همگرا</b> نامند هرگاه $\lim_{k\to\infty}A^k=0$.</p>
+  </div>
+  <div class="box intu">
+    <div class="box-h"><span class="tag">به زبان ساده</span></div>
+    <p>اگر یک ماتریس را مدام در خودش ضرب کنی، یا به صفر می‌رود یا نه. این سؤال در روش‌های تکراری فصل‌های بعد (مثل ژاکوبی و گاوس-زایدل) سرنوشت‌ساز است: خطا در هر تکرار در یک ماتریس ضرب می‌شود و باید به صفر برود. جواب فقط به یک عدد بستگی دارد: $\rho(A)$.</p>
+  </div>
+  <div class="box thm" id="prop22">
+    <div class="box-h"><span class="tag">گزاره ۲.۲</span></div>
+    <p>هر ماتریس پوچ‌توان همگرا است.</p>
+    <p class="small"><b>اثبات (تکمیلی):</b> پوچ‌توان یعنی برای یک $m$ داریم $A^m=0$. پس برای هر $k\ge m$: $A^k=A^{k-m}A^m=0$ و دنبالهٔ $A^k$ از جایی به بعد صفر است.</p>
+  </div>
+  <div class="box thm" id="prop32">
+    <div class="box-h"><span class="tag">گزاره ۳.۲</span></div>
+    <p>اگر برای نرم ماتریسی $\|\cdot\|$ با ویژگی زیرضربی داشته باشیم $\|A\|\lt1$ آن‌گاه $A$ ماتریسی همگرا است.</p>
+    <p class="small"><b>اثبات (تکمیلی):</b> با زیرضربی $\|A^k\|\le\|A\|^k$ و چون $\|A\|\lt1$، $\|A\|^k\to0$؛ طبق فشردگی $\|A^k-0\|\to0$ و طبق قضیهٔ ۱۶.۲، $A^k\to0$.</p>
+  </div>
+  <p>با توجه به مثال زیر کوچک‌تر از یک بودن نرم یک ماتریس شرط لازم برای همگرا بودن آن ماتریس نیست.</p>
+  <div class="box ex" id="ex72">
+    <div class="box-h"><span class="tag">مثال ۷.۲</span></div>
+    <p>برای ماتریس $C=\left[\begin{smallmatrix}0&2\\0&0\end{smallmatrix}\right]$ و هر نرم ماتریسی متداول، $\|C\|=2$ اما $C$ همگرا است ($C^2=0$).</p>
+  </div>
+
+  <div class="box thm" id="thm182">
+    <div class="box-h"><span class="tag">قضیه ۱۸.۲</span></div>
+    <p>عبارت‌های زیر هم‌ارز هستند: (آ) $A$ ماتریسی همگرا است؛ (ب) به ازای هر $x\in\mathbb{C}^n$، $\lim_{k\to\infty}A^kx=0$؛ (پ) $\rho(A)\lt1$.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-h"><span class="pt">اثبات قضیه ۱۸.۲</span><span class="badge book">از کتاب</span><span class="grow"></span></div>
+    <ol class="steps">
+      <li class="step"><b>(آ)⇒(ب).</b> اگر $\lim A^k=0$ واضح است که برای هر بردار دلخواه $x$، $\lim A^kx=0$.
+        <div class="why">قضیهٔ ۱۵.۲ (ب) با بردار ثابت $x$ به‌عنوان ماتریس $n\times1$: $\lim A^kx=(\lim A^k)x=0\cdot x$.</div></li>
+      <li class="step"><b>(ب)⇒(پ).</b> حال اگر (ب) برقرار باشد با انتخاب $x$ به عنوان ویژه‌برداری از $A$ متناظر با ویژه‌مقدار $\lambda$: $\ \lim A^kx=\lim\lambda^kx=0$. پس $|\lambda|\lt1$ که نتیجه می‌دهد $\rho(A)\lt1$.
+        <div class="why">$A^kx=\lambda^kx$ (استقرا). چون $x\ne0$ یکی از مؤلفه‌هایش ناصفر است و $\lambda^kx_i\to0$ یعنی $\lambda^k\to0$ یعنی $|\lambda|\lt1$. این برای همهٔ ویژه‌مقدارها درست است.</div></li>
+      <li class="step"><b>(پ)⇒(آ).</b> در نهایت اگر $\rho(A)\lt1$ بنابر قضیهٔ ۱۷.۲ نرم ماتریسی طبیعی $\|\cdot\|$ وجود دارد به طوری که $\|A\|\lt1$.
+        <div class="why">قضیهٔ ۱۷.۲ (ث) با $\epsilon=1-\rho(A)\gt0$.</div></li>
+      <li class="step">پس از $\|A^k\|\le\|A\|^k$ نتیجه می‌شود که $\lim\|A^k\|=0$ و این هم‌ارز با این است که $\lim A^k=0$.
+        <div class="why">نرم طبیعی زیرضربی است (تبصرهٔ ۸.۲) و قضیهٔ ۱۶.۲.</div></li>
+    </ol>
+    <div class="skeleton"><b>اسکلت برای حفظ</b>(آ)⇒(ب) بدیهی ؛ (ب)⇒(پ) $x$ را ویژه‌بردار بگیر: $\lambda^kx\to0$ ؛ (پ)⇒(آ) قضیهٔ ۱۷.۲(ث) نرمی با $\|A\|\lt1$ می‌دهد ← $\|A^k\|\le\|A\|^k\to0$.</div>
+    <div class="qed">∎</div>
+  </div>
+  <div class="box rem" id="rem112">
+    <div class="box-h"><span class="tag">تبصره ۱۱.۲</span></div>
+    <p>عبارت دیگری هم‌ارز با همگرا بودن یک ماتریس در لم ۴.۳ (صفحهٔ ۷۸) بیان می‌شود.</p>
+  </div>
+  <div class="box ex" id="ex82">
+    <div class="box-h"><span class="tag">مثال ۸.۲</span></div>
+    <p>ماتریس $A=\left[\begin{smallmatrix}\frac12&0\\[2pt]\frac14&\frac12\end{smallmatrix}\right]$ همگرا است زیرا $\|A\|_1=\|A\|_\infty=\frac34\lt1$ و همچنین $\ A^k=\begin{bmatrix}\frac1{2^k}&0\\[2pt]\frac{k}{2^{k+1}}&\frac1{2^k}\end{bmatrix}.$</p>
+    <p class="small"><b>کنترل فرمول $A^k$ با استقرا (تکمیلی):</b> برای $k=1$ درست است. اگر برای $k$ درست باشد، درایهٔ $(2,1)$ ماتریس $A^{k+1}=A^kA$ برابر است با $\frac{k}{2^{k+1}}\cdot\frac12+\frac1{2^k}\cdot\frac14=\frac{k+1}{2^{k+2}}$ و بقیهٔ درایه‌ها بدیهی‌اند. چون $\frac{k}{2^{k+1}}\to0$، واقعاً $A^k\to0$.</p>
+  </div>
+  <div class="box ex" id="ex92">
+    <div class="box-h"><span class="tag">مثال ۹.۲</span></div>
+    <p>با توجه به اینکه $\rho(A)=1$ و $\rho(B)=\frac12$ (ویژه‌مقدارهای ماتریس مثلثی برابر با درایه‌های روی قطر آن است؛ گزارهٔ ۲.۴، صفحهٔ ۹۲) ماتریس $A$ همگرا نیست ولی ماتریس $B$ همگرا است:</p>
+    $$A=\begin{bmatrix}1&0\\\frac14&\frac12\end{bmatrix},\qquad B=\begin{bmatrix}\frac12&0\\100&\frac12\end{bmatrix}.$$
+    <p>باید توجه داشت که اگر $A^k=[a_{ij}^{(k)}]$ آن‌گاه برای هر $k\ge1$، $a^{(k)}_{11}=1$.</p>
+    <p class="small">نکته: $\|B\|_1=100.5$ خیلی بزرگ است، ولی $B$ همگراست؛ نرم بزرگ فقط یعنی $B^k$ اول بزرگ می‌شود و بعد به صفر می‌رود (در ابزار زیر ببین).</p>
+  </div>
+  <div class="widget" data-widget="powers"></div>
+
+  <div class="quiz">
+    <div class="quiz-h"><b>خودآزمایی ۳.۲</b><span class="score"></span></div>
+    <div class="q">
+      <p class="q-t">کدام گزاره درست است؟</p>
+      <div class="opts"><button class="opt">اگر $\|A\|_\infty\ge1$ آن‌گاه $A$ همگرا نیست.</button><button class="opt" data-c>اگر $\rho(A)\lt1$ آن‌گاه $A$ همگراست.</button><button class="opt">اگر $\rho(A)=1$ آن‌گاه $A$ همگراست.</button></div>
+      <p class="q-exp">قضیهٔ ۱۸.۲. گزینهٔ اول غلط است (مثال ۷.۲ و ماتریس $B$ مثال ۹.۲).</p>
+    </div>
+    <div class="q">
+      <p class="q-t">برای ماتریس هرمیتی $A=\left[\begin{smallmatrix}2&1\\1&2\end{smallmatrix}\right]$، $\|A\|_2$ چند است؟</p>
+      <div class="opts two"><button class="opt">۱</button><button class="opt">۲</button><button class="opt" data-c>۳</button><button class="opt">$\sqrt{10}$</button></div>
+      <p class="q-exp">قضیهٔ ۱۷.۲ (ب): $\|A\|_2=\rho(A)=3$.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">در اثبات $\rho(A)\le\|A\|$ کدام بردار به کار رفت؟</p>
+      <div class="opts two"><button class="opt">$e^{(1)}$</button><button class="opt" data-c>ویژه‌بردار $x$</button><button class="opt">بردار یکه‌ها</button><button class="opt">بردار صفر</button></div>
+      <p class="q-exp">$|\lambda|=\|Ax\|/\|x\|\le\|A\|$.</p>
+    </div>
+    <div class="quiz-f"><button class="btn quiz-reset">دوباره</button></div>
+  </div>
+
+  <div class="box goal">
+    <div class="box-h"><span class="tag">حالا این تمرین‌ها را می‌توانی حل کنی</span></div>
+    <p><a href="#t16">تمرین ۱۶</a> · <a href="#t18">تمرین ۱۸</a> · <a href="#t19">تمرین ۱۹</a></p>
+  </div>
+  <div class="sec-done"><p>محک: قضیهٔ ۱۷.۲ (ت) و قضیهٔ ۱۸.۲ را از حفظ اثبات کن و ρ دو ماتریس مثال ۹.۲ را توضیح بده.</p><button class="btn done-btn" data-sec="sec23"></button></div>
+</section>
+
+<!-- ================================================================ EXERCISES -->
+<section class="sec" id="exercises">
+  <h2 id="sec24"><span class="num">۴.۲</span>تمرین‌ها (نمونه‌سؤال امتحان) با حل کامل</h2>
+  <p class="sec-intro">برای هر تمرین: صورت سؤال دقیقاً مثل کتاب، بعد «راهنمایی» که فقط قدم اول را می‌گوید، بعد «حل کامل» با دلیل هر گام. اول خودت روی کاغذ حل کن. اگر گیر کردی فقط راهنمایی را باز کن و دوباره تلاش کن.</p>
+
+  <h3 id="toolbox">جعبه‌ابزار اثبات این فصل</h3>
+  <p>تقریباً همهٔ اثبات‌ها و تمرین‌های این فصل با این ترفندها ساخته می‌شوند. سر جلسه، وقتی سؤال جدیدی دیدی، از خودت بپرس «کدام‌یک از این‌ها به کار می‌آید؟»</p>
+  <div class="cheat">
+    <div class="item"><h5>ت۱ · بازنویسی با «صفر اضافه کن»</h5><p class="small">$y=(y-x)+x$ یا $x=A^{-1}(Ax)$. در: لم ۲.۲، تمرین‌های ۱، ۸ و ۱۱.</p></div>
+    <div class="item"><h5>ت۲ · نامساوی از دو طرف</h5><p class="small">برای ثابت کردن $\|A\|=\lambda$: اول $\le\lambda$ برای همهٔ $x$، بعد یک $x$ خاص که $\ge\lambda$ بدهد. در: قضیه‌های ۱۱.۲، ۱۲.۲، ۱۷.۲(آ)، تمرین‌های ۸، ۱۷ و ۱۹.</p></div>
+    <div class="item"><h5>ت۳ · بردار خاص را انتخاب کن</h5><p class="small">$e^{(q)}$، بردار علامت‌ها $e^{-\mathrm i\theta_j}$، برداری که ماکزیمم را می‌سازد، ویژه‌بردار، $e^{(k)}+e^{(j)}$. در: قضیه‌های ۸.۲، ۱۱.۲، ۱۳.۲، ۱۷.۲(ت)، ۱۸.۲، تمرین‌های ۱۱، ۱۷، ۱۸ و ۱۹.</p></div>
+    <div class="item"><h5>ت۴ · کوشی-شوارتز</h5><p class="small">$|(x,y)|\le\|x\|_2\|y\|_2$. در: قضیه‌های ۱.۲ و ۱۲.۲، تمرین‌های ۵، ۱۰، ۱۷ و ۱۹.</p></div>
+    <div class="item"><h5>ت۵ · نرمال کن + وایرشتراس</h5><p class="small">$x/\|x\|$ روی کرهٔ واحد می‌افتد؛ تابع پیوسته روی آن ماکزیمم و مینیمم می‌گیرد. در: قضیه‌های ۵.۲، ۸.۲ و ۱۰.۲.</p></div>
+    <div class="item"><h5>ت۶ · فشردگی</h5><p class="small">$0\le a_k\le c\,b_k$ و $b_k\to0$ ⇒ $a_k\to0$. در: قضیه‌های ۷.۲ و ۱۸.۲، تمرین‌های ۴، ۷ و ۱۵.</p></div>
+    <div class="item"><h5>ت۷ · مؤلفه‌به‌مؤلفه</h5><p class="small">حد بردار/ماتریس را به حد اعداد برگردان. در: قضیهٔ ۷.۲، تمرین‌های ۶، ۱۴ و ۱۵.</p></div>
+    <div class="item"><h5>ت۸ · یکانی یعنی $U^HU=I$</h5><p class="small">پس $\|Ux\|_2=\|x\|_2$ و $|\det U|=1$. در: قضیه‌های ۱۳.۲ و ۱۴.۲، تمرین‌های ۱۲ و ۱۳.</p></div>
+    <div class="item"><h5>ت۹ · برای «آیا…؟» مثال نقض بساز</h5><p class="small">یک ویژگی را پیدا کن که خراب می‌شود و با یک بردار یا ماتریس کوچک نشانش بده. در: تمرین‌های ۳، ۹ و ۱۶.</p></div>
+  </div>
+
+  <!-- ===== exercise 1 -->
+  <div class="box ex" id="t1">
+    <div class="box-h"><span class="tag">تمرین ۱</span><span class="box-src">ابزار: ت۱ · مربوط به تبصرهٔ ۱.۲</span></div>
+    <p>ثابت کنید تعریف نرم برداری در تبصرهٔ ۱.۲ با تعریف ۱.۲ هم‌ارز است. به طور مشابه تعریفی هم‌ارز با تعریف ۹.۲ برای نرم ماتریسی بنویسید.</p>
+  </div>
+  <details class="try"><summary>راهنمایی</summary><div><p>یک جهت بدیهی است. برای جهت دیگر باید $\|x\|\ge0$ را ثابت کنی: اول $\|0\|$ را با همگنی حساب کن، بعد بنویس $0=x+(-x)$.</p></div></details>
+  <details class="try"><summary>حل کامل تمرین ۱</summary><div>
+    <div class="proof">
+      <div class="proof-h"><span class="pt">حل تمرین ۱</span><span class="grow"></span></div>
+      <ol class="steps">
+        <li class="step"><b>تعریف ۱.۲ ⇒ تبصرهٔ ۱.۲.</b> ویژگی‌های (پ) و (ت) تعریف همان (آ) و (ب) تبصره‌اند و (پ) تبصره بخشی از (ب) تعریف است.
+          <div class="why">هر نرم طبق تعریف ۱.۲، سه شرط تبصره را دارد.</div></li>
+        <li class="step"><b>تبصره ⇒ تعریف: $\|0\|=0$.</b> برای هر $x$: $\ \|0\|=\|0\cdot x\|=|0|\,\|x\|=0$.
+          <div class="why">ویژگی (آ) تبصره (همگنی) با $\alpha=0$.</div></li>
+        <li class="step"><b>نامنفی بودن.</b> $$\ 0=\|0\|=\|x+(-x)\|\le\|x\|+\|-x\|=\|x\|+|-1|\,\|x\|=2\|x\|$$ پس $\|x\|\ge0$.
+          <div class="why">نابرابری مثلثی (ب) و همگنی با $\alpha=-1$. این ویژگی (آ) تعریف ۱.۲ است.</div></li>
+        <li class="step"><b>ویژگی (ب) تعریف.</b> اگر $x=0$ طبق گام ۲، $\|x\|=0$؛ اگر $\|x\|=0$ طبق (پ) تبصره، $x=0$. پس $\|x\|=0\iff x=0$.
+          <div class="why">دو جهت «اگر و فقط اگر».</div></li>
+        <li class="step"><b>نسخهٔ ماتریسی.</b> تعریف هم‌ارز: نرم ماتریسی تابعی $\|\cdot\|:\mathbb{C}^{m\times n}\to\mathbb{R}$ است که (آ) $\|\alpha A\|=|\alpha|\|A\|$؛ (ب) $\|A+B\|\le\|A\|+\|B\|$؛ (پ) اگر $\|A\|=0$ آن‌گاه $A=0$. اثبات هم‌ارزی عیناً گام‌های ۱ تا ۴ است با $A$ به‌جای $x$.
+          <div class="why">در اثبات فقط از جمع و ضرب اسکالر استفاده شد که برای ماتریس‌ها هم تعریف شده‌اند.</div></li>
+      </ol>
+      <div class="skeleton"><b>خلاصهٔ جواب</b>$\|0\|=\|0\cdot x\|=0$ و $0=\|x-x\|\le2\|x\|$.</div>
+    </div>
+  </div></details>
+
+  <!-- ===== exercise 2 -->
+  <div class="box ex" id="t2">
+    <div class="box-h"><span class="tag">تمرین ۲</span><span class="box-src">ابزار: ت۴ · مربوط به لم ۱.۲</span></div>
+    <p>اگر $0\neq y\in\mathbb{C}^n$، ثابت کنید $|(x,y)|=(x,x)^{\frac12}(y,y)^{\frac12}$ اگر و تنها اگر به ازای $\alpha\in\mathbb{C}$ داشته باشیم $x=\alpha y$.</p>
+  </div>
+  <details class="try"><summary>راهنمایی</summary><div><p>جهت «اگر»: مستقیم جای‌گذاری کن. جهت «فقط اگر»: بردار $z=x-\xi y$ با $\xi=\frac{(y,x)}{(y,y)}$ را بساز و $(z,z)$ را حساب کن.</p></div></details>
+  <details class="try"><summary>حل کامل تمرین ۲</summary><div>
+    <div class="proof">
+      <div class="proof-h"><span class="pt">حل تمرین ۲</span><span class="grow"></span></div>
+      <ol class="steps">
+        <li class="step"><b>(⇐)</b> اگر $x=\alpha y$: $$\ |(x,y)|=|(\alpha y,y)|=|\bar\alpha(y,y)|=|\alpha|\,\|y\|_2^2$$ و $$(x,x)^{\frac12}(y,y)^{\frac12}=\|\alpha y\|_2\|y\|_2=|\alpha|\,\|y\|_2^2$$ برابرند.
+          <div class="why">ویژگی (ت) ضرب داخلی (ضریب در آرگومان اول مزدوج بیرون می‌آید) و $|\bar\alpha|=|\alpha|$.</div></li>
+        <li class="step"><b>(⇒)</b> فرض کن $|(x,y)|^2=(x,x)(y,y)$. قرار بده $\xi=\frac{(y,x)}{(y,y)}$ (ممکن است چون $y\ne0$) و $z=x-\xi y$. آن‌گاه
+          $$(z,z)=(x,x)-\xi(x,y)-\bar\xi(y,x)+|\xi|^2(y,y).$$
+          <div class="why">همان باز کردن اثبات لم ۱.۲.</div></li>
+        <li class="step">هر سه جملهٔ آخر برابر $\frac{|(x,y)|^2}{(y,y)}$اند:
+          $\ \xi(x,y)=\frac{(y,x)(x,y)}{(y,y)}$، $\ \bar\xi(y,x)=\frac{\overline{(y,x)}(y,x)}{(y,y)}$، $\ |\xi|^2(y,y)=\frac{|(y,x)|^2}{(y,y)}$. پس
+          $$(z,z)=(x,x)-\frac{|(x,y)|^2}{(y,y)}.$$
+          <div class="why">$(y,x)=\overline{(x,y)}$ پس $(y,x)(x,y)=|(x,y)|^2$؛ و $(y,y)$ حقیقی است.</div></li>
+        <li class="step">طبق فرض $|(x,y)|^2=(x,x)(y,y)$، پس $(z,z)=0$ و طبق ویژگی (ب) ضرب داخلی $z=0$؛ یعنی $x=\xi y$ با $\alpha=\xi$.
+          <div class="why">این‌جا دقیقاً از «برابری» استفاده کردیم.</div></li>
+      </ol>
+      <div class="skeleton"><b>خلاصهٔ جواب</b>$z=x-\frac{(y,x)}{(y,y)}y$ ⇒ $(z,z)=(x,x)-\frac{|(x,y)|^2}{(y,y)}$؛ برابری ⇔ $z=0$ ⇔ $x=\alpha y$. (همین محاسبه یک اثبات دیگر برای خود کوشی-شوارتز هم هست، چون $(z,z)\ge0$.)</div>
+    </div>
+  </div></details>
+
+  <!-- ===== exercise 3 -->
+  <div class="box ex" id="t3">
+    <div class="box-h"><span class="tag">تمرین ۳</span><span class="box-src">ابزار: ت۹ · مربوط به تعریف ۱.۲</span></div>
+    <p>فرض کنید $x=[x_i]_{n\times1}$ بردار دلخواهی در $\mathbb{C}^n$ باشد. آیا توابع زیر بیانگر نرم (نیم‌نرم) برداری روی $\mathbb{C}^n$ هستند؟</p>
+    $$\|x\|_k=\max\{|x_1|,\dots,|x_{k-1}|,|x_{k+1}|,\dots,|x_n|\},\qquad k=1,\dots,n,$$
+    $$\|x\|_k=\sqrt[k+1]{\sum_{j=1}^{n-k}\prod_{i=j}^{j+k}|x_i|},\qquad k=1,\dots,n-1.$$
+  </div>
+  <details class="try"><summary>راهنمایی</summary><div><p>برای هر دو تابع اول ببین $\|e^{(k)}\|$ یا $\|e^{(1)}\|$ چند می‌شود (ویژگی ب). بعد نابرابری مثلثی را بررسی کن. برای تابع دوم مثال $n=2$، $k=1$ یعنی $\sqrt{|x_1x_2|}$ را با $x=e^{(1)}$ و $y=e^{(2)}$ امتحان کن.</p></div></details>
+  <details class="try"><summary>حل کامل تمرین ۳</summary><div>
+    <div class="proof">
+      <div class="proof-h"><span class="pt">حل تمرین ۳</span><span class="grow"></span></div>
+      <p class="proof-goal">فرض $n\ge2$. جواب: تابع اول <b>نیم‌نرم است ولی نرم نیست</b>؛ تابع دوم <b>نه نرم است نه نیم‌نرم</b>.</p>
+      <ol class="steps">
+        <li class="step"><b>تابع اول، ویژگی‌های خوب.</b> نامنفی است. همگنی: $\max_{i\ne k}|\alpha x_i|=|\alpha|\max_{i\ne k}|x_i|$. مثلثی: برای هر $i\ne k$: $$\ |x_i+y_i|\le|x_i|+|y_i|\le\|x\|_k+\|y\|_k$$ پس ماکزیمم سمت چپ هم $\le\|x\|_k+\|y\|_k$.
+          <div class="why">دقیقاً مثل اثبات نرم بی‌نهایت، فقط مؤلفهٔ $k$ را نادیده گرفته‌ایم.</div></li>
+        <li class="step"><b>تابع اول، نرم نیست.</b> $x=e^{(k)}\neq0$ ولی همهٔ مؤلفه‌های غیر از $k$ صفرند و $\|e^{(k)}\|_k=0$. پس ویژگی (ب) خراب است: <b>نیم‌نرم</b>.
+          <div class="why">تعریف نیم‌نرم (تعریف ۱.۲).</div></li>
+        <li class="step"><b>تابع دوم، همگنی درست است.</b> هر حاصل‌ضرب $k+1$ عامل دارد: $\prod|\alpha x_i|=|\alpha|^{k+1}\prod|x_i|$؛ ریشهٔ $(k+1)$ام آن $|\alpha|$ را بیرون می‌دهد.
+          <div class="why">برای همین ریشهٔ $(k+1)$ام گذاشته شده.</div></li>
+        <li class="step"><b>تابع دوم، نابرابری مثلثی خراب است.</b> قرار بده $x=e^{(1)}+\cdots+e^{(k)}$ (اول $k$ مؤلفه ۱) و $y=e^{(k+1)}$. هر حاصل‌ضرب روی $k+1$ اندیس متوالی است و در $x$ فقط $k$ مؤلفهٔ ناصفر و در $y$ فقط یکی هست، پس $\|x\|_k=\|y\|_k=0$. اما $x+y$ اول $k+1$ مؤلفه‌اش ۱ است و جملهٔ $j=1$ برابر ۱ است، پس $\|x+y\|_k\ge1\gt0=\|x\|_k+\|y\|_k$.
+          <div class="why">مثال ساده: $n=2,k=1$: $\|x\|=\sqrt{|x_1x_2|}$؛ $\|e^{(1)}\|=\|e^{(2)}\|=0$ ولی $\|e^{(1)}+e^{(2)}\|=1$.</div></li>
+        <li class="step">پس تابع دوم حتی نیم‌نرم هم نیست (ضمناً $\|e^{(1)}\|_k=0$ با $e^{(1)}\ne0$، پس ویژگی (ب) هم خراب است).
+          <div class="why">نیم‌نرم هم باید نابرابری مثلثی داشته باشد.</div></li>
+      </ol>
+      <div class="skeleton"><b>خلاصهٔ جواب</b>اولی: مثلثی و همگن ✓، ولی $\|e^{(k)}\|_k=0$ ⇒ نیم‌نرم. دومی: $\|e^{(1)}+\cdots+e^{(k)}\|=\|e^{(k+1)}\|=0$ ولی جمعشان ناصفر ⇒ مثلثی ✗ ⇒ هیچ‌کدام.</div>
+    </div>
+  </div></details>
+
+  <!-- ===== exercise 4 -->
+  <div class="box ex" id="t4">
+    <div class="box-h"><span class="tag">تمرین ۴</span><span class="box-src">ابزار: ت۶ · مربوط به مثال ۱.۲</span></div>
+    <p>اگر $x\in\mathbb{C}^n$ نشان دهید $\ \lim_{p\to\infty}\|x\|_p=\|x\|_\infty$.</p>
+  </div>
+  <details class="try"><summary>راهنمایی</summary><div><p>با $M=\|x\|_\infty$ نشان بده $M\le\|x\|_p\le n^{1/p}M$ و از $n^{1/p}\to1$ و فشردگی استفاده کن.</p></div></details>
+  <details class="try"><summary>حل کامل تمرین ۴</summary><div>
+    <div class="proof">
+      <div class="proof-h"><span class="pt">حل تمرین ۴</span><span class="grow"></span></div>
+      <ol class="steps">
+        <li class="step">اگر $x=0$ همهٔ نرم‌ها صفرند. فرض کن $x\neq0$ و $M=\|x\|_\infty=|x_q|\gt0$.
+          <div class="why">$q$ اندیس بزرگ‌ترین مؤلفه است.</div></li>
+        <li class="step"><b>کران پایین.</b> $\ \sum_i|x_i|^p\ge|x_q|^p=M^p$ پس $\|x\|_p\ge M$.
+          <div class="why">جمع جمله‌های نامنفی از یکی از جمله‌ها کمتر نیست؛ تابع $t\mapsto t^{1/p}$ صعودی است.</div></li>
+        <li class="step"><b>کران بالا.</b> هر $|x_i|\le M$ پس $\sum_i|x_i|^p\le nM^p$ و $\|x\|_p\le n^{1/p}M$.
+          <div class="why">$n$ جمله، هر کدام حداکثر $M^p$.</div></li>
+        <li class="step">$n^{1/p}=e^{(\ln n)/p}\to e^0=1$ وقتی $p\to\infty$. پس با فشردگی $M\le\|x\|_p\le n^{1/p}M\to M$ و $\lim_{p\to\infty}\|x\|_p=M=\|x\|_\infty$.
+          <div class="why">قضیهٔ فشردگی برای اعداد. (در ابزار «گوی واحد» دیدی که منحنی $p$ بزرگ به مربع نزدیک می‌شود.)</div></li>
+      </ol>
+      <div class="skeleton"><b>خلاصهٔ جواب</b>$\|x\|_\infty\le\|x\|_p\le n^{1/p}\|x\|_\infty$ و $n^{1/p}\to1$.</div>
+    </div>
+  </div></details>
+
+  <!-- ===== exercise 5 -->
+  <div class="box ex" id="t5">
+    <div class="box-h"><span class="tag">تمرین ۵</span><span class="box-src">ابزار: ت۴ · مربوط به قضیهٔ ۵.۲</span></div>
+    <p>با این فرض که $x$ بردار دلخواهی در $\mathbb{C}^n$ باشد، درستی نابرابری‌های داده‌شده را بررسی کنید.</p>
+    $$\|x\|_2\le\|x\|_1\le\sqrt n\|x\|_2,\qquad\|x\|_\infty\le\|x\|_2\le\sqrt n\|x\|_\infty,\qquad\|x\|_\infty\le\|x\|_1\le n\|x\|_\infty .$$
+  </div>
+  <details class="try"><summary>راهنمایی</summary><div><p>همه درست‌اند. برای $\|x\|_1\le\sqrt n\|x\|_2$ کوشی-شوارتز را روی بردار $(|x_1|,\dots,|x_n|)$ و بردار $(1,\dots,1)$ به کار ببر. بقیه با «یک جمله ≤ مجموع» و «هر جمله ≤ ماکزیمم» درمی‌آیند.</p></div></details>
+  <details class="try"><summary>حل کامل تمرین ۵</summary><div>
+    <div class="proof">
+      <div class="proof-h"><span class="pt">حل تمرین ۵</span><span class="grow"></span></div>
+      <p class="proof-goal">$M=\|x\|_\infty$. هر شش نابرابری درست‌اند.</p>
+      <ol class="steps">
+        <li class="step"><b>$\|x\|_2\le\|x\|_1$:</b> $$\ \|x\|_1^2=\big(\sum|x_i|\big)^2=\sum|x_i|^2+\sum_{i\ne j}|x_i||x_j|\ge\sum|x_i|^2=\|x\|_2^2$$
+          <div class="why">جمله‌های متقاطع نامنفی‌اند.</div></li>
+        <li class="step"><b>$\|x\|_1\le\sqrt n\|x\|_2$:</b> با $u=(|x_1|,\dots,|x_n|)$ و $v=(1,\dots,1)$: $$\ \sum|x_i|=(u,v)\le\|u\|_2\|v\|_2=\|x\|_2\sqrt n$$
+          <div class="why">کوشی-شوارتز (لم ۱.۲).</div></li>
+        <li class="step"><b>$\|x\|_\infty\le\|x\|_2$:</b> $\ M^2=|x_q|^2\le\sum|x_i|^2$. $\quad$ <b>$\|x\|_2\le\sqrt n\|x\|_\infty$:</b> $\ \sum|x_i|^2\le nM^2$.
+          <div class="why">یک جمله ≤ مجموع؛ هر جمله ≤ ماکزیمم.</div></li>
+        <li class="step"><b>$\|x\|_\infty\le\|x\|_1$:</b> $\ M=|x_q|\le\sum|x_i|$. $\quad$ <b>$\|x\|_1\le n\|x\|_\infty$:</b> $\ \sum|x_i|\le nM$.
+          <div class="why">همان دو ترفند.</div></li>
+        <li class="step"><b>ثابت‌ها بهترین‌اند.</b> برای $x=e^{(1)}$ سه نرم همه ۱اند (نابرابری‌های سمت چپ برابری). برای $x=(1,\dots,1)$: $\|x\|_1=n$، $\|x\|_2=\sqrt n$، $\|x\|_\infty=1$ (نابرابری‌های سمت راست برابری).
+          <div class="why">سؤال‌های امتحانی گاهی می‌پرسند «آیا می‌توان ثابت را کوچک‌تر کرد؟»؛ جواب این دو مثال است.</div></li>
+      </ol>
+      <div class="skeleton"><b>خلاصهٔ جواب</b>همه درست. $$\|x\|_\infty\le\|x\|_2\le\|x\|_1\le\sqrt n\|x\|_2\le n\|x\|_\infty$$ این‌ها نمونه‌های ثابت‌های $\alpha_1,\alpha_2$ در قضیهٔ ۵.۲ هستند.</div>
+    </div>
+  </div></details>
+
+  <!-- ===== exercise 6 -->
+  <div class="box ex" id="t6">
+    <div class="box-h"><span class="tag">تمرین ۶</span><span class="box-src">ابزار: ت۷</span></div>
+    <p>قضیهٔ ۶.۲ را ثابت کنید.</p>
+  </div>
+  <details class="try"><summary>راهنمایی</summary><div><p>طبق تعریف ۷.۲ فقط کافی است مؤلفهٔ $i$ام را نگاه کنی؛ بعد قانون حد جمع و ضرب در عدد برای دنباله‌های عددی.</p></div></details>
+  <details class="try"><summary>حل کامل تمرین ۶</summary><div>
+    <div class="proof">
+      <div class="proof-h"><span class="pt">حل تمرین ۶</span><span class="grow"></span></div>
+      <ol class="steps">
+        <li class="step">مؤلفهٔ $i$ام بردار $\alpha x^{(k)}+\beta y^{(k)}$ برابر $\alpha x_i^{(k)}+\beta y_i^{(k)}$ است.
+          <div class="why">جمع و ضرب اسکالر بردارها مؤلفه‌به‌مؤلفه است.</div></li>
+        <li class="step">چون $x_i^{(k)}\to x_i$ و $y_i^{(k)}\to y_i$ (تعریف ۷.۲)، طبق قوانین حد دنباله‌های عددی: $\ \alpha x_i^{(k)}+\beta y_i^{(k)}\to\alpha x_i+\beta y_i$.
+          <div class="why">حد مجموع = مجموع حدها و حد $c\cdot a_k$ = $c\cdot\lim a_k$ (برای اعداد مختلط هم درست است).</div></li>
+        <li class="step">$\alpha x_i+\beta y_i$ مؤلفهٔ $i$ام $\alpha x+\beta y$ است و این برای همهٔ $i=1,\dots,n$ برقرار است؛ پس طبق تعریف ۷.۲: $\lim(\alpha x^{(k)}+\beta y^{(k)})=\alpha x+\beta y$.
+          <div class="why">تعریف حد مؤلفه‌ای.</div></li>
+      </ol>
+      <div class="skeleton"><b>خلاصهٔ جواب</b>مؤلفهٔ $i$ام را بگیر و قانون حد اعداد را بزن.</div>
+    </div>
+  </div></details>
+
+  <!-- ===== exercise 7 -->
+  <div class="box ex" id="t7">
+    <div class="box-h"><span class="tag">تمرین ۷</span><span class="box-src">ابزار: ت۶ · مربوط به قضیه‌های ۵.۲ و ۱۰.۲</span></div>
+    <p>اگر $\|\cdot\|_a$ و $\|\cdot\|_b$ دو نرم برداری دلخواه روی $\mathbb{C}^n$ باشند ثابت کنید برای دنبالهٔ $\{x^{(k)}\}$ داریم $$\ \lim\|x^{(k)}-x\|_a=0\iff\lim\|x^{(k)}-x\|_b=0$$ نتیجه‌ای مشابه را برای نرم‌های ماتریسی بیان کنید.</p>
+  </div>
+  <details class="try"><summary>راهنمایی</summary><div><p>قضیهٔ ۵.۲ را برای بردار $v=x^{(k)}-x$ بنویس و فشردگی بزن.</p></div></details>
+  <details class="try"><summary>حل کامل تمرین ۷</summary><div>
+    <div class="proof">
+      <div class="proof-h"><span class="pt">حل تمرین ۷</span><span class="grow"></span></div>
+      <ol class="steps">
+        <li class="step">طبق قضیهٔ ۵.۲ ثابت‌های $\alpha_1,\alpha_2\gt0$ هست که برای هر $v$: $\ \alpha_1\|v\|_b\le\|v\|_a\le\alpha_2\|v\|_b$. قرار بده $v=x^{(k)}-x$.
+          <div class="why">ثابت‌ها به $k$ بستگی ندارند؛ این مهم است.</div></li>
+        <li class="step"><b>(⇒)</b> $$\ 0\le\|x^{(k)}-x\|_b\le\frac1{\alpha_1}\|x^{(k)}-x\|_a\to0$$ پس $\|x^{(k)}-x\|_b\to0$.
+          <div class="why">فشردگی.</div></li>
+        <li class="step"><b>(⇐)</b> $$\ 0\le\|x^{(k)}-x\|_a\le\alpha_2\|x^{(k)}-x\|_b\to0$$
+          <div class="why">همان، از طرف دیگر نامساوی.</div></li>
+        <li class="step"><b>نتیجهٔ ماتریسی.</b> اگر $\|\cdot\|_a$ و $\|\cdot\|_b$ دو نرم ماتریسی روی $\mathbb{C}^{m\times n}$ باشند: $$\ \lim\|A^{(k)}-A\|_a=0\iff\lim\|A^{(k)}-A\|_b=0$$ اثبات عین بالا با قضیهٔ ۱۰.۲ به‌جای ۵.۲.
+          <div class="why">پس همگرایی ماتریسی هم به انتخاب نرم بستگی ندارد.</div></li>
+      </ol>
+      <div class="skeleton"><b>خلاصهٔ جواب</b>هم‌ارزی نرم‌ها + فشردگی، دو طرف.</div>
+    </div>
+  </div></details>
+
+  <!-- ===== exercise 8 -->
+  <div class="box ex" id="t8">
+    <div class="box-h"><span class="tag">تمرین ۸</span><span class="box-src">ابزار: ت۱ · مربوط به قضیهٔ ۸.۲</span></div>
+    <p>اگر $A\in\mathbb{C}^{n\times n}$ وارون‌پذیر باشد برای نرم ماتریسی طبیعی نشان دهید $\ \dfrac{1}{\|A\|}=\min_{0\ne x\in\mathbb{C}^n}\dfrac{\|A^{-1}x\|}{\|x\|}$.</p>
+  </div>
+  <details class="try"><summary>راهنمایی</summary><div><p>تغییر متغیر بده: $y=A^{-1}x$ یعنی $x=Ay$. نسبت به $\frac{\|y\|}{\|Ay\|}$ تبدیل می‌شود.</p></div></details>
+  <details class="try"><summary>حل کامل تمرین ۸</summary><div>
+    <div class="proof">
+      <div class="proof-h"><span class="pt">حل تمرین ۸</span><span class="grow"></span></div>
+      <ol class="steps">
+        <li class="step">برای $x\neq0$ قرار بده $y=A^{-1}x$. چون $A$ وارون‌پذیر است، $y\ne0$ و $x=Ay$؛ و وقتی $x$ همهٔ بردارهای ناصفر را می‌پیماید، $y$ هم همهٔ بردارهای ناصفر را می‌پیماید.
+          <div class="why">$x\mapsto A^{-1}x$ یک‌به‌یک و پوشا است.</div></li>
+        <li class="step">پس $\ \dfrac{\|A^{-1}x\|}{\|x\|}=\dfrac{\|y\|}{\|Ay\|}=\dfrac{1}{\ \|Ay\|/\|y\|\ }$.
+          <div class="why">$Ay\neq0$ چون $A$ وارون‌پذیر و $y\ne0$.</div></li>
+        <li class="step">برای اعداد مثبت $t_y=\frac{\|Ay\|}{\|y\|}$: $\ \min_y\frac1{t_y}=\frac1{\max_yt_y}=\frac1{\|A\|}$.
+          <div class="why">ماکزیمم $t_y$ همان $\|A\|$ است (قضیهٔ ۸.۲) و در یک $y$ رخ می‌دهد؛ در همان $y$ کسر $1/t_y$ کمینه است.</div></li>
+      </ol>
+      <div class="skeleton"><b>خلاصهٔ جواب</b>$x=Ay$ ⇒ $\frac{\|A^{-1}x\|}{\|x\|}=\big(\frac{\|Ay\|}{\|y\|}\big)^{-1}$؛ کمینهٔ معکوس = معکوس بیشینه.</div>
+    </div>
+  </div></details>
+
+  <!-- ===== exercise 9 -->
+  <div class="box ex" id="t9">
+    <div class="box-h"><span class="tag">تمرین ۹</span><span class="box-src">ابزار: ت۹ · مربوط به گزارهٔ ۱.۲</span></div>
+    <p>آیا نرم فروبنیوس یک نرم طبیعی است؟</p>
+  </div>
+  <details class="try"><summary>راهنمایی</summary><div><p>هر نرم طبیعی چه مقداری برای $I$ می‌دهد؟</p></div></details>
+  <details class="try"><summary>حل کامل تمرین ۹</summary><div>
+    <div class="proof">
+      <div class="proof-h"><span class="pt">حل تمرین ۹</span><span class="grow"></span></div>
+      <ol class="steps">
+        <li class="step">طبق گزارهٔ ۱.۲، برای هر نرم ماتریسی طبیعی $\|I\|=1$.
+          <div class="why">$\|I\|=\max\frac{\|Ix\|}{\|x\|}=1$.</div></li>
+        <li class="step">اما برای $I_{n\times n}$: $\ \|I\|_F=\sqrt{1^2+\cdots+1^2}=\sqrt n$ که برای $n\ge2$ مخالف ۱ است.
+          <div class="why">$n$ درایهٔ قطری برابر ۱.</div></li>
+        <li class="step">پس برای $n\ge2$ نرم فروبنیوس از هیچ نرم برداری القا نمی‌شود: <b>طبیعی نیست</b>. (برای $n=1$ همان قدرمطلق است که طبیعی است.)
+          <div class="why">مثال نقض با یک ماتریس ساده.</div></li>
+      </ol>
+      <div class="skeleton"><b>خلاصهٔ جواب</b>نه؛ $\|I\|_F=\sqrt n\neq1$. (ولی زیرضربی هست؛ تمرین ۱۰.)</div>
+    </div>
+  </div></details>
+
+  <!-- ===== exercise 10 -->
+  <div class="box ex" id="t10">
+    <div class="box-h"><span class="tag">تمرین ۱۰</span><span class="box-src">ابزار: ت۴ · مربوط به مثال ۵.۲</span></div>
+    <p>برای ماتریس‌های $A_{m\times n}$ و $B_{n\times p}$ ثابت کنید $\ \|AB\|_F\le\|A\|_2\|B\|_F$ و $\ \|AB\|_F\le\|A\|_F\|B\|_F$.</p>
+  </div>
+  <details class="try"><summary>راهنمایی</summary><div><p>$\|AB\|_F^2$ را ستون‌به‌ستون بنویس: ستون $j$ام $AB$ همان $Ab^{(j)}$ است. برای نامساوی دوم کافی است ثابت کنی $\|A\|_2\le\|A\|_F$ (کوشی-شوارتز روی سطرها).</p></div></details>
+  <details class="try"><summary>حل کامل تمرین ۱۰</summary><div>
+    <div class="proof">
+      <div class="proof-h"><span class="pt">حل تمرین ۱۰</span><span class="grow"></span></div>
+      <ol class="steps">
+        <li class="step">اگر $B=[b^{(1)}\cdots b^{(p)}]$ آن‌گاه $AB=[Ab^{(1)}\cdots Ab^{(p)}]$ و
+          $$\|AB\|_F^2=\sum_{j=1}^p\|Ab^{(j)}\|_2^2\le\sum_{j=1}^p\|A\|_2^2\|b^{(j)}\|_2^2=\|A\|_2^2\|B\|_F^2 .$$
+          <div class="why">مربع نرم فروبنیوس = مجموع مربع طول ستون‌ها؛ سازگاری نرم ۲. با جذر: نامساوی اول.</div></li>
+        <li class="step"><b>$\|A\|_2\le\|A\|_F$.</b> اگر $r_i$ سطر $i$ام $A$ باشد، برای هر $x$: $$\ \|Ax\|_2^2=\sum_{i=1}^m|r_ix|^2\le\sum_{i=1}^m\|r_i\|_2^2\|x\|_2^2=\|A\|_F^2\|x\|_2^2$$
+          <div class="why">مؤلفهٔ $i$ام $Ax$ برابر $r_ix=(r_i^H,x)$ است و کوشی-شوارتز. پس $\frac{\|Ax\|_2}{\|x\|_2}\le\|A\|_F$ برای همهٔ $x$.</div></li>
+        <li class="step">ترکیب: $$\ \|AB\|_F\le\|A\|_2\|B\|_F\le\|A\|_F\|B\|_F$$
+          <div class="why">نتیجه: نرم فروبنیوس زیرضربی است، با اینکه طبیعی نیست.</div></li>
+      </ol>
+      <div class="skeleton"><b>خلاصهٔ جواب</b>ستون‌به‌ستون + سازگاری؛ و $\|A\|_2\le\|A\|_F$ با کوشی-شوارتز روی سطرها.</div>
+    </div>
+  </div></details>
+
+  <!-- ===== exercise 11 -->
+  <div class="box ex" id="t11">
+    <div class="box-h"><span class="tag">تمرین ۱۱</span><span class="box-src">ابزار: ت۱، ت۳</span></div>
+    <p>نشان دهید اگر $B$ وارون‌پذیر نباشد آن‌گاه برای ماتریس وارون‌پذیر $A$ و نرم ماتریسی طبیعی $\|\cdot\|$ داریم $\ \dfrac{1}{\|A^{-1}\|}\le\|A-B\|$.</p>
+  </div>
+  <details class="try"><summary>راهنمایی</summary><div><p>چون $B$ وارون‌ناپذیر است، $x\neq0$ با $Bx=0$ هست. برای همین $x$ بنویس $x=A^{-1}Ax=A^{-1}(A-B)x$.</p></div></details>
+  <details class="try"><summary>حل کامل تمرین ۱۱</summary><div>
+    <div class="proof">
+      <div class="proof-h"><span class="pt">حل تمرین ۱۱</span><span class="grow"></span></div>
+      <ol class="steps">
+        <li class="step">$B$ وارون‌پذیر نیست، پس بردار $x\neq0$ با $Bx=0$ وجود دارد.
+          <div class="why">گزارهٔ ۱.۳ (فصل ۳): وارون‌پذیری ⇔ $Bx=0$ فقط جواب صفر دارد.</div></li>
+        <li class="step">$(A-B)x=Ax-Bx=Ax$، پس $\ x=A^{-1}Ax=A^{-1}(A-B)x$.
+          <div class="why">ترفند بازنویسی.</div></li>
+        <li class="step">نرم می‌گیریم: $$\ \|x\|\le\|A^{-1}\|\,\|(A-B)x\|\le\|A^{-1}\|\,\|A-B\|\,\|x\|$$
+          <div class="why">دو بار سازگاری نرم طبیعی.</div></li>
+        <li class="step">تقسیم بر $\|x\|\gt0$: $\ 1\le\|A^{-1}\|\|A-B\|$ یعنی $\ \frac{1}{\|A^{-1}\|}\le\|A-B\|$.
+          <div class="why">$\|A^{-1}\|\gt0$.</div></li>
+      </ol>
+      <div class="skeleton"><b>خلاصهٔ جواب</b>$Bx=0$ ⇒ $x=A^{-1}(A-B)x$ ⇒ $\|x\|\le\|A^{-1}\|\|A-B\|\|x\|$. معنی: فاصلهٔ $A$ تا نزدیک‌ترین ماتریس منفرد حداقل $1/\|A^{-1}\|$ است؛ با تقسیم بر $\|A\|$: $\frac{\|A-B\|}{\|A\|}\ge\frac1{\kappa(A)}$، یعنی ماتریس بدوضع (فصل ۳) به ماتریس منفرد نزدیک است.</div>
+    </div>
+  </div></details>
+
+  <!-- ===== exercise 12 -->
+  <div class="box ex" id="t12">
+    <div class="box-h"><span class="tag">تمرین ۱۲</span><span class="box-src">ابزار: ت۸</span></div>
+    <p>اگر $U$ یک ماتریس یکانی (متعامد) باشد آن‌گاه $|\det(U)|=1$.</p>
+  </div>
+  <details class="try"><summary>راهنمایی</summary><div><p>از $U^HU=I$ دترمینان بگیر و از $\det(U^H)=\overline{\det U}$ استفاده کن.</p></div></details>
+  <details class="try"><summary>حل کامل تمرین ۱۲</summary><div>
+    <div class="proof">
+      <div class="proof-h"><span class="pt">حل تمرین ۱۲</span><span class="grow"></span></div>
+      <ol class="steps">
+        <li class="step">$U$ یکانی است پس $U^HU=I$ (قضیهٔ ۱۳.۲) و $\ \det(U^H)\det(U)=\det(I)=1$.
+          <div class="why">$\det(AB)=\det A\det B$.</div></li>
+        <li class="step">$$\det(U^H)=\det(\bar U^T)=\det(\bar U)=\overline{\det U}$$
+          <div class="why">دترمینان ترانهاده تغییر نمی‌کند و چون دترمینان چندجمله‌ای با ضرایب صحیح از درایه‌هاست، مزدوج کردن درایه‌ها دترمینان را مزدوج می‌کند.</div></li>
+        <li class="step">پس $\overline{\det U}\det U=|\det U|^2=1$ و $|\det U|=1$. برای ماتریس متعامد حقیقی یعنی $\det U=\pm1$.
+          <div class="why">$\bar zz=|z|^2$.</div></li>
+      </ol>
+      <div class="skeleton"><b>خلاصهٔ جواب</b>$$1=\det(U^HU)=\overline{\det U}\det U=|\det U|^2$$</div>
+    </div>
+  </div></details>
+
+  <!-- ===== exercise 13 -->
+  <div class="box ex" id="t13">
+    <div class="box-h"><span class="tag">تمرین ۱۳</span><span class="box-src">ابزار: ت۸ · تعمیم قضیهٔ ۱۴.۲</span></div>
+    <p>(تعمیم قضیهٔ ۱۴.۲) اگر $U_{k\times m}$ ماتریسی با ستون‌های متعامدیکه و $V_{n\times r}$ ماتریسی با سطرهای متعامدیکه باشد ثابت کنید</p>
+    <ol>
+      <li>(آ) برای ماتریس $A$ در $\mathbb{C}^{m\times n}$ به ازای $p=2,F$ داریم $\|UA\|_p=\|AV\|_p=\|A\|_p$ و نتیجه بگیرید $\|UAV\|_p=\|A\|_p$؛</li>
+      <li>(ب) $\|U\|_2=\|V\|_2=1$، $\ \|U\|_F=\sqrt m$ و $\|V\|_F=\sqrt n$.</li>
+    </ol>
+  </div>
+  <details class="try"><summary>راهنمایی</summary><div><p>ستون‌های متعامدیکه یعنی $U^HU=I_m$ (ولی $UU^H$ لزوماً $I$ نیست). سطرهای متعامدیکه یعنی $VV^H=I_n$، یعنی $V^H$ ستون‌های متعامدیکه دارد. حالا اثبات قضیهٔ ۱۴.۲ را تکرار کن.</p></div></details>
+  <details class="try"><summary>حل کامل تمرین ۱۳</summary><div>
+    <div class="proof">
+      <div class="proof-h"><span class="pt">حل تمرین ۱۳</span><span class="grow"></span></div>
+      <ol class="steps">
+        <li class="step"><b>ابزار.</b> چون ستون‌های $U$ متعامدیکه‌اند $U^HU=I_m$؛ پس برای هر $y\in\mathbb{C}^m$: $\ \|Uy\|_2^2=y^HU^HUy=\|y\|_2^2$.
+          <div class="why">درایهٔ $(i,j)$ ماتریس $U^HU$ همان ضرب داخلی ستون‌های $i$ و $j$ است.</div></li>
+        <li class="step"><b>$\|UA\|_2=\|A\|_2$:</b> $$\ \|UA\|_2=\max_{x\ne0}\frac{\|U(Ax)\|_2}{\|x\|_2}=\max_{x\ne0}\frac{\|Ax\|_2}{\|x\|_2}=\|A\|_2$$
+          <div class="why">گام ۱ با $y=Ax$.</div></li>
+        <li class="step"><b>$\|UA\|_F=\|A\|_F$:</b> با $A=[a^{(1)}\cdots a^{(n)}]$: $$\ \|UA\|_F^2=\sum_j\|Ua^{(j)}\|_2^2=\sum_j\|a^{(j)}\|_2^2=\|A\|_F^2$$
+          <div class="why">ستون‌به‌ستون.</div></li>
+        <li class="step"><b>$\|AV\|_p=\|A\|_p$:</b> سطرهای $V$ متعامدیکه‌اند پس $VV^H=I_n$ و $W=V^H$ (ماتریس $r\times n$) ستون‌های متعامدیکه دارد. بنابراین $$\ \|AV\|_p=\|(AV)^H\|_p=\|WA^H\|_p=\|A^H\|_p=\|A\|_p$$
+          <div class="why">$\|M^H\|_2=\|M\|_2$ (قضیهٔ ۱۲.۲) و $\|M^H\|_F=\|M\|_F$؛ بعد گام‌های ۲ و ۳ برای $W$ به‌جای $U$.</div></li>
+        <li class="step"><b>$\|UAV\|_p=\|A\|_p$:</b> $\ \|U(AV)\|_p=\|AV\|_p=\|A\|_p$.
+          <div class="why">گام ۲ یا ۳ با $AV$ به‌جای $A$، بعد گام ۴.</div></li>
+        <li class="step"><b>(ب)</b> $\|U\|_2=\max\frac{\|Ux\|_2}{\|x\|_2}=1$ (گام ۱). $\ \|U\|_F^2=\sum_{j=1}^m\|u^{(j)}\|_2^2=m$. $\ \|V\|_2=\|V^H\|_2=1$ و $\|V\|_F^2$ = مجموع مربع طول $n$ سطر $=n$.
+          <div class="why">هر ستون (سطر) متعامدیکه طول ۱ دارد.</div></li>
+      </ol>
+      <div class="skeleton"><b>خلاصهٔ جواب</b>$U^HU=I$ ⇒ $\|Uy\|=\|y\|$ ⇒ $\|UA\|=\|A\|$؛ سطرهای $V$ ⇒ $V^H$ ستون متعامدیکه دارد ⇒ ترانهاده بگیر.</div>
+    </div>
+  </div></details>
+
+  <!-- ===== exercise 14 -->
+  <div class="box ex" id="t14">
+    <div class="box-h"><span class="tag">تمرین ۱۴</span><span class="box-src">ابزار: ت۷</span></div>
+    <p>قضیهٔ ۱۵.۲ را ثابت کنید.</p>
+  </div>
+  <details class="try"><summary>راهنمایی</summary><div><p>(آ) و (ب) درایه‌به‌درایه. برای (پ): دترمینان یک چندجمله‌ای از درایه‌هاست پس $\det A^{(k)}\to\det A\ne0$؛ و $A^{-1}=\frac{\operatorname{adj}(A)}{\det A}$.</p></div></details>
+  <details class="try"><summary>حل کامل تمرین ۱۴</summary><div>
+    <div class="proof">
+      <div class="proof-h"><span class="pt">حل تمرین ۱۴</span><span class="grow"></span></div>
+      <ol class="steps">
+        <li class="step"><b>(آ)</b> درایهٔ $(i,j)$: $\ \alpha a_{ij}^{(k)}+\beta b_{ij}^{(k)}\to\alpha a_{ij}+\beta b_{ij}$.
+          <div class="why">عین تمرین ۶، برای $mn$ درایه.</div></li>
+        <li class="step"><b>(ب)</b> $$(A^{(k)}B^{(k)})_{ij}=\sum_{l=1}^na_{il}^{(k)}b_{lj}^{(k)}\to\sum_{l=1}^na_{il}b_{lj}=(AB)_{ij}$$
+          <div class="why">مجموعِ متناهیِ حاصل‌ضرب دنباله‌های همگرا؛ حد ضرب = ضرب حدها.</div></li>
+        <li class="step"><b>(پ) وارون‌پذیری از جایی به بعد.</b> $\det$ مجموع حاصل‌ضرب‌های درایه‌هاست (تعریف ۴.۱) پس طبق (ب)-مانند: $\det A^{(k)}\to\det A=:d\neq0$. برای $\epsilon=|d|/2$ عدد $N$ هست که برای $k\ge N$: $|\det A^{(k)}-d|\lt|d|/2$ و در نتیجه $|\det A^{(k)}|\gt|d|/2\gt0$.
+          <div class="why">نابرابری مثلثی پسرو برای اعداد: $|\det A^{(k)}|\ge|d|-|\det A^{(k)}-d|$.</div></li>
+        <li class="step"><b>(پ) حد وارون.</b> برای $k\ge N$: $\ {A^{(k)}}^{-1}=\frac{\operatorname{adj}(A^{(k)})}{\det A^{(k)}}$. هر درایهٔ $\operatorname{adj}$ یک همسازه (± دترمینان یک زیرماتریس) است، پس به همسازهٔ متناظر $A$ میل می‌کند. تقسیم بر $\det A^{(k)}\to d\ne0$ هم مجاز است، پس ${A^{(k)}}^{-1}\to\frac{\operatorname{adj}(A)}{\det A}=A^{-1}$.
+          <div class="why">فرمول وارون با ماتریس الحاقی از فصل ۱؛ حد خارج‌قسمت = خارج‌قسمت حدها وقتی حد مخرج ناصفر است.</div></li>
+      </ol>
+      <div class="skeleton"><b>خلاصهٔ جواب</b>درایه‌به‌درایه؛ $\det$ و $\operatorname{adj}$ چندجمله‌ای‌اند پس پیوسته؛ $\det A^{(k)}$ از جایی به بعد از صفر دور است.</div>
+    </div>
+  </div></details>
+
+  <!-- ===== exercise 15 -->
+  <div class="box ex" id="t15">
+    <div class="box-h"><span class="tag">تمرین ۱۵</span><span class="box-src">ابزار: ت۶، ت۷</span></div>
+    <p>قضیهٔ ۱۶.۲ را ثابت کنید.</p>
+  </div>
+  <details class="try"><summary>راهنمایی</summary><div><p>مثل قضیهٔ ۷.۲: به خاطر هم‌ارزی نرم‌های ماتریسی (تمرین ۷)، کافی است برای یک نرم راحت ثابت کنی؛ نرم «بیشترین درایه» $\|M\|_{\max}=\max_{i,j}|m_{ij}|$ را بگیر.</p></div></details>
+  <details class="try"><summary>حل کامل تمرین ۱۵</summary><div>
+    <div class="proof">
+      <div class="proof-h"><span class="pt">حل تمرین ۱۵</span><span class="grow"></span></div>
+      <ol class="steps">
+        <li class="step">$\|M\|_{\max}=\max_{i,j}|m_{ij}|$ یک نرم ماتریسی است.
+          <div class="why">همان نرم بی‌نهایت برداری روی $mn$ درایهٔ ماتریس است؛ چهار ویژگی تعریف ۹.۲ عیناً برقرارند.</div></li>
+        <li class="step">طبق نسخهٔ ماتریسی تمرین ۷ (با قضیهٔ ۱۰.۲)، $\lim\|A^{(k)}-A\|=0$ برای هر نرم ماتریسی هم‌ارز است با $\lim\|A^{(k)}-A\|_{\max}=0$.
+          <div class="why">پس کافی است حکم را برای $\|\cdot\|_{\max}$ ثابت کنیم.</div></li>
+        <li class="step">$$\lim A^{(k)}=A\iff a_{ij}^{(k)}\to a_{ij}\ \forall i,j\iff|a_{ij}^{(k)}-a_{ij}|\to0\ \forall i,j\iff\max_{i,j}|a_{ij}^{(k)}-a_{ij}|\to0\iff\|A^{(k)}-A\|_{\max}\to0$$
+          <div class="why">تعریف ۱۳.۲ و همان استدلال قضیهٔ ۷.۲ (تعداد درایه‌ها متناهی است).</div></li>
+      </ol>
+      <div class="skeleton"><b>خلاصهٔ جواب</b>هم‌ارزی ⇒ فقط $\|\cdot\|_{\max}$ ⇒ زنجیرهٔ «درایه‌به‌درایه ⇔ ماکزیمم».</div>
+    </div>
+  </div></details>
+
+  <!-- ===== exercise 16 -->
+  <div class="box ex" id="t16">
+    <div class="box-h"><span class="tag">تمرین ۱۶</span><span class="box-src">ابزار: ت۹ · مربوط به تعریف ۱۵.۲</span></div>
+    <p>آیا $\rho(A)$ یک نرم ماتریسی تعریف می‌کند؟</p>
+  </div>
+  <details class="try"><summary>راهنمایی</summary><div><p>ماتریس ناصفری پیدا کن که همهٔ ویژه‌مقدارهایش صفر است (مثال ۷.۲). برای نابرابری مثلثی دو ماتریس مثلثی اکید با قطر صفر را جمع کن.</p></div></details>
+  <details class="try"><summary>حل کامل تمرین ۱۶</summary><div>
+    <div class="proof">
+      <div class="proof-h"><span class="pt">حل تمرین ۱۶</span><span class="grow"></span></div>
+      <ol class="steps">
+        <li class="step"><b>ویژگی (ب) خراب است.</b> $C=\left[\begin{smallmatrix}0&2\\0&0\end{smallmatrix}\right]\neq0$ ولی مثلثی است با قطر صفر، پس $\sigma(C)=\{0\}$ و $\rho(C)=0$.
+          <div class="why">ویژه‌مقدارهای ماتریس مثلثی = قطر.</div></li>
+        <li class="step"><b>نابرابری مثلثی هم خراب است.</b> $A=\left[\begin{smallmatrix}0&1\\0&0\end{smallmatrix}\right]$، $B=\left[\begin{smallmatrix}0&0\\1&0\end{smallmatrix}\right]$: $\rho(A)=\rho(B)=0$ ولی $A+B=\left[\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right]$ با $\lambda^2-1=0$ پس $\rho(A+B)=1\gt0+0$.
+          <div class="why">یک مثال نقض کافی است.</div></li>
+        <li class="step">پس $\rho$ نرم نیست (حتی نیم‌نرم هم نیست)، هرچند $\rho(\alpha A)=|\alpha|\rho(A)$ و $\rho(A)\ge0$ برقرارند.
+          <div class="why">ویژه‌مقدارهای $\alpha A$ همان $\alpha\lambda$اند.</div></li>
+      </ol>
+      <div class="skeleton"><b>خلاصهٔ جواب</b>نه: $\rho\left(\left[\begin{smallmatrix}0&2\\0&0\end{smallmatrix}\right]\right)=0$، و $\rho(A+B)=1\gt\rho(A)+\rho(B)=0$.</div>
+    </div>
+  </div></details>
+
+  <!-- ===== exercise 17 -->
+  <div class="box ex" id="t17">
+    <div class="box-h"><span class="tag">تمرین ۱۷</span><span class="box-src">ابزار: ت۲، ت۳، ت۴</span></div>
+    <p>اگر $x\in\mathbb{C}^m$ و $y\in\mathbb{C}^n$ ثابت کنید $\ \|xy^H\|_2=\|x\|_2\|y\|_2$.</p>
+  </div>
+  <details class="try"><summary>راهنمایی</summary><div><p>$(xy^H)z=x\,(y^Hz)$ و $y^Hz$ یک عدد است. کوشی-شوارتز «≤» را می‌دهد و $z=y$ برابری را.</p></div></details>
+  <details class="try"><summary>حل کامل تمرین ۱۷</summary><div>
+    <div class="proof">
+      <div class="proof-h"><span class="pt">حل تمرین ۱۷</span><span class="grow"></span></div>
+      <ol class="steps">
+        <li class="step">اگر $y=0$ دو طرف صفرند. فرض $y\ne0$. برای $z\in\mathbb{C}^n$: $\ (xy^H)z=x\,(y^Hz)$ پس $\ \|xy^Hz\|_2=|y^Hz|\,\|x\|_2$.
+          <div class="why">شرکت‌پذیری ضرب ماتریس؛ $y^Hz$ اسکالر است و از نرم بیرون می‌آید.</div></li>
+        <li class="step"><b>«≤»:</b> $\ |y^Hz|\le\|y\|_2\|z\|_2$ پس $\frac{\|xy^Hz\|_2}{\|z\|_2}\le\|x\|_2\|y\|_2$ برای هر $z\ne0$ و $\|xy^H\|_2\le\|x\|_2\|y\|_2$.
+          <div class="why">کوشی-شوارتز.</div></li>
+        <li class="step"><b>رخ دادن:</b> با $z=y$: $\ \frac{\|xy^Hy\|_2}{\|y\|_2}=\frac{\|y\|_2^2\|x\|_2}{\|y\|_2}=\|x\|_2\|y\|_2$.
+          <div class="why">بردار خاص؛ پس ماکزیمم دقیقاً همین است.</div></li>
+      </ol>
+      <div class="skeleton"><b>خلاصهٔ جواب</b>$\|xy^Hz\|=|y^Hz|\|x\|\le\|y\|\|z\|\|x\|$؛ برابری در $z=y$.</div>
+    </div>
+  </div></details>
+
+  <!-- ===== exercise 18 -->
+  <div class="box ex" id="t18">
+    <div class="box-h"><span class="tag">تمرین ۱۸</span><span class="box-src">ابزار: ت۳ · مربوط به قضیهٔ ۱۷.۲</span></div>
+    <p>ثابت کنید که قسمت ت قضیهٔ ۱۷.۲ برای هر نرم ماتریسی با ویژگی زیرضربی برقرار است.</p>
+  </div>
+  <details class="try"><summary>راهنمایی</summary><div><p>نرم ماتریسی روی بردار تعریف نشده است، پس ویژه‌بردار $x$ را تبدیل به ماتریس کن: $X=[x\ x\ \cdots\ x]$.</p></div></details>
+  <details class="try"><summary>حل کامل تمرین ۱۸</summary><div>
+    <div class="proof">
+      <div class="proof-h"><span class="pt">حل تمرین ۱۸</span><span class="grow"></span></div>
+      <ol class="steps">
+        <li class="step">فرض کن $\lambda$ ویژه‌مقدار $A$ با ویژه‌بردار $x\ne0$ و $\|\cdot\|$ نرم ماتریسی زیرضربی باشد. قرار بده $X=[x\ \ x\ \cdots\ x]\in\mathbb{C}^{n\times n}$.
+          <div class="why">$X\neq0$ چون $x\neq0$. ترفند: به‌جای سازگاری که برای نرم غیرطبیعی نداریم، از زیرضربی استفاده کنیم.</div></li>
+        <li class="step">$$AX=[Ax\ \cdots\ Ax]=[\lambda x\ \cdots\ \lambda x]=\lambda X$$
+          <div class="why">ضرب ماتریس ستون‌به‌ستون.</div></li>
+        <li class="step">$$\ |\lambda|\,\|X\|=\|\lambda X\|=\|AX\|\le\|A\|\,\|X\|$$ و با تقسیم بر $\|X\|\gt0$: $\ |\lambda|\le\|A\|$. پس $\rho(A)\le\|A\|$.
+          <div class="why">همگنی و زیرضربی. مثلاً برای نرم فروبنیوس (که طبیعی نیست ولی زیرضربی است، تمرین ۱۰) هم $\rho(A)\le\|A\|_F$.</div></li>
+      </ol>
+      <div class="skeleton"><b>خلاصهٔ جواب</b>$X=[x\cdots x]$ ⇒ $AX=\lambda X$ ⇒ $|\lambda|\|X\|\le\|A\|\|X\|$.</div>
+    </div>
+  </div></details>
+
+  <!-- ===== exercise 19 -->
+  <div class="box ex" id="t19">
+    <div class="box-h"><span class="tag">تمرین ۱۹</span><span class="box-src">ابزار: ت۲، ت۳، ت۴ · مربوط به قضیه‌های ۱۰.۲، ۱۱.۲ و ۱۷.۲</span></div>
+    <p>برای ماتریس $A_{m\times n}$ درستی نابرابری‌های زیر را بررسی کنید.</p>
+    <ol>
+      <li>(آ) $\frac{1}{\sqrt m}\|A\|_1\le\|A\|_2\le\sqrt n\|A\|_1$؛</li>
+      <li>(ب) $\frac1{\sqrt n}\|A\|_\infty\le\|A\|_2\le\sqrt m\|A\|_\infty$؛</li>
+      <li>(پ) $\|A\|_2\le\|A\|_F\le\sqrt n\|A\|_2$؛</li>
+      <li>(ت) $\|A\|_2\le\sqrt{\|A\|_1\|A\|_\infty}$ و بررسی کنید که برابری برای ماتریس $\ A=\left[\begin{smallmatrix}1&0&1&1\\1&1&0&1\\1&1&1&0\\0&1&1&1\end{smallmatrix}\right]\ $ برقرار می‌شود.</li>
+    </ol>
+  </div>
+  <details class="try"><summary>راهنمایی</summary><div><p>همه درست‌اند. هر کدام = یک نابرابری تمرین ۵ (در $\mathbb{C}^m$ یا $\mathbb{C}^n$) + سازگاری. برای کران‌های پایین از بردار خاصی که $\|A\|_1$ یا $\|A\|_\infty$ را می‌سازد استفاده کن (اثبات قضیهٔ ۱۱.۲). برای (ت): $\|A\|_2^2=\rho(A^HA)\le\|A^HA\|_1$.</p></div></details>
+  <details class="try"><summary>حل کامل تمرین ۱۹</summary><div>
+    <div class="proof">
+      <div class="proof-h"><span class="pt">حل تمرین ۱۹</span><span class="grow"></span></div>
+      <p class="proof-goal">توجه: $x\in\mathbb{C}^n$ و $Ax\in\mathbb{C}^m$؛ پس نابرابری‌های تمرین ۵ را با بُعد درست به کار ببر. همهٔ نابرابری‌ها درست‌اند.</p>
+      <ol class="steps">
+        <li class="step"><b>(آ) سمت چپ.</b> فرض کن ستون $q$ بیشترین مجموع را دارد. $$\ \|A\|_1=\|Ae^{(q)}\|_1\le\sqrt m\|Ae^{(q)}\|_2\le\sqrt m\|A\|_2\|e^{(q)}\|_2=\sqrt m\|A\|_2$$
+          <div class="why">قضیهٔ ۱۱.۲ (ستون برنده)؛ تمرین ۵ در $\mathbb{C}^m$؛ سازگاری.</div></li>
+        <li class="step"><b>(آ) سمت راست.</b> $$\ \|Ax\|_2\le\|Ax\|_1\le\|A\|_1\|x\|_1\le\|A\|_1\sqrt n\|x\|_2$$ پس $\|A\|_2\le\sqrt n\|A\|_1$.
+          <div class="why">تمرین ۵ دو بار (یک بار در $\mathbb{C}^m$، یک بار در $\mathbb{C}^n$) + سازگاری.</div></li>
+        <li class="step"><b>(ب) سمت چپ.</b> بردار $x^*$ با $\|x^*\|_\infty=1$ و $\|Ax^*\|_\infty=\|A\|_\infty$ (بردار علامت‌های سطر برنده) را بگیر: $$\ \|A\|_\infty=\|Ax^*\|_\infty\le\|Ax^*\|_2\le\|A\|_2\|x^*\|_2\le\|A\|_2\sqrt n\|x^*\|_\infty=\sqrt n\|A\|_2$$
+          <div class="why">قضیهٔ ۱۱.۲ و تمرین ۵.</div></li>
+        <li class="step"><b>(ب) سمت راست.</b> $$\ \|Ax\|_2\le\sqrt m\|Ax\|_\infty\le\sqrt m\|A\|_\infty\|x\|_\infty\le\sqrt m\|A\|_\infty\|x\|_2$$
+          <div class="why">همان الگو.</div></li>
+        <li class="step"><b>(پ)</b> سمت چپ در تمرین ۱۰ (گام ۲) ثابت شد. سمت راست: $$\ \|A\|_F^2=\sum_{j=1}^n\|Ae^{(j)}\|_2^2\le\sum_{j=1}^n\|A\|_2^2=n\|A\|_2^2$$
+          <div class="why">ستون $j$ام $A$ همان $Ae^{(j)}$ است.</div></li>
+        <li class="step"><b>(ت)</b> $$\ \|A\|_2^2=\rho(A^HA)\le\|A^HA\|_1\le\|A^H\|_1\|A\|_1=\|A\|_\infty\|A\|_1$$
+          <div class="why">قضیهٔ ۱۷.۲ (آ) با تبصرهٔ ۱۰.۲ (برای $m\times n$)؛ قضیهٔ ۱۷.۲ (ت) برای نرم طبیعی $\|\cdot\|_1$؛ زیرضربی؛ نتیجهٔ ۲.۲: $\|A^H\|_1=\|(A^H)^H\|_\infty=\|A\|_\infty$.</div></li>
+        <li class="step"><b>برابری برای ماتریس داده‌شده.</b> هر سطر و هر ستون $A$ سه تا ۱ دارد، پس $\|A\|_1=\|A\|_\infty=3$ و $\sqrt{\|A\|_1\|A\|_\infty}=3$. از طرف دیگر با $e=[1\ 1\ 1\ 1]^T$: $Ae=3e$ پس $\|A\|_2\ge\frac{\|Ae\|_2}{\|e\|_2}=3$. با کران بالای (ت): $\|A\|_2=3$ و برابری برقرار است.
+          <div class="why">الگوی «نامساوی از دو طرف»: کران بالا از (ت)، کران پایین با بردار خاص $e$.</div></li>
+      </ol>
+      <div class="skeleton"><b>خلاصهٔ جواب</b>هر کران = تمرین ۵ + سازگاری؛ کران‌های پایین با بردار برنده؛ (ت) با $\rho(A^HA)\le\|A^HA\|_1$؛ برابری با $Ae=3e$.</div>
+    </div>
+  </div></details>
+  <p class="small muted">ابزار «نرم‌های یک ماتریس ۲×۲» در بخش ۲.۲ همهٔ نابرابری‌های تمرین ۱۹ را برای هر ماتریس دلخواهی که وارد کنی زنده چک می‌کند.</p>
+  <div class="sec-done"><p>محک: بدون باز کردن حل‌ها، تمرین‌های ۲، ۳، ۵، ۸، ۱۱، ۱۷ و ۱۹ را دوباره حل کن. سؤال‌های امتحان معمولاً شبیه همین‌ها هستند.</p><button class="btn done-btn" data-sec="sec24"></button></div>
+</section>
+
+<!-- ================================================================ REVIEW -->
+<section class="sec" id="review">
+  <h2 id="sec-review">مرور و جمع‌بندی فصل</h2>
+
+  <h3 id="cheat">برگهٔ اسکلت اثبات قضیه‌ها</h3>
+  <p>هر اسکلت را بخوان، چشمت را ببند و اثبات کامل را روی کاغذ بنویس؛ بعد با لینک مقایسه کن.</p>
+  <div class="cheat">
+    <div class="item"><h5><a href="#lem12">لم ۱.۲ · کوشی-شوارتز</a></h5><ol><li>$0\le(x-\xi y,x-\xi y)$ ← $\xi=\frac{(x,x)}{(x,y)}$ ← ضرب در $\frac{|(x,y)|^2}{(x,x)}$.</li></ol></div>
+    <div class="item"><h5><a href="#thm12">قضیه ۱.۲ · مثلثی اقلیدسی</a></h5><ol><li>$$\|x+y\|^2=\|x\|^2+2\operatorname{Re}(y,x)+\|y\|^2\le(\|x\|+\|y\|)^2$$ با کوشی-شوارتز.</li></ol></div>
+    <div class="item"><h5><a href="#thm22">قضیه ۲.۲ · متعامد ⇒ مستقل</a></h5><ol><li>$\sum\alpha_jv^{(j)}=0$ را در $v^{(i)}$ ضرب داخلی کن.</li></ol></div>
+    <div class="item"><h5><a href="#thm32">قضیه ۳.۲ · $\nu(Ax)$ نرم است</a></h5><ol><li>هر ویژگی از $\nu$؛ (ب) با ستون‌های مستقل.</li></ol></div>
+    <div class="item"><h5><a href="#lem22">لم ۲.۲ · مثلثی پسرو</a></h5><ol><li>$y=(y-x)+x$ و برعکس.</li></ol></div>
+    <div class="item"><h5><a href="#thm42">قضیه ۴.۲ · پیوستگی</a></h5><ol><li>$|\nu(y)-\nu(x)|\le\nu(y-x)\le M\|y-x\|_\infty$.</li></ol></div>
+    <div class="item"><h5><a href="#thm52">قضیه ۵.۲ · هم‌ارزی نرم‌ها</a></h5><ol><li>مقایسه با $\|\cdot\|_\infty$ ← وایرشتراس روی $\{\|x\|_\infty=1\}$ ← نرمال کن.</li></ol></div>
+    <div class="item"><h5><a href="#thm72">قضیه ۷.۲ · همگرایی</a></h5><ol><li>هم‌ارزی ⇒ $\|\cdot\|_\infty$ ← مؤلفه‌ها ⇔ ماکزیمم.</li></ol></div>
+    <div class="item"><h5><a href="#thm82">قضیه ۸.۲ · نرم طبیعی</a></h5><ol><li>$\max_{\|x\|=1}\|Ax\|$ ← سازگاری ← (ب) با $e^{(j)}$ ← (ت) با $y$ بهینه.</li></ol></div>
+    <div class="item"><h5><a href="#rem82">تبصره ۸.۲ · زیرضربی</a></h5><ol><li>$\|AB\|=\|A(By)\|\le\|A\|\|B\|\|y\|$.</li></ol></div>
+    <div class="item"><h5><a href="#thm102">قضیه ۱۰.۲ · هم‌ارزی نرم‌های ماتریسی</a></h5><ol><li>$\|A\|_a=\big\|\frac{A}{\|A\|_b}\big\|_a\|A\|_b\ge\beta_1\|A\|_b$.</li></ol></div>
+    <div class="item"><h5><a href="#thm112">قضیه ۱۱.۲ · $\|A\|_1$ و $\|A\|_\infty$</a></h5><ol><li>$\le\lambda$ با مثلثی ← برای ۱: $e^{(q)}$؛ برای ∞: $x_j=e^{-\mathrm i\theta_j}$.</li></ol></div>
+    <div class="item"><h5><a href="#thm122">قضیه ۱۲.۲ · نرم ۲</a></h5><ol><li>کوشی-شوارتز ← $y=\frac{Ax}{\|Ax\|}$ ← $|y^HA^Hx|=|x^HAy|$ ← زیرضربی و $y=x$.</li></ol></div>
+    <div class="item"><h5><a href="#thm132">قضیه ۱۳.۲ · یکانی</a></h5><ol><li>$U^HU=I$ ⇔ $U^{-1}=U^H$ ⇒ طول حفظ؛ برگشت با $e^{(k)}$، $e^{(k)}+e^{(j)}$، $e^{(k)}+\mathrm ie^{(j)}$.</li></ol></div>
+    <div class="item"><h5><a href="#thm142">قضیه ۱۴.۲ · پایایی یکانی</a></h5><ol><li>$\|UA\|_2^2=\|A^HU^HUA\|_2$؛ فروبنیوس ستون‌به‌ستون؛ $AU$ با ترانهاده.</li></ol></div>
+    <div class="item"><h5><a href="#thm172">قضیه ۱۷.۲ · $\rho$ و نرم</a></h5><ol><li>(ت) $|\lambda|=\frac{\|Ax\|}{\|x\|}$ ؛ (ب) $A^HA=A^2$ ؛ (آ) قضیهٔ طیفی ؛ (ث) شور + $D_t$.</li></ol></div>
+    <div class="item"><h5><a href="#thm182">قضیه ۱۸.۲ · همگرایی ماتریس</a></h5><ol><li>ویژه‌بردار: $\lambda^kx\to0$ ؛ برگشت: نرمی با $\|A\|\lt1$ و $\|A^k\|\le\|A\|^k$.</li></ol></div>
+  </div>
+
+  <h3 id="cards">کارت‌های مرور با فاصله</h3>
+  <p>کارت را بخوان، جواب را اول در ذهنت بگو، بعد برگردان. پیشرفت این کارت‌ها جدا از فصل ۳ و فقط در همین مرورگر ذخیره می‌شود.</p>
+  <div class="widget" data-widget="flashcards"></div>
+
+  <h3 id="final-quiz">آزمون ترکیبی</h3>
+  <div class="quiz">
+    <div class="quiz-h"><b>آزمون ترکیبی فصل ۲</b><span class="score"></span></div>
+    <div class="q">
+      <p class="q-t">کدام رابطه همیشه درست است؟</p>
+      <div class="opts"><button class="opt">$\|x\|_1\le\|x\|_2$</button><button class="opt" data-c>$\|x\|_2\le\|x\|_1\le\sqrt n\|x\|_2$</button><button class="opt">$\|x\|_\infty\ge\|x\|_2$</button></div>
+      <p class="q-exp">تمرین ۵.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">برای ماتریس یکانی $U$ کدام درست نیست؟</p>
+      <div class="opts"><button class="opt">$\|Ux\|_2=\|x\|_2$</button><button class="opt">$|\det U|=1$</button><button class="opt" data-c>$\|U\|_F=1$</button></div>
+      <p class="q-exp">$\|U\|_F=\sqrt n$؛ $\|U\|_2=1$.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">$\|xy^H\|_2$ برای $x=[3\ \ 4]^T$ و $y=[1\ \ 0\ \ 0]^T$ چند است؟</p>
+      <div class="opts two"><button class="opt">۱</button><button class="opt" data-c>۵</button><button class="opt">۷</button><button class="opt">۲۵</button></div>
+      <p class="q-exp">تمرین ۱۷: $\|x\|_2\|y\|_2=5\cdot1$.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">ماتریس $B=\left[\begin{smallmatrix}0.5&0\\100&0.5\end{smallmatrix}\right]$:</p>
+      <div class="opts"><button class="opt">همگرا نیست چون $\|B\|_\infty\gt1$.</button><button class="opt" data-c>همگراست چون $\rho(B)=0.5\lt1$.</button><button class="opt">نمی‌توان گفت.</button></div>
+      <p class="q-exp">قضیهٔ ۱۸.۲؛ نرم بزرگ شرط کافی برای واگرایی نیست.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">برای ثابت کردن $\|A\|_p=\lambda$ معمولاً چه می‌کنیم؟</p>
+      <div class="opts"><button class="opt">فقط $\|Ax\|_p\le\lambda$ را نشان می‌دهیم.</button><button class="opt" data-c>$\|Ax\|_p\le\lambda$ برای $\|x\|_p=1$، و یک $x$ خاص با $\|Ax\|_p\ge\lambda$.</button><button class="opt">دترمینان می‌گیریم.</button></div>
+      <p class="q-exp">ترفند ت۲ + ت۳ جعبه‌ابزار.</p>
+    </div>
+    <div class="q">
+      <p class="q-t">اگر $B$ منفرد و $A$ وارون‌پذیر باشد، کدام درست است؟</p>
+      <div class="opts two"><button class="opt" data-c>$\|A-B\|\ge\frac{1}{\|A^{-1}\|}$</button><button class="opt">$\|A-B\|\le\|A^{-1}\|$</button><button class="opt">$\|A-B\|=0$</button><button class="opt">$\|B\|=0$</button></div>
+      <p class="q-exp">تمرین ۱۱.</p>
+    </div>
+    <div class="quiz-f"><button class="btn quiz-reset">دوباره</button></div>
+  </div>
+</section>
+
+  </main>
+</div>
+
+<footer class="page-foot">
+  <div class="in">
+    <p>این جزوه از فصل ۲ کتاب جبر خطی عددی (صفحات ۱۵ تا ۳۰، شامل ۱۹ تمرین آخر فصل) تهیه شده است. اثبات‌هایی که با برچسب «تکمیلی» مشخص شده‌اند در کتاب نیامده یا به تمرین یا فصل دیگری سپرده شده‌اند.</p>
+    <p><a href="index.html">بازگشت به فهرست فصل‌ها</a> · <a href="ch3.html">فصل بعد: دستگاه معادلات خطی</a></p>
+  </div>
+</footer>
+
+<script type="application/json" id="cards-data">
+[
+ {"id":"d1","tag":"تعریف","front":"تعریف ۱.۲: چهار ویژگی نرم برداری","back":"(آ) $\\|x\\|\\ge0$ (ب) $\\|x\\|=0\\iff x=0$ (پ) $\\|\\alpha x\\|=|\\alpha|\\|x\\|$ (ت) $\\|x+y\\|\\le\\|x\\|+\\|y\\|$. بدون (ب): نیم‌نرم."},
+ {"id":"d2","tag":"تعریف","front":"نرم‌های $1$، $2$ و $\\infty$ بردار","back":"$\\|x\\|_1=\\sum|x_i|$، $\\|x\\|_2=\\sqrt{\\sum|x_i|^2}$، $\\|x\\|_\\infty=\\max|x_i|$."},
+ {"id":"d3","tag":"تعریف","front":"تعریف ۲.۲: چهار ویژگی ضرب داخلی","back":"(آ) $(x,x)\\ge0$ (ب) $(x,x)=0\\iff x=0$ (پ) $(x,y)=\\overline{(y,x)}$ (ت) $(\\alpha x+\\beta y,z)=\\bar\\alpha(x,z)+\\bar\\beta(y,z)$."},
+ {"id":"d4","tag":"تعریف","front":"متعامد، متعامدیکه، ماتریس یکانی","back":"متعامد: $(v^{(i)},v^{(j)})=0$ برای $i\\ne j$. متعامدیکه: به‌علاوه طول ۱. یکانی (متعامد): ستون‌ها متعامدیکه."},
+ {"id":"d5","tag":"تعریف","front":"تعریف ۶.۲: دو نرم هم‌ارز","back":"$\\alpha_1\\mu(x)\\le\\nu(x)\\le\\alpha_2\\mu(x)$ با ثابت‌های مثبت."},
+ {"id":"d6","tag":"تعریف","front":"زیرضربی و سازگار","back":"زیرضربی: $\\mu(AB)\\le\\mu(A)\\mu(B)$. سازگار با نرم برداری: $\\|Ax\\|\\le\\mu(A)\\|x\\|$."},
+ {"id":"d7","tag":"تعریف","front":"نرم ماتریسی طبیعی (القایی)","back":"$\\|A\\|=\\max_{x\\ne0}\\frac{\\|Ax\\|}{\\|x\\|}=\\max_{\\|x\\|=1}\\|Ax\\|$."},
+ {"id":"d8","tag":"تعریف","front":"شعاع طیفی و ماتریس همگرا","back":"$\\rho(A)=\\max_{\\lambda\\in\\sigma(A)}|\\lambda|$. همگرا: $A^k\\to0$."},
+ {"id":"l1","tag":"لم","front":"لم ۱.۲: کوشی-شوارتز و حالت برابری","back":"$|(x,y)|\\le\\|x\\|_2\\|y\\|_2$؛ برای $y\\ne0$ برابری ⇔ $x=\\alpha y$."},
+ {"id":"l1p","tag":"لم","front":"اسکلت اثبات کوشی-شوارتز","back":"$0\\le(x-\\xi y,x-\\xi y)$ با $\\xi=\\frac{(x,x)}{(x,y)}$؛ ضرب در $\\frac{|(x,y)|^2}{(x,x)}$."},
+ {"id":"l2","tag":"لم","front":"لم ۲.۲: مثلثی پسرو","back":"$\\big|\\|y\\|-\\|x\\|\\big|\\le\\|y-x\\|$؛ اثبات با $y=(y-x)+x$."},
+ {"id":"t1","tag":"قضیه","front":"قضیه ۲.۲","back":"بردارهای متعامد غیرصفر مستقل خطی‌اند (ضرب داخلی با $v^{(i)}$)."},
+ {"id":"t2","tag":"قضیه","front":"قضیه ۳.۲","back":"$\\nu$ نرم روی $\\mathbb{C}^m$ و ستون‌های $A$ مستقل ⇒ $\\mu(x)=\\nu(Ax)$ نرم است."},
+ {"id":"t3","tag":"قضیه","front":"قضیه ۵.۲ و ایدهٔ اثبات","back":"همهٔ نرم‌های روی $\\mathbb{C}^n$ هم‌ارزند. مقایسه با $\\|\\cdot\\|_\\infty$؛ وایرشتراس روی $\\{\\|x\\|_\\infty=1\\}$."},
+ {"id":"t4","tag":"قضیه","front":"قضیه ۷.۲","back":"$\\|x^{(k)}-x\\|\\to0\\iff x^{(k)}\\to x$ (مؤلفه‌ای)؛ در هر نرمی."},
+ {"id":"t5","tag":"قضیه","front":"قضیه ۸.۲: نرم طبیعی چه ویژگی‌هایی دارد؟","back":"نرم ماتریسی است، سازگار است، زیرضربی است (تبصره ۸.۲) و $\\|I\\|=1$ (گزاره ۱.۲)."},
+ {"id":"t6","tag":"قضیه","front":"قضیه ۱۱.۲","back":"$\\|A\\|_1$ = بیشترین مجموع قدرمطلق ستونی؛ $\\|A\\|_\\infty$ = بیشترین مجموع قدرمطلق سطری."},
+ {"id":"t6p","tag":"قضیه","front":"بردار خاص در اثبات قضیه ۱۱.۲","back":"برای $\\|\\cdot\\|_1$: $e^{(q)}$ (ستون برنده). برای $\\|\\cdot\\|_\\infty$: $x_j=e^{-\\mathrm i\\theta_j}$ که $a_{qj}=r_je^{\\mathrm i\\theta_j}$ (سطر برنده)."},
+ {"id":"t7","tag":"قضیه","front":"قضیه ۱۲.۲: سه رابطهٔ نرم ۲","back":"$\\|A\\|_2=\\max_{\\|x\\|=\\|y\\|=1}|y^HAx|$، $\\|A^H\\|_2=\\|A\\|_2$، $\\|A^HA\\|_2=\\|A\\|_2^2$."},
+ {"id":"t8","tag":"قضیه","front":"قضیه ۱۳.۲: سه شرط هم‌ارز","back":"$U$ یکانی ⇔ $U^{-1}=U^H$ ⇔ $\\|Ux\\|_2=\\|x\\|_2$ برای همهٔ $x$."},
+ {"id":"t9","tag":"قضیه","front":"قضیه ۱۴.۲","back":"$U$ یکانی: $\\|UA\\|_p=\\|AU\\|_p=\\|A\\|_p$ برای $p=2,F$؛ $\\|U\\|_2=1$، $\\|U\\|_F=\\sqrt n$."},
+ {"id":"t10","tag":"قضیه","front":"قضیه ۱۷.۲: پنج بخش","back":"(آ) $\\|A\\|_2=\\sqrt{\\rho(A^HA)}$ (ب) هرمیتی: $\\|A\\|_2=\\rho(A)$ (پ) $\\|p_m(A)\\|_2=\\rho(p_m(A))$ (ت) $\\rho(A)\\le\\|A\\|$ طبیعی (ث) نرمی با $\\|A\\|\\lt\\rho(A)+\\epsilon$."},
+ {"id":"t11","tag":"قضیه","front":"قضیه ۱۸.۲","back":"$A$ همگرا ⇔ $A^kx\\to0$ برای هر $x$ ⇔ $\\rho(A)\\lt1$."},
+ {"id":"g1","tag":"گزاره","front":"گزاره‌های ۲.۲ و ۳.۲","back":"پوچ‌توان ⇒ همگرا. زیرضربی و $\\|A\\|\\lt1$ ⇒ همگرا (شرط لازم نیست: $\\left[\\begin{smallmatrix}0&2\\\\0&0\\end{smallmatrix}\\right]$)."},
+ {"id":"e3","tag":"تمرین","front":"تمرین ۳: جواب","back":"$\\max_{i\\ne k}|x_i|$ نیم‌نرم است (نه نرم)؛ تابع حاصل‌ضربی نه نرم است نه نیم‌نرم (مثلثی خراب)."},
+ {"id":"e5","tag":"تمرین","front":"تمرین ۵: زنجیرهٔ نابرابری‌ها","back":"$\\|x\\|_\\infty\\le\\|x\\|_2\\le\\|x\\|_1\\le\\sqrt n\\|x\\|_2\\le n\\|x\\|_\\infty$."},
+ {"id":"e9","tag":"تمرین","front":"تمرین ۹: فروبنیوس طبیعی است؟","back":"نه؛ $\\|I\\|_F=\\sqrt n\\ne1$."},
+ {"id":"e11","tag":"تمرین","front":"تمرین ۱۱: ایدهٔ اثبات","back":"$Bx=0$ با $x\\ne0$ ⇒ $x=A^{-1}(A-B)x$ ⇒ $1\\le\\|A^{-1}\\|\\|A-B\\|$."},
+ {"id":"e16","tag":"تمرین","front":"تمرین ۱۶: $\\rho$ نرم است؟","back":"نه؛ $\\rho\\left(\\left[\\begin{smallmatrix}0&2\\\\0&0\\end{smallmatrix}\\right]\\right)=0$ و $\\rho(A+B)\\gt\\rho(A)+\\rho(B)$ ممکن است."},
+ {"id":"e18","tag":"تمرین","front":"تمرین ۱۸: ترفند","back":"$X=[x\\ x\\cdots x]$ ⇒ $AX=\\lambda X$ ⇒ $|\\lambda|\\le\\|A\\|$ برای هر نرم زیرضربی."},
+ {"id":"e19","tag":"تمرین","front":"تمرین ۱۹ (ت)","back":"$\\|A\\|_2^2=\\rho(A^HA)\\le\\|A^HA\\|_1\\le\\|A\\|_\\infty\\|A\\|_1$."}
+]
+</script>
+</body>
+</html>
